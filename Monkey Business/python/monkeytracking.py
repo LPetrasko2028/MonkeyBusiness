@@ -1,19 +1,9 @@
-# This file tracks the monkey's positions and returns the x and y coordinates of the detected movement areas.
-#INPUT
-##########################
-# url - the url of the youtube stream to be processed.
-# segments - the amount of 5 second stream segements to record.
-# OUPUT
-##########################
-# The x and y coordinates sent to the standard output.
-#
-# PYTHON INSTALLATION
-# You can install a python .venv in visual studio code easily. First, install a Python module from the Windows Store.
-# In the parent folder of the project, press ctrl + shift + p and search for Python: Create Environment and click Venv.
-# Create a new .venv and use your downloaded python file for the base.
-# When asked for dependencies, use the requirements.txt option. 
-# That should set it up!
-
+# after getting your python environment running, run these commands in the terminal to finish setting up.
+# py -m pip install m3u8
+# py -m pip install streamlink
+# py -m pip install numpy
+# py -m pip install opencv-python
+# py -m pip install datetime
 from datetime import datetime, timedelta, timezone
 import time
 import numpy as np
@@ -137,5 +127,5 @@ def openCVProcessing(saved_video_file):
 tempFile = "temp.ts"  #files are format ts, open cv can view them
 videoURL = sys.argv[1]
 if(os.path.isfile(tempFile)): os.remove(tempFile)
-dl_stream(videoURL, tempFile, np.uint8(sys.argv[2]))
+dl_stream(videoURL, tempFile, 1)
 openCVProcessing(tempFile)
