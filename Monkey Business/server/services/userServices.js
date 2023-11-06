@@ -2,7 +2,7 @@ import queryMongoDatabase from '../data/mongoController.js'
 import { validateEmail, deleteInvestor } from '../middleware/generalServerFunctions.js'
 import { ObjectId } from 'mongodb'
 import { hashPassword } from '../controllers/signupController.js'
-import { comparePasswords, genAccessToken, genRefreshToken } from '../controllers/loginController.js'
+import { comparePasswords } from '../controllers/loginController.js'
 
 export async function login (req, res) {
   const username = req.body.username
@@ -51,19 +51,6 @@ export async function signup (req, res) { // working without authentication ----
         const insertDoc = await db.collection('Users').insertOne({ username, password: hashedPassword, email, preferencesID, adminID })
         if (insertDoc.insertedCount !== null) { res.json({ error: false, message: `User: ${username} Signed Up Successfully` }) } else { res.status(404).json({ error: true, message: 'Failed to insert user info!' }) }
       } else { res.status(404).json({ error: true, message: 'Failed to insert investor info!' }) }
-
-      // logs the user in after signup ------------------TO DO --------------------
-
-      // redirect the user to the home page after signup ------------------TO DO --------------------
-
-      // req.session.regenerate(function (err) {
-      //   if (err) next(err)
-      //   req.session.user = username
-      //   req.session.save(function (err) {
-      //     if (err) return next(err)
-      //     res.redirect('/')
-      //   })
-      // })
     }
   }, 'MonkeyBusinessWebApp')
 }
@@ -87,7 +74,7 @@ export async function logout (next, req, res) { // maybe POST to introduce authe
 
 export async function updatePreferences (req, res) {
   // turn parameters into variables
-  const username = req.body.username // going to be session.user
+  const username = req.body.username // const username = req.session.user
   const colorScheme = req.body.colorScheme
   const graphColor = req.body.graphColor
   const fontSize = req.body.fontSize
@@ -109,7 +96,6 @@ export async function updatePreferences (req, res) {
     } else { // if match, get id of matching set
       newPrefId = foundPreferences._id
     }
-
     // update user's preference set with new id
     const updateDoc = {
       $set: {
@@ -126,20 +112,13 @@ export async function updatePreferences (req, res) {
 }
 
 export async function deleteUser (req, res) {
-  // need to add authentication to this route ------------------TO DO --------------------
-  // user must be logged in to delete account
-  // ie req.session.user must be equal to req.params.username
-  // OR req.session.user must be an admin
+  // const username = req.session.user
   const username = req.params.username
 
   queryMongoDatabase(async db => {
-    const findAccount = await db.collection('Users').find({ username })
-    const numDocs = await db.collection('Users').countDocuments({ username })
-    if ((numDocs) === 0) {
-      // Function to set login state or token?? ------------------TO DO --------------------
+    const findAccount = await db.collection('Users').findOne({ username })
+    if (findAccount === 0) {
       res.status(404).json({ error: true, message: 'User could not be found.' })
-    } else if (numDocs > 1) {
-      res.status(500).json({ error: true, message: 'Multiple Users with same Username.' })
     } else {
       if (findAccount.investorID !== null) {
         deleteInvestor(username)

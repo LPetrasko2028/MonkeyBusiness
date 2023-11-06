@@ -64,25 +64,6 @@ export async function postSellStock (stockObj) { // add stock to profile
     return false
   }
 }
-// export async function putGameInput (gameObj) {
-//   try {
-//     const response = await fetch('api/games', {
-//       method: 'PUT',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify(gameObj)
-//     })
-//     if (response.status >= 400) {
-//       throw new Error(`Request failed with response code ${response.status}`)
-//     }
-//     return true
-//   } catch (err) {
-//     console.error('Failed to Input Game')
-//     console.error(err)
-//     return false
-//   }
-// }
 export async function deleteAccount (accountID) { // previously deleteGame
   try {
     const response = await fetch(`api/stocks/${accountID}`, {
