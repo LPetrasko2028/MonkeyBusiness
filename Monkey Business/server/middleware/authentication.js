@@ -1,5 +1,3 @@
-import bcryptjs from 'bcrypt'
-import jwt from 'jsonwebtoken'
 
 export function isAuthenticated (req, res, next) { // Check if user is authenticated ------------------TO DO --------------------
   console.log(req.session.user)
