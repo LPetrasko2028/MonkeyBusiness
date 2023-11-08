@@ -3,8 +3,37 @@ import React from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import PropTypes from 'prop-types'
+import { BsBrightnessHigh, BsMoonStars } from 'react-icons/bs'
+
 export default function MyNavBar (props) {
-  const { loggedIn } = props
+  const { loggedIn, handleTheme, mode, isDark } = props
+  const [check, setCheck] = React.useState(true)
+  const handleClick = () => {
+    handleTheme(!isDark)
+    changeIcon(!isDark)
+  }
+  let content = (
+    <div onClick = {handleClick}>
+    <BsBrightnessHigh/>
+    </div>
+  )
+  const changeIcon = () => {
+    console.log('this is check: ' + check)
+    if (check) {
+      content = (
+        <div onClick = {handleClick}>
+        <BsBrightnessHigh/>
+        </div>
+      )
+    } else {
+      content = (
+        <div onClick = {handleClick}>
+        <BsMoonStars/>
+        </div>
+      )
+    }
+    setCheck(!check)
+  }
   let navContent
   let navContent2
   if (!loggedIn) {
@@ -26,7 +55,7 @@ export default function MyNavBar (props) {
     )
   }
   return (
-    <Navbar bg="primary" variant="dark">
+    <Navbar bg= {mode} variant={mode}>
     <Navbar.Brand >Monkey Business</Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
@@ -37,23 +66,31 @@ export default function MyNavBar (props) {
         <LinkContainer to = "/stats" >
           <Nav.Link> Statistics </Nav.Link>
         </LinkContainer>
+        <LinkContainer to = "/search" >
+          <Nav.Link> Search </Nav.Link>
+        </LinkContainer>
         <LinkContainer to = "/monkeyTech" >
           <Nav.Link> Monkey Technology </Nav.Link>
         </LinkContainer>
         <LinkContainer to = "/about" >
           <Nav.Link> About Us </Nav.Link>
         </LinkContainer>
-        <LinkContainer to = "/setting" >
-          <Nav.Link> Setting </Nav.Link>
-        </LinkContainer>
-        <LinkContainer to = "/TutorialPage" >
-          <Nav.Link> Tutorial </Nav.Link>
-        </LinkContainer> 
-          {navContent2}
+        {navContent2}
+        <Nav.Link> { content } </Nav.Link>
         </Nav>
         { navContent }
-        </Nav>
     </Navbar.Collapse>
 </Navbar>
   )
+}
+MyNavBar.propTypes = {
+  loggedIn: PropTypes.bool,
+  handleTheme: PropTypes.func,
+  mode: PropTypes.string,
+  isDark: PropTypes.bool.isRequired
+}
+MyNavBar.defaultProps = {
+  loggedIn: false,
+  handleTheme: () => {},
+  mode: 'light'
 }

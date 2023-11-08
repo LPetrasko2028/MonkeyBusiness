@@ -1,8 +1,8 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react'
 
 function tPage () {
   return (
-  
     <React.Fragment>
     <div>This is where I'd put images for the tutorial</div>
     <div>
@@ -27,7 +27,6 @@ function tPage () {
     </div>
     {/* <img className = 'image-fluid' src="https://i.kym-cdn.com/entries/icons/facebook/000/027/475/Screen_Shot_2018-10-25_at_11.02.15_AM.jpg" alt="Image" /> */}
   </React.Fragment>
-      
 
   )
 }
