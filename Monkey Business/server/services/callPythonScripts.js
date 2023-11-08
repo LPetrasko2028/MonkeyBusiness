@@ -6,11 +6,11 @@ import cp from 'child_process'
 //INPUT
 /************************ */
 //url - the URL of the youtube livestream to process
-//segments - how many 5 second segments to record 
+//segments - how many 5 second segments to record
 //OUTPUT
 /************************ */
 //CoordSpace - the assortment of x and y positions of detected movements.
-//temp.ts - a video file of the last recorded livestream. 
+//temp.ts - a video file of the last recorded livestream.
 export async function getMonkeyPosition (url, segments) {
   const ls = cp.spawn('python', ['./python/MonkeyTracking.py', url, segments])
   var coordSpace = [];
@@ -43,43 +43,85 @@ export async function getMonkeyPosition (url, segments) {
 }
 
 export async function getStockShort (stockNameArray) {
-  const ls = cp.spawn('python', ['./python/GetStockInfo.py', stockNameArray])
-  ls.stdout.on('data', (data) => {
-    console.log(`stdout: ${data}`)
-  })
-  ls.stderr.on('data', (data) => {
-    console.error(`stderr: ${data}`)
-  })
-  ls.on('close', (code) => {
-    console.log(`child process exited with code ${code}`)
+  return new Promise((resolve, reject) => {
+    const ls = cp.spawn('python', ['./python/GetStockInfo.py', stockNameArray])
+    let stdoutData = ''
+    let stderrData = ''
+
+    ls.stdout.on('data', (data) => {
+      stdoutData += data
+    })
+
+    ls.stderr.on('data', (data) => {
+      stderrData += data
+    })
+
+    ls.on('error', (err) => {
+      reject(err)
+    })
+
+    ls.on('close', (code) => {
+      if (code !== 0) {
+        reject(new Error(`child process exited with code ${code}: ${stderrData}`))
+      } else {
+        resolve(stdoutData)
+      }
+    })
   })
 }
 
 export function getStockDetails (stockName, timeFrameMonths) {
-  const ls = cp.spawn('python', ['./python/GetClosingPriceList.py', stockName, timeFrameMonths])
+  return new Promise((resolve, reject) => {
+    const ls = cp.spawn('python', ['./python/GetClosingPriceList.py', stockName, timeFrameMonths])
+    let stdoutData = ''
+    let stderrData = ''
 
-  ls.stdout.on('data', (data) => {
-    console.log(`stdout: ${data}`)
-  })
-  ls.stderr.on('data', (data) => {
-    console.error(`stderr: ${data}`)
-  })
-  ls.on('close', (code) => {
-    console.log(`child process exited with code ${code}`)
+    ls.stdout.on('data', (data) => {
+      stdoutData += data
+    })
+
+    ls.stderr.on('data', (data) => {
+      stderrData += data
+    })
+
+    ls.on('error', (err) => {
+      reject(err)
+    })
+
+    ls.on('close', (code) => {
+      if (code !== 0) {
+        reject(new Error(`child process exited with code ${code}: ${stderrData}`))
+      } else {
+        resolve(stdoutData)
+      }
+    })
   })
 }
 
 export function searchStockAPI (searchQuery, start, end) {
-  const ls = cp.spawn('python', ['./python/StockSearchList.py', searchQuery, start, end])
+  return new Promise((resolve, reject) => {
+    const ls = cp.spawn('python', ['./python/StockSearchList.py', searchQuery, start, end])
+    let stdoutData = ''
+    let stderrData = ''
 
-  ls.stdout.on('data', (data) => {
-    console.log(`stdout: ${data}`)
-  })
-  ls.stderr.on('data', (data) => {
-    console.error(`stderr: ${data}`)
-  })
-  ls.on('close', (code) => {
-    console.log(`child process exited with code ${code}`)
+    ls.stdout.on('data', (data) => {
+      stdoutData += data
+    })
+
+    ls.stderr.on('data', (data) => {
+      stderrData += data
+    })
+
+    ls.on('error', (err) => {
+      reject(err)
+    })
+
+    ls.on('close', (code) => {
+      if (code !== 0) {
+        reject(new Error(`child process exited with code ${code}: ${stderrData}`))
+      } else {
+        resolve(stdoutData)
+      }
+    })
   })
 }
-

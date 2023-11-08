@@ -1,5 +1,4 @@
 import bcryptjs from 'bcrypt'
-import jwt from 'jsonwebtoken'
 
 export async function hashPassword (password) {
   const saltRounds = 10
