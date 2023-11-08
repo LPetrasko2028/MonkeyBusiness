@@ -1,6 +1,7 @@
 import Express from 'express'
 import dataRouter from './api/mbRoutes.js'
 import { getMonkeyPosition } from './services/callPythonScripts.js'
+import schedule from 'node-schedule'
 
 const PORT = 3000
 const app = new Express()
@@ -21,6 +22,8 @@ app.listen(PORT, () => {
 })
 
 
-//const temp = getMonkeyPosition("https://www.youtube.com/watch?v=jaPx8uOE5_0", 1)
+var rule = new schedule.RecurrenceRule()
+rule.minute = [0, 15, 30, 45]
+schedule.scheduleJob(rule, () => {getMonkeyPosition("https://www.youtube.com/watch?v=jaPx8uOE5_0", 1)})
 
 
