@@ -7,6 +7,8 @@ import MongoStore from 'connect-mongo'
 // import { url } from './config/database.js'
 import Mongo from './data/mongoController.js'
 
+import schedule from 'node-schedule'
+
 const store = new session.MemoryStore()
 
 const PORT = 3000
@@ -58,7 +60,6 @@ app.listen(PORT, () => {
   console.log(`Server is running on port http://localhost:${PORT}`)
 })
 
-
-const temp = getMonkeyPosition("https://www.youtube.com/watch?v=jaPx8uOE5_0", 1)
-
-
+var rule = new schedule.RecurrenceRule()
+rule.minute = [0, 15, 30, 45]
+schedule.scheduleJob(rule, () => {getMonkeyPosition("https://www.youtube.com/watch?v=jaPx8uOE5_0", 1)})
