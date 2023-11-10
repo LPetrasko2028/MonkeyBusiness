@@ -11,7 +11,7 @@ import { comparePasswords } from '../controllers/loginController.js'
 
 // change email - requires password
 
-export async function changeAccount (req, res) {
+export async function updateAccount (req, res) {
   const username = req.session.username
   const password = req.body.password
   const changeType = req.body.changeType
@@ -90,7 +90,7 @@ export async function changeAccount (req, res) {
   }
 }
 
-export async function forgotEmail (req, res) {
+export async function forgotPassword (req, res) {
   const username = req.session.username
   const email = req.body.email
   queryMongoDatabase(async db => {
@@ -104,6 +104,19 @@ export async function forgotEmail (req, res) {
         // send email to user with link to change password
         res.json({ error: false, message: `Email sent to ${email}` })
       }
+    }
+  }, 'MonkeyBusinessWebApp')
+}
+
+export async function getAccountDetails (req, res) {
+  const username = req.session.username
+  console.log(username)
+  queryMongoDatabase(async db => {
+    const user = await db.collection('Users').findOne({ username }, { projection: { _id: 0, password: 0 } })
+    if (user === null) {
+      res.status(404).json({ error: true, message: 'User does not exist.' })
+    } else {
+      res.json(user)
     }
   }, 'MonkeyBusinessWebApp')
 }
