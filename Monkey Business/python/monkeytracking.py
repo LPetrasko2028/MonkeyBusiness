@@ -94,7 +94,8 @@ def openCVProcessing(saved_video_file):
     '''View saved video with openCV
     Add your other steps here'''
     capture = cv2.VideoCapture(saved_video_file)
-
+    width = np.uint16(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
+    print(width)
     ret, frame1 = capture.read()
     ret, frame2 = capture.read()
     while capture.isOpened():
@@ -115,7 +116,7 @@ def openCVProcessing(saved_video_file):
                 continue
 
             cv2.rectangle(frame1, (x, y), (x + w, y + h), (0, 255, 0), 2)
-            print( x, y)
+            print(x, y)
             cv2.putText(frame1, "Status: {}".format('Movement'), (10, 20), cv2.FONT_HERSHEY_SIMPLEX,
                         1, (0, 0, 255), 3)
         #cv2.drawContours(frame1, contours, -1, (0, 255, 0), 2) #Not always desired, but keep available
