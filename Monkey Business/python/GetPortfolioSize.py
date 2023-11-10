@@ -5,8 +5,11 @@ import sys  # added after
 
 input= sys.argv[1]
 
+
 #input: list[string], the list of stock shortnames such as "AMZN" or "MSFT"
 def getPortfolio(input):
+    if len(input<=0):
+        input=['AMZN', 'MSFT', 'AAPL', 'GOOG']
     pricelist=[]
     for i in range(len(input)):
         name=input[i]
@@ -23,8 +26,9 @@ def getPortfolio(input):
         pricelist.remove(pricelist[temp])
         input.remove(input[temp])
     return [stocklist2,pricelist2]
-
+# input=[]
 print(getPortfolio(input))
+
 # testlist=['AMZN', 'MSFT', 'AAPL', 'GOOG']
 # print(getPortfolio(testlist))
 
