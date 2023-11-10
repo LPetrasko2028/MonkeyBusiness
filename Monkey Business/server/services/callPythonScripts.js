@@ -39,7 +39,9 @@ export async function getMonkeyPosition (url, segments) {
   ls.on('close', (code) => {
     console.log(`${width}`)
     for (let i = 0; i < coordSpace.length; i++) {
-      console.log(`x: ${coordSpace[i].x}, y: ${coordSpace[i].y}`);
+      console.log(`x: ${coordSpace[i].x}, y: ${coordSpace[i].y}`);if (i==0){
+        const ls = cp.spawn('python', ['./python/MPosToChoice.py', coordSpace[i].x, width])
+       }
     }
   })
 }
