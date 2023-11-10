@@ -36,6 +36,7 @@ export default function App () {
           <Route path="/about" Component={IntroPage } />
           <Route path = "/signup" element = { <SignUpCard onSignUp = {onLogInChange}/>}/>
           <Route path = "/monkeyTech" Component = {MonkeTech}/>
+          <Route path="/tPage" Component={tPage}/>
           <Route path = "/setting" element = {
           <SettingsPage
             name = { username }
