@@ -9,8 +9,9 @@ inputList=['AMZN', 'MSFT', 'AAPL', 'GOOG']
 # quantity= sys.argv[2]
 quantity = 2
 X= sys.argv[1]
-# screenWidth= sys.argv[4]
-screenWidth=1080
+# X= random.randint(1080)
+screenWidth= sys.argv[2]
+# screenWidth=1080
 
 #This function takes in a list of stocks from the user, and displays a subset of them for the monkeyChoice to choose between
 #inputList, list[string], a list of stock shortnames such as "AMZN" or "MSFT", if this value is zero the function will return an error
