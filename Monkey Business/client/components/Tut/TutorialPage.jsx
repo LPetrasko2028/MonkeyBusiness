@@ -1,5 +1,8 @@
 import React from 'react'
 import { Accordion, Container,Row, Col } from 'react-bootstrap'
+import { BsQuestionCircle,BsBrightnessHigh} from 'react-icons/bs'
+
+
 
 function tPage () {
   return (
@@ -11,9 +14,9 @@ function tPage () {
         <Col>
         <Accordion defaultActiveKey="0">
         <Accordion.Item eventKey='0'>
-          <Accordion.Header>Tutorial</Accordion.Header>
+          <Accordion.Header><BsQuestionCircle/></Accordion.Header>
           <Accordion.Body>
-            This page briefly explains elememts and pages on this website.
+            This is a tutorial that briefly explains elememts and pages on this website.
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey='1'>
@@ -53,9 +56,9 @@ function tPage () {
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey='8'>
-          <Accordion.Header>Dark Mode</Accordion.Header>
+          <Accordion.Header><BsBrightnessHigh/></Accordion.Header>
           <Accordion.Body>
-            This button toggles the entire website into a color scheme that is easier on the eye when studying the screen in a darkend environment.
+            This Dark mode button toggles the entire website into a color scheme that is easier on the eye when studying the screen in a darkend environment.
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
