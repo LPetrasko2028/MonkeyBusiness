@@ -27,22 +27,23 @@ export default function queryMongoDatabase (queryCallback, databaseName) {
 }
 //------------------MongoDB Atlas Connection Test --------------------
 
-// async function run() {
-//   try {
-//     const database = Mongo.db("MonkeyBusinessWebApp")
-//     const movies = database.collection("Preferences")
-//     const o_id = new ObjectId("651dec44f8c800a5da81622b")
-//       const query = { _id: o_id }
-//     const options = { }
-//     const cursor = movies.find(query, options)
-//     if ((await movies.countDocuments(query)) === 0) {
-//       console.log("No documents found!")
-//     }
-//     for await (const doc of cursor) {
-//       console.dir(doc)
-//     }
-//   } finally {
-//     console.log("Closing connection")
-//   }
-// }
-// run().catch(console.dir);
+async function run() {
+  try {
+    const database = Mongo.db("MonkeyBusinessWebApp")
+    const movies = database.collection("Preferences")
+    const o_id = new ObjectId("651dec44f8c800a5da81622b")
+      const query = { _id: o_id }
+    const options = { }
+    const cursor = movies.find(query, options)
+    if ((await movies.countDocuments(query)) === 0) {
+      console.log("No documents found!")
+    }
+    for await (const doc of cursor) {
+      console.dir(doc)
+      console.log("Got from Database")
+    }
+  } finally {
+    console.log("Closing connection")
+  }
+}
+run().catch(console.dir);

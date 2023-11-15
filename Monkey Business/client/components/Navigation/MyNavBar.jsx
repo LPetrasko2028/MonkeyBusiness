@@ -3,7 +3,7 @@ import React from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import PropTypes from 'prop-types'
-import { BsBrightnessHigh, BsMoonStars } from 'react-icons/bs'
+import { BsBrightnessHigh, BsMoonStars, BsQuestionCircle } from 'react-icons/bs'
 
 export default function MyNavBar (props) {
   const { loggedIn, handleTheme, mode, isDark } = props
@@ -74,6 +74,9 @@ export default function MyNavBar (props) {
         </LinkContainer>
         <LinkContainer to = "/about" >
           <Nav.Link> About Us </Nav.Link>
+        </LinkContainer>
+        <LinkContainer to="/TutorialPage">
+          <Nav.Link><BsQuestionCircle/></Nav.Link>
         </LinkContainer>
         {navContent2}
         <Nav.Link> { content } </Nav.Link>
