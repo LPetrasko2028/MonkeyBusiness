@@ -22,7 +22,7 @@ def defaultList():
 #quantity, int, the number of stocks the monkey is to choose between, if this value is greater than the input list, the function will return an error
 #this function returns a list of stock shortnames, culled to the quan tity specified, randomly
 def choicePicker(inputList, quantity):
-    if inputList==["default"]
+    if inputList==["default"]:
         inputList=defaultList()
     output=[]
     if(len(inputList)<=0):

@@ -1,7 +1,7 @@
 import yfinance as yf
 import json
 import urllib
-import sys  # added after
+import sys   
 
 query = sys.argv[1] # added after
 startRange = int(sys.argv[2]) # added after
