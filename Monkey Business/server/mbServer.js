@@ -1,15 +1,19 @@
 import Express from 'express'
 import dataRouter from './api/mbRoutes.js'
+import baseRouter from './api/baseRouter.js'
 import { getMonkeyPosition } from './services/callPythonScripts.js'
 import session from 'express-session'
 import mongoose from 'mongoose'
 import MongoStore from 'connect-mongo'
 // import { url } from './config/database.js'
 import Mongo from './data/mongoController.js'
+import path from 'path'
 
 import schedule from 'node-schedule'
 
 const store = new session.MemoryStore()
+path.__dirname = path.resolve(path.dirname('./public/index.html'))
+console.log(path.__dirname)
 
 const PORT = 3000
 const app = new Express()
@@ -50,8 +54,15 @@ app.use((req, res, next) => {
   next()
 })
 // Statically serve the public folder
-app.use(Express.static('./public'))
+app.use(Express.static(path.join('./public')))
 
+app.get('resetPassword/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'))
+})
+
+app.get('*', (req, res) => {
+  res.sendFile('index.html', { root: './public' })
+})
 
 
 app.use('/api', dataRouter)

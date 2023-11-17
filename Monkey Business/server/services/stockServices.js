@@ -8,8 +8,20 @@ export async function getStockInfo (req, res) {
   }
   const timeFrameMonths = (!req.body.timeFrameMonths) ? parseInt(req.body.timeFrameMonths) : 1
   try {
-    const stockData = await getStockDetails(stockName, (!timeFrameMonths) ? timeFrameMonths : 1)
-    res.send(stockData)
+    let stockData = await getStockDetails(stockName, (!timeFrameMonths) ? timeFrameMonths : 1)
+    stockData = stockData.split('\n')
+    stockData.pop()
+    stockData.pop()
+    stockData.pop()
+    stockData.shift()
+    stockData.shift()
+    const stockArray = []
+    for (let i = 0; i < stockData.length; i++) {
+      const date = stockData[i].split(/[\s, ]+/)
+      date.pop()
+      stockArray.push(date)
+    }
+    res.send((stockArray))
   } catch (err) {
     console.log(err)
   }
@@ -32,22 +44,19 @@ export async function searchForStock (req, res) {
   }
 }
 
-function getInvestorStockNames (username) {
-  try {
-    queryMongoDatabase(async db => {
-      const data = await db.collection('Investor').findOne({ username })
-      if ((data) < 1) {
-        return ('Failed to find investor')
-      }
-      const stockNames = []
-      for (const stock of data.stocks) {
-        stockNames.push(stock[0])
-      }
-      return (stockNames)
-    }, 'MonkeyBusinessWebApp')
-  } catch (err) {
-    console.log(err)
-  }
+async function getInvestorStockNames (username) {
+  queryMongoDatabase(async db => {
+    const data = await db.collection('Investor').findOne({ username })
+    if ((data) < 1) {
+      return ('Failed to find investor')
+    }
+    const stockNames = []
+    for (const stock of data.stocks) {
+      stockNames.push(stock[0])
+    }
+    const userStockData = await getStockShort(stockNames)
+    return (userStockData)
+  }, 'MonkeyBusinessWebApp')
 }
 
 function parseStockData (stockData) {
@@ -62,11 +71,43 @@ function parseStockData (stockData) {
   return (parsedData)
 }
 
+function parseStockDataArray (stockData) {
+  // parse stock data
+  // return parsed data
+
+  const regex = /(?<=\[)(.*?)(?=\])/g
+  const matches = String(stockData.match(regex))
+  const data = matches.substring(1, matches.length - 1)
+  const parsedData = data.split(',\'')
+  const parsedDataArray = parsedData.map((stock) => {
+    stock = stock.replace(/'/g, '')
+    stock = stock.split(', ')
+    stock[1] = parseFloat(stock[1])
+    stock[2] = parseInt(stock[2])
+    stock[3] = parseFloat(stock[3])
+    stock[4] = parseFloat(stock[4])
+    return (stock)
+  })
+  return (parsedDataArray)
+}
+
 export async function getInvestorStocks (req, res) {
   const username = req.body.username // const username = req.session.username
-  const userStocks = await getInvestorStockNames(username)
-  const userStockData = await getStockShort(userStocks)
-  res.json(userStockData)
+  const start = (req.body.start) ? parseInt(req.body.start) : 0
+  const end = (req.body.end) ? parseInt(req.body.end) : 5
+  queryMongoDatabase(async db => {
+    const data = await db.collection('Investor').findOne({ username })
+    if ((data) < 1) {
+      res.status(404).json({ error: true, message: 'Failed to find investor' })
+    }
+    if (start > data.stocks.length || end > data.stocks.length) { res.json({ error: true, message: 'Invalid Range' }) }
+    const stockNames = []
+    for (let i = start; i < end; i++) {
+      stockNames.push(data.stocks[i][0])
+    }
+    const userStockData = await getStockShort(stockNames)
+    res.json(parseStockDataArray(userStockData))
+  }, 'MonkeyBusinessWebApp')
 }
 
 export async function updateStockCount (req, res) {

@@ -125,3 +125,39 @@ export function searchStockAPI (searchQuery, start, end) {
     })
   })
 }
+
+export function getStockMarket (start, end) {
+  return new Promise((resolve, reject) => {
+    const ls = cp.spawn('python', ['./python/StockSearchList.py', start, end])
+    let stdoutData
+    let stderrData
+
+    ls.stdout.on('data', (data) => {
+      if (stdoutData === undefined) {
+        stdoutData = data
+      } else {
+        stdoutData += data
+      }
+    })
+
+    ls.stderr.on('data', (data) => {
+      if (stderrData === undefined) {
+        stderrData = data
+      } else {
+        stderrData += data
+      }
+    })
+
+    ls.on('error', (err) => {
+      reject(err)
+    })
+
+    ls.on('close', (code) => {
+      if (code !== 0) {
+        reject(new Error(`child process exited with code ${code}: ${stderrData}`))
+      } else {
+        resolve(stdoutData)
+      }
+    })
+  })
+}

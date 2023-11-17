@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import { logIn } from './dataHelper'
 import PropTypes from 'prop-types'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 let myTheme = 'light'
 let buttonTheme = 'outline-dark'
@@ -59,6 +59,12 @@ function LoginCard (props) {
           <Button type = 'submit' className = 'mt-3' variant={buttonTheme} >Log In</Button>
         </label>
         </form>
+        <div className = 'mt-3'>
+
+        <Link to = '/signup' className='.p-3'>Don't have an account? Sign Up!</Link>
+        <br />
+        <Link to = '/forgotPassword'>Forgot Password?</Link>
+        </div>
         </Card.Body>
       </Card>
     </div>

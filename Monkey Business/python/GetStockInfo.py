@@ -1,6 +1,8 @@
 import yfinance as yf
 import sys  # added after
-names = ["AMZN"] #sys.argv[1]  # added after pass in an array of stock names
+names = sys.argv[1] # added after pass in an array of stock names
+names.split(', ')
+names = names.split(',')
 #when given  the stock name, returns:
 #stock name, current price, the high for the day, the volume, and the percent change for the day
 def getStockInfo(names):
@@ -19,6 +21,7 @@ def getStockInfo(names):
 
         stockArray.append(output)  # added after
     return stockArray
-
-print(getStockInfo(names))  # added after
+if(type(names) is list):
+    print(getStockInfo(names))
+#print(getStockInfo(names))  # added after
 #print(getStockInfo(names)) # added after
