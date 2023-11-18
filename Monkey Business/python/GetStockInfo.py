@@ -1,8 +1,10 @@
 import yfinance as yf
 import sys  # added after
-names = ["AMZN"] #sys.argv[1]  # added after pass in an array of stock names
-#when given  the stock name, returns:
+names = sys.argv[1]  # added after pass in an array of stock names
+
+#when called given the stock name, returns:
 #stock name, current price, the high for the day, the volume, and the percent change for the day
+#name: string, the shortname of the stock such as "AMZN" or "MSFT"
 def getStockInfo(names):
     stockArray=[]  # added after
     for name in names:  # added after
