@@ -12,7 +12,10 @@
 
 # production
 /build
-
+/public
+/Monkey Business/public
+/MonkeyBusiness/public
+public/*
 # misc
 .DS_Store
 .env.local

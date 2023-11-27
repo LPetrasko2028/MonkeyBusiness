@@ -4,7 +4,6 @@ import { getMonkeyPosition } from './services/callPythonScripts.js'
 import session from 'express-session'
 import mongoose from 'mongoose'
 import MongoStore from 'connect-mongo'
-// import { url } from './config/database.js'
 import { Mongo, url } from './data/mongoController.js'
 import MongoDBStore from 'connect-mongodb-session'
 import path from 'path'
@@ -64,7 +63,9 @@ app.use((req, res, next) => {
 })
 // Statically serve the public folder
 app.use(Express.static(path.join('./public')))
+
 app.use('/api', dataRouter)
+
 app.get('resetPassword/*', (req, res) => {
   console.log('resetPassword')
   res.sendFile(path.join(__dirname, 'public/index.html'))
