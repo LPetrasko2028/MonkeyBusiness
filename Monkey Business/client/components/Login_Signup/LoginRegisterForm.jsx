@@ -5,21 +5,17 @@ import { logIn } from './dataHelper'
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 
-let myTheme = 'light'
-let buttonTheme = 'outline-dark'
-const isMidnight = true
-if (isMidnight) { myTheme = 'dark' }
-if (myTheme === 'light') {
-  buttonTheme = 'outline-dark'
-} else {
-  buttonTheme = 'outline-light'
-}
-
 function LoginCard (props) {
-  const navigate = useNavigate()
-  const { onLogIn } = props
+  const { onLogIn, mode } = props
+  let buttonTheme
+  if (mode === 'dark') {
+    buttonTheme = 'outline-light'
+  } else {
+    buttonTheme = 'outline-dark'
+  }
   const [name, setName] = React.useState('')
   const [pass, setPass] = React.useState('')
+  const navigate = useNavigate()
   async function handleSubmit (e) {
     e.preventDefault()
     const user = {
@@ -28,11 +24,12 @@ function LoginCard (props) {
     }
     if (await logIn(user)) {
       onLogIn(name)
+      // navigate('/dash_B') not working yet but will change to this
       navigate('/')
     }
   }
   return (
-    <div data-bs-theme={myTheme}>
+    <div data-bs-theme={mode}>
       <Card style={{ width: '18rem' }} className="mx-auto mt-5">
         <Card.Body>
           <form method = 'post' onSubmit={handleSubmit}>
@@ -65,6 +62,7 @@ function LoginCard (props) {
   )
 }
 LoginCard.propTypes = {
-  onLogIn: PropTypes.func
+  onLogIn: PropTypes.func,
+  mode: PropTypes.string
 }
 export default LoginCard

@@ -1,11 +1,10 @@
 import React from 'react'
 function MonkeTech () {
-// Will show live vids of the monkeys?
   return (
+    // TODO: actually get the tracking vids in here (?) if possible
     <React.Fragment>
       <div>Monkey Tech Page - just a place holder</div>
-      <img className = 'image-fluid' src="https://t3.ftcdn.net/jpg/05/66/26/98/360_F_566269813_8VisUzV5qqdN7nQ7De4FcVEVxnRuKh2E.jpg" alt="Image" />
-    </React.Fragment>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/jaPx8uOE5_0?si=tbA9ag4wK9_vOGCP" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>    </React.Fragment>
   )
 }
 

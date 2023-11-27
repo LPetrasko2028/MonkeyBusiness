@@ -11,16 +11,13 @@ export async function login (req, res) {
   queryMongoDatabase(async db => {
     const loginSuccess = await db.collection('Users').findOne({ username })
     if (loginSuccess < 1) { res.status(404).json({ error: true, message: 'Username or Password could not be found.' }) } else {
-      const match = await comparePasswords(password, loginSuccess.password)
-      if (match.valueOf() === true) {
-        if (req.session.username === username) {
-          res.json({ error: true, message: `User: ${username} Already Logged In Successfully` })
-        } else {
-          req.session.username = username
-          const session = req.session
-          res.send(session)
-        // res.json({ error: false, message: `User: ${username} Logged In Successfully` })
-        }
+      // const match = await comparePasswords(password, loginSuccess.password)
+      const match2 = (password === loginSuccess.password)
+      if (match2) {
+        // req.session.user = username
+
+        // console.log(req.session.user)
+        res.json({ error: false, message: `User: ${username} Logged In Successfully` })
       } else {
         res.status(404).json({ error: true, message: 'Username or Password could not be found.' })
       }
@@ -34,6 +31,7 @@ export async function signup (req, res) { // working without authentication ----
   const passwordConfirm = req.body.passwordConfirm
   const email = req.body.email
 
+  // console.log(req.session.user)
   // let errors = []
   // if (!username || !password || !passwordConfirm || !email) { // file for validation errors ------------------TO DO --------------------
   //   errors.push({ message: 'Please enter all fields' })
@@ -60,19 +58,19 @@ export async function signup (req, res) { // working without authentication ----
 
 export async function logout (next, req, res) { // maybe POST to introduce authentication ------------------TO DO --------------------
   // if authenticated, logout, else redirect to login page
-  req.session.user = null
-  req.session.save(function (err) {
-    if (err) return next(err)
-    req.session.regenerate(function (err) {
-      if (err) next(err)
-      res.redirect('/')
-    }
-    )
-  })
-  req.session.destroy(function (err) {
-    if (err) return next(err)
-    res.redirect('/')
-  })
+  // req.session.user = null
+  // req.session.save(function (err) {
+  //   if (err) return next(err)
+  //   req.session.regenerate(function (err) {
+  //     if (err) next(err)
+  //     res.redirect('/')
+  //   }
+  //   )
+  // })
+  // req.session.destroy(function (err) {
+  //   if (err) return next(err)
+  //   res.redirect('/')
+  // })
 }
 
 export async function updatePreferences (req, res) {
@@ -138,7 +136,7 @@ export async function deleteUser (req, res) {
     }
   }, 'MonkeyBusinessWebApp')
 }
-
+// TODO make change name, change email and change password function in the backend for account changing in setting
 export async function getPreferences (req, res) {
   const username = req.session.user
   queryMongoDatabase(async db => {

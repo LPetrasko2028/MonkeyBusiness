@@ -3,19 +3,17 @@ import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import { signUp } from './dataHelper.js'
 import PropTypes from 'prop-types'
-// dummy theme stuff
-let myTheme = 'light'
-let buttonTheme = 'outline-dark'
-const isMidnight = true
-if (isMidnight) { myTheme = 'dark' }
-if (myTheme === 'light') {
-  buttonTheme = 'outline-dark'
-} else {
-  buttonTheme = 'outline-light'
-}
+import { useNavigate } from 'react-router-dom'
 
 function SignUpCard (props) {
-  const { onSignUp } = props
+  const { onSignUp, mode } = props
+  const navigate = useNavigate()
+  let buttonTheme
+  if (mode === 'dark') {
+    buttonTheme = 'outline-light'
+  } else {
+    buttonTheme = 'outline-dark'
+  }
   const [newUsername, setNewUsername] = React.useState('')
   const [newPassword, setNewPassword] = React.useState('')
   const [newFirstName, setNewFirstName] = React.useState('')
@@ -43,13 +41,14 @@ function SignUpCard (props) {
       if (await signUp(newUser)) {
         console.log('Sign Up Successfully')
         onSignUp(newUsername)
+        navigate('/')
       }
     } else {
       console.log('Missing information')
     }
   }
   return (
-    <div data-bs-theme={myTheme}>
+    <div data-bs-theme={mode}>
       <Card style={{ width: '18rem' }} className="mx-auto mt-5">
       <Card.Body>
       <form method = "post" onSubmit={handleSubmit}>
@@ -115,6 +114,7 @@ function SignUpCard (props) {
   )
 }
 SignUpCard.propTypes = {
-  onSignUp: PropTypes.func
+  onSignUp: PropTypes.func,
+  mode: PropTypes.string
 }
 export default SignUpCard

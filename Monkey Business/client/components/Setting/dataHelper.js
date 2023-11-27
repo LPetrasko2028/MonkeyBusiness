@@ -19,6 +19,27 @@ export async function updatePref (Prefs) {
     return false
   }
 }
+export async function updateAcc (Acc) {
+  try {
+    const response = await fetch('http://localhost:3000/api/account', {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(Acc)
+    })
+    if (response.status >= 400) {
+      throw new Error(`Request failed with response code ${response.status}`)
+    } else {
+      window.alert('Update successfully')
+      return true
+    }
+  } catch (err) {
+    window.alert('Failed to Update')
+    console.error(err)
+    return false
+  }
+}
 export async function deleteAcc (accID) {
   try {
     const response = await fetch(`http://localhost:3000/api/account/${accID}`, { method: 'DELETE' })

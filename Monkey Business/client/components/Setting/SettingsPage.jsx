@@ -1,3 +1,4 @@
+// needs to bring delete account to adv setting instead
 import React from 'react'
 import { Row, Button, Modal } from 'react-bootstrap'
 import { updatePref, deleteAcc } from './dataHelper'

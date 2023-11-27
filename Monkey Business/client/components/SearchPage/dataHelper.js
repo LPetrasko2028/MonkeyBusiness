@@ -18,26 +18,25 @@ export async function retrieveStocks () {
     return []
   }
 }
-
-/**
- * Asynchronously retrieve the details for one movie from our data endpoint and return them
- * @returns {Promise} Resolves to an object for that movie on success or null on failure
-
-export async function retrieveMovieDetails (movieID) {
+export async function retrieveStockDetail (stock) {
   try {
-    // Send an AJAX request to our movieDetailsJSON endpoint
-    const response = await fetch(`data/movie/${movieID}`)
+    // Send an AJAX request to our movieBrowseJSON endpoint
+    const response = await fetch('http://localhost:3000/api/stocksDetail/', {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(stock)
+    })
     if (response.status >= 400) {
       throw new Error(`Request failed with response code ${response.status}`)
     }
-
     // Parse the response from JSON into an object and return it
     return await response.json()
   } catch (err) {
-    // something went wrong so return null
-    console.error('Failed to retrieve details')
+    // something went wrong so return an empty array
+    console.error('Failed to retrieve array of stocks')
     console.error(err)
-    return null
+    return []
   }
 }
-*/

@@ -2,16 +2,18 @@ import Express from 'express'
 import { validationErrorMiddleware, validator, loginSchema, signupSchema, stockSchema, monkeySchema } from './../middleware/validation.js'
 
 import { updateMonkey, getMonkeyInvestments } from './../services/monkeyServices.js'
-import { getInvestorStocks, searchForStock, updateStockCount, getStockInfo } from './../services/stockServices.js'
+import { getOneStock, getInvestorStocks, searchForStock, updateStockCount, getStockInfo, getAllStocks, getUserStocks } from './../services/stockServices.js'
 import { login, signup, logout, updatePreferences, getPreferences, deleteUser } from './../services/userServices.js'
 
 import { isAuthenticated } from '../middleware/authentication.js'
-import { getAccountDetails, updateAccount, forgotPassword } from './../services/accountServices.js'
+import { getAccountDetails, updateAccount, forgotPassword, resetPassword } from './../services/accountServices.js'
 
 const dataRouter = new Express.Router()
 
 dataRouter.use(validationErrorMiddleware)
-
+dataRouter.get('/stocksTemp/:username', getUserStocks)
+dataRouter.get('/stocksTemp', getAllStocks)
+dataRouter.post('/stocksDetail', getOneStock)
 // ------------------------------------ Stock Routes ------------------------------------
 dataRouter.get('/stocks/:search', searchForStock) // anyone can access * with restrictions to prevent abuse
 dataRouter.get('/stocks', getInvestorStocks) // corresponding user can get their stocks
@@ -29,6 +31,9 @@ dataRouter.post('/forgotPassword', forgotPassword)
 dataRouter.get('/account', isAuthenticated, getAccountDetails)
 dataRouter.delete('/account/:username', deleteUser) // corresponding user or admin can delete account
 dataRouter.post('/account', updateAccount) // corresponding user can update account
+dataRouter.post('/resetPassword', resetPassword)
+
+dataRouter.get('/user', isAuthenticated, (req, res) => { res.send(req.session.username) }) // corresponding user can get their session
 
 dataRouter.get('/preferences', getPreferences) // corresponding user can get preferences
 dataRouter.post('/preferences', updatePreferences) // corresponding user can update preferences

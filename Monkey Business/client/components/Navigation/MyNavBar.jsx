@@ -4,17 +4,23 @@ import { Navbar, Nav } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import PropTypes from 'prop-types'
 import { BsBrightnessHigh, BsMoonStars } from 'react-icons/bs'
-
+import { logout } from './dataHelper'
 export default function MyNavBar (props) {
-  const { loggedIn, handleTheme, mode, isDark } = props
+  const { loggedIn, handleTheme, mode, isDark, setLogInStat, setName } = props
   const [check, setCheck] = React.useState(true)
+  const handleLogOut = () => {
+    logout()
+    setLogInStat(false)
+    setName('')
+    console.log('Logged out successfully')
+  }
   const handleClick = () => {
     handleTheme(!isDark)
     changeIcon(!isDark)
   }
   let content = (
     <div onClick = {handleClick}>
-    <BsBrightnessHigh/>
+    <BsBrightnessHigh size = { 28 }/>
     </div>
   )
   const changeIcon = () => {
@@ -22,13 +28,13 @@ export default function MyNavBar (props) {
     if (check) {
       content = (
         <div onClick = {handleClick}>
-        <BsBrightnessHigh/>
+        <BsBrightnessHigh size = { 28 }/>
         </div>
       )
     } else {
       content = (
         <div onClick = {handleClick}>
-        <BsMoonStars/>
+        <BsMoonStars size = { 28 }/>
         </div>
       )
     }
@@ -48,10 +54,22 @@ export default function MyNavBar (props) {
       </Nav>
     )
   } else {
+    navContent = (
+      <Nav className="justify-content-end" style={{ width: '50%' }}>
+      <LinkContainer to = "/" >
+        <Nav.Link onClick={ handleLogOut }> Log Out </Nav.Link>
+      </LinkContainer>
+      </Nav>
+    )
     navContent2 = (
+      <React.Fragment>
       <LinkContainer to = "/setting" >
       <Nav.Link> Setting </Nav.Link>
-    </LinkContainer>
+      </LinkContainer>
+      <LinkContainer to = "/advSetting" >
+      <Nav.Link> Advance Setting </Nav.Link>
+      </LinkContainer>
+      </React.Fragment>
     )
   }
   return (
@@ -87,10 +105,14 @@ MyNavBar.propTypes = {
   loggedIn: PropTypes.bool,
   handleTheme: PropTypes.func,
   mode: PropTypes.string,
-  isDark: PropTypes.bool.isRequired
+  isDark: PropTypes.bool.isRequired,
+  setLogInStat: PropTypes.func,
+  setName: PropTypes.func
 }
 MyNavBar.defaultProps = {
   loggedIn: false,
   handleTheme: () => {},
-  mode: 'light'
+  mode: 'light',
+  setLogInStat: () => {},
+  setName: () => {}
 }

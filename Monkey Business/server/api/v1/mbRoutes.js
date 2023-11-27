@@ -4,7 +4,7 @@ import { validationErrorMiddleware, validator, loginSchema, signupSchema, stockS
 import { updateMonkey, getMonkeyInvestments, getMonkeyStocks, getMonkeyHistory } from '../../services/monkeyServices.js'
 import { getStocks, getInvestorStocks, searchForStock, getAllStocks, getUserStocks } from '../../services/stockServices.js'
 import { login, signup, logout, updatePreferences, deleteUser } from '../../services/userServices.js'
-
+import { changeAccount } from '../../services/accountServices.js'
 const dataRouter = new Express.Router()
 
 dataRouter.use(validationErrorMiddleware)
@@ -23,6 +23,7 @@ dataRouter.get('/logout', logout)
 dataRouter.post('/signup', validator.validate({ body: signupSchema }), signup)
 dataRouter.delete('/account/:username', deleteUser)
 dataRouter.post('/preferences', updatePreferences)
+dataRouter.post('/account', changeAccount)
 
 // ------------------------------------ Monkey Routes ------------------------------------
 dataRouter.post('/monkey', validator.validate({ body: monkeySchema }), updateMonkey)

@@ -6,12 +6,13 @@ import MonkeTech from './MonkeyTech/MonkeyTechPage.jsx'
 import IntroPage from './Intro/IntroPage.jsx'
 import SettingsPage from './Setting/SettingsPage.jsx'
 import StatsPage from './Stat/StatsPage.jsx'
-import { MySearchBar } from './SearchPage/MySearchBar.jsx'
 import LoginCard from './Login_Signup/LoginRegisterForm.jsx'
 import SignUpCard from './Login_Signup/SignUpRegisterForm.jsx'
 import tPage from './Tut/TutorialPage.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
-
+import AdvSetting from './Setting/AdvSettingsPage.jsx'
+import { MySearchBar } from './SearchPage/MySearchBar.jsx'
+import { SearchBar } from './SearchPage/SearchBar.jsx'
 export default function App () {
   const [darkMode, setDarkMode] = React.useState(false)
   const handleDarkMode = () => {
@@ -29,12 +30,12 @@ export default function App () {
   return (
     <React.Fragment>
     <div data-bs-theme={theme}>
-    <MyNavBar loggedIn = {logInStatus} mode = {theme} data-bs-theme = {theme} handleTheme = {handleDarkMode} isDark = {darkMode} />
+    <MyNavBar setLogInStat = { setLogInStatus } setName = { setUsername } setDark = { setDarkMode } loggedIn = {logInStatus} mode = {theme} data-bs-theme = {theme} handleTheme = {handleDarkMode} isDark = {darkMode} />
     <Routes>
-          <Route path="/" exact element= {<Home theme={theme} name = {username} status = {logInStatus}/>}/>
-          <Route path="/login" element = { <LoginCard onLogIn={onLogInChange}/> } />
+          <Route path="/" exact element= {<Home theme={theme}/>}/>
+          <Route path="/login" element = { <LoginCard mode = { theme } onLogIn={onLogInChange}/> } />
           <Route path="/about" Component={IntroPage } />
-          <Route path = "/signup" element = { <SignUpCard onSignUp = {onLogInChange}/>}/>
+          <Route path = "/signup" element = { <SignUpCard mode = { theme } onSignUp = {onLogInChange}/>}/>
           <Route path = "/monkeyTech" Component = {MonkeTech}/>
           <Route path = "/setting" element = {
           <SettingsPage
@@ -44,6 +45,7 @@ export default function App () {
             >
           </SettingsPage>
           }/>
+          <Route path = "/advSetting" element = {<AdvSetting></AdvSetting>}/>
           <Route path = "/stats" Component = {StatsPage}/>
           <Route path = "/search" Component = {MySearchBar}/>
           <Route path="/TutorialPage" Component={tPage}/>
