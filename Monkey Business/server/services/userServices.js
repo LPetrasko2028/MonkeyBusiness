@@ -12,11 +12,15 @@ export async function login (req, res) {
     const loginSuccess = await db.collection('Users').findOne({ username })
     if (loginSuccess < 1) { res.status(404).json({ error: true, message: 'Username or Password could not be found.' }) } else {
       const match = await comparePasswords(password, loginSuccess.password)
-      if (match) {
-        req.session.user = username
-
-        console.log(req.session.user)
-        res.json({ error: false, message: `User: ${username} Logged In Successfully` })
+      if (match.valueOf() === true) {
+        if (req.session.username === username) {
+          res.json({ error: true, message: `User: ${username} Already Logged In Successfully` })
+        } else {
+          req.session.username = username
+          const session = req.session
+          res.send(session)
+        // res.json({ error: false, message: `User: ${username} Logged In Successfully` })
+        }
       } else {
         res.status(404).json({ error: true, message: 'Username or Password could not be found.' })
       }
@@ -30,7 +34,6 @@ export async function signup (req, res) { // working without authentication ----
   const passwordConfirm = req.body.passwordConfirm
   const email = req.body.email
 
-  console.log(req.session.user)
   // let errors = []
   // if (!username || !password || !passwordConfirm || !email) { // file for validation errors ------------------TO DO --------------------
   //   errors.push({ message: 'Please enter all fields' })
@@ -134,4 +137,16 @@ export async function deleteUser (req, res) {
       }
     }
   }, 'MonkeyBusinessWebApp')
+}
+
+export async function getPreferences (req, res) {
+  const username = req.session.user
+  queryMongoDatabase(async db => {
+    const findPreferences = await db.collection('Preferences').findOne({ username }).projection({ _id: 0 })
+    if (findPreferences === null) {
+      res.status(404).json({ error: true, message: 'Preferences could not be found.' })
+    } else {
+      res.json(findPreferences)
+    }
+  })
 }
