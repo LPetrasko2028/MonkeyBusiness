@@ -139,14 +139,14 @@ export async function deleteAccount (username) { // Input of password instead --
   }
 }
 
-export async function resetPassword (accessKey, username, password, passwordConfirm) {
+export async function resetPassword (accessKey, username, password, confirmPassword) {
   try {
     const response = await fetch('http://localhost:3000/api/resetPassword', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ accessKey, username, password, passwordConfirm })
+      body: JSON.stringify({ accessKey, username, password, confirmPassword })
     })
     if (response.status >= 400) {
       throw new Error(`Request failed with response code ${response.status}`)
@@ -232,7 +232,7 @@ export async function getMonkeyInvestments () {
     if (response.status >= 400) {
       throw new Error(`Request failed with response code ${response.status}`)
     }
-    return await response.json()
+    return response //await response.json()
   } catch (err) {
     console.error('Failed to retrieve monkey investments')
     console.error(err)

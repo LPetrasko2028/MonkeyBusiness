@@ -4,6 +4,7 @@ import { Alert } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
+import { Link } from 'react-router-dom'
 
 export default function ForgotPassword () {
   const [username, setUsername] = useState('')
@@ -41,6 +42,7 @@ export default function ForgotPassword () {
         </p>
       </Alert>
     <Card style={{ width: '18rem' }} className="mx-auto mt-5">
+    <Card.Header>Forgot Password</Card.Header>
       <Card.Body>
     <form onSubmit={handleSubmit}>
       <label className='m-3'>
@@ -52,7 +54,10 @@ export default function ForgotPassword () {
         <input type="text" value={email} onChange={handleEmailChange} />
       </label>
       <br />
+      <div className='row-5'>
+      <Link to='/login'><Button variant="secondary">Back to Login</Button></Link>
       <Button type="submit">Send Email</Button>
+      </div>
     </form>
     </Card.Body>
     </Card>

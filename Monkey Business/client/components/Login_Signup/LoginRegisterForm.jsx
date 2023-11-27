@@ -5,16 +5,6 @@ import { logIn } from './dataHelper'
 import PropTypes from 'prop-types'
 import { useNavigate, Link } from 'react-router-dom'
 
-let myTheme = 'light'
-let buttonTheme = 'outline-dark'
-const isMidnight = true
-if (isMidnight) { myTheme = 'dark' }
-if (myTheme === 'light') {
-  buttonTheme = 'outline-dark'
-} else {
-  buttonTheme = 'outline-light'
-}
-
 function LoginCard (props) {
   const navigate = useNavigate()
   const { onLogIn } = props
@@ -32,7 +22,7 @@ function LoginCard (props) {
     }
   }
   return (
-    <div data-bs-theme={myTheme}>
+    <div>
       <Card style={{ width: '18rem' }} className="mx-auto mt-5">
         <Card.Body>
           <form method = 'post' onSubmit={handleSubmit}>
@@ -56,7 +46,7 @@ function LoginCard (props) {
         />
         </label>
         <label>
-          <Button type = 'submit' className = 'mt-3' variant={buttonTheme} >Log In</Button>
+          <Button type = 'submit' className = 'mt-3 center' >Log In</Button>
         </label>
         </form>
         <div className = 'mt-3'>

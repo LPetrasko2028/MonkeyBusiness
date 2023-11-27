@@ -287,9 +287,9 @@
           {
             Object.freeze(emptyObject);
           }
-          function Component(props, context3, updater) {
+          function Component(props, context5, updater) {
             this.props = props;
-            this.context = context3;
+            this.context = context5;
             this.refs = emptyObject;
             this.updater = updater || ReactNoopUpdateQueue;
           }
@@ -325,9 +325,9 @@
           function ComponentDummy() {
           }
           ComponentDummy.prototype = Component.prototype;
-          function PureComponent(props, context3, updater) {
+          function PureComponent(props, context5, updater) {
             this.props = props;
-            this.context = context3;
+            this.context = context5;
             this.refs = emptyObject;
             this.updater = updater || ReactNoopUpdateQueue;
           }
@@ -419,8 +419,8 @@
             if (typeof type === "object") {
               switch (type.$$typeof) {
                 case REACT_CONTEXT_TYPE:
-                  var context3 = type;
-                  return getContextName(context3) + ".Consumer";
+                  var context5 = type;
+                  return getContextName(context5) + ".Consumer";
                 case REACT_PROVIDER_TYPE:
                   var provider = type;
                   return getContextName(provider._context) + ".Provider";
@@ -799,14 +799,14 @@
             }
             return subtreeCount;
           }
-          function mapChildren(children, func, context3) {
+          function mapChildren(children, func, context5) {
             if (children == null) {
               return children;
             }
             var result = [];
             var count = 0;
             mapIntoArray(children, result, "", "", function(child) {
-              return func.call(context3, child, count++);
+              return func.call(context5, child, count++);
             });
             return result;
           }
@@ -833,8 +833,8 @@
             }
             return children;
           }
-          function createContext9(defaultValue) {
-            var context3 = {
+          function createContext11(defaultValue) {
+            var context5 = {
               $$typeof: REACT_CONTEXT_TYPE,
               // As a workaround to support multiple concurrent renderers, we categorize
               // some renderers as primary and others as secondary. We only expect
@@ -853,9 +853,9 @@
               _defaultValue: null,
               _globalName: null
             };
-            context3.Provider = {
+            context5.Provider = {
               $$typeof: REACT_PROVIDER_TYPE,
-              _context: context3
+              _context: context5
             };
             var hasWarnedAboutUsingNestedContextConsumers = false;
             var hasWarnedAboutUsingConsumerProvider = false;
@@ -863,7 +863,7 @@
             {
               var Consumer2 = {
                 $$typeof: REACT_CONTEXT_TYPE,
-                _context: context3
+                _context: context5
               };
               Object.defineProperties(Consumer2, {
                 Provider: {
@@ -872,34 +872,34 @@
                       hasWarnedAboutUsingConsumerProvider = true;
                       error("Rendering <Context.Consumer.Provider> is not supported and will be removed in a future major release. Did you mean to render <Context.Provider> instead?");
                     }
-                    return context3.Provider;
+                    return context5.Provider;
                   },
                   set: function(_Provider) {
-                    context3.Provider = _Provider;
+                    context5.Provider = _Provider;
                   }
                 },
                 _currentValue: {
                   get: function() {
-                    return context3._currentValue;
+                    return context5._currentValue;
                   },
                   set: function(_currentValue) {
-                    context3._currentValue = _currentValue;
+                    context5._currentValue = _currentValue;
                   }
                 },
                 _currentValue2: {
                   get: function() {
-                    return context3._currentValue2;
+                    return context5._currentValue2;
                   },
                   set: function(_currentValue2) {
-                    context3._currentValue2 = _currentValue2;
+                    context5._currentValue2 = _currentValue2;
                   }
                 },
                 _threadCount: {
                   get: function() {
-                    return context3._threadCount;
+                    return context5._threadCount;
                   },
                   set: function(_threadCount) {
-                    context3._threadCount = _threadCount;
+                    context5._threadCount = _threadCount;
                   }
                 },
                 Consumer: {
@@ -908,12 +908,12 @@
                       hasWarnedAboutUsingNestedContextConsumers = true;
                       error("Rendering <Context.Consumer.Consumer> is not supported and will be removed in a future major release. Did you mean to render <Context.Consumer> instead?");
                     }
-                    return context3.Consumer;
+                    return context5.Consumer;
                   }
                 },
                 displayName: {
                   get: function() {
-                    return context3.displayName;
+                    return context5.displayName;
                   },
                   set: function(displayName) {
                     if (!hasWarnedAboutDisplayNameOnConsumer) {
@@ -923,13 +923,13 @@
                   }
                 }
               });
-              context3.Consumer = Consumer2;
+              context5.Consumer = Consumer2;
             }
             {
-              context3._currentRenderer = null;
-              context3._currentRenderer2 = null;
+              context5._currentRenderer = null;
+              context5._currentRenderer2 = null;
             }
-            return context3;
+            return context5;
           }
           var Uninitialized = -1;
           var Pending = 0;
@@ -1020,7 +1020,7 @@
             }
             return lazyType;
           }
-          function forwardRef46(render) {
+          function forwardRef55(render) {
             {
               if (render != null && render.$$typeof === REACT_MEMO_TYPE) {
                 error("forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...)).");
@@ -1119,7 +1119,7 @@
             }
             return dispatcher;
           }
-          function useContext11(Context2) {
+          function useContext14(Context2) {
             var dispatcher = resolveDispatcher();
             {
               if (Context2._context !== void 0) {
@@ -1133,7 +1133,7 @@
             }
             return dispatcher.useContext(Context2);
           }
-          function useState14(initialState) {
+          function useState15(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1145,7 +1145,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect15(create, deps) {
+          function useEffect16(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -1161,7 +1161,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useCallback(callback, deps);
           }
-          function useMemo9(create, deps) {
+          function useMemo11(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useMemo(create, deps);
           }
@@ -1897,14 +1897,14 @@
           var createElement$1 = createElementWithValidation;
           var cloneElement$1 = cloneElementWithValidation;
           var createFactory = createFactoryWithValidation;
-          var Children = {
+          var Children2 = {
             map: mapChildren,
             forEach: forEachChildren,
             count: countChildren,
             toArray: toArray2,
             only: onlyChild
           };
-          exports.Children = Children;
+          exports.Children = Children2;
           exports.Component = Component;
           exports.Fragment = REACT_FRAGMENT_TYPE;
           exports.Profiler = REACT_PROFILER_TYPE;
@@ -1913,29 +1913,29 @@
           exports.Suspense = REACT_SUSPENSE_TYPE;
           exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactSharedInternals;
           exports.cloneElement = cloneElement$1;
-          exports.createContext = createContext9;
+          exports.createContext = createContext11;
           exports.createElement = createElement$1;
           exports.createFactory = createFactory;
           exports.createRef = createRef;
-          exports.forwardRef = forwardRef46;
+          exports.forwardRef = forwardRef55;
           exports.isValidElement = isValidElement;
           exports.lazy = lazy;
           exports.memo = memo;
           exports.startTransition = startTransition;
           exports.unstable_act = act;
           exports.useCallback = useCallback11;
-          exports.useContext = useContext11;
+          exports.useContext = useContext14;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect15;
+          exports.useEffect = useEffect16;
           exports.useId = useId;
           exports.useImperativeHandle = useImperativeHandle2;
           exports.useInsertionEffect = useInsertionEffect;
           exports.useLayoutEffect = useLayoutEffect2;
-          exports.useMemo = useMemo9;
+          exports.useMemo = useMemo11;
           exports.useReducer = useReducer2;
           exports.useRef = useRef13;
-          exports.useState = useState14;
+          exports.useState = useState15;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition2;
           exports.version = ReactVersion;
@@ -2431,9 +2431,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React75 = require_react();
+          var React86 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React75.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React86.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -3589,8 +3589,8 @@
             if (typeof type === "object") {
               switch (type.$$typeof) {
                 case REACT_CONTEXT_TYPE:
-                  var context3 = type;
-                  return getContextName(context3) + ".Consumer";
+                  var context5 = type;
+                  return getContextName(context5) + ".Consumer";
                 case REACT_PROVIDER_TYPE:
                   var provider = type;
                   return getContextName(provider._context) + ".Provider";
@@ -3629,8 +3629,8 @@
               case CacheComponent:
                 return "Cache";
               case ContextConsumer:
-                var context3 = type;
-                return getContextName$1(context3) + ".Consumer";
+                var context5 = type;
+                return getContextName$1(context5) + ".Consumer";
               case ContextProvider:
                 var provider = type;
                 return getContextName$1(provider._context) + ".Provider";
@@ -4038,7 +4038,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React75.Children.forEach(props.children, function(child) {
+                  React86.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -5594,10 +5594,10 @@
               passiveBrowserEventsSupported = false;
             }
           }
-          function invokeGuardedCallbackProd(name, func, context3, a, b, c, d, e, f) {
+          function invokeGuardedCallbackProd(name, func, context5, a, b, c, d, e, f) {
             var funcArgs = Array.prototype.slice.call(arguments, 3);
             try {
-              func.apply(context3, funcArgs);
+              func.apply(context5, funcArgs);
             } catch (error2) {
               this.onError(error2);
             }
@@ -5606,7 +5606,7 @@
           {
             if (typeof window !== "undefined" && typeof window.dispatchEvent === "function" && typeof document !== "undefined" && typeof document.createEvent === "function") {
               var fakeNode = document.createElement("react");
-              invokeGuardedCallbackImpl = function invokeGuardedCallbackDev(name, func, context3, a, b, c, d, e, f) {
+              invokeGuardedCallbackImpl = function invokeGuardedCallbackDev(name, func, context5, a, b, c, d, e, f) {
                 if (typeof document === "undefined" || document === null) {
                   throw new Error("The `document` global was defined when React was initialized, but is not defined anymore. This can happen in a test environment if a component schedules an update from an asynchronous callback, but the test has already finished running. To solve this, you can either unmount the component at the end of your test (and ensure that any asynchronous operations get canceled in `componentWillUnmount`), or you can change the test itself to be asynchronous.");
                 }
@@ -5625,7 +5625,7 @@
                 function callCallback2() {
                   didCall = true;
                   restoreAfterDispatch();
-                  func.apply(context3, funcArgs);
+                  func.apply(context5, funcArgs);
                   didError = false;
                 }
                 var error2;
@@ -5681,12 +5681,12 @@
               caughtError = error2;
             }
           };
-          function invokeGuardedCallback(name, func, context3, a, b, c, d, e, f) {
+          function invokeGuardedCallback(name, func, context5, a, b, c, d, e, f) {
             hasError = false;
             caughtError = null;
             invokeGuardedCallbackImpl$1.apply(reporter, arguments);
           }
-          function invokeGuardedCallbackAndCatchFirstError(name, func, context3, a, b, c, d, e, f) {
+          function invokeGuardedCallbackAndCatchFirstError(name, func, context5, a, b, c, d, e, f) {
             invokeGuardedCallback.apply(this, arguments);
             if (hasError) {
               var error2 = clearCaughtError();
@@ -10928,18 +10928,18 @@
               if (instance && instance.__reactInternalMemoizedUnmaskedChildContext === unmaskedContext) {
                 return instance.__reactInternalMemoizedMaskedChildContext;
               }
-              var context3 = {};
+              var context5 = {};
               for (var key in contextTypes) {
-                context3[key] = unmaskedContext[key];
+                context5[key] = unmaskedContext[key];
               }
               {
                 var name = getComponentNameFromFiber(workInProgress2) || "Unknown";
-                checkPropTypes(contextTypes, context3, "context", name);
+                checkPropTypes(contextTypes, context5, "context", name);
               }
               if (instance) {
-                cacheContext(workInProgress2, unmaskedContext, context3);
+                cacheContext(workInProgress2, unmaskedContext, context5);
               }
-              return context3;
+              return context5;
             }
           }
           function hasContextChanged() {
@@ -10965,12 +10965,12 @@
               pop(contextStackCursor, fiber);
             }
           }
-          function pushTopLevelContextObject(fiber, context3, didChange) {
+          function pushTopLevelContextObject(fiber, context5, didChange) {
             {
               if (contextStackCursor.current !== emptyContextObject) {
                 throw new Error("Unexpected context found on stack. This error is likely caused by a bug in React. Please file an issue.");
               }
-              push(contextStackCursor, context3, fiber);
+              push(contextStackCursor, context5, fiber);
               push(didPerformWorkStackCursor, didChange, fiber);
             }
           }
@@ -11844,24 +11844,24 @@
               isDisallowedContextReadInDEV = false;
             }
           }
-          function pushProvider(providerFiber, context3, nextValue) {
+          function pushProvider(providerFiber, context5, nextValue) {
             {
-              push(valueCursor, context3._currentValue, providerFiber);
-              context3._currentValue = nextValue;
+              push(valueCursor, context5._currentValue, providerFiber);
+              context5._currentValue = nextValue;
               {
-                if (context3._currentRenderer !== void 0 && context3._currentRenderer !== null && context3._currentRenderer !== rendererSigil) {
+                if (context5._currentRenderer !== void 0 && context5._currentRenderer !== null && context5._currentRenderer !== rendererSigil) {
                   error("Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.");
                 }
-                context3._currentRenderer = rendererSigil;
+                context5._currentRenderer = rendererSigil;
               }
             }
           }
-          function popProvider(context3, providerFiber) {
+          function popProvider(context5, providerFiber) {
             var currentValue = valueCursor.current;
             pop(valueCursor, providerFiber);
             {
               {
-                context3._currentValue = currentValue;
+                context5._currentValue = currentValue;
               }
             }
           }
@@ -11888,12 +11888,12 @@
               }
             }
           }
-          function propagateContextChange(workInProgress2, context3, renderLanes2) {
+          function propagateContextChange(workInProgress2, context5, renderLanes2) {
             {
-              propagateContextChange_eager(workInProgress2, context3, renderLanes2);
+              propagateContextChange_eager(workInProgress2, context5, renderLanes2);
             }
           }
-          function propagateContextChange_eager(workInProgress2, context3, renderLanes2) {
+          function propagateContextChange_eager(workInProgress2, context5, renderLanes2) {
             var fiber = workInProgress2.child;
             if (fiber !== null) {
               fiber.return = workInProgress2;
@@ -11905,7 +11905,7 @@
                 nextFiber = fiber.child;
                 var dependency = list.firstContext;
                 while (dependency !== null) {
-                  if (dependency.context === context3) {
+                  if (dependency.context === context5) {
                     if (fiber.tag === ClassComponent) {
                       var lane = pickArbitraryLane(renderLanes2);
                       var update = createUpdate(NoTimestamp, lane);
@@ -11991,18 +11991,18 @@
               }
             }
           }
-          function readContext(context3) {
+          function readContext(context5) {
             {
               if (isDisallowedContextReadInDEV) {
                 error("Context can only be read while React is rendering. In classes, you can read it in the render method or getDerivedStateFromProps. In function components, you can read it directly in the function body, but not inside Hooks like useReducer() or useMemo().");
               }
             }
-            var value = context3._currentValue;
-            if (lastFullyObservedContext === context3)
+            var value = context5._currentValue;
+            if (lastFullyObservedContext === context5)
               ;
             else {
               var contextItem = {
-                context: context3,
+                context: context5,
                 memoizedValue: value,
                 next: null
               };
@@ -12458,11 +12458,11 @@
               currentlyProcessingQueue = null;
             }
           }
-          function callCallback(callback, context3) {
+          function callCallback(callback, context5) {
             if (typeof callback !== "function") {
               throw new Error("Invalid argument passed as callback. Expected a function. Instead " + ("received: " + callback));
             }
-            callback.call(context3);
+            callback.call(context5);
           }
           function resetHasForceUpdateBeforeProcessing() {
             hasForceUpdate = false;
@@ -12485,7 +12485,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React75.Component().refs;
+          var emptyRefsObject = new React86.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -12736,7 +12736,7 @@
           function constructClassInstance(workInProgress2, ctor, props) {
             var isLegacyContextConsumer = false;
             var unmaskedContext = emptyContextObject;
-            var context3 = emptyContextObject;
+            var context5 = emptyContextObject;
             var contextType = ctor.contextType;
             {
               if ("contextType" in ctor) {
@@ -12763,19 +12763,19 @@
               }
             }
             if (typeof contextType === "object" && contextType !== null) {
-              context3 = readContext(contextType);
+              context5 = readContext(contextType);
             } else {
               unmaskedContext = getUnmaskedContext(workInProgress2, ctor, true);
               var contextTypes = ctor.contextTypes;
               isLegacyContextConsumer = contextTypes !== null && contextTypes !== void 0;
-              context3 = isLegacyContextConsumer ? getMaskedContext(workInProgress2, unmaskedContext) : emptyContextObject;
+              context5 = isLegacyContextConsumer ? getMaskedContext(workInProgress2, unmaskedContext) : emptyContextObject;
             }
-            var instance = new ctor(props, context3);
+            var instance = new ctor(props, context5);
             {
               if (workInProgress2.mode & StrictLegacyMode) {
                 setIsStrictModeForDevtools(true);
                 try {
-                  instance = new ctor(props, context3);
+                  instance = new ctor(props, context5);
                 } finally {
                   setIsStrictModeForDevtools(false);
                 }
@@ -12821,7 +12821,7 @@
               }
             }
             if (isLegacyContextConsumer) {
-              cacheContext(workInProgress2, unmaskedContext, context3);
+              cacheContext(workInProgress2, unmaskedContext, context5);
             }
             return instance;
           }
@@ -13872,14 +13872,14 @@
             pop(rootInstanceStackCursor, fiber);
           }
           function getHostContext() {
-            var context3 = requiredContext(contextStackCursor$1.current);
-            return context3;
+            var context5 = requiredContext(contextStackCursor$1.current);
+            return context5;
           }
           function pushHostContext(fiber) {
             var rootInstance = requiredContext(rootInstanceStackCursor.current);
-            var context3 = requiredContext(contextStackCursor$1.current);
-            var nextContext = getChildHostContext(context3, fiber.type);
-            if (context3 === nextContext) {
+            var context5 = requiredContext(contextStackCursor$1.current);
+            var nextContext = getChildHostContext(context5, fiber.type);
+            if (context5 === nextContext) {
               return;
             }
             push(contextFiberStackCursor, fiber, fiber);
@@ -15047,8 +15047,8 @@
               error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks");
             };
             HooksDispatcherOnMountInDEV = {
-              readContext: function(context3) {
-                return readContext(context3);
+              readContext: function(context5) {
+                return readContext(context5);
               },
               useCallback: function(callback, deps) {
                 currentHookNameInDev = "useCallback";
@@ -15056,10 +15056,10 @@
                 checkDepsAreArrayDev(deps);
                 return mountCallback(callback, deps);
               },
-              useContext: function(context3) {
+              useContext: function(context5) {
                 currentHookNameInDev = "useContext";
                 mountHookTypesDev();
-                return readContext(context3);
+                return readContext(context5);
               },
               useEffect: function(create, deps) {
                 currentHookNameInDev = "useEffect";
@@ -15157,18 +15157,18 @@
               unstable_isNewReconciler: enableNewReconciler
             };
             HooksDispatcherOnMountWithHookTypesInDEV = {
-              readContext: function(context3) {
-                return readContext(context3);
+              readContext: function(context5) {
+                return readContext(context5);
               },
               useCallback: function(callback, deps) {
                 currentHookNameInDev = "useCallback";
                 updateHookTypesDev();
                 return mountCallback(callback, deps);
               },
-              useContext: function(context3) {
+              useContext: function(context5) {
                 currentHookNameInDev = "useContext";
                 updateHookTypesDev();
-                return readContext(context3);
+                return readContext(context5);
               },
               useEffect: function(create, deps) {
                 currentHookNameInDev = "useEffect";
@@ -15261,18 +15261,18 @@
               unstable_isNewReconciler: enableNewReconciler
             };
             HooksDispatcherOnUpdateInDEV = {
-              readContext: function(context3) {
-                return readContext(context3);
+              readContext: function(context5) {
+                return readContext(context5);
               },
               useCallback: function(callback, deps) {
                 currentHookNameInDev = "useCallback";
                 updateHookTypesDev();
                 return updateCallback(callback, deps);
               },
-              useContext: function(context3) {
+              useContext: function(context5) {
                 currentHookNameInDev = "useContext";
                 updateHookTypesDev();
-                return readContext(context3);
+                return readContext(context5);
               },
               useEffect: function(create, deps) {
                 currentHookNameInDev = "useEffect";
@@ -15365,18 +15365,18 @@
               unstable_isNewReconciler: enableNewReconciler
             };
             HooksDispatcherOnRerenderInDEV = {
-              readContext: function(context3) {
-                return readContext(context3);
+              readContext: function(context5) {
+                return readContext(context5);
               },
               useCallback: function(callback, deps) {
                 currentHookNameInDev = "useCallback";
                 updateHookTypesDev();
                 return updateCallback(callback, deps);
               },
-              useContext: function(context3) {
+              useContext: function(context5) {
                 currentHookNameInDev = "useContext";
                 updateHookTypesDev();
-                return readContext(context3);
+                return readContext(context5);
               },
               useEffect: function(create, deps) {
                 currentHookNameInDev = "useEffect";
@@ -15469,9 +15469,9 @@
               unstable_isNewReconciler: enableNewReconciler
             };
             InvalidNestedHooksDispatcherOnMountInDEV = {
-              readContext: function(context3) {
+              readContext: function(context5) {
                 warnInvalidContextAccess();
-                return readContext(context3);
+                return readContext(context5);
               },
               useCallback: function(callback, deps) {
                 currentHookNameInDev = "useCallback";
@@ -15479,11 +15479,11 @@
                 mountHookTypesDev();
                 return mountCallback(callback, deps);
               },
-              useContext: function(context3) {
+              useContext: function(context5) {
                 currentHookNameInDev = "useContext";
                 warnInvalidHookAccess();
                 mountHookTypesDev();
-                return readContext(context3);
+                return readContext(context5);
               },
               useEffect: function(create, deps) {
                 currentHookNameInDev = "useEffect";
@@ -15590,9 +15590,9 @@
               unstable_isNewReconciler: enableNewReconciler
             };
             InvalidNestedHooksDispatcherOnUpdateInDEV = {
-              readContext: function(context3) {
+              readContext: function(context5) {
                 warnInvalidContextAccess();
-                return readContext(context3);
+                return readContext(context5);
               },
               useCallback: function(callback, deps) {
                 currentHookNameInDev = "useCallback";
@@ -15600,11 +15600,11 @@
                 updateHookTypesDev();
                 return updateCallback(callback, deps);
               },
-              useContext: function(context3) {
+              useContext: function(context5) {
                 currentHookNameInDev = "useContext";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
-                return readContext(context3);
+                return readContext(context5);
               },
               useEffect: function(create, deps) {
                 currentHookNameInDev = "useEffect";
@@ -15711,9 +15711,9 @@
               unstable_isNewReconciler: enableNewReconciler
             };
             InvalidNestedHooksDispatcherOnRerenderInDEV = {
-              readContext: function(context3) {
+              readContext: function(context5) {
                 warnInvalidContextAccess();
-                return readContext(context3);
+                return readContext(context5);
               },
               useCallback: function(callback, deps) {
                 currentHookNameInDev = "useCallback";
@@ -15721,11 +15721,11 @@
                 updateHookTypesDev();
                 return updateCallback(callback, deps);
               },
-              useContext: function(context3) {
+              useContext: function(context5) {
                 currentHookNameInDev = "useContext";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
-                return readContext(context3);
+                return readContext(context5);
               },
               useEffect: function(create, deps) {
                 currentHookNameInDev = "useEffect";
@@ -16514,10 +16514,10 @@
                 }
               }
             }
-            var context3;
+            var context5;
             {
               var unmaskedContext = getUnmaskedContext(workInProgress2, Component, true);
-              context3 = getMaskedContext(workInProgress2, unmaskedContext);
+              context5 = getMaskedContext(workInProgress2, unmaskedContext);
             }
             var nextChildren;
             var hasId;
@@ -16528,12 +16528,12 @@
             {
               ReactCurrentOwner$1.current = workInProgress2;
               setIsRendering(true);
-              nextChildren = renderWithHooks(current2, workInProgress2, Component, nextProps, context3, renderLanes2);
+              nextChildren = renderWithHooks(current2, workInProgress2, Component, nextProps, context5, renderLanes2);
               hasId = checkDidRenderIdHook();
               if (workInProgress2.mode & StrictLegacyMode) {
                 setIsStrictModeForDevtools(true);
                 try {
-                  nextChildren = renderWithHooks(current2, workInProgress2, Component, nextProps, context3, renderLanes2);
+                  nextChildren = renderWithHooks(current2, workInProgress2, Component, nextProps, context5, renderLanes2);
                   hasId = checkDidRenderIdHook();
                 } finally {
                   setIsStrictModeForDevtools(false);
@@ -16848,10 +16848,10 @@
           function mountIndeterminateComponent(_current, workInProgress2, Component, renderLanes2) {
             resetSuspendedCurrentOnMountInLegacyMode(_current, workInProgress2);
             var props = workInProgress2.pendingProps;
-            var context3;
+            var context5;
             {
               var unmaskedContext = getUnmaskedContext(workInProgress2, Component, false);
-              context3 = getMaskedContext(workInProgress2, unmaskedContext);
+              context5 = getMaskedContext(workInProgress2, unmaskedContext);
             }
             prepareToReadContext(workInProgress2, renderLanes2);
             var value;
@@ -16872,7 +16872,7 @@
               }
               setIsRendering(true);
               ReactCurrentOwner$1.current = workInProgress2;
-              value = renderWithHooks(null, workInProgress2, Component, props, context3, renderLanes2);
+              value = renderWithHooks(null, workInProgress2, Component, props, context5, renderLanes2);
               hasId = checkDidRenderIdHook();
               setIsRendering(false);
             }
@@ -16922,7 +16922,7 @@
                 if (workInProgress2.mode & StrictLegacyMode) {
                   setIsStrictModeForDevtools(true);
                   try {
-                    value = renderWithHooks(null, workInProgress2, Component, props, context3, renderLanes2);
+                    value = renderWithHooks(null, workInProgress2, Component, props, context5, renderLanes2);
                     hasId = checkDidRenderIdHook();
                   } finally {
                     setIsStrictModeForDevtools(false);
@@ -17574,7 +17574,7 @@
           var hasWarnedAboutUsingNoValuePropOnContextProvider = false;
           function updateContextProvider(current2, workInProgress2, renderLanes2) {
             var providerType = workInProgress2.type;
-            var context3 = providerType._context;
+            var context5 = providerType._context;
             var newProps = workInProgress2.pendingProps;
             var oldProps = workInProgress2.memoizedProps;
             var newValue = newProps.value;
@@ -17590,7 +17590,7 @@
                 checkPropTypes(providerPropTypes, newProps, "prop", "Context.Provider");
               }
             }
-            pushProvider(workInProgress2, context3, newValue);
+            pushProvider(workInProgress2, context5, newValue);
             {
               if (oldProps !== null) {
                 var oldValue = oldProps.value;
@@ -17599,7 +17599,7 @@
                     return bailoutOnAlreadyFinishedWork(current2, workInProgress2, renderLanes2);
                   }
                 } else {
-                  propagateContextChange(workInProgress2, context3, renderLanes2);
+                  propagateContextChange(workInProgress2, context5, renderLanes2);
                 }
               }
             }
@@ -17609,17 +17609,17 @@
           }
           var hasWarnedAboutUsingContextAsConsumer = false;
           function updateContextConsumer(current2, workInProgress2, renderLanes2) {
-            var context3 = workInProgress2.type;
+            var context5 = workInProgress2.type;
             {
-              if (context3._context === void 0) {
-                if (context3 !== context3.Consumer) {
+              if (context5._context === void 0) {
+                if (context5 !== context5.Consumer) {
                   if (!hasWarnedAboutUsingContextAsConsumer) {
                     hasWarnedAboutUsingContextAsConsumer = true;
                     error("Rendering <Context> directly is not supported and will be removed in a future major release. Did you mean to render <Context.Consumer> instead?");
                   }
                 }
               } else {
-                context3 = context3._context;
+                context5 = context5._context;
               }
             }
             var newProps = workInProgress2.pendingProps;
@@ -17630,7 +17630,7 @@
               }
             }
             prepareToReadContext(workInProgress2, renderLanes2);
-            var newValue = readContext(context3);
+            var newValue = readContext(context5);
             {
               markComponentRenderStarted(workInProgress2);
             }
@@ -17743,8 +17743,8 @@
                 break;
               case ContextProvider: {
                 var newValue = workInProgress2.memoizedProps.value;
-                var context3 = workInProgress2.type._context;
-                pushProvider(workInProgress2, context3, newValue);
+                var context5 = workInProgress2.type._context;
+                pushProvider(workInProgress2, context5, newValue);
                 break;
               }
               case Profiler:
@@ -18331,8 +18331,8 @@
                 bubbleProperties(workInProgress2);
                 return null;
               case ContextProvider:
-                var context3 = workInProgress2.type._context;
-                popProvider(context3, workInProgress2);
+                var context5 = workInProgress2.type._context;
+                popProvider(context5, workInProgress2);
                 bubbleProperties(workInProgress2);
                 return null;
               case IncompleteClassComponent: {
@@ -18544,8 +18544,8 @@
                 popHostContainer(workInProgress2);
                 return null;
               case ContextProvider:
-                var context3 = workInProgress2.type._context;
-                popProvider(context3, workInProgress2);
+                var context5 = workInProgress2.type._context;
+                popProvider(context5, workInProgress2);
                 return null;
               case OffscreenComponent:
               case LegacyHiddenComponent:
@@ -18588,8 +18588,8 @@
                 popSuspenseContext(interruptedWork);
                 break;
               case ContextProvider:
-                var context3 = interruptedWork.type._context;
-                popProvider(context3, interruptedWork);
+                var context5 = interruptedWork.type._context;
+                popProvider(context5, interruptedWork);
                 break;
               case OffscreenComponent:
               case LegacyHiddenComponent:
@@ -22697,11 +22697,11 @@
             {
               markRenderScheduled(lane);
             }
-            var context3 = getContextForSubtree(parentComponent);
+            var context5 = getContextForSubtree(parentComponent);
             if (container.context === null) {
-              container.context = context3;
+              container.context = context5;
             } else {
-              container.pendingContext = context3;
+              container.pendingContext = context5;
             }
             {
               if (isRendering && current !== null && !didWarnAboutNestedUpdates) {
@@ -25898,10 +25898,10 @@
             }
             if (isErrorResult(result)) {
               let boundaryMatch = findNearestBoundary(matches, actionMatch.route.id);
-              let context4 = yield loadRouteData(request, matches, requestContext, void 0, {
+              let context6 = yield loadRouteData(request, matches, requestContext, void 0, {
                 [boundaryMatch.route.id]: result.error
               });
-              return _extends2({}, context4, {
+              return _extends2({}, context6, {
                 statusCode: isRouteErrorResponse(result.error) ? result.error.status : 500,
                 actionData: null,
                 actionHeaders: _extends2({}, result.headers ? {
@@ -25914,8 +25914,8 @@
               redirect: request.redirect,
               signal: request.signal
             });
-            let context3 = yield loadRouteData(loaderRequest, matches, requestContext);
-            return _extends2({}, context3, result.statusCode ? {
+            let context5 = yield loadRouteData(loaderRequest, matches, requestContext);
+            return _extends2({}, context5, result.statusCode ? {
               statusCode: result.statusCode
             } : {}, {
               actionData: {
@@ -25962,14 +25962,14 @@
               throw new Error(method + "() call aborted: " + request.method + " " + request.url);
             }
             let activeDeferreds = /* @__PURE__ */ new Map();
-            let context3 = processRouteLoaderData(matches, matchesToLoad, results, pendingActionError, activeDeferreds);
+            let context5 = processRouteLoaderData(matches, matchesToLoad, results, pendingActionError, activeDeferreds);
             let executedLoaders = new Set(matchesToLoad.map((match) => match.route.id));
             matches.forEach((match) => {
               if (!executedLoaders.has(match.route.id)) {
-                context3.loaderData[match.route.id] = null;
+                context5.loaderData[match.route.id] = null;
               }
             });
-            return _extends2({}, context3, {
+            return _extends2({}, context5, {
               matches,
               activeDeferreds: activeDeferreds.size > 0 ? Object.fromEntries(activeDeferreds.entries()) : null
             });
@@ -25981,11 +25981,11 @@
           queryRoute
         };
       }
-      function getStaticContextFromError(routes, context3, error) {
-        let newContext = _extends2({}, context3, {
+      function getStaticContextFromError(routes, context5, error) {
+        let newContext = _extends2({}, context5, {
           statusCode: 500,
           errors: {
-            [context3._deepestRenderedBoundaryId || routes[0].id]: error
+            [context5._deepestRenderedBoundaryId || routes[0].id]: error
           }
         });
         return newContext;
@@ -26938,7 +26938,7 @@
     "node_modules/react-router-dom/node_modules/react-router/dist/umd/react-router.development.js"(exports, module) {
       (function(global2, factory) {
         typeof exports === "object" && typeof module !== "undefined" ? factory(exports, require_react(), require_router_cjs()) : typeof define === "function" && define.amd ? define(["exports", "react", "@remix-run/router"], factory) : (global2 = typeof globalThis !== "undefined" ? globalThis : global2 || self, factory(global2.ReactRouter = {}, global2.React, global2.RemixRouter));
-      })(exports, function(exports2, React75, router) {
+      })(exports, function(exports2, React86, router) {
         "use strict";
         function _interopNamespace(e) {
           if (e && e.__esModule)
@@ -26960,7 +26960,7 @@
           n["default"] = e;
           return Object.freeze(n);
         }
-        var React__namespace = /* @__PURE__ */ _interopNamespace(React75);
+        var React__namespace = /* @__PURE__ */ _interopNamespace(React86);
         function _extends2() {
           _extends2 = Object.assign ? Object.assign.bind() : function(target) {
             for (var i = 1; i < arguments.length; i++) {
@@ -27124,16 +27124,16 @@
         function useOutletContext() {
           return React__namespace.useContext(OutletContext);
         }
-        function useOutlet(context3) {
+        function useOutlet(context5) {
           let outlet = React__namespace.useContext(RouteContext).outlet;
           if (outlet) {
             return /* @__PURE__ */ React__namespace.createElement(OutletContext.Provider, {
-              value: context3
+              value: context5
             }, outlet);
           }
           return outlet;
         }
-        function useParams2() {
+        function useParams() {
           let {
             matches
           } = React__namespace.useContext(RouteContext);
@@ -28052,7 +28052,7 @@
         exports2.useNavigationType = useNavigationType;
         exports2.useOutlet = useOutlet;
         exports2.useOutletContext = useOutletContext;
-        exports2.useParams = useParams2;
+        exports2.useParams = useParams;
         exports2.useResolvedPath = useResolvedPath;
         exports2.useRevalidator = useRevalidator;
         exports2.useRouteError = useRouteError;
@@ -28080,7 +28080,7 @@
     "node_modules/react-router-dom/dist/umd/react-router-dom.development.js"(exports, module) {
       (function(global2, factory) {
         typeof exports === "object" && typeof module !== "undefined" ? factory(exports, require_react(), require_main(), require_router_cjs()) : typeof define === "function" && define.amd ? define(["exports", "react", "react-router", "@remix-run/router"], factory) : (global2 = typeof globalThis !== "undefined" ? globalThis : global2 || self, factory(global2.ReactRouterDOM = {}, global2.React, global2.ReactRouter, global2.RemixRouter));
-      })(exports, function(exports2, React75, reactRouter, router) {
+      })(exports, function(exports2, React86, reactRouter, router) {
         "use strict";
         function _interopNamespace(e) {
           if (e && e.__esModule)
@@ -28102,7 +28102,7 @@
           n["default"] = e;
           return Object.freeze(n);
         }
-        var React__namespace = /* @__PURE__ */ _interopNamespace(React75);
+        var React__namespace = /* @__PURE__ */ _interopNamespace(React86);
         function _extends2() {
           _extends2 = Object.assign ? Object.assign.bind() : function(target) {
             for (var i = 1; i < arguments.length; i++) {
@@ -28426,7 +28426,7 @@
         }
         const isBrowser = typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined";
         const ABSOLUTE_URL_REGEX = /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i;
-        const Link2 = /* @__PURE__ */ React__namespace.forwardRef(function LinkWithRef(_ref4, ref) {
+        const Link4 = /* @__PURE__ */ React__namespace.forwardRef(function LinkWithRef(_ref4, ref) {
           let {
             onClick,
             relative,
@@ -28487,7 +28487,7 @@
           );
         });
         {
-          Link2.displayName = "Link";
+          Link4.displayName = "Link";
         }
         const NavLink2 = /* @__PURE__ */ React__namespace.forwardRef(function NavLinkWithRef(_ref5, ref) {
           let {
@@ -28531,7 +28531,7 @@
             isActive,
             isPending
           }) : styleProp;
-          return /* @__PURE__ */ React__namespace.createElement(Link2, _extends2({}, rest, {
+          return /* @__PURE__ */ React__namespace.createElement(Link4, _extends2({}, rest, {
             "aria-current": ariaCurrent,
             className,
             ref,
@@ -29273,7 +29273,7 @@
         exports2.BrowserRouter = BrowserRouter2;
         exports2.Form = Form;
         exports2.HashRouter = HashRouter;
-        exports2.Link = Link2;
+        exports2.Link = Link4;
         exports2.NavLink = NavLink2;
         exports2.ScrollRestoration = ScrollRestoration;
         exports2.UNSAFE_useScrollRestoration = useScrollRestoration;
@@ -29313,7 +29313,7 @@
         "use strict";
         var hasOwn = {}.hasOwnProperty;
         var nativeCodeString = "[native code]";
-        function classNames38() {
+        function classNames47() {
           var classes = [];
           for (var i = 0; i < arguments.length; i++) {
             var arg = arguments[i];
@@ -29324,7 +29324,7 @@
               classes.push(arg);
             } else if (Array.isArray(arg)) {
               if (arg.length) {
-                var inner = classNames38.apply(null, arg);
+                var inner = classNames47.apply(null, arg);
                 if (inner) {
                   classes.push(inner);
                 }
@@ -29344,14 +29344,14 @@
           return classes.join(" ");
         }
         if (typeof module !== "undefined" && module.exports) {
-          classNames38.default = classNames38;
-          module.exports = classNames38;
+          classNames47.default = classNames47;
+          module.exports = classNames47;
         } else if (typeof define === "function" && typeof define.amd === "object" && define.amd) {
           define("classnames", [], function() {
-            return classNames38;
+            return classNames47;
           });
         } else {
-          window.classNames = classNames38;
+          window.classNames = classNames47;
         }
       })();
     }
@@ -29398,7 +29398,7 @@
       if (true) {
         (function() {
           "use strict";
-          var React75 = require_react();
+          var React86 = require_react();
           var REACT_ELEMENT_TYPE = Symbol.for("react.element");
           var REACT_PORTAL_TYPE = Symbol.for("react.portal");
           var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
@@ -29424,7 +29424,7 @@
             }
             return null;
           }
-          var ReactSharedInternals = React75.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React86.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function error(format) {
             {
               {
@@ -29520,8 +29520,8 @@
             if (typeof type === "object") {
               switch (type.$$typeof) {
                 case REACT_CONTEXT_TYPE:
-                  var context3 = type;
-                  return getContextName(context3) + ".Consumer";
+                  var context5 = type;
+                  return getContextName(context5) + ".Consumer";
                 case REACT_PROVIDER_TYPE:
                   var provider = type;
                   return getContextName(provider._context) + ".Provider";
@@ -31297,15 +31297,20 @@
   });
 
   // client/main.jsx
-  var import_react60 = __toESM(require_react(), 1);
+  var import_react65 = __toESM(require_react(), 1);
   var import_client = __toESM(require_client(), 1);
 
   // client/components/App.jsx
-  var import_react59 = __toESM(require_react(), 1);
-  var import_react_router_dom4 = __toESM(require_main2(), 1);
+  var import_react64 = __toESM(require_react(), 1);
+  var import_react_router_dom5 = __toESM(require_main2(), 1);
 
   // client/components/Navigation/MyNavBar.jsx
-  var import_react46 = __toESM(require_react(), 1);
+  var import_react51 = __toESM(require_react(), 1);
+
+  // node_modules/react-bootstrap/esm/Accordion.js
+  var import_classnames7 = __toESM(require_classnames());
+  var React14 = __toESM(require_react());
+  var import_react13 = __toESM(require_react());
 
   // node_modules/@babel/runtime/helpers/esm/extends.js
   function _extends() {
@@ -31489,6 +31494,16 @@
     return dir === "rtl";
   }
 
+  // node_modules/react-bootstrap/esm/AccordionBody.js
+  var import_classnames3 = __toESM(require_classnames());
+  var React10 = __toESM(require_react());
+  var import_react10 = __toESM(require_react());
+
+  // node_modules/react-bootstrap/esm/AccordionCollapse.js
+  var import_classnames2 = __toESM(require_classnames());
+  var React8 = __toESM(require_react());
+  var import_react9 = __toESM(require_react());
+
   // node_modules/react-bootstrap/esm/Collapse.js
   var import_classnames = __toESM(require_classnames());
 
@@ -31600,10 +31615,10 @@
   var EXITING = "exiting";
   var Transition = /* @__PURE__ */ function(_React$Component) {
     _inheritsLoose(Transition2, _React$Component);
-    function Transition2(props, context3) {
+    function Transition2(props, context5) {
       var _this;
-      _this = _React$Component.call(this, props, context3) || this;
-      var parentGroup = context3;
+      _this = _React$Component.call(this, props, context5) || this;
+      var parentGroup = context5;
       var appear = parentGroup && !parentGroup.isMounting ? props.enter : props.appear;
       var initialStatus;
       _this.appearStatus = null;
@@ -32339,18 +32354,292 @@
   });
   var Collapse_default = Collapse;
 
+  // node_modules/react-bootstrap/esm/AccordionContext.js
+  var React7 = __toESM(require_react());
+  function isAccordionItemSelected(activeEventKey, eventKey) {
+    return Array.isArray(activeEventKey) ? activeEventKey.includes(eventKey) : activeEventKey === eventKey;
+  }
+  var context = /* @__PURE__ */ React7.createContext({});
+  context.displayName = "AccordionContext";
+  var AccordionContext_default = context;
+
+  // node_modules/react-bootstrap/esm/AccordionCollapse.js
+  var import_jsx_runtime4 = __toESM(require_jsx_runtime());
+  var AccordionCollapse = /* @__PURE__ */ React8.forwardRef((_a, ref) => {
+    var _b = _a, {
+      as: Component = "div",
+      bsPrefix,
+      className,
+      children,
+      eventKey
+    } = _b, props = __objRest(_b, [
+      "as",
+      "bsPrefix",
+      "className",
+      "children",
+      "eventKey"
+    ]);
+    const {
+      activeEventKey
+    } = (0, import_react9.useContext)(AccordionContext_default);
+    bsPrefix = useBootstrapPrefix(bsPrefix, "accordion-collapse");
+    return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Collapse_default, __spreadProps(__spreadValues({
+      ref,
+      in: isAccordionItemSelected(activeEventKey, eventKey)
+    }, props), {
+      className: (0, import_classnames2.default)(className, bsPrefix),
+      children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Component, {
+        children: React8.Children.only(children)
+      })
+    }));
+  });
+  AccordionCollapse.displayName = "AccordionCollapse";
+  var AccordionCollapse_default = AccordionCollapse;
+
+  // node_modules/react-bootstrap/esm/AccordionItemContext.js
+  var React9 = __toESM(require_react());
+  var context2 = /* @__PURE__ */ React9.createContext({
+    eventKey: ""
+  });
+  context2.displayName = "AccordionItemContext";
+  var AccordionItemContext_default = context2;
+
+  // node_modules/react-bootstrap/esm/AccordionBody.js
+  var import_jsx_runtime5 = __toESM(require_jsx_runtime());
+  var AccordionBody = /* @__PURE__ */ React10.forwardRef((_a, ref) => {
+    var _b = _a, {
+      as: Component = "div",
+      bsPrefix,
+      className,
+      onEnter,
+      onEntering,
+      onEntered,
+      onExit,
+      onExiting,
+      onExited
+    } = _b, props = __objRest(_b, [
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      "as",
+      "bsPrefix",
+      "className",
+      "onEnter",
+      "onEntering",
+      "onEntered",
+      "onExit",
+      "onExiting",
+      "onExited"
+    ]);
+    bsPrefix = useBootstrapPrefix(bsPrefix, "accordion-body");
+    const {
+      eventKey
+    } = (0, import_react10.useContext)(AccordionItemContext_default);
+    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(AccordionCollapse_default, {
+      eventKey,
+      onEnter,
+      onEntering,
+      onEntered,
+      onExit,
+      onExiting,
+      onExited,
+      children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Component, __spreadProps(__spreadValues({
+        ref
+      }, props), {
+        className: (0, import_classnames3.default)(className, bsPrefix)
+      }))
+    });
+  });
+  AccordionBody.displayName = "AccordionBody";
+  var AccordionBody_default = AccordionBody;
+
+  // node_modules/react-bootstrap/esm/AccordionButton.js
+  var React11 = __toESM(require_react());
+  var import_react11 = __toESM(require_react());
+  var import_classnames4 = __toESM(require_classnames());
+  var import_jsx_runtime6 = __toESM(require_jsx_runtime());
+  function useAccordionButton(eventKey, onClick) {
+    const {
+      activeEventKey,
+      onSelect,
+      alwaysOpen
+    } = (0, import_react11.useContext)(AccordionContext_default);
+    return (e) => {
+      let eventKeyPassed = eventKey === activeEventKey ? null : eventKey;
+      if (alwaysOpen) {
+        if (Array.isArray(activeEventKey)) {
+          if (activeEventKey.includes(eventKey)) {
+            eventKeyPassed = activeEventKey.filter((k) => k !== eventKey);
+          } else {
+            eventKeyPassed = [...activeEventKey, eventKey];
+          }
+        } else {
+          eventKeyPassed = [eventKey];
+        }
+      }
+      onSelect == null ? void 0 : onSelect(eventKeyPassed, e);
+      onClick == null ? void 0 : onClick(e);
+    };
+  }
+  var AccordionButton = /* @__PURE__ */ React11.forwardRef((_a, ref) => {
+    var _b = _a, {
+      as: Component = "button",
+      bsPrefix,
+      className,
+      onClick
+    } = _b, props = __objRest(_b, [
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      "as",
+      "bsPrefix",
+      "className",
+      "onClick"
+    ]);
+    bsPrefix = useBootstrapPrefix(bsPrefix, "accordion-button");
+    const {
+      eventKey
+    } = (0, import_react11.useContext)(AccordionItemContext_default);
+    const accordionOnClick = useAccordionButton(eventKey, onClick);
+    const {
+      activeEventKey
+    } = (0, import_react11.useContext)(AccordionContext_default);
+    if (Component === "button") {
+      props.type = "button";
+    }
+    return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Component, __spreadProps(__spreadValues({
+      ref,
+      onClick: accordionOnClick
+    }, props), {
+      "aria-expanded": Array.isArray(activeEventKey) ? activeEventKey.includes(eventKey) : eventKey === activeEventKey,
+      className: (0, import_classnames4.default)(className, bsPrefix, !isAccordionItemSelected(activeEventKey, eventKey) && "collapsed")
+    }));
+  });
+  AccordionButton.displayName = "AccordionButton";
+  var AccordionButton_default = AccordionButton;
+
+  // node_modules/react-bootstrap/esm/AccordionHeader.js
+  var import_classnames5 = __toESM(require_classnames());
+  var React12 = __toESM(require_react());
+  var import_jsx_runtime7 = __toESM(require_jsx_runtime());
+  var AccordionHeader = /* @__PURE__ */ React12.forwardRef((_a, ref) => {
+    var _b = _a, {
+      as: Component = "h2",
+      bsPrefix,
+      className,
+      children,
+      onClick
+    } = _b, props = __objRest(_b, [
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      "as",
+      "bsPrefix",
+      "className",
+      "children",
+      "onClick"
+    ]);
+    bsPrefix = useBootstrapPrefix(bsPrefix, "accordion-header");
+    return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Component, __spreadProps(__spreadValues({
+      ref
+    }, props), {
+      className: (0, import_classnames5.default)(className, bsPrefix),
+      children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(AccordionButton_default, {
+        onClick,
+        children
+      })
+    }));
+  });
+  AccordionHeader.displayName = "AccordionHeader";
+  var AccordionHeader_default = AccordionHeader;
+
+  // node_modules/react-bootstrap/esm/AccordionItem.js
+  var import_classnames6 = __toESM(require_classnames());
+  var React13 = __toESM(require_react());
+  var import_react12 = __toESM(require_react());
+  var import_jsx_runtime8 = __toESM(require_jsx_runtime());
+  var AccordionItem = /* @__PURE__ */ React13.forwardRef((_a, ref) => {
+    var _b = _a, {
+      as: Component = "div",
+      bsPrefix,
+      className,
+      eventKey
+    } = _b, props = __objRest(_b, [
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      "as",
+      "bsPrefix",
+      "className",
+      "eventKey"
+    ]);
+    bsPrefix = useBootstrapPrefix(bsPrefix, "accordion-item");
+    const contextValue = (0, import_react12.useMemo)(() => ({
+      eventKey
+    }), [eventKey]);
+    return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(AccordionItemContext_default.Provider, {
+      value: contextValue,
+      children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Component, __spreadProps(__spreadValues({
+        ref
+      }, props), {
+        className: (0, import_classnames6.default)(className, bsPrefix)
+      }))
+    });
+  });
+  AccordionItem.displayName = "AccordionItem";
+  var AccordionItem_default = AccordionItem;
+
+  // node_modules/react-bootstrap/esm/Accordion.js
+  var import_jsx_runtime9 = __toESM(require_jsx_runtime());
+  var Accordion = /* @__PURE__ */ React14.forwardRef((props, ref) => {
+    const _a = useUncontrolled(props, {
+      activeKey: "onSelect"
+    }), {
+      as: Component = "div",
+      activeKey,
+      bsPrefix,
+      className,
+      onSelect,
+      flush,
+      alwaysOpen
+    } = _a, controlledProps = __objRest(_a, [
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      "as",
+      "activeKey",
+      "bsPrefix",
+      "className",
+      "onSelect",
+      "flush",
+      "alwaysOpen"
+    ]);
+    const prefix = useBootstrapPrefix(bsPrefix, "accordion");
+    const contextValue = (0, import_react13.useMemo)(() => ({
+      activeEventKey: activeKey,
+      onSelect,
+      alwaysOpen
+    }), [activeKey, onSelect, alwaysOpen]);
+    return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(AccordionContext_default.Provider, {
+      value: contextValue,
+      children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Component, __spreadProps(__spreadValues({
+        ref
+      }, controlledProps), {
+        className: (0, import_classnames7.default)(className, prefix, flush && `${prefix}-flush`)
+      }))
+    });
+  });
+  Accordion.displayName = "Accordion";
+  var Accordion_default = Object.assign(Accordion, {
+    Button: AccordionButton_default,
+    Collapse: AccordionCollapse_default,
+    Item: AccordionItem_default,
+    Header: AccordionHeader_default,
+    Body: AccordionBody_default
+  });
+
   // node_modules/react-bootstrap/esm/Alert.js
-  var import_classnames7 = __toESM(require_classnames());
-  var React14 = __toESM(require_react());
+  var import_classnames13 = __toESM(require_classnames());
+  var React22 = __toESM(require_react());
 
   // node_modules/@restart/hooks/esm/useEventCallback.js
-  var import_react10 = __toESM(require_react());
+  var import_react15 = __toESM(require_react());
 
   // node_modules/@restart/hooks/esm/useCommittedRef.js
-  var import_react9 = __toESM(require_react());
+  var import_react14 = __toESM(require_react());
   function useCommittedRef(value) {
-    const ref = (0, import_react9.useRef)(value);
-    (0, import_react9.useEffect)(() => {
+    const ref = (0, import_react14.useRef)(value);
+    (0, import_react14.useEffect)(() => {
       ref.current = value;
     }, [value]);
     return ref;
@@ -32360,29 +32649,29 @@
   // node_modules/@restart/hooks/esm/useEventCallback.js
   function useEventCallback(fn) {
     const ref = useCommittedRef_default(fn);
-    return (0, import_react10.useCallback)(function(...args) {
+    return (0, import_react15.useCallback)(function(...args) {
       return ref.current && ref.current(...args);
     }, [ref]);
   }
 
   // node_modules/react-bootstrap/esm/AlertHeading.js
-  var React8 = __toESM(require_react());
-  var import_classnames3 = __toESM(require_classnames());
+  var React16 = __toESM(require_react());
+  var import_classnames9 = __toESM(require_classnames());
 
   // node_modules/react-bootstrap/esm/divWithClassName.js
-  var React7 = __toESM(require_react());
-  var import_classnames2 = __toESM(require_classnames());
-  var import_jsx_runtime4 = __toESM(require_jsx_runtime());
-  var divWithClassName_default = (className) => /* @__PURE__ */ React7.forwardRef((p, ref) => /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", __spreadProps(__spreadValues({}, p), {
+  var React15 = __toESM(require_react());
+  var import_classnames8 = __toESM(require_classnames());
+  var import_jsx_runtime10 = __toESM(require_jsx_runtime());
+  var divWithClassName_default = (className) => /* @__PURE__ */ React15.forwardRef((p, ref) => /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", __spreadProps(__spreadValues({}, p), {
     ref,
-    className: (0, import_classnames2.default)(p.className, className)
+    className: (0, import_classnames8.default)(p.className, className)
   })));
 
   // node_modules/react-bootstrap/esm/AlertHeading.js
-  var import_jsx_runtime5 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime11 = __toESM(require_jsx_runtime());
   var DivStyledAsH4 = divWithClassName_default("h4");
   DivStyledAsH4.displayName = "DivStyledAsH4";
-  var AlertHeading = /* @__PURE__ */ React8.forwardRef((_a, ref) => {
+  var AlertHeading = /* @__PURE__ */ React16.forwardRef((_a, ref) => {
     var _b = _a, {
       className,
       bsPrefix,
@@ -32393,48 +32682,48 @@
       "as"
     ]);
     bsPrefix = useBootstrapPrefix(bsPrefix, "alert-heading");
-    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Component, __spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(Component, __spreadValues({
       ref,
-      className: (0, import_classnames3.default)(className, bsPrefix)
+      className: (0, import_classnames9.default)(className, bsPrefix)
     }, props));
   });
   AlertHeading.displayName = "AlertHeading";
   var AlertHeading_default = AlertHeading;
 
   // node_modules/react-bootstrap/esm/AlertLink.js
-  var React11 = __toESM(require_react());
-  var import_classnames4 = __toESM(require_classnames());
+  var React19 = __toESM(require_react());
+  var import_classnames10 = __toESM(require_classnames());
 
   // node_modules/@restart/ui/esm/Anchor.js
-  var React10 = __toESM(require_react());
+  var React18 = __toESM(require_react());
 
   // node_modules/@restart/hooks/esm/useCallbackRef.js
-  var import_react11 = __toESM(require_react());
+  var import_react16 = __toESM(require_react());
   function useCallbackRef() {
-    return (0, import_react11.useState)(null);
+    return (0, import_react16.useState)(null);
   }
 
   // node_modules/@restart/hooks/esm/useEventListener.js
-  var import_react12 = __toESM(require_react());
+  var import_react17 = __toESM(require_react());
 
   // node_modules/@restart/hooks/esm/useGlobalListener.js
-  var import_react13 = __toESM(require_react());
+  var import_react18 = __toESM(require_react());
 
   // node_modules/@restart/hooks/esm/useInterval.js
-  var import_react14 = __toESM(require_react());
+  var import_react19 = __toESM(require_react());
 
   // node_modules/@restart/hooks/esm/useRafInterval.js
-  var import_react15 = __toESM(require_react());
+  var import_react20 = __toESM(require_react());
 
   // node_modules/@restart/hooks/esm/useMergeState.js
-  var import_react16 = __toESM(require_react());
+  var import_react21 = __toESM(require_react());
 
   // node_modules/@restart/hooks/esm/useMounted.js
-  var import_react17 = __toESM(require_react());
+  var import_react22 = __toESM(require_react());
   function useMounted() {
-    const mounted = (0, import_react17.useRef)(true);
-    const isMounted = (0, import_react17.useRef)(() => mounted.current);
-    (0, import_react17.useEffect)(() => {
+    const mounted = (0, import_react22.useRef)(true);
+    const isMounted = (0, import_react22.useRef)(() => mounted.current);
+    (0, import_react22.useEffect)(() => {
       mounted.current = true;
       return () => {
         mounted.current = false;
@@ -32444,32 +32733,32 @@
   }
 
   // node_modules/@restart/hooks/esm/usePrevious.js
-  var import_react18 = __toESM(require_react());
+  var import_react23 = __toESM(require_react());
   function usePrevious(value) {
-    const ref = (0, import_react18.useRef)(null);
-    (0, import_react18.useEffect)(() => {
+    const ref = (0, import_react23.useRef)(null);
+    (0, import_react23.useEffect)(() => {
       ref.current = value;
     });
     return ref.current;
   }
 
   // node_modules/@restart/hooks/esm/useImage.js
-  var import_react19 = __toESM(require_react());
+  var import_react24 = __toESM(require_react());
 
   // node_modules/@restart/hooks/esm/useResizeObserver.js
-  var import_react21 = __toESM(require_react());
+  var import_react26 = __toESM(require_react());
 
   // node_modules/@restart/hooks/esm/useIsomorphicEffect.js
-  var import_react20 = __toESM(require_react());
+  var import_react25 = __toESM(require_react());
   var isReactNative = typeof global !== "undefined" && // @ts-ignore
   global.navigator && // @ts-ignore
   global.navigator.product === "ReactNative";
   var isDOM = typeof document !== "undefined";
-  var useIsomorphicEffect_default = isDOM || isReactNative ? import_react20.useLayoutEffect : import_react20.useEffect;
+  var useIsomorphicEffect_default = isDOM || isReactNative ? import_react25.useLayoutEffect : import_react25.useEffect;
 
   // node_modules/@restart/ui/esm/Button.js
-  var React9 = __toESM(require_react());
-  var import_jsx_runtime6 = __toESM(require_jsx_runtime());
+  var React17 = __toESM(require_react());
+  var import_jsx_runtime12 = __toESM(require_jsx_runtime());
   var _excluded = ["as", "disabled"];
   function _objectWithoutPropertiesLoose2(source, excluded) {
     if (source == null)
@@ -32551,7 +32840,7 @@
       onKeyDown: handleKeyDown
     }, meta];
   }
-  var Button = /* @__PURE__ */ React9.forwardRef((_ref, ref) => {
+  var Button = /* @__PURE__ */ React17.forwardRef((_ref, ref) => {
     let {
       as: asProp,
       disabled
@@ -32562,7 +32851,7 @@
       tagName: asProp,
       disabled
     }, props));
-    return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Component, Object.assign({}, props, buttonProps, {
+    return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(Component, Object.assign({}, props, buttonProps, {
       ref
     }));
   });
@@ -32570,7 +32859,7 @@
   var Button_default = Button;
 
   // node_modules/@restart/ui/esm/Anchor.js
-  var import_jsx_runtime7 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime13 = __toESM(require_jsx_runtime());
   var _excluded2 = ["onKeyDown"];
   function _objectWithoutPropertiesLoose3(source, excluded) {
     if (source == null)
@@ -32589,7 +32878,7 @@
   function isTrivialHref2(href) {
     return !href || href.trim() === "#";
   }
-  var Anchor = /* @__PURE__ */ React10.forwardRef((_ref, ref) => {
+  var Anchor = /* @__PURE__ */ React18.forwardRef((_ref, ref) => {
     let {
       onKeyDown
     } = _ref, props = _objectWithoutPropertiesLoose3(_ref, _excluded2);
@@ -32601,13 +32890,13 @@
       onKeyDown == null ? void 0 : onKeyDown(e);
     });
     if (isTrivialHref2(props.href) || props.role === "button") {
-      return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("a", Object.assign({
+      return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("a", Object.assign({
         ref
       }, props, buttonProps, {
         onKeyDown: handleKeyDown
       }));
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("a", Object.assign({
+    return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("a", Object.assign({
       ref
     }, props, {
       onKeyDown
@@ -32617,8 +32906,8 @@
   var Anchor_default = Anchor;
 
   // node_modules/react-bootstrap/esm/AlertLink.js
-  var import_jsx_runtime8 = __toESM(require_jsx_runtime());
-  var AlertLink = /* @__PURE__ */ React11.forwardRef((_a, ref) => {
+  var import_jsx_runtime14 = __toESM(require_jsx_runtime());
+  var AlertLink = /* @__PURE__ */ React19.forwardRef((_a, ref) => {
     var _b = _a, {
       className,
       bsPrefix,
@@ -32629,24 +32918,24 @@
       "as"
     ]);
     bsPrefix = useBootstrapPrefix(bsPrefix, "alert-link");
-    return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Component, __spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Component, __spreadValues({
       ref,
-      className: (0, import_classnames4.default)(className, bsPrefix)
+      className: (0, import_classnames10.default)(className, bsPrefix)
     }, props));
   });
   AlertLink.displayName = "AlertLink";
   var AlertLink_default = AlertLink;
 
   // node_modules/react-bootstrap/esm/Fade.js
-  var import_classnames5 = __toESM(require_classnames());
-  var React12 = __toESM(require_react());
-  var import_react22 = __toESM(require_react());
-  var import_jsx_runtime9 = __toESM(require_jsx_runtime());
+  var import_classnames11 = __toESM(require_classnames());
+  var React20 = __toESM(require_react());
+  var import_react27 = __toESM(require_react());
+  var import_jsx_runtime15 = __toESM(require_jsx_runtime());
   var fadeStyles = {
     [ENTERING]: "show",
     [ENTERED]: "show"
   };
-  var Fade = /* @__PURE__ */ React12.forwardRef((_a, ref) => {
+  var Fade = /* @__PURE__ */ React20.forwardRef((_a, ref) => {
     var _b = _a, {
       className,
       children,
@@ -32665,18 +32954,18 @@
       unmountOnExit: false,
       appear: false
     }, rest);
-    const handleEnter = (0, import_react22.useCallback)((node, isAppearing) => {
+    const handleEnter = (0, import_react27.useCallback)((node, isAppearing) => {
       triggerBrowserReflow(node);
       onEnter == null ? void 0 : onEnter(node, isAppearing);
     }, [onEnter]);
-    return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(TransitionWrapper_default, __spreadProps(__spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(TransitionWrapper_default, __spreadProps(__spreadValues({
       ref,
       addEndListener: transitionEndListener
     }, props), {
       onEnter: handleEnter,
       childRef: children.ref,
-      children: (status, innerProps) => /* @__PURE__ */ React12.cloneElement(children, __spreadProps(__spreadValues({}, innerProps), {
-        className: (0, import_classnames5.default)("fade", className, children.props.className, fadeStyles[status], transitionClasses[status])
+      children: (status, innerProps) => /* @__PURE__ */ React20.cloneElement(children, __spreadProps(__spreadValues({}, innerProps), {
+        className: (0, import_classnames11.default)("fade", className, children.props.className, fadeStyles[status], transitionClasses[status])
       }))
     }));
   });
@@ -32685,9 +32974,9 @@
 
   // node_modules/react-bootstrap/esm/CloseButton.js
   var import_prop_types3 = __toESM(require_prop_types());
-  var React13 = __toESM(require_react());
-  var import_classnames6 = __toESM(require_classnames());
-  var import_jsx_runtime10 = __toESM(require_jsx_runtime());
+  var React21 = __toESM(require_react());
+  var import_classnames12 = __toESM(require_classnames());
+  var import_jsx_runtime16 = __toESM(require_jsx_runtime());
   var propTypes = {
     /** An accessible label indicating the relevant information about the Close Button. */
     "aria-label": import_prop_types3.default.string,
@@ -32700,7 +32989,7 @@
      */
     variant: import_prop_types3.default.oneOf(["white"])
   };
-  var CloseButton = /* @__PURE__ */ React13.forwardRef((_a, ref) => {
+  var CloseButton = /* @__PURE__ */ React21.forwardRef((_a, ref) => {
     var _b = _a, {
       className,
       variant,
@@ -32710,10 +32999,10 @@
       "variant",
       "aria-label"
     ]);
-    return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("button", __spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("button", __spreadValues({
       ref,
       type: "button",
-      className: (0, import_classnames6.default)("btn-close", variant && `btn-close-${variant}`, className),
+      className: (0, import_classnames12.default)("btn-close", variant && `btn-close-${variant}`, className),
       "aria-label": ariaLabel
     }, props));
   });
@@ -32722,9 +33011,9 @@
   var CloseButton_default = CloseButton;
 
   // node_modules/react-bootstrap/esm/Alert.js
-  var import_jsx_runtime11 = __toESM(require_jsx_runtime());
-  var import_jsx_runtime12 = __toESM(require_jsx_runtime());
-  var Alert = /* @__PURE__ */ React14.forwardRef((uncontrolledProps, ref) => {
+  var import_jsx_runtime17 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime18 = __toESM(require_jsx_runtime());
+  var Alert = /* @__PURE__ */ React22.forwardRef((uncontrolledProps, ref) => {
     const _a = useUncontrolled(uncontrolledProps, {
       show: "onClose"
     }), {
@@ -32757,12 +33046,12 @@
       }
     });
     const Transition2 = transition === true ? Fade_default : transition;
-    const alert = /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", __spreadProps(__spreadValues({
+    const alert = /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", __spreadProps(__spreadValues({
       role: "alert"
     }, !Transition2 ? props : void 0), {
       ref,
-      className: (0, import_classnames7.default)(className, prefix, variant && `${prefix}-${variant}`, dismissible && `${prefix}-dismissible`),
-      children: [dismissible && /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(CloseButton_default, {
+      className: (0, import_classnames13.default)(className, prefix, variant && `${prefix}-${variant}`, dismissible && `${prefix}-dismissible`),
+      children: [dismissible && /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(CloseButton_default, {
         onClick: handleClose,
         "aria-label": closeLabel,
         variant: closeVariant
@@ -32770,7 +33059,7 @@
     }));
     if (!Transition2)
       return show ? alert : null;
-    return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(Transition2, __spreadProps(__spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Transition2, __spreadProps(__spreadValues({
       unmountOnExit: true
     }, props), {
       ref: void 0,
@@ -32785,10 +33074,10 @@
   });
 
   // node_modules/react-bootstrap/esm/Button.js
-  var import_classnames8 = __toESM(require_classnames());
-  var React15 = __toESM(require_react());
-  var import_jsx_runtime13 = __toESM(require_jsx_runtime());
-  var Button2 = /* @__PURE__ */ React15.forwardRef((_a, ref) => {
+  var import_classnames14 = __toESM(require_classnames());
+  var React23 = __toESM(require_react());
+  var import_jsx_runtime19 = __toESM(require_jsx_runtime());
+  var Button2 = /* @__PURE__ */ React23.forwardRef((_a, ref) => {
     var _b = _a, {
       as,
       bsPrefix,
@@ -32814,24 +33103,24 @@
       disabled
     }, props));
     const Component = tagName;
-    return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Component, __spreadProps(__spreadValues(__spreadValues({}, buttonProps), props), {
+    return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(Component, __spreadProps(__spreadValues(__spreadValues({}, buttonProps), props), {
       ref,
       disabled,
-      className: (0, import_classnames8.default)(className, prefix, active && "active", variant && `${prefix}-${variant}`, size2 && `${prefix}-${size2}`, props.href && disabled && "disabled")
+      className: (0, import_classnames14.default)(className, prefix, active && "active", variant && `${prefix}-${variant}`, size2 && `${prefix}-${size2}`, props.href && disabled && "disabled")
     }));
   });
   Button2.displayName = "Button";
   var Button_default2 = Button2;
 
   // node_modules/react-bootstrap/esm/Card.js
-  var import_classnames18 = __toESM(require_classnames());
-  var React26 = __toESM(require_react());
+  var import_classnames24 = __toESM(require_classnames());
+  var React34 = __toESM(require_react());
 
   // node_modules/react-bootstrap/esm/CardBody.js
-  var React16 = __toESM(require_react());
-  var import_classnames9 = __toESM(require_classnames());
-  var import_jsx_runtime14 = __toESM(require_jsx_runtime());
-  var CardBody = /* @__PURE__ */ React16.forwardRef((_a, ref) => {
+  var React24 = __toESM(require_react());
+  var import_classnames15 = __toESM(require_classnames());
+  var import_jsx_runtime20 = __toESM(require_jsx_runtime());
+  var CardBody = /* @__PURE__ */ React24.forwardRef((_a, ref) => {
     var _b = _a, {
       className,
       bsPrefix,
@@ -32842,19 +33131,19 @@
       "as"
     ]);
     bsPrefix = useBootstrapPrefix(bsPrefix, "card-body");
-    return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Component, __spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Component, __spreadValues({
       ref,
-      className: (0, import_classnames9.default)(className, bsPrefix)
+      className: (0, import_classnames15.default)(className, bsPrefix)
     }, props));
   });
   CardBody.displayName = "CardBody";
   var CardBody_default = CardBody;
 
   // node_modules/react-bootstrap/esm/CardFooter.js
-  var React17 = __toESM(require_react());
-  var import_classnames10 = __toESM(require_classnames());
-  var import_jsx_runtime15 = __toESM(require_jsx_runtime());
-  var CardFooter = /* @__PURE__ */ React17.forwardRef((_a, ref) => {
+  var React25 = __toESM(require_react());
+  var import_classnames16 = __toESM(require_classnames());
+  var import_jsx_runtime21 = __toESM(require_jsx_runtime());
+  var CardFooter = /* @__PURE__ */ React25.forwardRef((_a, ref) => {
     var _b = _a, {
       className,
       bsPrefix,
@@ -32865,28 +33154,28 @@
       "as"
     ]);
     bsPrefix = useBootstrapPrefix(bsPrefix, "card-footer");
-    return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(Component, __spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(Component, __spreadValues({
       ref,
-      className: (0, import_classnames10.default)(className, bsPrefix)
+      className: (0, import_classnames16.default)(className, bsPrefix)
     }, props));
   });
   CardFooter.displayName = "CardFooter";
   var CardFooter_default = CardFooter;
 
   // node_modules/react-bootstrap/esm/CardHeader.js
-  var import_classnames11 = __toESM(require_classnames());
-  var React19 = __toESM(require_react());
-  var import_react23 = __toESM(require_react());
+  var import_classnames17 = __toESM(require_classnames());
+  var React27 = __toESM(require_react());
+  var import_react28 = __toESM(require_react());
 
   // node_modules/react-bootstrap/esm/CardHeaderContext.js
-  var React18 = __toESM(require_react());
-  var context = /* @__PURE__ */ React18.createContext(null);
-  context.displayName = "CardHeaderContext";
-  var CardHeaderContext_default = context;
+  var React26 = __toESM(require_react());
+  var context3 = /* @__PURE__ */ React26.createContext(null);
+  context3.displayName = "CardHeaderContext";
+  var CardHeaderContext_default = context3;
 
   // node_modules/react-bootstrap/esm/CardHeader.js
-  var import_jsx_runtime16 = __toESM(require_jsx_runtime());
-  var CardHeader = /* @__PURE__ */ React19.forwardRef((_a, ref) => {
+  var import_jsx_runtime22 = __toESM(require_jsx_runtime());
+  var CardHeader = /* @__PURE__ */ React27.forwardRef((_a, ref) => {
     var _b = _a, {
       bsPrefix,
       className,
@@ -32898,15 +33187,15 @@
       "as"
     ]);
     const prefix = useBootstrapPrefix(bsPrefix, "card-header");
-    const contextValue = (0, import_react23.useMemo)(() => ({
+    const contextValue = (0, import_react28.useMemo)(() => ({
       cardHeaderBsPrefix: prefix
     }), [prefix]);
-    return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(CardHeaderContext_default.Provider, {
+    return /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(CardHeaderContext_default.Provider, {
       value: contextValue,
-      children: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Component, __spreadProps(__spreadValues({
+      children: /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(Component, __spreadProps(__spreadValues({
         ref
       }, props), {
-        className: (0, import_classnames11.default)(className, prefix)
+        className: (0, import_classnames17.default)(className, prefix)
       }))
     });
   });
@@ -32914,10 +33203,10 @@
   var CardHeader_default = CardHeader;
 
   // node_modules/react-bootstrap/esm/CardImg.js
-  var import_classnames12 = __toESM(require_classnames());
-  var React20 = __toESM(require_react());
-  var import_jsx_runtime17 = __toESM(require_jsx_runtime());
-  var CardImg = /* @__PURE__ */ React20.forwardRef(
+  var import_classnames18 = __toESM(require_classnames());
+  var React28 = __toESM(require_react());
+  var import_jsx_runtime23 = __toESM(require_jsx_runtime());
+  var CardImg = /* @__PURE__ */ React28.forwardRef(
     // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
     (_a, ref) => {
       var _b = _a, {
@@ -32932,9 +33221,9 @@
         "as"
       ]);
       const prefix = useBootstrapPrefix(bsPrefix, "card-img");
-      return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Component, __spreadValues({
+      return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(Component, __spreadValues({
         ref,
-        className: (0, import_classnames12.default)(variant ? `${prefix}-${variant}` : prefix, className)
+        className: (0, import_classnames18.default)(variant ? `${prefix}-${variant}` : prefix, className)
       }, props));
     }
   );
@@ -32942,10 +33231,10 @@
   var CardImg_default = CardImg;
 
   // node_modules/react-bootstrap/esm/CardImgOverlay.js
-  var React21 = __toESM(require_react());
-  var import_classnames13 = __toESM(require_classnames());
-  var import_jsx_runtime18 = __toESM(require_jsx_runtime());
-  var CardImgOverlay = /* @__PURE__ */ React21.forwardRef((_a, ref) => {
+  var React29 = __toESM(require_react());
+  var import_classnames19 = __toESM(require_classnames());
+  var import_jsx_runtime24 = __toESM(require_jsx_runtime());
+  var CardImgOverlay = /* @__PURE__ */ React29.forwardRef((_a, ref) => {
     var _b = _a, {
       className,
       bsPrefix,
@@ -32956,19 +33245,19 @@
       "as"
     ]);
     bsPrefix = useBootstrapPrefix(bsPrefix, "card-img-overlay");
-    return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(Component, __spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(Component, __spreadValues({
       ref,
-      className: (0, import_classnames13.default)(className, bsPrefix)
+      className: (0, import_classnames19.default)(className, bsPrefix)
     }, props));
   });
   CardImgOverlay.displayName = "CardImgOverlay";
   var CardImgOverlay_default = CardImgOverlay;
 
   // node_modules/react-bootstrap/esm/CardLink.js
-  var React22 = __toESM(require_react());
-  var import_classnames14 = __toESM(require_classnames());
-  var import_jsx_runtime19 = __toESM(require_jsx_runtime());
-  var CardLink = /* @__PURE__ */ React22.forwardRef((_a, ref) => {
+  var React30 = __toESM(require_react());
+  var import_classnames20 = __toESM(require_classnames());
+  var import_jsx_runtime25 = __toESM(require_jsx_runtime());
+  var CardLink = /* @__PURE__ */ React30.forwardRef((_a, ref) => {
     var _b = _a, {
       className,
       bsPrefix,
@@ -32979,20 +33268,20 @@
       "as"
     ]);
     bsPrefix = useBootstrapPrefix(bsPrefix, "card-link");
-    return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(Component, __spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(Component, __spreadValues({
       ref,
-      className: (0, import_classnames14.default)(className, bsPrefix)
+      className: (0, import_classnames20.default)(className, bsPrefix)
     }, props));
   });
   CardLink.displayName = "CardLink";
   var CardLink_default = CardLink;
 
   // node_modules/react-bootstrap/esm/CardSubtitle.js
-  var React23 = __toESM(require_react());
-  var import_classnames15 = __toESM(require_classnames());
-  var import_jsx_runtime20 = __toESM(require_jsx_runtime());
+  var React31 = __toESM(require_react());
+  var import_classnames21 = __toESM(require_classnames());
+  var import_jsx_runtime26 = __toESM(require_jsx_runtime());
   var DivStyledAsH6 = divWithClassName_default("h6");
-  var CardSubtitle = /* @__PURE__ */ React23.forwardRef((_a, ref) => {
+  var CardSubtitle = /* @__PURE__ */ React31.forwardRef((_a, ref) => {
     var _b = _a, {
       className,
       bsPrefix,
@@ -33003,19 +33292,19 @@
       "as"
     ]);
     bsPrefix = useBootstrapPrefix(bsPrefix, "card-subtitle");
-    return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Component, __spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(Component, __spreadValues({
       ref,
-      className: (0, import_classnames15.default)(className, bsPrefix)
+      className: (0, import_classnames21.default)(className, bsPrefix)
     }, props));
   });
   CardSubtitle.displayName = "CardSubtitle";
   var CardSubtitle_default = CardSubtitle;
 
   // node_modules/react-bootstrap/esm/CardText.js
-  var React24 = __toESM(require_react());
-  var import_classnames16 = __toESM(require_classnames());
-  var import_jsx_runtime21 = __toESM(require_jsx_runtime());
-  var CardText = /* @__PURE__ */ React24.forwardRef((_a, ref) => {
+  var React32 = __toESM(require_react());
+  var import_classnames22 = __toESM(require_classnames());
+  var import_jsx_runtime27 = __toESM(require_jsx_runtime());
+  var CardText = /* @__PURE__ */ React32.forwardRef((_a, ref) => {
     var _b = _a, {
       className,
       bsPrefix,
@@ -33026,20 +33315,20 @@
       "as"
     ]);
     bsPrefix = useBootstrapPrefix(bsPrefix, "card-text");
-    return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(Component, __spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Component, __spreadValues({
       ref,
-      className: (0, import_classnames16.default)(className, bsPrefix)
+      className: (0, import_classnames22.default)(className, bsPrefix)
     }, props));
   });
   CardText.displayName = "CardText";
   var CardText_default = CardText;
 
   // node_modules/react-bootstrap/esm/CardTitle.js
-  var React25 = __toESM(require_react());
-  var import_classnames17 = __toESM(require_classnames());
-  var import_jsx_runtime22 = __toESM(require_jsx_runtime());
+  var React33 = __toESM(require_react());
+  var import_classnames23 = __toESM(require_classnames());
+  var import_jsx_runtime28 = __toESM(require_jsx_runtime());
   var DivStyledAsH5 = divWithClassName_default("h5");
-  var CardTitle = /* @__PURE__ */ React25.forwardRef((_a, ref) => {
+  var CardTitle = /* @__PURE__ */ React33.forwardRef((_a, ref) => {
     var _b = _a, {
       className,
       bsPrefix,
@@ -33050,17 +33339,17 @@
       "as"
     ]);
     bsPrefix = useBootstrapPrefix(bsPrefix, "card-title");
-    return /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(Component, __spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Component, __spreadValues({
       ref,
-      className: (0, import_classnames17.default)(className, bsPrefix)
+      className: (0, import_classnames23.default)(className, bsPrefix)
     }, props));
   });
   CardTitle.displayName = "CardTitle";
   var CardTitle_default = CardTitle;
 
   // node_modules/react-bootstrap/esm/Card.js
-  var import_jsx_runtime23 = __toESM(require_jsx_runtime());
-  var Card = /* @__PURE__ */ React26.forwardRef((_a, ref) => {
+  var import_jsx_runtime29 = __toESM(require_jsx_runtime());
+  var Card = /* @__PURE__ */ React34.forwardRef((_a, ref) => {
     var _b = _a, {
       bsPrefix,
       className,
@@ -33082,11 +33371,11 @@
       "as"
     ]);
     const prefix = useBootstrapPrefix(bsPrefix, "card");
-    return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(Component, __spreadProps(__spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Component, __spreadProps(__spreadValues({
       ref
     }, props), {
-      className: (0, import_classnames18.default)(className, prefix, bg && `bg-${bg}`, text && `text-${text}`, border && `border-${border}`),
-      children: body ? /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(CardBody_default, {
+      className: (0, import_classnames24.default)(className, prefix, bg && `bg-${bg}`, text && `text-${text}`, border && `border-${border}`),
+      children: body ? /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(CardBody_default, {
         children
       }) : children
     }));
@@ -33105,19 +33394,118 @@
   });
 
   // node_modules/@restart/hooks/esm/useUpdatedRef.js
-  var import_react24 = __toESM(require_react());
+  var import_react29 = __toESM(require_react());
   function useUpdatedRef(value) {
-    const valueRef = (0, import_react24.useRef)(value);
+    const valueRef = (0, import_react29.useRef)(value);
     valueRef.current = value;
     return valueRef;
   }
 
   // node_modules/@restart/hooks/esm/useWillUnmount.js
-  var import_react25 = __toESM(require_react());
+  var import_react30 = __toESM(require_react());
   function useWillUnmount(fn) {
     const onUnmount = useUpdatedRef(fn);
-    (0, import_react25.useEffect)(() => () => onUnmount.current(), []);
+    (0, import_react30.useEffect)(() => () => onUnmount.current(), []);
   }
+
+  // node_modules/react-bootstrap/esm/Col.js
+  var import_classnames25 = __toESM(require_classnames());
+  var React35 = __toESM(require_react());
+  var import_jsx_runtime30 = __toESM(require_jsx_runtime());
+  function useCol(_a) {
+    var _b = _a, {
+      as,
+      bsPrefix,
+      className
+    } = _b, props = __objRest(_b, [
+      "as",
+      "bsPrefix",
+      "className"
+    ]);
+    bsPrefix = useBootstrapPrefix(bsPrefix, "col");
+    const breakpoints = useBootstrapBreakpoints();
+    const minBreakpoint = useBootstrapMinBreakpoint();
+    const spans = [];
+    const classes = [];
+    breakpoints.forEach((brkPoint) => {
+      const propValue = props[brkPoint];
+      delete props[brkPoint];
+      let span;
+      let offset;
+      let order;
+      if (typeof propValue === "object" && propValue != null) {
+        ({
+          span,
+          offset,
+          order
+        } = propValue);
+      } else {
+        span = propValue;
+      }
+      const infix = brkPoint !== minBreakpoint ? `-${brkPoint}` : "";
+      if (span)
+        spans.push(span === true ? `${bsPrefix}${infix}` : `${bsPrefix}${infix}-${span}`);
+      if (order != null)
+        classes.push(`order${infix}-${order}`);
+      if (offset != null)
+        classes.push(`offset${infix}-${offset}`);
+    });
+    return [__spreadProps(__spreadValues({}, props), {
+      className: (0, import_classnames25.default)(className, ...spans, ...classes)
+    }), {
+      as,
+      bsPrefix,
+      spans
+    }];
+  }
+  var Col = /* @__PURE__ */ React35.forwardRef(
+    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+    (props, ref) => {
+      const [_a, ..._b] = useCol(props), _c = _a, {
+        className
+      } = _c, colProps = __objRest(_c, [
+        "className"
+      ]), [{
+        as: Component = "div",
+        bsPrefix,
+        spans
+      }] = _b;
+      return /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Component, __spreadProps(__spreadValues({}, colProps), {
+        ref,
+        className: (0, import_classnames25.default)(className, !spans.length && bsPrefix)
+      }));
+    }
+  );
+  Col.displayName = "Col";
+  var Col_default = Col;
+
+  // node_modules/react-bootstrap/esm/Container.js
+  var import_classnames26 = __toESM(require_classnames());
+  var React36 = __toESM(require_react());
+  var import_jsx_runtime31 = __toESM(require_jsx_runtime());
+  var Container = /* @__PURE__ */ React36.forwardRef((_a, ref) => {
+    var _b = _a, {
+      bsPrefix,
+      fluid = false,
+      as: Component = "div",
+      className
+    } = _b, props = __objRest(_b, [
+      "bsPrefix",
+      "fluid",
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      "as",
+      "className"
+    ]);
+    const prefix = useBootstrapPrefix(bsPrefix, "container");
+    const suffix = typeof fluid === "string" ? `-${fluid}` : "-fluid";
+    return /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(Component, __spreadProps(__spreadValues({
+      ref
+    }, props), {
+      className: (0, import_classnames26.default)(className, fluid ? `${prefix}${suffix}` : prefix)
+    }));
+  });
+  Container.displayName = "Container";
+  var Container_default = Container;
 
   // node_modules/dom-helpers/esm/querySelectorAll.js
   var toArray = Function.prototype.bind.call(Function.prototype.call, [].slice);
@@ -33126,23 +33514,23 @@
   }
 
   // node_modules/@restart/hooks/esm/useForceUpdate.js
-  var import_react26 = __toESM(require_react());
+  var import_react31 = __toESM(require_react());
   function useForceUpdate() {
-    const [, dispatch] = (0, import_react26.useReducer)((state) => !state, false);
+    const [, dispatch] = (0, import_react31.useReducer)((state) => !state, false);
     return dispatch;
   }
 
   // node_modules/dom-helpers/esm/contains.js
-  function contains(context3, node) {
-    if (context3.contains)
-      return context3.contains(node);
-    if (context3.compareDocumentPosition)
-      return context3 === node || !!(context3.compareDocumentPosition(node) & 16);
+  function contains(context5, node) {
+    if (context5.contains)
+      return context5.contains(node);
+    if (context5.compareDocumentPosition)
+      return context5 === node || !!(context5.compareDocumentPosition(node) & 16);
   }
 
   // node_modules/@restart/ui/esm/SelectableContext.js
-  var React27 = __toESM(require_react());
-  var SelectableContext = /* @__PURE__ */ React27.createContext(null);
+  var React37 = __toESM(require_react());
+  var SelectableContext = /* @__PURE__ */ React37.createContext(null);
   var makeEventKey = (eventKey, href = null) => {
     if (eventKey != null)
       return String(eventKey);
@@ -33151,8 +33539,8 @@
   var SelectableContext_default = SelectableContext;
 
   // node_modules/@restart/ui/esm/NavContext.js
-  var React28 = __toESM(require_react());
-  var NavContext = /* @__PURE__ */ React28.createContext(null);
+  var React38 = __toESM(require_react());
+  var NavContext = /* @__PURE__ */ React38.createContext(null);
   NavContext.displayName = "NavContext";
   var NavContext_default = NavContext;
 
@@ -33167,32 +33555,32 @@
   }
 
   // node_modules/@restart/ui/esm/useWindow.js
-  var import_react27 = __toESM(require_react());
-  var Context = /* @__PURE__ */ (0, import_react27.createContext)(canUseDOM_default ? window : void 0);
+  var import_react32 = __toESM(require_react());
+  var Context = /* @__PURE__ */ (0, import_react32.createContext)(canUseDOM_default ? window : void 0);
   var WindowProvider = Context.Provider;
   function useWindow() {
-    return (0, import_react27.useContext)(Context);
+    return (0, import_react32.useContext)(Context);
   }
 
   // node_modules/react-bootstrap/esm/NavbarContext.js
-  var React29 = __toESM(require_react());
-  var context2 = /* @__PURE__ */ React29.createContext(null);
-  context2.displayName = "NavbarContext";
-  var NavbarContext_default = context2;
+  var React39 = __toESM(require_react());
+  var context4 = /* @__PURE__ */ React39.createContext(null);
+  context4.displayName = "NavbarContext";
+  var NavbarContext_default = context4;
 
   // node_modules/@restart/ui/esm/Nav.js
-  var React32 = __toESM(require_react());
-  var import_react29 = __toESM(require_react());
+  var React42 = __toESM(require_react());
+  var import_react34 = __toESM(require_react());
 
   // node_modules/@restart/ui/esm/TabContext.js
-  var React30 = __toESM(require_react());
-  var TabContext = /* @__PURE__ */ React30.createContext(null);
+  var React40 = __toESM(require_react());
+  var TabContext = /* @__PURE__ */ React40.createContext(null);
   var TabContext_default = TabContext;
 
   // node_modules/@restart/ui/esm/NavItem.js
-  var React31 = __toESM(require_react());
-  var import_react28 = __toESM(require_react());
-  var import_jsx_runtime24 = __toESM(require_jsx_runtime());
+  var React41 = __toESM(require_react());
+  var import_react33 = __toESM(require_react());
+  var import_jsx_runtime32 = __toESM(require_jsx_runtime());
   var _excluded3 = ["as", "active", "eventKey"];
   function _objectWithoutPropertiesLoose4(source, excluded) {
     if (source == null)
@@ -33216,9 +33604,9 @@
     role,
     disabled
   }) {
-    const parentOnSelect = (0, import_react28.useContext)(SelectableContext_default);
-    const navContext = (0, import_react28.useContext)(NavContext_default);
-    const tabContext = (0, import_react28.useContext)(TabContext_default);
+    const parentOnSelect = (0, import_react33.useContext)(SelectableContext_default);
+    const navContext = (0, import_react33.useContext)(NavContext_default);
+    const tabContext = (0, import_react33.useContext)(TabContext_default);
     let isActive = active;
     const props = {
       role
@@ -33259,7 +33647,7 @@
       isActive
     }];
   }
-  var NavItem = /* @__PURE__ */ React31.forwardRef((_ref, ref) => {
+  var NavItem = /* @__PURE__ */ React41.forwardRef((_ref, ref) => {
     let {
       as: Component = Button_default,
       active,
@@ -33270,7 +33658,7 @@
       active
     }, options));
     props[dataAttr("active")] = meta.isActive;
-    return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(Component, Object.assign({}, options, props, {
+    return /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Component, Object.assign({}, options, props, {
       ref
     }));
   });
@@ -33278,7 +33666,7 @@
   var NavItem_default = NavItem;
 
   // node_modules/@restart/ui/esm/Nav.js
-  var import_jsx_runtime25 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime33 = __toESM(require_jsx_runtime());
   var _excluded4 = ["as", "onSelect", "activeKey", "role", "onKeyDown"];
   function _objectWithoutPropertiesLoose5(source, excluded) {
     if (source == null)
@@ -33297,7 +33685,7 @@
   var noop2 = () => {
   };
   var EVENT_KEY_ATTR = dataAttr("event-key");
-  var Nav = /* @__PURE__ */ React32.forwardRef((_ref, ref) => {
+  var Nav = /* @__PURE__ */ React42.forwardRef((_ref, ref) => {
     let {
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = "div",
@@ -33307,9 +33695,9 @@
       onKeyDown
     } = _ref, props = _objectWithoutPropertiesLoose5(_ref, _excluded4);
     const forceUpdate = useForceUpdate();
-    const needsRefocusRef = (0, import_react29.useRef)(false);
-    const parentOnSelect = (0, import_react29.useContext)(SelectableContext_default);
-    const tabContext = (0, import_react29.useContext)(TabContext_default);
+    const needsRefocusRef = (0, import_react34.useRef)(false);
+    const parentOnSelect = (0, import_react34.useContext)(SelectableContext_default);
+    const tabContext = (0, import_react34.useContext)(TabContext_default);
     let getControlledId, getControllerId;
     if (tabContext) {
       role = role || "tablist";
@@ -33317,7 +33705,7 @@
       getControlledId = tabContext.getControlledId;
       getControllerId = tabContext.getControllerId;
     }
-    const listNode = (0, import_react29.useRef)(null);
+    const listNode = (0, import_react34.useRef)(null);
     const getNextActiveTab = (offset) => {
       const currentListNode = listNode.current;
       if (!currentListNode)
@@ -33367,7 +33755,7 @@
       needsRefocusRef.current = true;
       forceUpdate();
     };
-    (0, import_react29.useEffect)(() => {
+    (0, import_react34.useEffect)(() => {
       if (listNode.current && needsRefocusRef.current) {
         const activeChild = listNode.current.querySelector(`[${EVENT_KEY_ATTR}][aria-selected=true]`);
         activeChild == null ? void 0 : activeChild.focus();
@@ -33375,9 +33763,9 @@
       needsRefocusRef.current = false;
     });
     const mergedRef = useMergedRefs_default(ref, listNode);
-    return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(SelectableContext_default.Provider, {
+    return /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(SelectableContext_default.Provider, {
       value: handleSelect,
-      children: /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(NavContext_default.Provider, {
+      children: /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(NavContext_default.Provider, {
         value: {
           role,
           // used by NavLink to determine it's role
@@ -33385,7 +33773,7 @@
           getControlledId: getControlledId || noop2,
           getControllerId: getControllerId || noop2
         },
-        children: /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(Component, Object.assign({}, props, {
+        children: /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(Component, Object.assign({}, props, {
           onKeyDown: handleKeyDown,
           ref: mergedRef,
           role
@@ -33399,7 +33787,7 @@
   });
 
   // node_modules/react-bootstrap/esm/Modal.js
-  var import_classnames24 = __toESM(require_classnames());
+  var import_classnames32 = __toESM(require_classnames());
 
   // node_modules/dom-helpers/esm/scrollbarSize.js
   var size;
@@ -33421,8 +33809,8 @@
   }
 
   // node_modules/react-bootstrap/esm/Modal.js
-  var React42 = __toESM(require_react());
-  var import_react35 = __toESM(require_react());
+  var React52 = __toESM(require_react());
+  var import_react40 = __toESM(require_react());
 
   // node_modules/dom-helpers/esm/activeElement.js
   function activeElement(doc) {
@@ -33440,8 +33828,8 @@
   }
 
   // node_modules/@restart/ui/esm/Modal.js
-  var import_react33 = __toESM(require_react());
-  var React34 = __toESM(require_react());
+  var import_react38 = __toESM(require_react());
+  var React44 = __toESM(require_react());
   var import_react_dom3 = __toESM(require_react_dom());
 
   // node_modules/@restart/ui/esm/getScrollbarWidth.js
@@ -33535,7 +33923,7 @@
   var ModalManager_default = ModalManager;
 
   // node_modules/@restart/ui/esm/useWaitForDOMRef.js
-  var import_react30 = __toESM(require_react());
+  var import_react35 = __toESM(require_react());
   var resolveContainerRef = (ref, document2) => {
     if (!canUseDOM_default)
       return null;
@@ -33551,18 +33939,18 @@
   };
   function useWaitForDOMRef(ref, onResolved) {
     const window2 = useWindow();
-    const [resolvedRef, setRef] = (0, import_react30.useState)(() => resolveContainerRef(ref, window2 == null ? void 0 : window2.document));
+    const [resolvedRef, setRef] = (0, import_react35.useState)(() => resolveContainerRef(ref, window2 == null ? void 0 : window2.document));
     if (!resolvedRef) {
       const earlyRef = resolveContainerRef(ref);
       if (earlyRef)
         setRef(earlyRef);
     }
-    (0, import_react30.useEffect)(() => {
+    (0, import_react35.useEffect)(() => {
       if (onResolved && resolvedRef) {
         onResolved(resolvedRef);
       }
     }, [onResolved, resolvedRef]);
-    (0, import_react30.useEffect)(() => {
+    (0, import_react35.useEffect)(() => {
       const nextRef = resolveContainerRef(ref);
       if (nextRef !== resolvedRef) {
         setRef(nextRef);
@@ -33572,10 +33960,10 @@
   }
 
   // node_modules/@restart/ui/esm/ImperativeTransition.js
-  var import_react32 = __toESM(require_react());
+  var import_react37 = __toESM(require_react());
 
   // node_modules/@restart/ui/esm/NoopTransition.js
-  var import_react31 = __toESM(require_react());
+  var import_react36 = __toESM(require_react());
   function NoopTransition({
     children,
     in: inProp,
@@ -33583,10 +33971,10 @@
     mountOnEnter,
     unmountOnExit
   }) {
-    const ref = (0, import_react31.useRef)(null);
-    const hasEnteredRef = (0, import_react31.useRef)(inProp);
+    const ref = (0, import_react36.useRef)(null);
+    const hasEnteredRef = (0, import_react36.useRef)(inProp);
     const handleExited = useEventCallback(onExited);
-    (0, import_react31.useEffect)(() => {
+    (0, import_react36.useEffect)(() => {
       if (inProp)
         hasEnteredRef.current = true;
       else {
@@ -33594,7 +33982,7 @@
       }
     }, [inProp, handleExited]);
     const combinedRef = useMergedRefs_default(ref, children.ref);
-    const child = /* @__PURE__ */ (0, import_react31.cloneElement)(children, {
+    const child = /* @__PURE__ */ (0, import_react36.cloneElement)(children, {
       ref: combinedRef
     });
     if (inProp)
@@ -33610,13 +33998,13 @@
   var NoopTransition_default = NoopTransition;
 
   // node_modules/@restart/ui/esm/ImperativeTransition.js
-  var import_jsx_runtime26 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime34 = __toESM(require_jsx_runtime());
   function useTransition({
     in: inProp,
     onTransition
   }) {
-    const ref = (0, import_react32.useRef)(null);
-    const isInitialRef = (0, import_react32.useRef)(true);
+    const ref = (0, import_react37.useRef)(null);
+    const isInitialRef = (0, import_react37.useRef)(true);
     const handleTransition = useEventCallback(onTransition);
     useIsomorphicEffect_default(() => {
       if (!ref.current) {
@@ -33648,7 +34036,7 @@
     onEntered,
     transition
   }) {
-    const [exited, setExited] = (0, import_react32.useState)(!inProp);
+    const [exited, setExited] = (0, import_react37.useState)(!inProp);
     if (inProp && exited) {
       setExited(false);
     }
@@ -33673,20 +34061,20 @@
       }
     });
     const combinedRef = useMergedRefs_default(ref, children.ref);
-    return exited && !inProp ? null : /* @__PURE__ */ (0, import_react32.cloneElement)(children, {
+    return exited && !inProp ? null : /* @__PURE__ */ (0, import_react37.cloneElement)(children, {
       ref: combinedRef
     });
   }
   function renderTransition(Component, runTransition, props) {
     if (Component) {
-      return /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(Component, Object.assign({}, props));
+      return /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Component, Object.assign({}, props));
     }
     if (runTransition) {
-      return /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(ImperativeTransition, Object.assign({}, props, {
+      return /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(ImperativeTransition, Object.assign({}, props, {
         transition: runTransition
       }));
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(NoopTransition_default, Object.assign({}, props));
+    return /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(NoopTransition_default, Object.assign({}, props));
   }
 
   // node_modules/@restart/ui/esm/utils.js
@@ -33695,9 +34083,9 @@
   }
 
   // node_modules/@restart/ui/esm/Modal.js
-  var import_jsx_runtime27 = __toESM(require_jsx_runtime());
-  var import_jsx_runtime28 = __toESM(require_jsx_runtime());
-  var import_jsx_runtime29 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime35 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime36 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime37 = __toESM(require_jsx_runtime());
   var _excluded5 = ["show", "role", "className", "style", "children", "backdrop", "keyboard", "onBackdropClick", "onEscapeKeyDown", "transition", "runTransition", "backdropTransition", "runBackdropTransition", "autoFocus", "enforceFocus", "restoreFocus", "restoreFocusOptions", "renderDialog", "renderBackdrop", "manager", "container", "onShow", "onHide", "onExit", "onExited", "onExiting", "onEnter", "onEntering", "onEntered"];
   function _objectWithoutPropertiesLoose6(source, excluded) {
     if (source == null)
@@ -33724,7 +34112,7 @@
   function useModalManager(provided) {
     const window2 = useWindow();
     const modalManager = provided || getManager(window2);
-    const modal = (0, import_react33.useRef)({
+    const modal = (0, import_react38.useRef)({
       dialog: null,
       backdrop: null
     });
@@ -33732,15 +34120,15 @@
       add: () => modalManager.add(modal.current),
       remove: () => modalManager.remove(modal.current),
       isTopModal: () => modalManager.isTopModal(modal.current),
-      setDialogRef: (0, import_react33.useCallback)((ref) => {
+      setDialogRef: (0, import_react38.useCallback)((ref) => {
         modal.current.dialog = ref;
       }, []),
-      setBackdropRef: (0, import_react33.useCallback)((ref) => {
+      setBackdropRef: (0, import_react38.useCallback)((ref) => {
         modal.current.backdrop = ref;
       }, [])
     });
   }
-  var Modal = /* @__PURE__ */ (0, import_react33.forwardRef)((_ref, ref) => {
+  var Modal = /* @__PURE__ */ (0, import_react38.forwardRef)((_ref, ref) => {
     let {
       show = false,
       role = "dialog",
@@ -33760,7 +34148,7 @@
       restoreFocus = true,
       restoreFocusOptions,
       renderDialog,
-      renderBackdrop = (props) => /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", Object.assign({}, props)),
+      renderBackdrop = (props) => /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", Object.assign({}, props)),
       manager: providedManager,
       container: containerRef,
       onShow,
@@ -33778,9 +34166,9 @@
     const modal = useModalManager(providedManager);
     const isMounted = useMounted();
     const prevShow = usePrevious(show);
-    const [exited, setExited] = (0, import_react33.useState)(!show);
-    const lastFocusRef = (0, import_react33.useRef)(null);
-    (0, import_react33.useImperativeHandle)(ref, () => modal, [modal]);
+    const [exited, setExited] = (0, import_react38.useState)(!show);
+    const lastFocusRef = (0, import_react38.useRef)(null);
+    (0, import_react38.useImperativeHandle)(ref, () => modal, [modal]);
     if (canUseDOM_default && !prevShow && show) {
       lastFocusRef.current = activeElement(ownerWindow2 == null ? void 0 : ownerWindow2.document);
     }
@@ -33820,7 +34208,7 @@
         lastFocusRef.current = null;
       }
     });
-    (0, import_react33.useEffect)(() => {
+    (0, import_react38.useEffect)(() => {
       if (!show || !container)
         return;
       handleShow();
@@ -33830,7 +34218,7 @@
       /* should never change: */
       handleShow
     ]);
-    (0, import_react33.useEffect)(() => {
+    (0, import_react38.useEffect)(() => {
       if (!exited)
         return;
       handleHide();
@@ -33864,8 +34252,8 @@
         }
       }
     });
-    const removeFocusListenerRef = (0, import_react33.useRef)();
-    const removeKeydownListenerRef = (0, import_react33.useRef)();
+    const removeFocusListenerRef = (0, import_react38.useRef)();
+    const removeKeydownListenerRef = (0, import_react38.useRef)();
     const handleHidden = (...args) => {
       setExited(true);
       onExited == null ? void 0 : onExited(...args);
@@ -33883,8 +34271,8 @@
       className,
       tabIndex: -1
     });
-    let dialog = renderDialog ? renderDialog(dialogProps) : /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", Object.assign({}, dialogProps, {
-      children: /* @__PURE__ */ React34.cloneElement(children, {
+    let dialog = renderDialog ? renderDialog(dialogProps) : /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", Object.assign({}, dialogProps, {
+      children: /* @__PURE__ */ React44.cloneElement(children, {
         role: "document"
       })
     }));
@@ -33915,8 +34303,8 @@
         children: backdropElement
       });
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(import_jsx_runtime28.Fragment, {
-      children: /* @__PURE__ */ import_react_dom3.default.createPortal(/* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(import_jsx_runtime28.Fragment, {
+    return /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(import_jsx_runtime36.Fragment, {
+      children: /* @__PURE__ */ import_react_dom3.default.createPortal(/* @__PURE__ */ (0, import_jsx_runtime37.jsxs)(import_jsx_runtime36.Fragment, {
         children: [backdropElement, dialog]
       }), container)
     });
@@ -34013,10 +34401,10 @@
   var BootstrapModalManager_default = BootstrapModalManager;
 
   // node_modules/react-bootstrap/esm/ModalBody.js
-  var React35 = __toESM(require_react());
-  var import_classnames19 = __toESM(require_classnames());
-  var import_jsx_runtime30 = __toESM(require_jsx_runtime());
-  var ModalBody = /* @__PURE__ */ React35.forwardRef((_a, ref) => {
+  var React45 = __toESM(require_react());
+  var import_classnames27 = __toESM(require_classnames());
+  var import_jsx_runtime38 = __toESM(require_jsx_runtime());
+  var ModalBody = /* @__PURE__ */ React45.forwardRef((_a, ref) => {
     var _b = _a, {
       className,
       bsPrefix,
@@ -34027,17 +34415,17 @@
       "as"
     ]);
     bsPrefix = useBootstrapPrefix(bsPrefix, "modal-body");
-    return /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Component, __spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(Component, __spreadValues({
       ref,
-      className: (0, import_classnames19.default)(className, bsPrefix)
+      className: (0, import_classnames27.default)(className, bsPrefix)
     }, props));
   });
   ModalBody.displayName = "ModalBody";
   var ModalBody_default = ModalBody;
 
   // node_modules/react-bootstrap/esm/ModalContext.js
-  var React36 = __toESM(require_react());
-  var ModalContext = /* @__PURE__ */ React36.createContext({
+  var React46 = __toESM(require_react());
+  var ModalContext = /* @__PURE__ */ React46.createContext({
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     onHide() {
     }
@@ -34045,10 +34433,10 @@
   var ModalContext_default = ModalContext;
 
   // node_modules/react-bootstrap/esm/ModalDialog.js
-  var import_classnames20 = __toESM(require_classnames());
-  var React37 = __toESM(require_react());
-  var import_jsx_runtime31 = __toESM(require_jsx_runtime());
-  var ModalDialog = /* @__PURE__ */ React37.forwardRef((_a, ref) => {
+  var import_classnames28 = __toESM(require_classnames());
+  var React47 = __toESM(require_react());
+  var import_jsx_runtime39 = __toESM(require_jsx_runtime());
+  var ModalDialog = /* @__PURE__ */ React47.forwardRef((_a, ref) => {
     var _b = _a, {
       bsPrefix,
       className,
@@ -34071,11 +34459,11 @@
     bsPrefix = useBootstrapPrefix(bsPrefix, "modal");
     const dialogClass = `${bsPrefix}-dialog`;
     const fullScreenClass = typeof fullscreen === "string" ? `${bsPrefix}-fullscreen-${fullscreen}` : `${bsPrefix}-fullscreen`;
-    return /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", __spreadProps(__spreadValues({}, props), {
+    return /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("div", __spreadProps(__spreadValues({}, props), {
       ref,
-      className: (0, import_classnames20.default)(dialogClass, className, size2 && `${bsPrefix}-${size2}`, centered && `${dialogClass}-centered`, scrollable && `${dialogClass}-scrollable`, fullscreen && fullScreenClass),
-      children: /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", {
-        className: (0, import_classnames20.default)(`${bsPrefix}-content`, contentClassName),
+      className: (0, import_classnames28.default)(dialogClass, className, size2 && `${bsPrefix}-${size2}`, centered && `${dialogClass}-centered`, scrollable && `${dialogClass}-scrollable`, fullscreen && fullScreenClass),
+      children: /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("div", {
+        className: (0, import_classnames28.default)(`${bsPrefix}-content`, contentClassName),
         children
       })
     }));
@@ -34084,10 +34472,10 @@
   var ModalDialog_default = ModalDialog;
 
   // node_modules/react-bootstrap/esm/ModalFooter.js
-  var React38 = __toESM(require_react());
-  var import_classnames21 = __toESM(require_classnames());
-  var import_jsx_runtime32 = __toESM(require_jsx_runtime());
-  var ModalFooter = /* @__PURE__ */ React38.forwardRef((_a, ref) => {
+  var React48 = __toESM(require_react());
+  var import_classnames29 = __toESM(require_classnames());
+  var import_jsx_runtime40 = __toESM(require_jsx_runtime());
+  var ModalFooter = /* @__PURE__ */ React48.forwardRef((_a, ref) => {
     var _b = _a, {
       className,
       bsPrefix,
@@ -34098,24 +34486,24 @@
       "as"
     ]);
     bsPrefix = useBootstrapPrefix(bsPrefix, "modal-footer");
-    return /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Component, __spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime40.jsx)(Component, __spreadValues({
       ref,
-      className: (0, import_classnames21.default)(className, bsPrefix)
+      className: (0, import_classnames29.default)(className, bsPrefix)
     }, props));
   });
   ModalFooter.displayName = "ModalFooter";
   var ModalFooter_default = ModalFooter;
 
   // node_modules/react-bootstrap/esm/ModalHeader.js
-  var import_classnames22 = __toESM(require_classnames());
-  var React40 = __toESM(require_react());
+  var import_classnames30 = __toESM(require_classnames());
+  var React50 = __toESM(require_react());
 
   // node_modules/react-bootstrap/esm/AbstractModalHeader.js
-  var React39 = __toESM(require_react());
-  var import_react34 = __toESM(require_react());
-  var import_jsx_runtime33 = __toESM(require_jsx_runtime());
-  var import_jsx_runtime34 = __toESM(require_jsx_runtime());
-  var AbstractModalHeader = /* @__PURE__ */ React39.forwardRef((_a, ref) => {
+  var React49 = __toESM(require_react());
+  var import_react39 = __toESM(require_react());
+  var import_jsx_runtime41 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime42 = __toESM(require_jsx_runtime());
+  var AbstractModalHeader = /* @__PURE__ */ React49.forwardRef((_a, ref) => {
     var _b = _a, {
       closeLabel = "Close",
       closeVariant,
@@ -34129,15 +34517,15 @@
       "onHide",
       "children"
     ]);
-    const context3 = (0, import_react34.useContext)(ModalContext_default);
+    const context5 = (0, import_react39.useContext)(ModalContext_default);
     const handleClick = useEventCallback(() => {
-      context3 == null ? void 0 : context3.onHide();
+      context5 == null ? void 0 : context5.onHide();
       onHide == null ? void 0 : onHide();
     });
-    return /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("div", __spreadProps(__spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime42.jsxs)("div", __spreadProps(__spreadValues({
       ref
     }, props), {
-      children: [children, closeButton && /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(CloseButton_default, {
+      children: [children, closeButton && /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(CloseButton_default, {
         "aria-label": closeLabel,
         variant: closeVariant,
         onClick: handleClick
@@ -34147,8 +34535,8 @@
   var AbstractModalHeader_default = AbstractModalHeader;
 
   // node_modules/react-bootstrap/esm/ModalHeader.js
-  var import_jsx_runtime35 = __toESM(require_jsx_runtime());
-  var ModalHeader = /* @__PURE__ */ React40.forwardRef((_a, ref) => {
+  var import_jsx_runtime43 = __toESM(require_jsx_runtime());
+  var ModalHeader = /* @__PURE__ */ React50.forwardRef((_a, ref) => {
     var _b = _a, {
       bsPrefix,
       className,
@@ -34161,10 +34549,10 @@
       "closeButton"
     ]);
     bsPrefix = useBootstrapPrefix(bsPrefix, "modal-header");
-    return /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(AbstractModalHeader_default, __spreadProps(__spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(AbstractModalHeader_default, __spreadProps(__spreadValues({
       ref
     }, props), {
-      className: (0, import_classnames22.default)(className, bsPrefix),
+      className: (0, import_classnames30.default)(className, bsPrefix),
       closeLabel,
       closeButton
     }));
@@ -34173,11 +34561,11 @@
   var ModalHeader_default = ModalHeader;
 
   // node_modules/react-bootstrap/esm/ModalTitle.js
-  var React41 = __toESM(require_react());
-  var import_classnames23 = __toESM(require_classnames());
-  var import_jsx_runtime36 = __toESM(require_jsx_runtime());
+  var React51 = __toESM(require_react());
+  var import_classnames31 = __toESM(require_classnames());
+  var import_jsx_runtime44 = __toESM(require_jsx_runtime());
   var DivStyledAsH42 = divWithClassName_default("h4");
-  var ModalTitle = /* @__PURE__ */ React41.forwardRef((_a, ref) => {
+  var ModalTitle = /* @__PURE__ */ React51.forwardRef((_a, ref) => {
     var _b = _a, {
       className,
       bsPrefix,
@@ -34188,27 +34576,27 @@
       "as"
     ]);
     bsPrefix = useBootstrapPrefix(bsPrefix, "modal-title");
-    return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Component, __spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(Component, __spreadValues({
       ref,
-      className: (0, import_classnames23.default)(className, bsPrefix)
+      className: (0, import_classnames31.default)(className, bsPrefix)
     }, props));
   });
   ModalTitle.displayName = "ModalTitle";
   var ModalTitle_default = ModalTitle;
 
   // node_modules/react-bootstrap/esm/Modal.js
-  var import_jsx_runtime37 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime45 = __toESM(require_jsx_runtime());
   function DialogTransition(props) {
-    return /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(Fade_default, __spreadProps(__spreadValues({}, props), {
+    return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(Fade_default, __spreadProps(__spreadValues({}, props), {
       timeout: null
     }));
   }
   function BackdropTransition(props) {
-    return /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(Fade_default, __spreadProps(__spreadValues({}, props), {
+    return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(Fade_default, __spreadProps(__spreadValues({}, props), {
       timeout: null
     }));
   }
-  var Modal2 = /* @__PURE__ */ React42.forwardRef((_a, ref) => {
+  var Modal2 = /* @__PURE__ */ React52.forwardRef((_a, ref) => {
     var _b = _a, {
       bsPrefix,
       className,
@@ -34273,17 +34661,17 @@
       "backdropClassName",
       "manager"
     ]);
-    const [modalStyle, setStyle] = (0, import_react35.useState)({});
-    const [animateStaticModal, setAnimateStaticModal] = (0, import_react35.useState)(false);
-    const waitingForMouseUpRef = (0, import_react35.useRef)(false);
-    const ignoreBackdropClickRef = (0, import_react35.useRef)(false);
-    const removeStaticModalAnimationRef = (0, import_react35.useRef)(null);
+    const [modalStyle, setStyle] = (0, import_react40.useState)({});
+    const [animateStaticModal, setAnimateStaticModal] = (0, import_react40.useState)(false);
+    const waitingForMouseUpRef = (0, import_react40.useRef)(false);
+    const ignoreBackdropClickRef = (0, import_react40.useRef)(false);
+    const removeStaticModalAnimationRef = (0, import_react40.useRef)(null);
     const [modal, setModalRef] = useCallbackRef();
     const mergedRef = useMergedRefs_default(ref, setModalRef);
     const handleHide = useEventCallback(onHide);
     const isRTL = useIsRTL();
     bsPrefix = useBootstrapPrefix(bsPrefix, "modal");
-    const modalContext = (0, import_react35.useMemo)(() => ({
+    const modalContext = (0, import_react40.useMemo)(() => ({
       onHide: handleHide
     }), [handleHide]);
     function getModalManager() {
@@ -34374,31 +34762,31 @@
       onExited == null ? void 0 : onExited(node);
       removeEventListener_default(window, "resize", handleWindowResize);
     };
-    const renderBackdrop = (0, import_react35.useCallback)((backdropProps) => /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("div", __spreadProps(__spreadValues({}, backdropProps), {
-      className: (0, import_classnames24.default)(`${bsPrefix}-backdrop`, backdropClassName, !animation && "show")
+    const renderBackdrop = (0, import_react40.useCallback)((backdropProps) => /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("div", __spreadProps(__spreadValues({}, backdropProps), {
+      className: (0, import_classnames32.default)(`${bsPrefix}-backdrop`, backdropClassName, !animation && "show")
     })), [animation, backdropClassName, bsPrefix]);
     const baseModalStyle = __spreadValues(__spreadValues({}, style2), modalStyle);
     baseModalStyle.display = "block";
-    const renderDialog = (dialogProps) => /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("div", __spreadProps(__spreadValues({
+    const renderDialog = (dialogProps) => /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("div", __spreadProps(__spreadValues({
       role: "dialog"
     }, dialogProps), {
       style: baseModalStyle,
-      className: (0, import_classnames24.default)(className, bsPrefix, animateStaticModal && `${bsPrefix}-static`, !animation && "show"),
+      className: (0, import_classnames32.default)(className, bsPrefix, animateStaticModal && `${bsPrefix}-static`, !animation && "show"),
       onClick: backdrop ? handleClick : void 0,
       onMouseUp: handleMouseUp,
       "aria-label": ariaLabel,
       "aria-labelledby": ariaLabelledby,
       "aria-describedby": ariaDescribedby,
-      children: /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(Dialog, __spreadProps(__spreadValues({}, props), {
+      children: /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(Dialog, __spreadProps(__spreadValues({}, props), {
         onMouseDown: handleDialogMouseDown,
         className: dialogClassName,
         contentClassName,
         children
       }))
     }));
-    return /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(ModalContext_default.Provider, {
+    return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(ModalContext_default.Provider, {
       value: modalContext,
-      children: /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(Modal_default, {
+      children: /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(Modal_default, {
         show,
         ref: mergedRef,
         backdrop,
@@ -34437,16 +34825,16 @@
   });
 
   // node_modules/react-bootstrap/esm/Nav.js
-  var import_classnames27 = __toESM(require_classnames());
+  var import_classnames35 = __toESM(require_classnames());
   var import_all = __toESM(require_all());
-  var React45 = __toESM(require_react());
-  var import_react36 = __toESM(require_react());
+  var React55 = __toESM(require_react());
+  var import_react41 = __toESM(require_react());
 
   // node_modules/react-bootstrap/esm/NavItem.js
-  var React43 = __toESM(require_react());
-  var import_classnames25 = __toESM(require_classnames());
-  var import_jsx_runtime38 = __toESM(require_jsx_runtime());
-  var NavItem2 = /* @__PURE__ */ React43.forwardRef((_a, ref) => {
+  var React53 = __toESM(require_react());
+  var import_classnames33 = __toESM(require_classnames());
+  var import_jsx_runtime46 = __toESM(require_jsx_runtime());
+  var NavItem2 = /* @__PURE__ */ React53.forwardRef((_a, ref) => {
     var _b = _a, {
       className,
       bsPrefix,
@@ -34457,19 +34845,19 @@
       "as"
     ]);
     bsPrefix = useBootstrapPrefix(bsPrefix, "nav-item");
-    return /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(Component, __spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(Component, __spreadValues({
       ref,
-      className: (0, import_classnames25.default)(className, bsPrefix)
+      className: (0, import_classnames33.default)(className, bsPrefix)
     }, props));
   });
   NavItem2.displayName = "NavItem";
   var NavItem_default2 = NavItem2;
 
   // node_modules/react-bootstrap/esm/NavLink.js
-  var import_classnames26 = __toESM(require_classnames());
-  var React44 = __toESM(require_react());
-  var import_jsx_runtime39 = __toESM(require_jsx_runtime());
-  var NavLink = /* @__PURE__ */ React44.forwardRef((_a, ref) => {
+  var import_classnames34 = __toESM(require_classnames());
+  var React54 = __toESM(require_react());
+  var import_jsx_runtime47 = __toESM(require_jsx_runtime());
+  var NavLink = /* @__PURE__ */ React54.forwardRef((_a, ref) => {
     var _b = _a, {
       bsPrefix,
       className,
@@ -34491,18 +34879,18 @@
       active,
       disabled
     }, props));
-    return /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(Component, __spreadProps(__spreadValues(__spreadValues({}, props), navItemProps), {
+    return /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(Component, __spreadProps(__spreadValues(__spreadValues({}, props), navItemProps), {
       ref,
       disabled,
-      className: (0, import_classnames26.default)(className, bsPrefix, disabled && "disabled", meta.isActive && "active")
+      className: (0, import_classnames34.default)(className, bsPrefix, disabled && "disabled", meta.isActive && "active")
     }));
   });
   NavLink.displayName = "NavLink";
   var NavLink_default = NavLink;
 
   // node_modules/react-bootstrap/esm/Nav.js
-  var import_jsx_runtime40 = __toESM(require_jsx_runtime());
-  var Nav2 = /* @__PURE__ */ React45.forwardRef((uncontrolledProps, ref) => {
+  var import_jsx_runtime48 = __toESM(require_jsx_runtime());
+  var Nav2 = /* @__PURE__ */ React55.forwardRef((uncontrolledProps, ref) => {
     const _a = useUncontrolled(uncontrolledProps, {
       activeKey: "onSelect"
     }), {
@@ -34530,8 +34918,8 @@
     let navbarBsPrefix;
     let cardHeaderBsPrefix;
     let isNavbar = false;
-    const navbarContext = (0, import_react36.useContext)(NavbarContext_default);
-    const cardHeaderContext = (0, import_react36.useContext)(CardHeaderContext_default);
+    const navbarContext = (0, import_react41.useContext)(NavbarContext_default);
+    const cardHeaderContext = (0, import_react41.useContext)(CardHeaderContext_default);
     if (navbarContext) {
       navbarBsPrefix = navbarContext.bsPrefix;
       isNavbar = navbar == null ? true : navbar;
@@ -34540,11 +34928,11 @@
         cardHeaderBsPrefix
       } = cardHeaderContext);
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime40.jsx)(Nav_default, __spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(Nav_default, __spreadValues({
       as,
       ref,
       activeKey,
-      className: (0, import_classnames27.default)(className, {
+      className: (0, import_classnames35.default)(className, {
         [bsPrefix]: !isNavbar,
         [`${navbarBsPrefix}-nav`]: isNavbar,
         [`${navbarBsPrefix}-nav-scroll`]: isNavbar && navbarScroll,
@@ -34562,15 +34950,15 @@
   });
 
   // node_modules/react-bootstrap/esm/Navbar.js
-  var import_classnames36 = __toESM(require_classnames());
-  var React56 = __toESM(require_react());
-  var import_react43 = __toESM(require_react());
+  var import_classnames44 = __toESM(require_classnames());
+  var React66 = __toESM(require_react());
+  var import_react48 = __toESM(require_react());
 
   // node_modules/react-bootstrap/esm/NavbarBrand.js
-  var import_classnames28 = __toESM(require_classnames());
-  var React46 = __toESM(require_react());
-  var import_jsx_runtime41 = __toESM(require_jsx_runtime());
-  var NavbarBrand = /* @__PURE__ */ React46.forwardRef((_a, ref) => {
+  var import_classnames36 = __toESM(require_classnames());
+  var React56 = __toESM(require_react());
+  var import_jsx_runtime49 = __toESM(require_jsx_runtime());
+  var NavbarBrand = /* @__PURE__ */ React56.forwardRef((_a, ref) => {
     var _b = _a, {
       bsPrefix,
       className,
@@ -34582,19 +34970,19 @@
     ]);
     bsPrefix = useBootstrapPrefix(bsPrefix, "navbar-brand");
     const Component = as || (props.href ? "a" : "span");
-    return /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(Component, __spreadProps(__spreadValues({}, props), {
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Component, __spreadProps(__spreadValues({}, props), {
       ref,
-      className: (0, import_classnames28.default)(className, bsPrefix)
+      className: (0, import_classnames36.default)(className, bsPrefix)
     }));
   });
   NavbarBrand.displayName = "NavbarBrand";
   var NavbarBrand_default = NavbarBrand;
 
   // node_modules/react-bootstrap/esm/NavbarCollapse.js
-  var React47 = __toESM(require_react());
-  var import_react37 = __toESM(require_react());
-  var import_jsx_runtime42 = __toESM(require_jsx_runtime());
-  var NavbarCollapse = /* @__PURE__ */ React47.forwardRef((_a, ref) => {
+  var React57 = __toESM(require_react());
+  var import_react42 = __toESM(require_react());
+  var import_jsx_runtime50 = __toESM(require_jsx_runtime());
+  var NavbarCollapse = /* @__PURE__ */ React57.forwardRef((_a, ref) => {
     var _b = _a, {
       children,
       bsPrefix
@@ -34603,11 +34991,11 @@
       "bsPrefix"
     ]);
     bsPrefix = useBootstrapPrefix(bsPrefix, "navbar-collapse");
-    const context3 = (0, import_react37.useContext)(NavbarContext_default);
-    return /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(Collapse_default, __spreadProps(__spreadValues({
-      in: !!(context3 && context3.expanded)
+    const context5 = (0, import_react42.useContext)(NavbarContext_default);
+    return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(Collapse_default, __spreadProps(__spreadValues({
+      in: !!(context5 && context5.expanded)
     }, props), {
-      children: /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("div", {
+      children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", {
         ref,
         className: bsPrefix,
         children
@@ -34618,11 +35006,11 @@
   var NavbarCollapse_default = NavbarCollapse;
 
   // node_modules/react-bootstrap/esm/NavbarToggle.js
-  var import_classnames29 = __toESM(require_classnames());
-  var React48 = __toESM(require_react());
-  var import_react38 = __toESM(require_react());
-  var import_jsx_runtime43 = __toESM(require_jsx_runtime());
-  var NavbarToggle = /* @__PURE__ */ React48.forwardRef((_a, ref) => {
+  var import_classnames37 = __toESM(require_classnames());
+  var React58 = __toESM(require_react());
+  var import_react43 = __toESM(require_react());
+  var import_jsx_runtime51 = __toESM(require_jsx_runtime());
+  var NavbarToggle = /* @__PURE__ */ React58.forwardRef((_a, ref) => {
     var _b = _a, {
       bsPrefix,
       className,
@@ -34643,7 +35031,7 @@
     const {
       onToggle,
       expanded
-    } = (0, import_react38.useContext)(NavbarContext_default) || {};
+    } = (0, import_react43.useContext)(NavbarContext_default) || {};
     const handleClick = useEventCallback((e) => {
       if (onClick)
         onClick(e);
@@ -34653,12 +35041,12 @@
     if (Component === "button") {
       props.type = "button";
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(Component, __spreadProps(__spreadValues({}, props), {
+    return /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(Component, __spreadProps(__spreadValues({}, props), {
       ref,
       onClick: handleClick,
       "aria-label": label,
-      className: (0, import_classnames29.default)(className, bsPrefix, !expanded && "collapsed"),
-      children: children || /* @__PURE__ */ (0, import_jsx_runtime43.jsx)("span", {
+      className: (0, import_classnames37.default)(className, bsPrefix, !expanded && "collapsed"),
+      children: children || /* @__PURE__ */ (0, import_jsx_runtime51.jsx)("span", {
         className: `${bsPrefix}-icon`
       })
     }));
@@ -34667,14 +35055,14 @@
   var NavbarToggle_default = NavbarToggle;
 
   // node_modules/react-bootstrap/esm/NavbarOffcanvas.js
-  var React54 = __toESM(require_react());
-  var import_react42 = __toESM(require_react());
+  var React64 = __toESM(require_react());
+  var import_react47 = __toESM(require_react());
 
   // node_modules/react-bootstrap/esm/Offcanvas.js
-  var import_classnames34 = __toESM(require_classnames());
+  var import_classnames42 = __toESM(require_classnames());
 
   // node_modules/@restart/hooks/esm/useMediaQuery.js
-  var import_react39 = __toESM(require_react());
+  var import_react44 = __toESM(require_react());
   var matchersByWindow = /* @__PURE__ */ new WeakMap();
   var getMatcher = (query, targetWindow) => {
     if (!query || !targetWindow)
@@ -34691,7 +35079,7 @@
   };
   function useMediaQuery(query, targetWindow = typeof window === "undefined" ? void 0 : window) {
     const mql = getMatcher(query, targetWindow);
-    const [matches, setMatches] = (0, import_react39.useState)(() => mql ? mql.matches : false);
+    const [matches, setMatches] = (0, import_react44.useState)(() => mql ? mql.matches : false);
     useIsomorphicEffect_default(() => {
       let mql2 = getMatcher(query, targetWindow);
       if (!mql2) {
@@ -34717,7 +35105,7 @@
   }
 
   // node_modules/@restart/hooks/esm/useBreakpoint.js
-  var import_react40 = __toESM(require_react());
+  var import_react45 = __toESM(require_react());
   function createBreakpointHook(breakpointValues) {
     const names = Object.keys(breakpointValues);
     function and(query, next) {
@@ -34757,7 +35145,7 @@
           [breakpointOrMap]: direction
         };
       }
-      let query = (0, import_react40.useMemo)(() => Object.entries(breakpointMap).reduce((query2, [key, direction2]) => {
+      let query = (0, import_react45.useMemo)(() => Object.entries(breakpointMap).reduce((query2, [key, direction2]) => {
         if (direction2 === "up" || direction2 === true) {
           query2 = and(query2, getMinQuery(key));
         }
@@ -34781,14 +35169,14 @@
   var useBreakpoint_default = useBreakpoint;
 
   // node_modules/react-bootstrap/esm/Offcanvas.js
-  var React53 = __toESM(require_react());
-  var import_react41 = __toESM(require_react());
+  var React63 = __toESM(require_react());
+  var import_react46 = __toESM(require_react());
 
   // node_modules/react-bootstrap/esm/OffcanvasBody.js
-  var React49 = __toESM(require_react());
-  var import_classnames30 = __toESM(require_classnames());
-  var import_jsx_runtime44 = __toESM(require_jsx_runtime());
-  var OffcanvasBody = /* @__PURE__ */ React49.forwardRef((_a, ref) => {
+  var React59 = __toESM(require_react());
+  var import_classnames38 = __toESM(require_classnames());
+  var import_jsx_runtime52 = __toESM(require_jsx_runtime());
+  var OffcanvasBody = /* @__PURE__ */ React59.forwardRef((_a, ref) => {
     var _b = _a, {
       className,
       bsPrefix,
@@ -34799,23 +35187,23 @@
       "as"
     ]);
     bsPrefix = useBootstrapPrefix(bsPrefix, "offcanvas-body");
-    return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(Component, __spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Component, __spreadValues({
       ref,
-      className: (0, import_classnames30.default)(className, bsPrefix)
+      className: (0, import_classnames38.default)(className, bsPrefix)
     }, props));
   });
   OffcanvasBody.displayName = "OffcanvasBody";
   var OffcanvasBody_default = OffcanvasBody;
 
   // node_modules/react-bootstrap/esm/OffcanvasToggling.js
-  var import_classnames31 = __toESM(require_classnames());
-  var React50 = __toESM(require_react());
-  var import_jsx_runtime45 = __toESM(require_jsx_runtime());
+  var import_classnames39 = __toESM(require_classnames());
+  var React60 = __toESM(require_react());
+  var import_jsx_runtime53 = __toESM(require_jsx_runtime());
   var transitionStyles = {
     [ENTERING]: "show",
     [ENTERED]: "show"
   };
-  var OffcanvasToggling = /* @__PURE__ */ React50.forwardRef((_a, ref) => {
+  var OffcanvasToggling = /* @__PURE__ */ React60.forwardRef((_a, ref) => {
     var _b = _a, {
       bsPrefix,
       className,
@@ -34834,7 +35222,7 @@
       "appear"
     ]);
     bsPrefix = useBootstrapPrefix(bsPrefix, "offcanvas");
-    return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(TransitionWrapper_default, __spreadProps(__spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(TransitionWrapper_default, __spreadProps(__spreadValues({
       ref,
       addEndListener: transitionEndListener,
       in: inProp,
@@ -34843,8 +35231,8 @@
       appear
     }, props), {
       childRef: children.ref,
-      children: (status, innerProps) => /* @__PURE__ */ React50.cloneElement(children, __spreadProps(__spreadValues({}, innerProps), {
-        className: (0, import_classnames31.default)(className, children.props.className, (status === ENTERING || status === EXITING) && `${bsPrefix}-toggling`, transitionStyles[status])
+      children: (status, innerProps) => /* @__PURE__ */ React60.cloneElement(children, __spreadProps(__spreadValues({}, innerProps), {
+        className: (0, import_classnames39.default)(className, children.props.className, (status === ENTERING || status === EXITING) && `${bsPrefix}-toggling`, transitionStyles[status])
       }))
     }));
   });
@@ -34852,10 +35240,10 @@
   var OffcanvasToggling_default = OffcanvasToggling;
 
   // node_modules/react-bootstrap/esm/OffcanvasHeader.js
-  var import_classnames32 = __toESM(require_classnames());
-  var React51 = __toESM(require_react());
-  var import_jsx_runtime46 = __toESM(require_jsx_runtime());
-  var OffcanvasHeader = /* @__PURE__ */ React51.forwardRef((_a, ref) => {
+  var import_classnames40 = __toESM(require_classnames());
+  var React61 = __toESM(require_react());
+  var import_jsx_runtime54 = __toESM(require_jsx_runtime());
+  var OffcanvasHeader = /* @__PURE__ */ React61.forwardRef((_a, ref) => {
     var _b = _a, {
       bsPrefix,
       className,
@@ -34868,10 +35256,10 @@
       "closeButton"
     ]);
     bsPrefix = useBootstrapPrefix(bsPrefix, "offcanvas-header");
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(AbstractModalHeader_default, __spreadProps(__spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(AbstractModalHeader_default, __spreadProps(__spreadValues({
       ref
     }, props), {
-      className: (0, import_classnames32.default)(className, bsPrefix),
+      className: (0, import_classnames40.default)(className, bsPrefix),
       closeLabel,
       closeButton
     }));
@@ -34880,11 +35268,11 @@
   var OffcanvasHeader_default = OffcanvasHeader;
 
   // node_modules/react-bootstrap/esm/OffcanvasTitle.js
-  var React52 = __toESM(require_react());
-  var import_classnames33 = __toESM(require_classnames());
-  var import_jsx_runtime47 = __toESM(require_jsx_runtime());
+  var React62 = __toESM(require_react());
+  var import_classnames41 = __toESM(require_classnames());
+  var import_jsx_runtime55 = __toESM(require_jsx_runtime());
   var DivStyledAsH52 = divWithClassName_default("h5");
-  var OffcanvasTitle = /* @__PURE__ */ React52.forwardRef((_a, ref) => {
+  var OffcanvasTitle = /* @__PURE__ */ React62.forwardRef((_a, ref) => {
     var _b = _a, {
       className,
       bsPrefix,
@@ -34895,25 +35283,25 @@
       "as"
     ]);
     bsPrefix = useBootstrapPrefix(bsPrefix, "offcanvas-title");
-    return /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(Component, __spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(Component, __spreadValues({
       ref,
-      className: (0, import_classnames33.default)(className, bsPrefix)
+      className: (0, import_classnames41.default)(className, bsPrefix)
     }, props));
   });
   OffcanvasTitle.displayName = "OffcanvasTitle";
   var OffcanvasTitle_default = OffcanvasTitle;
 
   // node_modules/react-bootstrap/esm/Offcanvas.js
-  var import_jsx_runtime48 = __toESM(require_jsx_runtime());
-  var import_jsx_runtime49 = __toESM(require_jsx_runtime());
-  var import_jsx_runtime50 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime56 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime57 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime58 = __toESM(require_jsx_runtime());
   function DialogTransition2(props) {
-    return /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(OffcanvasToggling_default, __spreadValues({}, props));
+    return /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(OffcanvasToggling_default, __spreadValues({}, props));
   }
   function BackdropTransition2(props) {
-    return /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(Fade_default, __spreadValues({}, props));
+    return /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(Fade_default, __spreadValues({}, props));
   }
-  var Offcanvas = /* @__PURE__ */ React53.forwardRef((_a, ref) => {
+  var Offcanvas = /* @__PURE__ */ React63.forwardRef((_a, ref) => {
     var _b = _a, {
       bsPrefix,
       className,
@@ -34972,21 +35360,21 @@
       "manager",
       "renderStaticNode"
     ]);
-    const modalManager = (0, import_react41.useRef)();
+    const modalManager = (0, import_react46.useRef)();
     bsPrefix = useBootstrapPrefix(bsPrefix, "offcanvas");
     const {
       onToggle
-    } = (0, import_react41.useContext)(NavbarContext_default) || {};
-    const [showOffcanvas, setShowOffcanvas] = (0, import_react41.useState)(false);
+    } = (0, import_react46.useContext)(NavbarContext_default) || {};
+    const [showOffcanvas, setShowOffcanvas] = (0, import_react46.useState)(false);
     const hideResponsiveOffcanvas = useBreakpoint_default(responsive || "xs", "up");
-    (0, import_react41.useEffect)(() => {
+    (0, import_react46.useEffect)(() => {
       setShowOffcanvas(responsive ? show && !hideResponsiveOffcanvas : show);
     }, [show, responsive, hideResponsiveOffcanvas]);
     const handleHide = useEventCallback(() => {
       onToggle == null ? void 0 : onToggle();
       onHide == null ? void 0 : onHide();
     });
-    const modalContext = (0, import_react41.useMemo)(() => ({
+    const modalContext = (0, import_react46.useMemo)(() => ({
       onHide: handleHide
     }), [handleHide]);
     function getModalManager() {
@@ -35011,18 +35399,18 @@
         node.style.visibility = "";
       onExited == null ? void 0 : onExited(...args);
     };
-    const renderBackdrop = (0, import_react41.useCallback)((backdropProps) => /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("div", __spreadProps(__spreadValues({}, backdropProps), {
-      className: (0, import_classnames34.default)(`${bsPrefix}-backdrop`, backdropClassName)
+    const renderBackdrop = (0, import_react46.useCallback)((backdropProps) => /* @__PURE__ */ (0, import_jsx_runtime56.jsx)("div", __spreadProps(__spreadValues({}, backdropProps), {
+      className: (0, import_classnames42.default)(`${bsPrefix}-backdrop`, backdropClassName)
     })), [backdropClassName, bsPrefix]);
-    const renderDialog = (dialogProps) => /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("div", __spreadProps(__spreadValues(__spreadValues({}, dialogProps), props), {
-      className: (0, import_classnames34.default)(className, responsive ? `${bsPrefix}-${responsive}` : bsPrefix, `${bsPrefix}-${placement}`),
+    const renderDialog = (dialogProps) => /* @__PURE__ */ (0, import_jsx_runtime56.jsx)("div", __spreadProps(__spreadValues(__spreadValues({}, dialogProps), props), {
+      className: (0, import_classnames42.default)(className, responsive ? `${bsPrefix}-${responsive}` : bsPrefix, `${bsPrefix}-${placement}`),
       "aria-labelledby": ariaLabelledby,
       children
     }));
-    return /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)(import_jsx_runtime49.Fragment, {
-      children: [!showOffcanvas && (responsive || renderStaticNode) && renderDialog({}), /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(ModalContext_default.Provider, {
+    return /* @__PURE__ */ (0, import_jsx_runtime58.jsxs)(import_jsx_runtime57.Fragment, {
+      children: [!showOffcanvas && (responsive || renderStaticNode) && renderDialog({}), /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(ModalContext_default.Provider, {
         value: modalContext,
-        children: /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(Modal_default, {
+        children: /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(Modal_default, {
           show: showOffcanvas,
           ref,
           backdrop,
@@ -35058,12 +35446,12 @@
   });
 
   // node_modules/react-bootstrap/esm/NavbarOffcanvas.js
-  var import_jsx_runtime51 = __toESM(require_jsx_runtime());
-  var NavbarOffcanvas = /* @__PURE__ */ React54.forwardRef((props, ref) => {
-    const context3 = (0, import_react42.useContext)(NavbarContext_default);
-    return /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(Offcanvas_default, __spreadProps(__spreadValues({
+  var import_jsx_runtime59 = __toESM(require_jsx_runtime());
+  var NavbarOffcanvas = /* @__PURE__ */ React64.forwardRef((props, ref) => {
+    const context5 = (0, import_react47.useContext)(NavbarContext_default);
+    return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Offcanvas_default, __spreadProps(__spreadValues({
       ref,
-      show: !!(context3 != null && context3.expanded)
+      show: !!(context5 != null && context5.expanded)
     }, props), {
       renderStaticNode: true
     }));
@@ -35072,10 +35460,10 @@
   var NavbarOffcanvas_default = NavbarOffcanvas;
 
   // node_modules/react-bootstrap/esm/NavbarText.js
-  var React55 = __toESM(require_react());
-  var import_classnames35 = __toESM(require_classnames());
-  var import_jsx_runtime52 = __toESM(require_jsx_runtime());
-  var NavbarText = /* @__PURE__ */ React55.forwardRef((_a, ref) => {
+  var React65 = __toESM(require_react());
+  var import_classnames43 = __toESM(require_classnames());
+  var import_jsx_runtime60 = __toESM(require_jsx_runtime());
+  var NavbarText = /* @__PURE__ */ React65.forwardRef((_a, ref) => {
     var _b = _a, {
       className,
       bsPrefix,
@@ -35086,17 +35474,17 @@
       "as"
     ]);
     bsPrefix = useBootstrapPrefix(bsPrefix, "navbar-text");
-    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Component, __spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Component, __spreadValues({
       ref,
-      className: (0, import_classnames35.default)(className, bsPrefix)
+      className: (0, import_classnames43.default)(className, bsPrefix)
     }, props));
   });
   NavbarText.displayName = "NavbarText";
   var NavbarText_default = NavbarText;
 
   // node_modules/react-bootstrap/esm/Navbar.js
-  var import_jsx_runtime53 = __toESM(require_jsx_runtime());
-  var Navbar = /* @__PURE__ */ React56.forwardRef((props, ref) => {
+  var import_jsx_runtime61 = __toESM(require_jsx_runtime());
+  var Navbar = /* @__PURE__ */ React66.forwardRef((props, ref) => {
     const _a = useUncontrolled(props, {
       expanded: "onToggle"
     }), {
@@ -35128,7 +35516,7 @@
       "collapseOnSelect"
     ]);
     const bsPrefix = useBootstrapPrefix(initialBsPrefix, "navbar");
-    const handleCollapse = (0, import_react43.useCallback)((...args) => {
+    const handleCollapse = (0, import_react48.useCallback)((...args) => {
       onSelect == null ? void 0 : onSelect(...args);
       if (collapseOnSelect && expanded) {
         onToggle == null ? void 0 : onToggle(false);
@@ -35140,20 +35528,20 @@
     let expandClass = `${bsPrefix}-expand`;
     if (typeof expand === "string")
       expandClass = `${expandClass}-${expand}`;
-    const navbarContext = (0, import_react43.useMemo)(() => ({
+    const navbarContext = (0, import_react48.useMemo)(() => ({
       onToggle: () => onToggle == null ? void 0 : onToggle(!expanded),
       bsPrefix,
       expanded: !!expanded,
       expand
     }), [bsPrefix, expanded, expand, onToggle]);
-    return /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(NavbarContext_default.Provider, {
+    return /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(NavbarContext_default.Provider, {
       value: navbarContext,
-      children: /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(SelectableContext_default.Provider, {
+      children: /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(SelectableContext_default.Provider, {
         value: handleCollapse,
-        children: /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(Component, __spreadProps(__spreadValues({
+        children: /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(Component, __spreadProps(__spreadValues({
           ref
         }, controlledProps), {
-          className: (0, import_classnames36.default)(className, bsPrefix, expand && expandClass, variant && `${bsPrefix}-${variant}`, bg && `bg-${bg}`, sticky && `sticky-${sticky}`, fixed && `fixed-${fixed}`)
+          className: (0, import_classnames44.default)(className, bsPrefix, expand && expandClass, variant && `${bsPrefix}-${variant}`, bg && `bg-${bg}`, sticky && `sticky-${sticky}`, fixed && `fixed-${fixed}`)
         }))
       })
     });
@@ -35168,10 +35556,10 @@
   });
 
   // node_modules/react-bootstrap/esm/Row.js
-  var import_classnames37 = __toESM(require_classnames());
-  var React57 = __toESM(require_react());
-  var import_jsx_runtime54 = __toESM(require_jsx_runtime());
-  var Row = /* @__PURE__ */ React57.forwardRef((_a, ref) => {
+  var import_classnames45 = __toESM(require_classnames());
+  var React67 = __toESM(require_react());
+  var import_jsx_runtime62 = __toESM(require_jsx_runtime());
+  var Row = /* @__PURE__ */ React67.forwardRef((_a, ref) => {
     var _b = _a, {
       bsPrefix,
       className,
@@ -35202,24 +35590,70 @@
       if (cols != null)
         classes.push(`${sizePrefix}${infix}-${cols}`);
     });
-    return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(Component, __spreadProps(__spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Component, __spreadProps(__spreadValues({
       ref
     }, props), {
-      className: (0, import_classnames37.default)(className, decoratedBsPrefix, ...classes)
+      className: (0, import_classnames45.default)(className, decoratedBsPrefix, ...classes)
     }));
   });
   Row.displayName = "Row";
   var Row_default = Row;
+
+  // node_modules/react-bootstrap/esm/Table.js
+  var import_classnames46 = __toESM(require_classnames());
+  var React68 = __toESM(require_react());
+  var import_jsx_runtime63 = __toESM(require_jsx_runtime());
+  var Table = /* @__PURE__ */ React68.forwardRef((_a, ref) => {
+    var _b = _a, {
+      bsPrefix,
+      className,
+      striped,
+      bordered,
+      borderless,
+      hover,
+      size: size2,
+      variant,
+      responsive
+    } = _b, props = __objRest(_b, [
+      "bsPrefix",
+      "className",
+      "striped",
+      "bordered",
+      "borderless",
+      "hover",
+      "size",
+      "variant",
+      "responsive"
+    ]);
+    const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, "table");
+    const classes = (0, import_classnames46.default)(className, decoratedBsPrefix, variant && `${decoratedBsPrefix}-${variant}`, size2 && `${decoratedBsPrefix}-${size2}`, striped && `${decoratedBsPrefix}-${typeof striped === "string" ? `striped-${striped}` : "striped"}`, bordered && `${decoratedBsPrefix}-bordered`, borderless && `${decoratedBsPrefix}-borderless`, hover && `${decoratedBsPrefix}-hover`);
+    const table = /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("table", __spreadProps(__spreadValues({}, props), {
+      className: classes,
+      ref
+    }));
+    if (responsive) {
+      let responsiveClass = `${decoratedBsPrefix}-responsive`;
+      if (typeof responsive === "string") {
+        responsiveClass = `${responsiveClass}-${responsive}`;
+      }
+      return /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("div", {
+        className: responsiveClass,
+        children: table
+      });
+    }
+    return table;
+  });
+  var Table_default = Table;
 
   // client/components/Navigation/MyNavBar.jsx
   var import_react_router_bootstrap = __toESM(require_react_router_bootstrap(), 1);
   var import_prop_types4 = __toESM(require_prop_types(), 1);
 
   // node_modules/react-icons/lib/esm/iconBase.js
-  var import_react45 = __toESM(require_react());
+  var import_react50 = __toESM(require_react());
 
   // node_modules/react-icons/lib/esm/iconContext.js
-  var import_react44 = __toESM(require_react());
+  var import_react49 = __toESM(require_react());
   var DefaultContext = {
     color: void 0,
     size: void 0,
@@ -35227,7 +35661,7 @@
     style: void 0,
     attr: void 0
   };
-  var IconContext = import_react44.default.createContext && import_react44.default.createContext(DefaultContext);
+  var IconContext = import_react49.default.createContext && import_react49.default.createContext(DefaultContext);
 
   // node_modules/react-icons/lib/esm/iconBase.js
   var __assign = function() {
@@ -35256,14 +35690,14 @@
   };
   function Tree2Element(tree) {
     return tree && tree.map(function(node, i) {
-      return import_react45.default.createElement(node.tag, __assign({
+      return import_react50.default.createElement(node.tag, __assign({
         key: i
       }, node.attr), Tree2Element(node.child));
     });
   }
   function GenIcon(data) {
     return function(props) {
-      return import_react45.default.createElement(IconBase, __assign({
+      return import_react50.default.createElement(IconBase, __assign({
         attr: __assign({}, data.attr)
       }, props), Tree2Element(data.child));
     };
@@ -35277,7 +35711,7 @@
         className = conf.className;
       if (props.className)
         className = (className ? className + " " : "") + props.className;
-      return import_react45.default.createElement("svg", __assign({
+      return import_react50.default.createElement("svg", __assign({
         stroke: "currentColor",
         fill: "currentColor",
         strokeWidth: "0"
@@ -35289,9 +35723,9 @@
         height: computedSize,
         width: computedSize,
         xmlns: "http://www.w3.org/2000/svg"
-      }), title && import_react45.default.createElement("title", null, title), props.children);
+      }), title && import_react50.default.createElement("title", null, title), props.children);
     };
-    return IconContext !== void 0 ? import_react45.default.createElement(IconContext.Consumer, null, function(conf) {
+    return IconContext !== void 0 ? import_react50.default.createElement(IconContext.Consumer, null, function(conf) {
       return elem(conf);
     }) : elem(DefaultContext);
   }
@@ -35303,33 +35737,36 @@
   function BsMoonStars(props) {
     return GenIcon({ "tag": "svg", "attr": { "fill": "currentColor", "viewBox": "0 0 16 16" }, "child": [{ "tag": "path", "attr": { "d": "M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278zM4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z" } }, { "tag": "path", "attr": { "d": "M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z" } }] })(props);
   }
+  function BsQuestionCircle(props) {
+    return GenIcon({ "tag": "svg", "attr": { "fill": "currentColor", "viewBox": "0 0 16 16" }, "child": [{ "tag": "path", "attr": { "d": "M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" } }, { "tag": "path", "attr": { "d": "M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" } }] })(props);
+  }
 
   // client/components/Navigation/MyNavBar.jsx
   function MyNavBar(props) {
     const { loggedIn, handleTheme, mode, isDark } = props;
-    const [check, setCheck] = import_react46.default.useState(true);
+    const [check, setCheck] = import_react51.default.useState(true);
     const handleClick = () => {
       handleTheme(!isDark);
       changeIcon(!isDark);
     };
-    let content = /* @__PURE__ */ import_react46.default.createElement("div", { onClick: handleClick }, /* @__PURE__ */ import_react46.default.createElement(BsBrightnessHigh, null));
+    let content = /* @__PURE__ */ import_react51.default.createElement("div", { onClick: handleClick }, /* @__PURE__ */ import_react51.default.createElement(BsBrightnessHigh, null));
     const changeIcon = () => {
       console.log("this is check: " + check);
       if (check) {
-        content = /* @__PURE__ */ import_react46.default.createElement("div", { onClick: handleClick }, /* @__PURE__ */ import_react46.default.createElement(BsBrightnessHigh, null));
+        content = /* @__PURE__ */ import_react51.default.createElement("div", { onClick: handleClick }, /* @__PURE__ */ import_react51.default.createElement(BsBrightnessHigh, null));
       } else {
-        content = /* @__PURE__ */ import_react46.default.createElement("div", { onClick: handleClick }, /* @__PURE__ */ import_react46.default.createElement(BsMoonStars, null));
+        content = /* @__PURE__ */ import_react51.default.createElement("div", { onClick: handleClick }, /* @__PURE__ */ import_react51.default.createElement(BsMoonStars, null));
       }
       setCheck(!check);
     };
     let navContent;
     let navContent2;
     if (!loggedIn) {
-      navContent = /* @__PURE__ */ import_react46.default.createElement(Nav_default2, { className: "justify-content-end", style: { width: "50%" } }, /* @__PURE__ */ import_react46.default.createElement(import_react_router_bootstrap.LinkContainer, { to: "/login" }, /* @__PURE__ */ import_react46.default.createElement(Nav_default2.Link, null, " Log In ")), /* @__PURE__ */ import_react46.default.createElement(import_react_router_bootstrap.LinkContainer, { to: "/signup" }, /* @__PURE__ */ import_react46.default.createElement(Nav_default2.Link, null, " Sign Up ")));
+      navContent = /* @__PURE__ */ import_react51.default.createElement(Nav_default2, { className: "justify-content-end", style: { width: "50%" } }, /* @__PURE__ */ import_react51.default.createElement(import_react_router_bootstrap.LinkContainer, { to: "/login" }, /* @__PURE__ */ import_react51.default.createElement(Nav_default2.Link, null, " Log In ")), /* @__PURE__ */ import_react51.default.createElement(import_react_router_bootstrap.LinkContainer, { to: "/signup" }, /* @__PURE__ */ import_react51.default.createElement(Nav_default2.Link, null, " Sign Up ")));
     } else {
-      navContent2 = /* @__PURE__ */ import_react46.default.createElement(import_react_router_bootstrap.LinkContainer, { to: "/setting" }, /* @__PURE__ */ import_react46.default.createElement(Nav_default2.Link, null, " Setting "));
+      navContent2 = /* @__PURE__ */ import_react51.default.createElement(import_react_router_bootstrap.LinkContainer, { to: "/setting" }, /* @__PURE__ */ import_react51.default.createElement(Nav_default2.Link, null, " Setting "));
     }
-    return /* @__PURE__ */ import_react46.default.createElement(Navbar_default, { bg: mode, variant: mode }, /* @__PURE__ */ import_react46.default.createElement(Navbar_default.Brand, null, "Monkey Business"), /* @__PURE__ */ import_react46.default.createElement(Navbar_default.Toggle, { "aria-controls": "basic-navbar-nav" }), /* @__PURE__ */ import_react46.default.createElement(Navbar_default.Collapse, { id: "basic-navbar-nav" }, /* @__PURE__ */ import_react46.default.createElement(Nav_default2, { className: "mr-auto" }, /* @__PURE__ */ import_react46.default.createElement(import_react_router_bootstrap.LinkContainer, { to: "/" }, /* @__PURE__ */ import_react46.default.createElement(Nav_default2.Link, null, " Home ")), /* @__PURE__ */ import_react46.default.createElement(import_react_router_bootstrap.LinkContainer, { to: "/stats" }, /* @__PURE__ */ import_react46.default.createElement(Nav_default2.Link, null, " Statistics ")), /* @__PURE__ */ import_react46.default.createElement(import_react_router_bootstrap.LinkContainer, { to: "/search" }, /* @__PURE__ */ import_react46.default.createElement(Nav_default2.Link, null, " Search ")), /* @__PURE__ */ import_react46.default.createElement(import_react_router_bootstrap.LinkContainer, { to: "/monkeyTech" }, /* @__PURE__ */ import_react46.default.createElement(Nav_default2.Link, null, " Monkey Technology ")), /* @__PURE__ */ import_react46.default.createElement(import_react_router_bootstrap.LinkContainer, { to: "/about" }, /* @__PURE__ */ import_react46.default.createElement(Nav_default2.Link, null, " About Us ")), navContent2, /* @__PURE__ */ import_react46.default.createElement(Nav_default2.Link, null, " ", content, " ")), navContent));
+    return /* @__PURE__ */ import_react51.default.createElement(Navbar_default, { bg: mode, variant: mode }, /* @__PURE__ */ import_react51.default.createElement(Navbar_default.Brand, null, "Monkey Business"), /* @__PURE__ */ import_react51.default.createElement(Navbar_default.Toggle, { "aria-controls": "basic-navbar-nav" }), /* @__PURE__ */ import_react51.default.createElement(Navbar_default.Collapse, { id: "basic-navbar-nav" }, /* @__PURE__ */ import_react51.default.createElement(Nav_default2, { className: "mr-auto" }, /* @__PURE__ */ import_react51.default.createElement(import_react_router_bootstrap.LinkContainer, { to: "/" }, /* @__PURE__ */ import_react51.default.createElement(Nav_default2.Link, null, " Home ")), /* @__PURE__ */ import_react51.default.createElement(import_react_router_bootstrap.LinkContainer, { to: "/stats" }, /* @__PURE__ */ import_react51.default.createElement(Nav_default2.Link, null, " Statistics ")), /* @__PURE__ */ import_react51.default.createElement(import_react_router_bootstrap.LinkContainer, { to: "/search" }, /* @__PURE__ */ import_react51.default.createElement(Nav_default2.Link, null, " Search ")), /* @__PURE__ */ import_react51.default.createElement(import_react_router_bootstrap.LinkContainer, { to: "/monkeyTech" }, /* @__PURE__ */ import_react51.default.createElement(Nav_default2.Link, null, " Monkey Technology ")), /* @__PURE__ */ import_react51.default.createElement(import_react_router_bootstrap.LinkContainer, { to: "/about" }, /* @__PURE__ */ import_react51.default.createElement(Nav_default2.Link, null, " About Us ")), navContent2, /* @__PURE__ */ import_react51.default.createElement(Nav_default2.Link, null, " ", content, " ")), navContent));
   }
   MyNavBar.propTypes = {
     loggedIn: import_prop_types4.default.bool,
@@ -35345,17 +35782,17 @@
   };
 
   // client/components/Home/HomePage.jsx
-  var import_react47 = __toESM(require_react(), 1);
+  var import_react52 = __toESM(require_react(), 1);
   var import_prop_types5 = __toESM(require_prop_types(), 1);
   function Home(props) {
     const { name } = props;
     let content;
     if (name !== "") {
-      content = /* @__PURE__ */ import_react47.default.createElement("div", null, " Welcome ", name, " ");
+      content = /* @__PURE__ */ import_react52.default.createElement("div", null, " Welcome ", name, " ");
     } else {
-      content = /* @__PURE__ */ import_react47.default.createElement("div", null, " Home page placeholder");
+      content = /* @__PURE__ */ import_react52.default.createElement("div", null, " Home page placeholder");
     }
-    return /* @__PURE__ */ import_react47.default.createElement(import_react47.default.Fragment, null, content);
+    return /* @__PURE__ */ import_react52.default.createElement(import_react52.default.Fragment, null, content);
   }
   Home.propTypes = {
     name: import_prop_types5.default.string
@@ -35366,21 +35803,102 @@
   var HomePage_default = Home;
 
   // client/components/MonkeyTech/MonkeyTechPage.jsx
-  var import_react48 = __toESM(require_react(), 1);
+  var import_react53 = __toESM(require_react(), 1);
+
+  // client/mbdataHelper.js
+  function resetPassword(accessKey, username, password, confirmPassword) {
+    return __async(this, null, function* () {
+      try {
+        const response = yield fetch("http://localhost:3000/api/resetPassword", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ accessKey, username, password, confirmPassword })
+        });
+        if (response.status >= 400) {
+          throw new Error(`Request failed with response code ${response.status}`);
+        }
+        return true;
+      } catch (err) {
+        console.error("Failed to reset password");
+        console.error(err);
+        return false;
+      }
+    });
+  }
+  function forgotPassword(username, email) {
+    return __async(this, null, function* () {
+      try {
+        const response = yield fetch("http://localhost:3000/api/forgotPassword", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ username, email })
+        });
+        if (response.status >= 400) {
+          throw new Error(`Request failed with response code ${response.status}`);
+        }
+        return true;
+      } catch (err) {
+        console.error("Failed to reset password");
+        console.error(err);
+        return false;
+      }
+    });
+  }
+  function getMonkeyInvestments() {
+    return __async(this, null, function* () {
+      try {
+        const response = yield fetch("http://localhost:3000/api/monkey");
+        if (response.status >= 400) {
+          throw new Error(`Request failed with response code ${response.status}`);
+        }
+        return response;
+      } catch (err) {
+        console.error("Failed to retrieve monkey investments");
+        console.error(err);
+        return null;
+      }
+    });
+  }
+
+  // client/components/MonkeyTech/MonkeyTechPage.jsx
   function MonkeTech() {
-    return /* @__PURE__ */ import_react48.default.createElement(import_react48.default.Fragment, null, /* @__PURE__ */ import_react48.default.createElement("div", null, "Monkey Tech Page - just a place holder"), /* @__PURE__ */ import_react48.default.createElement("img", { className: "image-fluid", src: "https://t3.ftcdn.net/jpg/05/66/26/98/360_F_566269813_8VisUzV5qqdN7nQ7De4FcVEVxnRuKh2E.jpg", alt: "Image" }));
+    const [tableData, setTableData] = (0, import_react53.useState)([]);
+    const [show, setShow] = (0, import_react53.useState)(false);
+    const [success, setSuccess] = (0, import_react53.useState)(false);
+    const handleShow = () => setShow(true);
+    const handleClose = () => setShow(false);
+    const onSuccessMessage = "Monkey Investments retrieved";
+    const onFailMessage = "Failed to retrieve monkey investments";
+    (0, import_react53.useEffect)(() => {
+      const renderMonkeyInvestments = (e) => __async(this, null, function* () {
+        const fetchMonkeyInvestments = yield getMonkeyInvestments();
+        if (fetchMonkeyInvestments) {
+          setSuccess(true);
+        } else {
+          setSuccess(false);
+        }
+        handleShow();
+        setTableData(fetchMonkeyInvestments);
+      });
+      renderMonkeyInvestments();
+    }, []);
+    return /* @__PURE__ */ import_react53.default.createElement(import_react53.default.Fragment, null, /* @__PURE__ */ import_react53.default.createElement(Alert_default, { show, variant: success ? "success" : "danger", onClose: handleClose, dismissible: true }, /* @__PURE__ */ import_react53.default.createElement(Alert_default.Heading, null, "Retrieving Monkey Stock Details"), /* @__PURE__ */ import_react53.default.createElement("p", null, success ? onSuccessMessage : onFailMessage)), /* @__PURE__ */ import_react53.default.createElement(Table_default, { striped: true, border: true, hover: true, id: "monkeyTable" }, /* @__PURE__ */ import_react53.default.createElement("thead", null, /* @__PURE__ */ import_react53.default.createElement("tr", null, /* @__PURE__ */ import_react53.default.createElement("th", { scope: "col" }, "Stock Name"), /* @__PURE__ */ import_react53.default.createElement("th", { scope: "col" }, "Stocks"), /* @__PURE__ */ import_react53.default.createElement("th", { scope: "col" }, "History"), /* @__PURE__ */ import_react53.default.createElement("th", { scope: "col" }, "Stock Pool"), /* @__PURE__ */ import_react53.default.createElement("th", { scope: "col" }, "Amount"))), /* @__PURE__ */ import_react53.default.createElement("tbody", null)), /* @__PURE__ */ import_react53.default.createElement("div", null, tableData));
   }
   var MonkeyTechPage_default = MonkeTech;
 
   // client/components/Intro/IntroPage.jsx
-  var import_react49 = __toESM(require_react(), 1);
+  var import_react54 = __toESM(require_react(), 1);
   function IntroPage() {
-    return /* @__PURE__ */ import_react49.default.createElement(import_react49.default.Fragment, null, /* @__PURE__ */ import_react49.default.createElement("h1", null, " Placeholder "), /* @__PURE__ */ import_react49.default.createElement("h2", null, " Devs "), /* @__PURE__ */ import_react49.default.createElement("div", null, " info about us"));
+    return /* @__PURE__ */ import_react54.default.createElement(import_react54.default.Fragment, null, /* @__PURE__ */ import_react54.default.createElement("h1", null, " Placeholder "), /* @__PURE__ */ import_react54.default.createElement("h2", null, " Devs "), /* @__PURE__ */ import_react54.default.createElement("div", null, " info about us"));
   }
   var IntroPage_default = IntroPage;
 
   // client/components/Setting/SettingsPage.jsx
-  var import_react50 = __toESM(require_react(), 1);
+  var import_react55 = __toESM(require_react(), 1);
 
   // client/components/Setting/dataHelper.js
   function updatePref(Prefs) {
@@ -35441,10 +35959,10 @@
   function SettingsPage(props) {
     const navigate = (0, import_react_router_dom.useNavigate)();
     const { name, setLogIn, setName } = props;
-    const [change, setChange] = import_react50.default.useState(false);
-    const [fontSize, setFontSize] = import_react50.default.useState(12);
-    const [graphColor, setGraphColor] = import_react50.default.useState("Default");
-    const [show, setShow] = import_react50.default.useState(false);
+    const [change, setChange] = import_react55.default.useState(false);
+    const [fontSize, setFontSize] = import_react55.default.useState(12);
+    const [graphColor, setGraphColor] = import_react55.default.useState("Default");
+    const [show, setShow] = import_react55.default.useState(false);
     function handleClose(e) {
       setShow(false);
     }
@@ -35497,9 +36015,9 @@
     }
     let content;
     if (change) {
-      content = /* @__PURE__ */ import_react50.default.createElement(Button_default2, { type: "submit", onClick: handleSubmit }, " Apply");
+      content = /* @__PURE__ */ import_react55.default.createElement(Button_default2, { type: "submit", onClick: handleSubmit }, " Apply");
     }
-    return /* @__PURE__ */ import_react50.default.createElement("div", { className: "px-3", "data-bs-theme": myTheme }, /* @__PURE__ */ import_react50.default.createElement("div", null, /* @__PURE__ */ import_react50.default.createElement("h1", null, "Settings Page"), /* @__PURE__ */ import_react50.default.createElement("h2", null, "This is where the settings will be")), /* @__PURE__ */ import_react50.default.createElement(Row_default, null, /* @__PURE__ */ import_react50.default.createElement("div", null, /* @__PURE__ */ import_react50.default.createElement("p", null, "Theme mode:", /* @__PURE__ */ import_react50.default.createElement("label", null, /* @__PURE__ */ import_react50.default.createElement("input", { type: "radio", name: "settingsRadio", value: "option1" }), "Light Mode"), /* @__PURE__ */ import_react50.default.createElement("label", null, /* @__PURE__ */ import_react50.default.createElement("input", { type: "radio", name: "settingsRadio", value: "option2" }), "Dark Mode")))), /* @__PURE__ */ import_react50.default.createElement(Row_default, null, /* @__PURE__ */ import_react50.default.createElement("label", null, /* @__PURE__ */ import_react50.default.createElement("div", null, "Font size: "), /* @__PURE__ */ import_react50.default.createElement("input", { type: "number", name: "fontSize", value: fontSize, onChange: handleChangeFontSize }))), /* @__PURE__ */ import_react50.default.createElement(Row_default, null, /* @__PURE__ */ import_react50.default.createElement("label", null, /* @__PURE__ */ import_react50.default.createElement("div", null, "Graph Colors: "))), /* @__PURE__ */ import_react50.default.createElement(Row_default, null, /* @__PURE__ */ import_react50.default.createElement("label", null, "Default", /* @__PURE__ */ import_react50.default.createElement("input", { type: "radio", name: "graphColor", value: "Default", checked: true, onChange: handleChangeGraphColor }))), /* @__PURE__ */ import_react50.default.createElement(Row_default, null, /* @__PURE__ */ import_react50.default.createElement("label", null, "Simply Black", /* @__PURE__ */ import_react50.default.createElement("input", { type: "radio", name: "graphColor", value: "Simply Black", onChange: handleChangeGraphColor }))), /* @__PURE__ */ import_react50.default.createElement(Row_default, null, /* @__PURE__ */ import_react50.default.createElement("label", null, "Hot & Cold", /* @__PURE__ */ import_react50.default.createElement("input", { type: "radio", name: "graphColor", value: "Hot & Cold", onChange: handleChangeGraphColor }))), /* @__PURE__ */ import_react50.default.createElement(Row_default, null, /* @__PURE__ */ import_react50.default.createElement("label", null, "Spring", /* @__PURE__ */ import_react50.default.createElement("input", { type: "radio", name: "graphColor", value: "Spring", onChange: handleChangeGraphColor }))), /* @__PURE__ */ import_react50.default.createElement(Row_default, null, /* @__PURE__ */ import_react50.default.createElement(Button_default2, { type: "submit", className: "mt-3", variant: buttonTheme, onClick: handleDelete }, " Delete Account")), /* @__PURE__ */ import_react50.default.createElement(Modal_default2, { show, onHide: handleClose }, /* @__PURE__ */ import_react50.default.createElement(Modal_default2.Header, { closeButton: true }, /* @__PURE__ */ import_react50.default.createElement(Modal_default2.Title, null, "Confirm Delete")), /* @__PURE__ */ import_react50.default.createElement(Modal_default2.Body, null, "All of your account data will be gone reduced to atoms"), /* @__PURE__ */ import_react50.default.createElement(Modal_default2.Footer, null, /* @__PURE__ */ import_react50.default.createElement(Button_default2, { variant: "secondary", onClick: handleClose }, "Cancel"), /* @__PURE__ */ import_react50.default.createElement(Button_default2, { variant: buttonTheme, onClick: confirmDelete }, "Delete"))), /* @__PURE__ */ import_react50.default.createElement(Row_default, null, content));
+    return /* @__PURE__ */ import_react55.default.createElement("div", { className: "px-3", "data-bs-theme": myTheme }, /* @__PURE__ */ import_react55.default.createElement("div", null, /* @__PURE__ */ import_react55.default.createElement("h1", null, "Settings Page"), /* @__PURE__ */ import_react55.default.createElement("h2", null, "This is where the settings will be")), /* @__PURE__ */ import_react55.default.createElement(Row_default, null, /* @__PURE__ */ import_react55.default.createElement("div", null, /* @__PURE__ */ import_react55.default.createElement("p", null, "Theme mode:", /* @__PURE__ */ import_react55.default.createElement("label", null, /* @__PURE__ */ import_react55.default.createElement("input", { type: "radio", name: "settingsRadio", value: "option1" }), "Light Mode"), /* @__PURE__ */ import_react55.default.createElement("label", null, /* @__PURE__ */ import_react55.default.createElement("input", { type: "radio", name: "settingsRadio", value: "option2" }), "Dark Mode")))), /* @__PURE__ */ import_react55.default.createElement(Row_default, null, /* @__PURE__ */ import_react55.default.createElement("label", null, /* @__PURE__ */ import_react55.default.createElement("div", null, "Font size: "), /* @__PURE__ */ import_react55.default.createElement("input", { type: "number", name: "fontSize", value: fontSize, onChange: handleChangeFontSize }))), /* @__PURE__ */ import_react55.default.createElement(Row_default, null, /* @__PURE__ */ import_react55.default.createElement("label", null, /* @__PURE__ */ import_react55.default.createElement("div", null, "Graph Colors: "))), /* @__PURE__ */ import_react55.default.createElement(Row_default, null, /* @__PURE__ */ import_react55.default.createElement("label", null, "Default", /* @__PURE__ */ import_react55.default.createElement("input", { type: "radio", name: "graphColor", value: "Default", checked: true, onChange: handleChangeGraphColor }))), /* @__PURE__ */ import_react55.default.createElement(Row_default, null, /* @__PURE__ */ import_react55.default.createElement("label", null, "Simply Black", /* @__PURE__ */ import_react55.default.createElement("input", { type: "radio", name: "graphColor", value: "Simply Black", onChange: handleChangeGraphColor }))), /* @__PURE__ */ import_react55.default.createElement(Row_default, null, /* @__PURE__ */ import_react55.default.createElement("label", null, "Hot & Cold", /* @__PURE__ */ import_react55.default.createElement("input", { type: "radio", name: "graphColor", value: "Hot & Cold", onChange: handleChangeGraphColor }))), /* @__PURE__ */ import_react55.default.createElement(Row_default, null, /* @__PURE__ */ import_react55.default.createElement("label", null, "Spring", /* @__PURE__ */ import_react55.default.createElement("input", { type: "radio", name: "graphColor", value: "Spring", onChange: handleChangeGraphColor }))), /* @__PURE__ */ import_react55.default.createElement(Row_default, null, /* @__PURE__ */ import_react55.default.createElement(Button_default2, { type: "submit", className: "mt-3", variant: buttonTheme, onClick: handleDelete }, " Delete Account")), /* @__PURE__ */ import_react55.default.createElement(Modal_default2, { show, onHide: handleClose }, /* @__PURE__ */ import_react55.default.createElement(Modal_default2.Header, { closeButton: true }, /* @__PURE__ */ import_react55.default.createElement(Modal_default2.Title, null, "Confirm Delete")), /* @__PURE__ */ import_react55.default.createElement(Modal_default2.Body, null, "All of your account data will be gone reduced to atoms"), /* @__PURE__ */ import_react55.default.createElement(Modal_default2.Footer, null, /* @__PURE__ */ import_react55.default.createElement(Button_default2, { variant: "secondary", onClick: handleClose }, "Cancel"), /* @__PURE__ */ import_react55.default.createElement(Button_default2, { variant: buttonTheme, onClick: confirmDelete }, "Delete"))), /* @__PURE__ */ import_react55.default.createElement(Row_default, null, content));
   }
   SettingsPage.propTypes = {
     name: import_prop_types6.default.string.isRequired,
@@ -35509,14 +36027,14 @@
   var SettingsPage_default = SettingsPage;
 
   // client/components/Stat/StatsPage.jsx
-  var import_react51 = __toESM(require_react(), 1);
+  var import_react56 = __toESM(require_react(), 1);
   function StatsPage() {
-    return /* @__PURE__ */ import_react51.default.createElement("div", null, /* @__PURE__ */ import_react51.default.createElement("div", null, /* @__PURE__ */ import_react51.default.createElement("h1", null, "Stats Page")), /* @__PURE__ */ import_react51.default.createElement("div", null, /* @__PURE__ */ import_react51.default.createElement("p", null, "This is where Stats stuff will go")));
+    return /* @__PURE__ */ import_react56.default.createElement("div", null, /* @__PURE__ */ import_react56.default.createElement("div", null, /* @__PURE__ */ import_react56.default.createElement("h1", null, "Stats Page")), /* @__PURE__ */ import_react56.default.createElement("div", null, /* @__PURE__ */ import_react56.default.createElement("p", null, "This is where Stats stuff will go")));
   }
   var StatsPage_default = StatsPage;
 
   // client/components/SearchPage/MySearchBar.jsx
-  var import_react52 = __toESM(require_react(), 1);
+  var import_react57 = __toESM(require_react(), 1);
 
   // client/components/SearchPage/dataHelper.js
   function retrieveStocks() {
@@ -35537,10 +36055,10 @@
 
   // client/components/SearchPage/MySearchBar.jsx
   var MySearchBar = () => {
-    const [searchInput, setSearchInput] = import_react52.default.useState("");
-    const [stock, setStock] = import_react52.default.useState([]);
-    const [searchResult, setSearchResult] = import_react52.default.useState([""]);
-    import_react52.default.useEffect(() => {
+    const [searchInput, setSearchInput] = import_react57.default.useState("");
+    const [stock, setStock] = import_react57.default.useState([]);
+    const [searchResult, setSearchResult] = import_react57.default.useState([""]);
+    import_react57.default.useEffect(() => {
       const fetchData = () => __async(void 0, null, function* () {
         const stockData = yield retrieveStocks();
         setStock(stockData);
@@ -35574,10 +36092,10 @@
       (thisStock) => {
         k++;
         console.log(thisStock);
-        return /* @__PURE__ */ import_react52.default.createElement(Row_default, { className: "px-3 py-3 pt-1 pb-2", key: k }, " ", thisStock, " ");
+        return /* @__PURE__ */ import_react57.default.createElement(Row_default, { className: "px-3 py-3 pt-1 pb-2", key: k }, " ", thisStock, " ");
       }
     );
-    return /* @__PURE__ */ import_react52.default.createElement(import_react52.default.Fragment, null, /* @__PURE__ */ import_react52.default.createElement(Row_default, { className: "px-3 py-3 pt-1 pb-2 bg-dark" }, /* @__PURE__ */ import_react52.default.createElement(
+    return /* @__PURE__ */ import_react57.default.createElement(import_react57.default.Fragment, null, /* @__PURE__ */ import_react57.default.createElement(Row_default, { className: "px-3 py-3 pt-1 pb-2 bg-dark" }, /* @__PURE__ */ import_react57.default.createElement(
       "input",
       {
         id: "searchForm",
@@ -35591,7 +36109,7 @@
   };
 
   // client/components/Login_Signup/LoginRegisterForm.jsx
-  var import_react53 = __toESM(require_react(), 1);
+  var import_react58 = __toESM(require_react(), 1);
 
   // client/components/Login_Signup/dataHelper.js
   function logIn(userInfo) {
@@ -35649,22 +36167,11 @@
   // client/components/Login_Signup/LoginRegisterForm.jsx
   var import_prop_types7 = __toESM(require_prop_types(), 1);
   var import_react_router_dom2 = __toESM(require_main2(), 1);
-  var myTheme2 = "light";
-  var buttonTheme2 = "outline-dark";
-  var isMidnight2 = true;
-  if (isMidnight2) {
-    myTheme2 = "dark";
-  }
-  if (myTheme2 === "light") {
-    buttonTheme2 = "outline-dark";
-  } else {
-    buttonTheme2 = "outline-light";
-  }
   function LoginCard(props) {
     const navigate = (0, import_react_router_dom2.useNavigate)();
     const { onLogIn } = props;
-    const [name, setName] = import_react53.default.useState("");
-    const [pass, setPass] = import_react53.default.useState("");
+    const [name, setName] = import_react58.default.useState("");
+    const [pass, setPass] = import_react58.default.useState("");
     function handleSubmit(e) {
       return __async(this, null, function* () {
         e.preventDefault();
@@ -35678,21 +36185,21 @@
         }
       });
     }
-    return /* @__PURE__ */ import_react53.default.createElement("div", { "data-bs-theme": myTheme2 }, /* @__PURE__ */ import_react53.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react53.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react53.default.createElement("form", { method: "post", onSubmit: handleSubmit }, /* @__PURE__ */ import_react53.default.createElement("label", null, "Please enter your information to log in."), /* @__PURE__ */ import_react53.default.createElement("label", null, "Username: ", /* @__PURE__ */ import_react53.default.createElement(
+    return /* @__PURE__ */ import_react58.default.createElement("div", null, /* @__PURE__ */ import_react58.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react58.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react58.default.createElement("form", { method: "post", onSubmit: handleSubmit }, /* @__PURE__ */ import_react58.default.createElement("label", null, "Please enter your information to log in."), /* @__PURE__ */ import_react58.default.createElement("label", null, "Username: ", /* @__PURE__ */ import_react58.default.createElement(
       "input",
       {
         name: "username",
         value: name,
         onChange: (e) => setName(e.target.value)
       }
-    )), /* @__PURE__ */ import_react53.default.createElement("label", null, "Password: ", /* @__PURE__ */ import_react53.default.createElement(
+    )), /* @__PURE__ */ import_react58.default.createElement("label", null, "Password: ", /* @__PURE__ */ import_react58.default.createElement(
       "input",
       {
         name: "password",
         value: pass,
         onChange: (e) => setPass(e.target.value)
       }
-    )), /* @__PURE__ */ import_react53.default.createElement("label", null, /* @__PURE__ */ import_react53.default.createElement(Button_default2, { type: "submit", className: "mt-3", variant: buttonTheme2 }, "Log In"))), /* @__PURE__ */ import_react53.default.createElement("div", { className: "mt-3" }, /* @__PURE__ */ import_react53.default.createElement(import_react_router_dom2.Link, { to: "/signup", className: ".p-3" }, "Don't have an account? Sign Up!"), /* @__PURE__ */ import_react53.default.createElement("br", null), /* @__PURE__ */ import_react53.default.createElement(import_react_router_dom2.Link, { to: "/forgotPassword" }, "Forgot Password?")))));
+    )), /* @__PURE__ */ import_react58.default.createElement("label", null, /* @__PURE__ */ import_react58.default.createElement(Button_default2, { type: "submit", className: "mt-3 center" }, "Log In"))), /* @__PURE__ */ import_react58.default.createElement("div", { className: "mt-3" }, /* @__PURE__ */ import_react58.default.createElement(import_react_router_dom2.Link, { to: "/signup", className: ".p-3" }, "Don't have an account? Sign Up!"), /* @__PURE__ */ import_react58.default.createElement("br", null), /* @__PURE__ */ import_react58.default.createElement(import_react_router_dom2.Link, { to: "/forgotPassword" }, "Forgot Password?")))));
   }
   LoginCard.propTypes = {
     onLogIn: import_prop_types7.default.func
@@ -35700,27 +36207,17 @@
   var LoginRegisterForm_default = LoginCard;
 
   // client/components/Login_Signup/SignUpRegisterForm.jsx
-  var import_react54 = __toESM(require_react(), 1);
+  var import_react59 = __toESM(require_react(), 1);
   var import_prop_types8 = __toESM(require_prop_types(), 1);
-  var myTheme3 = "light";
-  var buttonTheme3 = "outline-dark";
-  var isMidnight3 = true;
-  if (isMidnight3) {
-    myTheme3 = "dark";
-  }
-  if (myTheme3 === "light") {
-    buttonTheme3 = "outline-dark";
-  } else {
-    buttonTheme3 = "outline-light";
-  }
+  var import_react_router_dom3 = __toESM(require_main2(), 1);
   function SignUpCard(props) {
     const { onSignUp } = props;
-    const [newUsername, setNewUsername] = import_react54.default.useState("");
-    const [newPassword, setNewPassword] = import_react54.default.useState("");
-    const [newFirstName, setNewFirstName] = import_react54.default.useState("");
-    const [newLastName, setNewLastName] = import_react54.default.useState("");
-    const [newGmail, setNewGmail] = import_react54.default.useState("");
-    const [confirmPass, setConfirmPass] = import_react54.default.useState("");
+    const [newUsername, setNewUsername] = import_react59.default.useState("");
+    const [newPassword, setNewPassword] = import_react59.default.useState("");
+    const [newFirstName, setNewFirstName] = import_react59.default.useState("");
+    const [newLastName, setNewLastName] = import_react59.default.useState("");
+    const [newGmail, setNewGmail] = import_react59.default.useState("");
+    const [confirmPass, setConfirmPass] = import_react59.default.useState("");
     function handleSubmit(e) {
       return __async(this, null, function* () {
         e.preventDefault();
@@ -35741,49 +36238,49 @@
         }
       });
     }
-    return /* @__PURE__ */ import_react54.default.createElement("div", { "data-bs-theme": myTheme3 }, /* @__PURE__ */ import_react54.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react54.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react54.default.createElement("form", { method: "post", onSubmit: handleSubmit }, /* @__PURE__ */ import_react54.default.createElement("label", null, "Please enter your information to create a new account."), /* @__PURE__ */ import_react54.default.createElement("label", null, "First Name: ", /* @__PURE__ */ import_react54.default.createElement(
+    return /* @__PURE__ */ import_react59.default.createElement("div", null, /* @__PURE__ */ import_react59.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react59.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react59.default.createElement("form", { method: "post", onSubmit: handleSubmit }, /* @__PURE__ */ import_react59.default.createElement("label", null, "Please enter your information to create a new account."), /* @__PURE__ */ import_react59.default.createElement("label", null, "First Name: ", /* @__PURE__ */ import_react59.default.createElement(
       "input",
       {
         name: "firstName",
         value: newFirstName,
         onChange: (e) => setNewFirstName(e.target.value)
       }
-    )), /* @__PURE__ */ import_react54.default.createElement("label", null, "Last Name: ", /* @__PURE__ */ import_react54.default.createElement(
+    )), /* @__PURE__ */ import_react59.default.createElement("label", null, "Last Name: ", /* @__PURE__ */ import_react59.default.createElement(
       "input",
       {
         name: "lastName",
         value: newLastName,
         onChange: (e) => setNewLastName(e.target.value)
       }
-    )), /* @__PURE__ */ import_react54.default.createElement("label", null, "Gmail: ", /* @__PURE__ */ import_react54.default.createElement("br", null), /* @__PURE__ */ import_react54.default.createElement(
+    )), /* @__PURE__ */ import_react59.default.createElement("label", null, "Gmail: ", /* @__PURE__ */ import_react59.default.createElement("br", null), /* @__PURE__ */ import_react59.default.createElement(
       "input",
       {
         name: "gmail",
         value: newGmail,
         onChange: (e) => setNewGmail(e.target.value)
       }
-    )), /* @__PURE__ */ import_react54.default.createElement("label", null, "Username: ", /* @__PURE__ */ import_react54.default.createElement(
+    )), /* @__PURE__ */ import_react59.default.createElement("label", null, "Username: ", /* @__PURE__ */ import_react59.default.createElement(
       "input",
       {
         name: "username",
         value: newUsername,
         onChange: (e) => setNewUsername(e.target.value)
       }
-    )), /* @__PURE__ */ import_react54.default.createElement("label", null, "Password: ", /* @__PURE__ */ import_react54.default.createElement(
+    )), /* @__PURE__ */ import_react59.default.createElement("label", null, "Password: ", /* @__PURE__ */ import_react59.default.createElement(
       "input",
       {
         name: "password",
         value: newPassword,
         onChange: (e) => setNewPassword(e.target.value)
       }
-    )), /* @__PURE__ */ import_react54.default.createElement("label", null, "Confirm Password: ", /* @__PURE__ */ import_react54.default.createElement(
+    )), /* @__PURE__ */ import_react59.default.createElement("label", null, "Confirm Password: ", /* @__PURE__ */ import_react59.default.createElement(
       "input",
       {
         name: "confirm_password",
         value: confirmPass,
         onChange: (e) => setConfirmPass(e.target.value)
       }
-    )), /* @__PURE__ */ import_react54.default.createElement("label", null, /* @__PURE__ */ import_react54.default.createElement(Button_default2, { type: "submit", className: "mt-3", variant: buttonTheme3 }, "Sign Up"))))));
+    )), /* @__PURE__ */ import_react59.default.createElement("label", null, /* @__PURE__ */ import_react59.default.createElement(Button_default2, { type: "submit", className: "mt-3" }, "Sign Up"))), /* @__PURE__ */ import_react59.default.createElement("div", { className: "mt-3" }, /* @__PURE__ */ import_react59.default.createElement(import_react_router_dom3.Link, { to: "/login", className: ".p-3" }, "Already have an account? Login!")))));
   }
   SignUpCard.propTypes = {
     onSignUp: import_prop_types8.default.func
@@ -35791,73 +36288,34 @@
   var SignUpRegisterForm_default = SignUpCard;
 
   // client/components/Tut/TutorialPage.jsx
-  var import_react55 = __toESM(require_react(), 1);
+  var import_react60 = __toESM(require_react(), 1);
   function tPage() {
-    return /* @__PURE__ */ import_react55.default.createElement(import_react55.default.Fragment, null, /* @__PURE__ */ import_react55.default.createElement("div", null, "This is where I'd put images for the tutorial"), /* @__PURE__ */ import_react55.default.createElement("div", null, /* @__PURE__ */ import_react55.default.createElement("h1", null, "Home Page"), /* @__PURE__ */ import_react55.default.createElement("p", null, "This is the landing page for the website. It displays a few random stocks"), /* @__PURE__ */ import_react55.default.createElement("h1", null, "Statistics"), /* @__PURE__ */ import_react55.default.createElement("p", null, "This has a more in depth table of stocks"), /* @__PURE__ */ import_react55.default.createElement("h1", null, "Monkey Technology"), /* @__PURE__ */ import_react55.default.createElement("p", null, "This page explains things about the monkey algorithm"), /* @__PURE__ */ import_react55.default.createElement("h1", null, "About Us"), /* @__PURE__ */ import_react55.default.createElement("p", null, "This page explains about what why we are doing what we are doing"), /* @__PURE__ */ import_react55.default.createElement("h1", null, "Settings"), /* @__PURE__ */ import_react55.default.createElement("p", null, "This is where a user can change different settings to change the way the website looks"), /* @__PURE__ */ import_react55.default.createElement("h1", null, "Tutorial"), /* @__PURE__ */ import_react55.default.createElement("p", null, "you are here"), /* @__PURE__ */ import_react55.default.createElement("h1", null, "Login"), /* @__PURE__ */ import_react55.default.createElement("p", null, "This is where you can login in  to your account for personalized stats"), /* @__PURE__ */ import_react55.default.createElement("h1", null, "Sign Up"), /* @__PURE__ */ import_react55.default.createElement("p", null, "this is where you can sign up for an account"), /* @__PURE__ */ import_react55.default.createElement("h1", null, "Dark Mode"), /* @__PURE__ */ import_react55.default.createElement("p", null, "This button will switch the colors of the website to a darker color set")));
+    return /* @__PURE__ */ import_react60.default.createElement(import_react60.default.Fragment, null, /* @__PURE__ */ import_react60.default.createElement("div", null, /* @__PURE__ */ import_react60.default.createElement(Container_default, null, /* @__PURE__ */ import_react60.default.createElement(Row_default, null, /* @__PURE__ */ import_react60.default.createElement(Col_default, null, /* @__PURE__ */ import_react60.default.createElement(Accordion_default, { defaultActiveKey: "0" }, /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Item, { eventKey: "0" }, /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Header, null, /* @__PURE__ */ import_react60.default.createElement(BsQuestionCircle, null)), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Body, null, "This is a tutorial that briefly explains elememts and pages on this website.")), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Item, { eventKey: "1" }, /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Header, null, "Home"), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Body, null, "This is the landing page for all visitors.")), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Item, { eventKey: "2" }, /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Header, null, "Stats"), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Body, null, "This page has a more indepth overview of the stocks that are being evaluated on the website")), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Item, { eventKey: "3" }, /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Header, null, "Monkey Technology"), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Body, null, "This page describes the algorithm that we used to take the position of the monkeys and translate it into stock descisions.")), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Item, { eventKey: "4" }, /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Header, null, "Log In"), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Body, null, "This is where you log in to your account")), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Item, { eventKey: "6" }, /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Header, null, "Sign In"), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Body, null, "This is where you can create an account that allows you to track specific stocks and add them to your portfolio")), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Item, { eventKey: "7" }, /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Header, null, "Settings"), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Body, null, "This is where you can change different visual elements of the website. In order for the changes to stay between sessions, you must create an account or log in to an already existing account.")), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Item, { eventKey: "8" }, /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Header, null, /* @__PURE__ */ import_react60.default.createElement(BsBrightnessHigh, null)), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Body, null, "This Dark mode button toggles the entire website into a color scheme that is easier on the eye when studying the screen in a darkend environment."))))))));
   }
   var TutorialPage_default = tPage;
 
   // client/components/Error/Error.jsx
-  var import_react56 = __toESM(require_react(), 1);
+  var import_react61 = __toESM(require_react(), 1);
   function Error2() {
-    return /* @__PURE__ */ import_react56.default.createElement("div", null, /* @__PURE__ */ import_react56.default.createElement("h1", null, "Error"), /* @__PURE__ */ import_react56.default.createElement("p", null, "The URL you have entered does not link to a page."));
+    return /* @__PURE__ */ import_react61.default.createElement("div", null, /* @__PURE__ */ import_react61.default.createElement("h1", null, "Error"), /* @__PURE__ */ import_react61.default.createElement("p", null, "The URL you have entered does not link to a page."));
   }
 
   // client/components/ResetPassword/ResetPassword.jsx
-  var import_react57 = __toESM(require_react(), 1);
-
-  // client/mbdataHelper.js
-  function resetPassword(accessKey, username, password, passwordConfirm) {
-    return __async(this, null, function* () {
-      try {
-        const response = yield fetch("http://localhost:3000/api/resetPassword", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ accessKey, username, password, passwordConfirm })
-        });
-        if (response.status >= 400) {
-          throw new Error(`Request failed with response code ${response.status}`);
-        }
-        return true;
-      } catch (err) {
-        console.error("Failed to reset password");
-        console.error(err);
-        return false;
-      }
-    });
-  }
-  function forgotPassword(username, email) {
-    return __async(this, null, function* () {
-      try {
-        const response = yield fetch("http://localhost:3000/api/forgotPassword", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ username, email })
-        });
-        if (response.status >= 400) {
-          throw new Error(`Request failed with response code ${response.status}`);
-        }
-        return true;
-      } catch (err) {
-        console.error("Failed to reset password");
-        console.error(err);
-        return false;
-      }
-    });
-  }
-
-  // client/components/ResetPassword/ResetPassword.jsx
+  var import_react62 = __toESM(require_react(), 1);
   var import_prop_types9 = __toESM(require_prop_types(), 1);
-  var import_react_router_dom3 = __toESM(require_main2(), 1);
   function ResetPassword(props) {
-    const { accessKey } = (0, import_react_router_dom3.default)();
-    const [username, setUsername] = (0, import_react57.useState)("");
-    const [password, setPassword] = (0, import_react57.useState)("");
-    const [confirmPassword, setConfirmPassword] = (0, import_react57.useState)("");
+    const accessKey = props.accessKey;
+    const [username, setUsername] = (0, import_react62.useState)("");
+    const [password, setPassword] = (0, import_react62.useState)("");
+    const [confirmPassword, setConfirmPassword] = (0, import_react62.useState)("");
+    const [success, setSuccess] = (0, import_react62.useState)(false);
+    const [show, setShow] = (0, import_react62.useState)(false);
+    const [showNoMatch, setShowNoMatch] = (0, import_react62.useState)(false);
+    const handleShowNoMatch = () => setShowNoMatch(true);
+    const handleShow = () => setShow(true);
+    const handleClose = () => setShow(false);
+    const onSuccessMessage = "Password reset successfully";
+    const onFailMessage = "Failed to reset password";
     const handleUsernameChange = (e) => {
       setUsername(e.target.value);
     };
@@ -35870,16 +36328,22 @@
     const handleSubmit = (e) => __async(this, null, function* () {
       e.preventDefault();
       if (password !== confirmPassword) {
-        Alert_default("Passwords don't match");
+        handleShowNoMatch();
       } else {
         try {
-          yield resetPassword(accessKey, username, password, confirmPassword);
+          const fetchResetPassword = yield resetPassword(accessKey, username, password, confirmPassword);
+          if (fetchResetPassword) {
+            setSuccess(true);
+          } else {
+            setSuccess(false);
+          }
+          handleShow();
         } catch (error) {
           console.log(error);
         }
       }
     });
-    return /* @__PURE__ */ import_react57.default.createElement("form", { onSubmit: handleSubmit }, /* @__PURE__ */ import_react57.default.createElement("label", null, "Username:", /* @__PURE__ */ import_react57.default.createElement("input", { type: "text", value: username, onChange: handleUsernameChange })), /* @__PURE__ */ import_react57.default.createElement("label", null, "New Password:", /* @__PURE__ */ import_react57.default.createElement("input", { type: "password", value: password, onChange: handlePasswordChange })), /* @__PURE__ */ import_react57.default.createElement("br", null), /* @__PURE__ */ import_react57.default.createElement("label", null, "Confirm Password:", /* @__PURE__ */ import_react57.default.createElement("input", { type: "password", value: confirmPassword, onChange: handleConfirmPasswordChange })), /* @__PURE__ */ import_react57.default.createElement("br", null), /* @__PURE__ */ import_react57.default.createElement("button", { type: "submit" }, "Reset Password"));
+    return /* @__PURE__ */ import_react62.default.createElement(import_react62.default.Fragment, null, /* @__PURE__ */ import_react62.default.createElement(Alert_default, { show: showNoMatch, variant: "danger", onClose: handleClose, dismissible: true }, /* @__PURE__ */ import_react62.default.createElement("p", null, "Passwords do not match!")), /* @__PURE__ */ import_react62.default.createElement(Alert_default, { show, variant: success ? "success" : "danger", onClose: handleClose, dismissible: true }, /* @__PURE__ */ import_react62.default.createElement(Alert_default.Heading, null, "Reset Password"), /* @__PURE__ */ import_react62.default.createElement("p", null, success ? onSuccessMessage : onFailMessage)), /* @__PURE__ */ import_react62.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react62.default.createElement(Card_default.Header, { className: "fw-bold" }, "Reset Password"), /* @__PURE__ */ import_react62.default.createElement(CardBody_default, null, /* @__PURE__ */ import_react62.default.createElement("form", { onSubmit: handleSubmit }, /* @__PURE__ */ import_react62.default.createElement("div", null, "accessKey: ", accessKey), /* @__PURE__ */ import_react62.default.createElement("label", { className: "m-3" }, "Username:", /* @__PURE__ */ import_react62.default.createElement("input", { type: "text", value: username, onChange: handleUsernameChange })), /* @__PURE__ */ import_react62.default.createElement("label", { className: "m-3" }, "New Password:", /* @__PURE__ */ import_react62.default.createElement("input", { type: "password", value: password, onChange: handlePasswordChange })), /* @__PURE__ */ import_react62.default.createElement("br", null), /* @__PURE__ */ import_react62.default.createElement("label", { className: "m-3" }, "Confirm New Password:", /* @__PURE__ */ import_react62.default.createElement("input", { type: "password", value: confirmPassword, onChange: handleConfirmPasswordChange })), /* @__PURE__ */ import_react62.default.createElement("br", null), /* @__PURE__ */ import_react62.default.createElement("button", { className: "m-3", type: "submit" }, "Reset Password")))));
   }
   ResetPassword.propTypes = {
     accessKey: import_prop_types9.default.string,
@@ -35892,12 +36356,13 @@
   var ResetPassword_default = ResetPassword;
 
   // client/components/ForgotPassword/ForgotPassword.jsx
-  var import_react58 = __toESM(require_react(), 1);
+  var import_react63 = __toESM(require_react(), 1);
+  var import_react_router_dom4 = __toESM(require_main2(), 1);
   function ForgotPassword() {
-    const [username, setUsername] = (0, import_react58.useState)("");
-    const [email, setEmail] = (0, import_react58.useState)("");
-    const [success, setSuccess] = (0, import_react58.useState)(false);
-    const [show, setShow] = (0, import_react58.useState)(false);
+    const [username, setUsername] = (0, import_react63.useState)("");
+    const [email, setEmail] = (0, import_react63.useState)("");
+    const [success, setSuccess] = (0, import_react63.useState)(false);
+    const [show, setShow] = (0, import_react63.useState)(false);
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
     const onSuccessMessage = "Email sent";
@@ -35918,19 +36383,19 @@
       }
       handleShow();
     });
-    return /* @__PURE__ */ import_react58.default.createElement(import_react58.default.Fragment, null, /* @__PURE__ */ import_react58.default.createElement(Alert_default, { show, variant: success ? "success" : "danger", onClose: handleClose, dismissible: true }, /* @__PURE__ */ import_react58.default.createElement(Alert_default.Heading, null, "Reset Password"), /* @__PURE__ */ import_react58.default.createElement("p", null, success ? onSuccessMessage : onFailMessage)), /* @__PURE__ */ import_react58.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react58.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react58.default.createElement("form", { onSubmit: handleSubmit }, /* @__PURE__ */ import_react58.default.createElement("label", { className: "m-3" }, "Username:", /* @__PURE__ */ import_react58.default.createElement("input", { type: "text", value: username, onChange: handleUsernameChange })), /* @__PURE__ */ import_react58.default.createElement("label", { className: "m-3" }, "Email:", /* @__PURE__ */ import_react58.default.createElement("input", { type: "text", value: email, onChange: handleEmailChange })), /* @__PURE__ */ import_react58.default.createElement("br", null), /* @__PURE__ */ import_react58.default.createElement(Button_default2, { type: "submit" }, "Send Email")))));
+    return /* @__PURE__ */ import_react63.default.createElement(import_react63.default.Fragment, null, /* @__PURE__ */ import_react63.default.createElement(Alert_default, { show, variant: success ? "success" : "danger", onClose: handleClose, dismissible: true }, /* @__PURE__ */ import_react63.default.createElement(Alert_default.Heading, null, "Reset Password"), /* @__PURE__ */ import_react63.default.createElement("p", null, success ? onSuccessMessage : onFailMessage)), /* @__PURE__ */ import_react63.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react63.default.createElement(Card_default.Header, null, "Forgot Password"), /* @__PURE__ */ import_react63.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react63.default.createElement("form", { onSubmit: handleSubmit }, /* @__PURE__ */ import_react63.default.createElement("label", { className: "m-3" }, "Username:", /* @__PURE__ */ import_react63.default.createElement("input", { type: "text", value: username, onChange: handleUsernameChange })), /* @__PURE__ */ import_react63.default.createElement("label", { className: "m-3" }, "Email:", /* @__PURE__ */ import_react63.default.createElement("input", { type: "text", value: email, onChange: handleEmailChange })), /* @__PURE__ */ import_react63.default.createElement("br", null), /* @__PURE__ */ import_react63.default.createElement("div", { className: "row-5" }, /* @__PURE__ */ import_react63.default.createElement(import_react_router_dom4.Link, { to: "/login" }, /* @__PURE__ */ import_react63.default.createElement(Button_default2, { variant: "secondary" }, "Back to Login")), /* @__PURE__ */ import_react63.default.createElement(Button_default2, { type: "submit" }, "Send Email"))))));
   }
 
   // client/components/App.jsx
   function App() {
-    const location = (0, import_react_router_dom4.useLocation)();
+    const location = (0, import_react_router_dom5.useLocation)();
     const { hash, pathname, search } = location;
-    const [darkMode, setDarkMode] = import_react59.default.useState(false);
+    const [darkMode, setDarkMode] = import_react64.default.useState(false);
     const handleDarkMode = () => {
       setDarkMode(!darkMode);
     };
-    const [username, setUsername] = import_react59.default.useState("");
-    const [logInStatus, setLogInStatus] = import_react59.default.useState(false);
+    const [username, setUsername] = import_react64.default.useState("");
+    const [logInStatus, setLogInStatus] = import_react64.default.useState(false);
     function onLogInChange(username2) {
       setUsername(username2);
       setLogInStatus(true);
@@ -35938,21 +36403,22 @@
     const theme = darkMode ? "dark" : "light";
     document.getElementById("html").setAttribute("data-bs-theme", darkMode ? "dark" : "light");
     console.log(darkMode);
-    return /* @__PURE__ */ import_react59.default.createElement(import_react59.default.Fragment, null, /* @__PURE__ */ import_react59.default.createElement("div", { "data-bs-theme": theme }, /* @__PURE__ */ import_react59.default.createElement(MyNavBar, { loggedIn: logInStatus, mode: theme, "data-bs-theme": theme, handleTheme: handleDarkMode, isDark: darkMode }), /* @__PURE__ */ import_react59.default.createElement(import_react_router_dom4.Routes, null, /* @__PURE__ */ import_react59.default.createElement(import_react_router_dom4.Route, { path: "/", exact: true, element: /* @__PURE__ */ import_react59.default.createElement(HomePage_default, { theme, name: username, status: logInStatus }) }), /* @__PURE__ */ import_react59.default.createElement(import_react_router_dom4.Route, { path: "/login", element: /* @__PURE__ */ import_react59.default.createElement(LoginRegisterForm_default, { onLogIn: onLogInChange }) }), /* @__PURE__ */ import_react59.default.createElement(import_react_router_dom4.Route, { path: "/about", Component: IntroPage_default }), /* @__PURE__ */ import_react59.default.createElement(import_react_router_dom4.Route, { path: "/signup", element: /* @__PURE__ */ import_react59.default.createElement(SignUpRegisterForm_default, { onSignUp: onLogInChange }) }), /* @__PURE__ */ import_react59.default.createElement(import_react_router_dom4.Route, { path: "/monkeyTech", Component: MonkeyTechPage_default }), /* @__PURE__ */ import_react59.default.createElement(import_react_router_dom4.Route, { path: "/setting", element: /* @__PURE__ */ import_react59.default.createElement(
+    const accessKey = search.substring(11, search.length);
+    return /* @__PURE__ */ import_react64.default.createElement(import_react64.default.Fragment, null, /* @__PURE__ */ import_react64.default.createElement("div", { "data-bs-theme": theme }, /* @__PURE__ */ import_react64.default.createElement(MyNavBar, { loggedIn: logInStatus, mode: theme, "data-bs-theme": theme, handleTheme: handleDarkMode, isDark: darkMode }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Routes, null, /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/", exact: true, element: /* @__PURE__ */ import_react64.default.createElement(HomePage_default, { theme, name: username, status: logInStatus }) }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/login", element: /* @__PURE__ */ import_react64.default.createElement(LoginRegisterForm_default, { onLogIn: onLogInChange }) }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/about", Component: IntroPage_default }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/signup", element: /* @__PURE__ */ import_react64.default.createElement(SignUpRegisterForm_default, { onSignUp: onLogInChange }) }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/monkeyTech", Component: MonkeyTechPage_default }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/setting", element: /* @__PURE__ */ import_react64.default.createElement(
       SettingsPage_default,
       {
         name: username,
         setLogIn: setLogInStatus,
         setName: setUsername
       }
-    ) }), /* @__PURE__ */ import_react59.default.createElement(import_react_router_dom4.Route, { path: "/stats", Component: StatsPage_default }), /* @__PURE__ */ import_react59.default.createElement(import_react_router_dom4.Route, { path: "/search", Component: MySearchBar }), /* @__PURE__ */ import_react59.default.createElement(import_react_router_dom4.Route, { path: "/TutorialPage", Component: TutorialPage_default }), /* @__PURE__ */ import_react59.default.createElement(import_react_router_dom4.Route, { path: "/resetPassword/:accessKey", Component: ResetPassword_default }), /* @__PURE__ */ import_react59.default.createElement(import_react_router_dom4.Route, { path: "/resetPassword/*", Component: ResetPassword_default }), /* @__PURE__ */ import_react59.default.createElement(import_react_router_dom4.Route, { path: "/resetPassword", Component: ResetPassword_default }), /* @__PURE__ */ import_react59.default.createElement(import_react_router_dom4.Route, { path: "/forgotPassword", Component: ForgotPassword }), /* @__PURE__ */ import_react59.default.createElement(import_react_router_dom4.Route, { path: "*", Component: Error2 })), "Pathname: ", /* @__PURE__ */ import_react59.default.createElement("b", null, pathname), /* @__PURE__ */ import_react59.default.createElement("br", null), "Search params: ", /* @__PURE__ */ import_react59.default.createElement("b", null, search), /* @__PURE__ */ import_react59.default.createElement("br", null), "Hash: ", /* @__PURE__ */ import_react59.default.createElement("b", null, hash)));
+    ) }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/stats", Component: StatsPage_default }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/search", Component: MySearchBar }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/TutorialPage", Component: TutorialPage_default }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/resetPassword", element: /* @__PURE__ */ import_react64.default.createElement(ResetPassword_default, { accessKey, darkMode }) }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/forgotPassword", element: /* @__PURE__ */ import_react64.default.createElement(ForgotPassword, { darkMode }) }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "*", Component: Error2 }))));
   }
 
   // client/main.jsx
-  var import_react_router_dom5 = __toESM(require_main2(), 1);
+  var import_react_router_dom6 = __toESM(require_main2(), 1);
   var root = (0, import_client.createRoot)(document.getElementById("root"));
   root.render(
-    /* @__PURE__ */ import_react60.default.createElement(import_react_router_dom5.BrowserRouter, null, /* @__PURE__ */ import_react60.default.createElement(App, null))
+    /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom6.BrowserRouter, null, /* @__PURE__ */ import_react65.default.createElement(App, null))
     // <SignupPage/>
     // <LoginPage/>
     // <IntroPage/>

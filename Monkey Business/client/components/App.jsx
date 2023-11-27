@@ -31,6 +31,8 @@ export default function App () {
   const theme = (darkMode ? 'dark' : 'light')
   document.getElementById('html').setAttribute('data-bs-theme', darkMode ? 'dark' : 'light')
   console.log(darkMode)
+  //-------------------------------------------------------------
+  const accessKey = search.substring(11, search.length)
   return (
     <React.Fragment>
 
@@ -54,19 +56,21 @@ export default function App () {
             <Route path = "/stats" Component = {StatsPage}/>
             <Route path = "/search" Component = {MySearchBar}/>
             <Route path="/TutorialPage" Component={tPage}/>
-            <Route path="/resetPassword/:accessKey" Component={ResetPassword}/>
-            <Route path="/resetPassword/*" Component={ResetPassword}/>
-            <Route path="/resetPassword" Component={ResetPassword}/>
-            <Route path="/forgotPassword" Component={ForgotPassword}/>
+            <Route path="/resetPassword" element={<ResetPassword accessKey={accessKey} darkMode={darkMode} />}>
+            </Route>
+
+            <Route path="/forgotPassword" element={<ForgotPassword darkMode={darkMode} />}/>
 
             <Route path = "*" Component = {Error}/>
 
         </Routes>
-        Pathname: <b>{pathname}</b><br />
-        Search params: <b>{search}</b><br />
-        Hash: <b>{hash}</b>
       </div>
 
     </React.Fragment>
   )
 }
+/*
+Pathname: <b>{pathname}</b><br />
+Search params: <b>{search}</b><br />
+Hash: <b>{hash}</b>
+*/
