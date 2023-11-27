@@ -28,9 +28,6 @@ export async function getMonkeyPosition (url, segments) {
       index = index+1;
       i = j + 1;
     }
-    //var space = result.indexOf(' ', i);
-    //const coord = {x: result.substring(i, space), y: result.substring(space), (result.length - 1)};
-    //coordSpace[index] = coord;
   })
   ls.stderr.on('data', (data) => {
     console.error(`stderr: ${data}`)
