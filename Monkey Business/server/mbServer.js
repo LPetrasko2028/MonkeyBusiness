@@ -4,19 +4,22 @@ import { getMonkeyPosition } from './services/callPythonScripts.js'
 import session from 'express-session'
 import mongoose from 'mongoose'
 import MongoStore from 'connect-mongo'
-// import { url } from './config/database.js'
-import Mongo from './data/mongoController.js'
+import { Mongo, url } from './data/mongoController.js'
+import MongoDBStore from 'connect-mongodb-session'
+import path from 'path'
 
 import schedule from 'node-schedule'
 
 const store = new session.MemoryStore()
+path.__dirname = path.resolve(path.dirname('./public/index.html'))
+
 
 const PORT = 3000
 const app = new Express()
 
 app.use(Express.json())
 
-// create client connection to mongoDB to use in session store
+//create client connection to mongoDB to use in session store
 // const client = await mongoose.connect(url, {
 //   useNewUrlParser: true,
 //   useUnifiedTopology: true
@@ -30,6 +33,15 @@ app.use(Express.json())
 //   httpOnly: true,
 //   resave: false,
 //   secret: 'secret'
+// }
+// mongoose.connect(url, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true
+// })
+// const mongoStore = new MongoDBStore({
+//   uri: url,
+//   collection: 'Sessions'
+// })
 
 // } // later put the secret in .env file and make it more secure
 const sessionOptions = {
@@ -50,11 +62,18 @@ app.use((req, res, next) => {
   next()
 })
 // Statically serve the public folder
-app.use(Express.static('./public'))
-
-
+app.use(Express.static(path.join('./public')))
 
 app.use('/api', dataRouter)
+
+app.get('resetPassword/*', (req, res) => {
+  console.log('resetPassword')
+  res.sendFile(path.join(__dirname, 'public/index.html'))
+})
+
+app.get('*', (req, res) => {
+  res.sendFile('index.html', { root: './public' })
+})
 
 app.listen(PORT, () => {
   console.log(`Server is running on port http://localhost:${PORT}`)
