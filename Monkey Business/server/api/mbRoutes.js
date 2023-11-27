@@ -3,7 +3,10 @@ import { validationErrorMiddleware, validator, loginSchema, signupSchema, stockS
 
 import { updateMonkey, getMonkeyInvestments, getMonkeyHistory } from './../services/monkeyServices.js'
 import { getInvestorStocks, searchForStock, updateStockCount, getStockInfo, getUserMarketData } from './../services/stockServices.js'
-import { login, signup, logout, updatePreferences, deleteUser, getPreferences, getAccountDetails } from './../services/userServices.js'
+import { login, signup, logout, updatePreferences, getPreferences, deleteUser, getAccountDetails } from './../services/userServices.js'
+
+import { isAuthenticated } from '../middleware/authentication.js'
+import { getAccountDetails, updateAccount, forgotPassword } from './../services/accountServices.js'
 
 const dataRouter = new Express.Router()
 
@@ -17,11 +20,18 @@ dataRouter.get('/stockDetails', getStockInfo)
 dataRouter.post('/stockChange', updateStockCount)
 dataRouter.post('/userMarketData', getUserMarketData)
 
-// ------------------------------------ User Routes ------------------------------------
-dataRouter.post('/login', validator.validate({ body: loginSchema }), Express.urlencoded({ extended: false }), login) // open
+// ------------------------------------ Auth Routes ------------------------------------
+dataRouter.post('/login', validator.validate({ body: loginSchema }), login) // open
 dataRouter.get('/logout', logout) // open to only logged in users
 dataRouter.post('/signup', validator.validate({ body: signupSchema }), signup) // open
+dataRouter.post('/forgotPassword', forgotPassword)
+
+// ------------------------------------ User Routes ------------------------------------
+dataRouter.get('/account', isAuthenticated, getAccountDetails)
 dataRouter.delete('/account/:username', deleteUser) // corresponding user or admin can delete account
+dataRouter.post('/account', updateAccount) // corresponding user can update account
+
+dataRouter.get('/preferences', getPreferences) // corresponding user can get preferences
 dataRouter.post('/preferences', updatePreferences) // corresponding user can update preferences
 dataRouter.get('/preferences', getPreferences)
 dataRouter.get('/accountDetails', getAccountDetails)
