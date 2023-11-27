@@ -30,7 +30,7 @@ export async function getMonkeyStocks (req, res) {
 }
 
 export async function getMonkeyHistory (req, res) {
-  const username = req.session.username
+  const username = req.body.username
   queryMongoDatabase(async db => {
     const data = await db.collection('Monkey').find({ username }, { projection: { _id: 0 } })
     if ((await db.collection('Monkey').countDocuments({ username })) < 1) {

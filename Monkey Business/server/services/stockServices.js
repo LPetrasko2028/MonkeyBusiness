@@ -1,5 +1,5 @@
 import queryMongoDatabase from '../data/mongoController.js'
-import { getStockShort, getStockDetails, searchStockAPI } from './callPythonScripts.js'
+import { getStockShort, getStockDetails, searchStockAPI, GetCompareData } from './callPythonScripts.js'
 
 export async function getStockInfo (req, res) {
   const stockName = req.body.stockName
@@ -180,5 +180,31 @@ export async function updateStockCount (req, res) {
         }
       }
     }
+  }, 'MonkeyBusinessWebApp')
+}
+
+export async function getUserMarketData (req, res) {
+  const username = req.body.username
+  let stockArr = []
+  //query database to get the user's stock pool
+  queryMongoDatabase( async db=> {
+    const data = await db.collection('Investor').findOne({ username })
+    const numDocs = await db.collection('Investor').countDocuments({ username })
+    if(numDocs === null) {
+      res.status(404).json({error: true, message: 'Investor Account Not Found'})
+    }
+    for(const stock of data.stocks) {
+      stockArr.push(stock[0])
+    }
+    
+    //call python script to grab stock data from stockArr names
+    try {
+      //console.log(stockArr)
+      const compareData = await GetCompareData(stockArr)
+      res.send(compareData)
+    } catch (err) {
+      console.log(err)
+    }
+
   }, 'MonkeyBusinessWebApp')
 }
