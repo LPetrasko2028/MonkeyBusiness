@@ -45,13 +45,13 @@ export async function signup (req, res) { // working without authentication ----
       if (password !== passwordConfirm) { res.status(404).json({ error: true, message: 'Passwords do not match.' }) } else if (validateEmail(email) === false) { res.status(404).json({ error: true, message: 'Invalid Email.' }) }
 
       // Encrypt Password before database insertion ------------------TO DO --------------------
-      const hashedPassword = await hashPassword(password)
+      const passwordHash = await hashPassword(password)
       const adminID = null
       const preferencesID = new ObjectId('651dec44f8c800a5da81622b')
       // initialize new_investor
       const investorID = await db.collection('Investor').insertOne({ username, stocks: [], monkey: [] })
       if (investorID.insertedCount !== null) {
-        const insertDoc = await db.collection('Users').insertOne({ username, password: hashedPassword, email, preferencesID, adminID })
+        const insertDoc = await db.collection('Users').insertOne({ username, password: passwordHash, email, preferencesID, adminID })
         if (insertDoc.insertedCount !== null) { res.json({ error: false, message: `User: ${username} Signed Up Successfully` }) } else { res.status(404).json({ error: true, message: 'Failed to insert user info!' }) }
       } else { res.status(404).json({ error: true, message: 'Failed to insert investor info!' }) }
     }

@@ -6,7 +6,7 @@ import { getInvestorStocks, searchForStock, updateStockCount, getStockInfo, getU
 import { login, signup, logout, updatePreferences, getPreferences, deleteUser, getAccountDetails } from './../services/userServices.js'
 
 import { isAuthenticated } from '../middleware/authentication.js'
-import { getAccountDetails, updateAccount, forgotPassword } from './../services/accountServices.js'
+import { getAccountDetails, updateAccount, forgotPassword, resetPassword } from './../services/accountServices.js'
 
 const dataRouter = new Express.Router()
 
@@ -30,6 +30,9 @@ dataRouter.post('/forgotPassword', forgotPassword)
 dataRouter.get('/account', isAuthenticated, getAccountDetails)
 dataRouter.delete('/account/:username', deleteUser) // corresponding user or admin can delete account
 dataRouter.post('/account', updateAccount) // corresponding user can update account
+dataRouter.post('/resetPassword', resetPassword)
+
+dataRouter.get('/user', isAuthenticated, (req, res) => { res.send(req.session.username) }) // corresponding user can get their session
 
 dataRouter.get('/preferences', getPreferences) // corresponding user can get preferences
 dataRouter.post('/preferences', updatePreferences) // corresponding user can update preferences

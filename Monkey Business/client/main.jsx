@@ -10,9 +10,10 @@ import { BrowserRouter } from 'react-router-dom'
 // import MonkeTech from './components/MonkeyTech/MonkeyTechPage.jsx'
 const root = createRoot(document.getElementById('root'))
 root.render(
-      <BrowserRouter>
+
+  <BrowserRouter>
        <App />
-      </BrowserRouter>
+       </BrowserRouter>
   // <SignupPage/>
   // <LoginPage/>
   // <IntroPage/>

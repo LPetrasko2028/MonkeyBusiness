@@ -3,16 +3,9 @@ import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import { signUp } from './dataHelper.js'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 // dummy theme stuff
-let myTheme = 'light'
-let buttonTheme = 'outline-dark'
-const isMidnight = true
-if (isMidnight) { myTheme = 'dark' }
-if (myTheme === 'light') {
-  buttonTheme = 'outline-dark'
-} else {
-  buttonTheme = 'outline-light'
-}
+
 
 function SignUpCard (props) {
   const { onSignUp } = props
@@ -49,7 +42,7 @@ function SignUpCard (props) {
     }
   }
   return (
-    <div data-bs-theme={myTheme}>
+    <div>
       <Card style={{ width: '18rem' }} className="mx-auto mt-5">
       <Card.Body>
       <form method = "post" onSubmit={handleSubmit}>
@@ -106,9 +99,12 @@ function SignUpCard (props) {
         />
         </label>
         <label>
-          <Button type = 'submit' className = 'mt-3' variant={buttonTheme} >Sign Up</Button>
+          <Button type = 'submit' className = 'mt-3' >Sign Up</Button>
         </label>
       </form>
+        <div className = 'mt-3'>
+          <Link to = '/login' className='.p-3'>Already have an account? Login!</Link>
+        </div>
       </Card.Body>
     </Card>
     </div>

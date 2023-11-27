@@ -1,11 +1,73 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Table, Alert } from 'react-bootstrap'
+import { getMonkeyInvestments } from '../../mbdataHelper'
+
 function MonkeTech () {
-// Will show live vids of the monkeys?
+  const [tableData, setTableData] = useState([])
+  const [show, setShow] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const handleShow = () => setShow(true)
+  const handleClose = () => setShow(false)
+  const onSuccessMessage = 'Monkey Investments retrieved'
+  const onFailMessage = 'Failed to retrieve monkey investments'
+
+  useEffect(() => {
+    const renderMonkeyInvestments = async (e) => {
+      const fetchMonkeyInvestments = await getMonkeyInvestments()
+      if (fetchMonkeyInvestments) {
+        setSuccess(true)
+      } else {
+        setSuccess(false)
+      }
+      handleShow()
+      setTableData(fetchMonkeyInvestments)
+    }
+    renderMonkeyInvestments()
+  }, [])
+  // function mapMonkeyInvestments () {
+  //   return tableData.map((currentValue) => {
+  //     return (
+  //     <tr>
+  //       <td>{currentValue.stockName}</td>
+  //       <td>{currentValue.stocks}</td>
+  //       <td>{currentValue.history}</td>
+  //       <td>{currentValue.stockPool}</td>
+  //       <td>{currentValue.amount}</td>
+  //     </tr>
+  //     )
+  //   })
+  // }
+
+  // Will show live vids of the monkeys?
   return (
+
     <React.Fragment>
-      <div>Monkey Tech Page - just a place holder</div>
-      <img className = 'image-fluid' src="https://t3.ftcdn.net/jpg/05/66/26/98/360_F_566269813_8VisUzV5qqdN7nQ7De4FcVEVxnRuKh2E.jpg" alt="Image" />
+
+       <Alert show={show} variant= {success ? 'success' : 'danger'} onClose={handleClose} dismissible>
+        <Alert.Heading>Retrieving Monkey Stock Details</Alert.Heading>
+        <p>
+          {success ? onSuccessMessage : onFailMessage}
+        </p>
+      </Alert>
+
+      <Table striped border hover id='monkeyTable'>
+        <thead>
+          <tr>
+            <th scope="col">Stock Name</th>
+            <th scope="col">Stocks</th>
+            <th scope="col">History</th>
+            <th scope="col">Stock Pool</th>
+            <th scope="col">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+
+      </Table>
+<div >{ tableData }</div>
     </React.Fragment>
+
   )
 }
 

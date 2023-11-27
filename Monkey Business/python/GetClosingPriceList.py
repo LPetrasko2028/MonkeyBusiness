@@ -10,5 +10,7 @@ def getClosingPriceList(name, timeframe):
     stock=yf.Ticker(name)
     hist = stock.history(timeframe)
     #print(hist)
-    return hist
+    return hist.to_string()
 print(getClosingPriceList(name,timeframe))  # added after
+
+# Only call the price attribute of the hist object if possible, for effeciency

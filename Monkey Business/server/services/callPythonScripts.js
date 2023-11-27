@@ -122,7 +122,6 @@ export function searchStockAPI (searchQuery, start, end) {
     })
   })
 }
-
 export function GetCompareData(arr) {
   return new Promise((resolve, reject) => {
     const ls = cp.spawn('python', ['./python/GetCompareData.py', arr])
