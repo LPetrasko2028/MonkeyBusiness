@@ -139,14 +139,50 @@ export async function deleteUser (req, res) {
   }, 'MonkeyBusinessWebApp')
 }
 
-export async function getPreferences (req, res) {
-  const username = req.session.user
+export async function getAccountDetails(req, res) {
+  const username = req.body.username // eventually change to session
+
   queryMongoDatabase(async db => {
-    const findPreferences = await db.collection('Preferences').findOne({ username }).projection({ _id: 0 })
-    if (findPreferences === null) {
-      res.status(404).json({ error: true, message: 'Preferences could not be found.' })
+    const findAccount = await db.collection('Users').find({ username })
+    const numDocs = await db.collection('Users').countDocuments({ username })
+
+    if(numDocs === 0) { //check if no user / duplicate users
+      res.status(404).json({ error: true, message: 'User not found'})
+    } else if (numDocs > 1) {
+      res.status(500).json({ error: true, message: 'Multiple users with same username' })
+
     } else {
-      res.json(findPreferences)
+      for await (const doc of findAccount) {
+        res.json(doc)
+      }
     }
-  })
+  }, 'MonkeyBusinessWebApp')
+}
+
+export async function getPreferences(req, res) {
+  const username = req.body.username // eventually change to session
+
+  queryMongoDatabase(async db => {
+    const findUsername = await db.collection('Users').findOne({ username })
+    const numDocs = await db.collection('Users').countDocuments({ username })
+
+    if(numDocs === 0) { //check if no user / duplicate users
+      res.status(404).json({ error: true, message: 'User not found'})
+    } else if (numDocs > 1) {
+      res.status(500).json({ error: true, message: 'Multiple users with same username' })
+
+    } else {
+      const prefId = findUsername['preferencesID'] // either use this or findUsername[4]
+      const findPreferences = await db.collection('Preferences').find({ _id: prefId })
+      const numDocs2 = await db.collection('Preferences').countDocuments({ _id: prefId })
+      if(numDocs2 === 0) {
+        res.status(404).json('Preference set not found')
+      } else {
+        for await (const doc of findPreferences) {
+          res.json(doc)
+        }
+        //res.json({ error: false, message: 'Preference set found' })
+      }
+    }
+  }, 'MonkeyBusinessWebApp')
 }

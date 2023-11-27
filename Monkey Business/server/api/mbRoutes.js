@@ -1,9 +1,9 @@
 import Express from 'express'
 import { validationErrorMiddleware, validator, loginSchema, signupSchema, stockSchema, monkeySchema } from './../middleware/validation.js'
 
-import { updateMonkey, getMonkeyInvestments } from './../services/monkeyServices.js'
-import { getInvestorStocks, searchForStock, updateStockCount, getStockInfo } from './../services/stockServices.js'
-import { login, signup, logout, updatePreferences, getPreferences, deleteUser } from './../services/userServices.js'
+import { updateMonkey, getMonkeyInvestments, getMonkeyHistory } from './../services/monkeyServices.js'
+import { getInvestorStocks, searchForStock, updateStockCount, getStockInfo, getUserMarketData } from './../services/stockServices.js'
+import { login, signup, logout, updatePreferences, getPreferences, deleteUser, getAccountDetails } from './../services/userServices.js'
 
 import { isAuthenticated } from '../middleware/authentication.js'
 import { getAccountDetails, updateAccount, forgotPassword, resetPassword } from './../services/accountServices.js'
@@ -18,6 +18,7 @@ dataRouter.get('/stocks', getInvestorStocks) // corresponding user can get their
 dataRouter.get('/stockDetails', getStockInfo)
 
 dataRouter.post('/stockChange', updateStockCount)
+dataRouter.post('/userMarketData', getUserMarketData)
 
 // ------------------------------------ Auth Routes ------------------------------------
 dataRouter.post('/login', validator.validate({ body: loginSchema }), login) // open
@@ -35,10 +36,14 @@ dataRouter.get('/user', isAuthenticated, (req, res) => { res.send(req.session.us
 
 dataRouter.get('/preferences', getPreferences) // corresponding user can get preferences
 dataRouter.post('/preferences', updatePreferences) // corresponding user can update preferences
+dataRouter.get('/preferences', getPreferences)
+dataRouter.get('/accountDetails', getAccountDetails)
 
 // ------------------------------------ Monkey Routes ------------------------------------
 dataRouter.post('/monkey', validator.validate({ body: monkeySchema }), updateMonkey) // corresponding user can update monkey
 dataRouter.get('/monkey', getMonkeyInvestments) // corresponding user can get monkey investments
+
+dataRouter.get('/monkeyHistory', getMonkeyHistory)
 
 // Make the router available to import in other files
 export default dataRouter

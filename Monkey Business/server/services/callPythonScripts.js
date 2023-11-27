@@ -28,9 +28,6 @@ export async function getMonkeyPosition (url, segments) {
       index = index+1;
       i = j + 1;
     }
-    //var space = result.indexOf(' ', i);
-    //const coord = {x: result.substring(i, space), y: result.substring(space), (result.length - 1)};
-    //coordSpace[index] = coord;
   })
   ls.stderr.on('data', (data) => {
     console.error(`stderr: ${data}`)
@@ -125,27 +122,18 @@ export function searchStockAPI (searchQuery, start, end) {
     })
   })
 }
-
-export function getStockMarket (start, end) {
+export function GetCompareData(arr) {
   return new Promise((resolve, reject) => {
-    const ls = cp.spawn('python', ['./python/StockSearchList.py', start, end])
-    let stdoutData
-    let stderrData
+    const ls = cp.spawn('python', ['./python/GetCompareData.py', arr])
+    let stdoutData = ''
+    let stderrData = ''
 
     ls.stdout.on('data', (data) => {
-      if (stdoutData === undefined) {
-        stdoutData = data
-      } else {
-        stdoutData += data
-      }
+      stdoutData += data
     })
 
     ls.stderr.on('data', (data) => {
-      if (stderrData === undefined) {
-        stderrData = data
-      } else {
-        stderrData += data
-      }
+      stderrData += data
     })
 
     ls.on('error', (err) => {
