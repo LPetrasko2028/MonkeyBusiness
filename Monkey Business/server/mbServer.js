@@ -48,7 +48,7 @@ const sessionOptions = {
   name: 'example.sid', // default name is 'connect.sid
   secret: 'your-secret-key',
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   store, // : MongoStore.create({ client: Mongo, dbName: 'MonkeyBusinessWebApp' }), // store: new MongoStore.Session({ mongooseConnection: mongoose.connection }),
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 // 1 day
