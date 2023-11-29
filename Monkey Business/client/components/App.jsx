@@ -30,7 +30,6 @@ export default function App () {
   }
   const theme = (darkMode ? 'dark' : 'light')
   document.getElementById('html').setAttribute('data-bs-theme', darkMode ? 'dark' : 'light')
-  console.log(darkMode)
   //-------------------------------------------------------------
   const accessKey = search.substring(11, search.length)
   return (

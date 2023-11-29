@@ -1,28 +1,50 @@
-import React from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import Button from 'react-bootstrap/Button'
-import Card from 'react-bootstrap/Card'
+import { Card, Alert } from 'react-bootstrap'
 import { logIn } from './dataHelper'
 import PropTypes from 'prop-types'
 import { useNavigate, Link } from 'react-router-dom'
+import { login } from '../../mbdataHelper'
 
 function LoginCard (props) {
   const navigate = useNavigate()
   const { onLogIn } = props
-  const [name, setName] = React.useState('')
-  const [pass, setPass] = React.useState('')
-  async function handleSubmit (e) {
+  const [name, setName] = useState('')
+  const [pass, setPass] = useState('')
+  const [success, setSuccess] = useState(false)
+  const [show, setShow] = useState(false)
+  const handleShow = () => setShow(true)
+  const handleClose = () => setShow(false)
+  const onSuccessMessage = 'Logged in successfully'
+  const onFailMessage = 'Failed to log in'
+
+  const handleSubmit = async e => {
     e.preventDefault()
-    const user = {
-      username: name,
-      password: pass
-    }
-    if (await logIn(user)) {
-      onLogIn(name)
-      navigate('/')
+    try {
+      const attemptLogin = await login(name, pass)
+      if (attemptLogin) {
+        setSuccess(true)
+        onLogIn(name)
+        handleShow()
+        await wait(1000)
+        navigate('/')
+      } else {
+        setSuccess(false)
+      }
+      handleShow()
+    } catch (error) {
+      console.log(error)
     }
   }
+
   return (
     <div>
+      <Alert show={show} variant= {success ? 'success' : 'danger'} onClose={handleClose} dismissible>
+        <Alert.Heading>Login</Alert.Heading>
+        <p>
+          {success ? onSuccessMessage : onFailMessage}
+        </p>
+      </Alert>
       <Card style={{ width: '18rem' }} className="mx-auto mt-5">
         <Card.Body>
           <form method = 'post' onSubmit={handleSubmit}>
@@ -64,3 +86,7 @@ LoginCard.propTypes = {
   onLogIn: PropTypes.func
 }
 export default LoginCard
+
+export function wait (ms) {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
