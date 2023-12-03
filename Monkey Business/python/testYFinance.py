@@ -1,13 +1,15 @@
 import yfinance as yf
+import json
+import urllib
 import sys  # added after
-names = sys.argv[1] # added after pass in an array of stock names
-names.split(', ')
-names = names.split(',')
+
+names = ["AMZN", "AAPL", "AMZN.NE"]
 #when given  the stock name, returns:
 #stock name, current price, the high for the day, the volume, and the percent change for the day
 def getStockInfo(names):
     stockArray=[]  # added after
     for name in names:  # added after
+      try:
         output=[]
         stock=yf.Ticker(name)
         output.append(name)
@@ -20,18 +22,29 @@ def getStockInfo(names):
         # output.append((1-stock.info['currentPrice']/stock.info['regularMarketPreviousClose'])*100)
 
         stockArray.append(output)  # added after
+      except:
+        print("error with " + name)
+
     return stockArray
 if(type(names) is list):
   try:
     print(getStockInfo(names))
-  except NameError:
-    print('name error' + NameError)
-  except ValueError:
-    print('value error' + ValueError)
-  except TypeError:
-    print('type error' + TypeError)
-  except AttributeError:
-    print('attribute error' + AttributeError)
   except:
     print(f"error")
 
+
+query = "amz" # added after
+startRange = 0 # added after
+endRange = 5 # added after
+
+def stockSearchList(query, startRange, endRange):
+    response = urllib.request.urlopen(f'https://query2.finance.yahoo.com/v1/finance/search?q={query}')
+    content = response.read()
+    data = json.loads(content.decode('utf8'))['quotes']
+    output=[]
+    for i in range(startRange, endRange):
+        if data[i]['quoteType'] == "EQUITY":
+          output.append(data[i]['symbol'])
+    return output
+
+print(stockSearchList(query, startRange, endRange)) # added after

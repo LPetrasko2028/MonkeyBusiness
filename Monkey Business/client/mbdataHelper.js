@@ -1,7 +1,11 @@
-export async function searchStockAPI (stockName, stockPageObj) { // Search for stock by name
+export async function searchStockAPI (stockName, start, end) { // Search for stock by name
   try {
-    const response = await fetch(`http://localhost:3000/api/stocks/${stockName}`, {
-      body: JSON.stringify(stockPageObj)
+    const response = await fetch('http://localhost:3000/api/search', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ stockName, start, end })
     })
     if (response.status >= 400) {
       throw new Error(`Request failed with response code ${response.status}`)
@@ -232,7 +236,7 @@ export async function getMonkeyInvestments () {
     if (response.status >= 400) {
       throw new Error(`Request failed with response code ${response.status}`)
     }
-    return response //await response.json()
+    return await response.json()
   } catch (err) {
     console.error('Failed to retrieve monkey investments')
     console.error(err)

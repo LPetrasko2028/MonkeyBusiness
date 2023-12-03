@@ -28,17 +28,16 @@ export async function getStockInfo (req, res) {
 }
 
 export async function searchForStock (req, res) {
-  // call python function to search API for stock
-  // process and return data
-  const searchQuery = req.params.search
+  const searchQuery = req.body.stockName.searchInput
   if (searchQuery === undefined) {
     res.status(404).json({ error: true, message: 'No Search Query Provided' })
   }
-  const start = (req.body.start) ? parseInt(req.body.start) : 0
-  const end = (req.body.end) ? parseInt(req.body.end) : 5
+  const start = (req.body.stockName.start) ? parseInt(req.body.stockName.start) : 0
+  const end = (req.body.stockName.end) ? parseInt(req.body.stockName.end) : 5
   try {
-    const stockData = await searchStockAPI(searchQuery, start, end)
-    res.json(parseStockData(stockData))
+    const stockName = await searchStockAPI(searchQuery, start, end)
+    const stockNames = parseSearchData(stockName)
+    res.json(stockNames)
   } catch (err) {
     console.log(err)
   }
@@ -59,16 +58,29 @@ async function getInvestorStockNames (username) {
   }, 'MonkeyBusinessWebApp')
 }
 
-function parseStockData (stockData) {
+function parseSearchData (searchData) {
   // parse stock data
   // return parsed data
+  console.log(searchData)
 
   const regex = /(?<=\[)(.*?)(?=\])/g
-  const matches = String(stockData.match(regex))
+  const matches = String(searchData.match(regex))
   const data = matches.substring(1, matches.length - 1)
-  const parsedData = data.split('\', \'')
+  const parsedData = data.split(',\'')
+  const parsedDataArray = parsedData.map((stock) => {
+    stock = stock.split(/', '|', /g)
+    console.log(stock)
+    const stockObj = {
+      symbol: stock[0].replace(/'/g, ''),
+      name: stock[1],
+      quoteType: stock[2],
+      industry: stock[3],
+      score: parseFloat(stock[4])
+    }
+    return (stockObj)
+  })
 
-  return (parsedData)
+  return (parsedDataArray)
 }
 
 function parseStockDataArray (stockData) {
@@ -82,11 +94,18 @@ function parseStockDataArray (stockData) {
   const parsedDataArray = parsedData.map((stock) => {
     stock = stock.replace(/'/g, '')
     stock = stock.split(', ')
-    stock[1] = parseFloat(stock[1])
-    stock[2] = parseInt(stock[2])
-    stock[3] = parseFloat(stock[3])
-    stock[4] = parseFloat(stock[4])
-    return (stock)
+    const stockObj = {
+      name: stock[0],
+      price: parseFloat(stock[1]),
+      volume: parseInt(stock[2]),
+      change: parseFloat(stock[3]),
+      marketCap: parseFloat(stock[4])
+    }
+    // stock[1] = parseFloat(stock[1])
+    // stock[2] = parseInt(stock[2])
+    // stock[3] = parseFloat(stock[3])
+    // stock[4] = parseFloat(stock[4])
+    return (stockObj)
   })
   return (parsedDataArray)
 }
@@ -99,12 +118,18 @@ export async function getInvestorStocks (req, res) {
     const data = await db.collection('Investor').findOne({ username })
     if ((data) < 1) {
       res.status(404).json({ error: true, message: 'Failed to find investor' })
+      return
     }
-    if (start > data.stocks.length || end > data.stocks.length) { res.json({ error: true, message: 'Invalid Range' }) }
+    if (start > data.stocks.length || end > data.stocks.length) {
+      res.json({ error: true, message: 'Invalid Range' })
+      return
+    }
     const stockNames = []
     for (let i = start; i < end; i++) {
       stockNames.push(data.stocks[i][0])
     }
+    console.log(stockNames)
+    console.log(typeof stockNames)
     const userStockData = await getStockShort(stockNames)
     res.json(parseStockDataArray(userStockData))
   }, 'MonkeyBusinessWebApp')
@@ -237,7 +262,7 @@ export async function getUserMarketData (req, res) {
     for(const stock of data.stocks) {
       stockArr.push(stock[0])
     }
-    
+
     //call python script to grab stock data from stockArr names
     try {
       //console.log(stockArr)
