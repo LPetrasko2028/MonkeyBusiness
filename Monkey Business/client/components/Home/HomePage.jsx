@@ -35,7 +35,27 @@ function Home(props) {
       </div>
     );
   } else {
-    content = <div> Home page placeholder</div>;
+    content = 
+    <div>
+      <div> Home page placeholder</div>;
+      <Button variant="primary" onClick={handleShow}>
+          Open Modal
+        </Button>
+
+        <Modal show={showModal} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Please work</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>test test</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+    </div>
   }
 
   return <React.Fragment>{content}</React.Fragment>;

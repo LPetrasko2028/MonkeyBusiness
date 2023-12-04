@@ -1133,7 +1133,7 @@
             }
             return dispatcher.useContext(Context2);
           }
-          function useState15(initialState) {
+          function useState17(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1145,7 +1145,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect16(create, deps) {
+          function useEffect17(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -1157,7 +1157,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useLayoutEffect(create, deps);
           }
-          function useCallback11(callback, deps) {
+          function useCallback12(callback, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useCallback(callback, deps);
           }
@@ -1923,11 +1923,11 @@
           exports.memo = memo;
           exports.startTransition = startTransition;
           exports.unstable_act = act;
-          exports.useCallback = useCallback11;
+          exports.useCallback = useCallback12;
           exports.useContext = useContext14;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect16;
+          exports.useEffect = useEffect17;
           exports.useId = useId;
           exports.useImperativeHandle = useImperativeHandle2;
           exports.useInsertionEffect = useInsertionEffect;
@@ -1935,7 +1935,7 @@
           exports.useMemo = useMemo11;
           exports.useReducer = useReducer2;
           exports.useRef = useRef13;
-          exports.useState = useState15;
+          exports.useState = useState17;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition2;
           exports.version = ReactVersion;
@@ -35786,11 +35786,14 @@
   var import_prop_types5 = __toESM(require_prop_types(), 1);
   function Home(props) {
     const { name } = props;
+    const [showModal, setShowModal] = (0, import_react52.useState)(false);
+    const handleShow = () => setShowModal(true);
+    const handleClose = () => setShowModal(false);
     let content;
     if (name !== "") {
-      content = /* @__PURE__ */ import_react52.default.createElement("div", null, " Welcome ", name, " ");
+      content = /* @__PURE__ */ import_react52.default.createElement("div", null, /* @__PURE__ */ import_react52.default.createElement("div", null, " Welcome ", name, " "), /* @__PURE__ */ import_react52.default.createElement(Button_default2, { variant: "primary", onClick: handleShow }, "Open Modal"), /* @__PURE__ */ import_react52.default.createElement(Modal_default2, { show: showModal, onHide: handleClose }, /* @__PURE__ */ import_react52.default.createElement(Modal_default2.Header, { closeButton: true }, /* @__PURE__ */ import_react52.default.createElement(Modal_default2.Title, null, "Please work")), /* @__PURE__ */ import_react52.default.createElement(Modal_default2.Body, null, /* @__PURE__ */ import_react52.default.createElement("p", null, "test test")), /* @__PURE__ */ import_react52.default.createElement(Modal_default2.Footer, null, /* @__PURE__ */ import_react52.default.createElement(Button_default2, { variant: "secondary", onClick: handleClose }, "Close"))));
     } else {
-      content = /* @__PURE__ */ import_react52.default.createElement("div", null, " Home page placeholder");
+      content = /* @__PURE__ */ import_react52.default.createElement("div", null, /* @__PURE__ */ import_react52.default.createElement("div", null, " Home page placeholder"), ";", /* @__PURE__ */ import_react52.default.createElement(Button_default2, { variant: "primary", onClick: handleShow }, "Open Modal"), /* @__PURE__ */ import_react52.default.createElement(Modal_default2, { show: showModal, onHide: handleClose }, /* @__PURE__ */ import_react52.default.createElement(Modal_default2.Header, { closeButton: true }, /* @__PURE__ */ import_react52.default.createElement(Modal_default2.Title, null, "Please work")), /* @__PURE__ */ import_react52.default.createElement(Modal_default2.Body, null, /* @__PURE__ */ import_react52.default.createElement("p", null, "test test")), /* @__PURE__ */ import_react52.default.createElement(Modal_default2.Footer, null, /* @__PURE__ */ import_react52.default.createElement(Button_default2, { variant: "secondary", onClick: handleClose }, "Close"))));
     }
     return /* @__PURE__ */ import_react52.default.createElement(import_react52.default.Fragment, null, content);
   }
@@ -35806,6 +35809,27 @@
   var import_react53 = __toESM(require_react(), 1);
 
   // client/mbdataHelper.js
+  function login(username, password) {
+    return __async(this, null, function* () {
+      try {
+        const response = yield fetch("http://localhost:3000/api/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ username, password })
+        });
+        if (response.status >= 400) {
+          throw new Error(`Request failed with response code ${response.status}`);
+        }
+        return true;
+      } catch (err) {
+        console.error("Failed to login");
+        console.error(err);
+        return false;
+      }
+    });
+  }
   function resetPassword(accessKey, username, password, confirmPassword) {
     return __async(this, null, function* () {
       try {
@@ -36112,32 +36136,6 @@
   var import_react58 = __toESM(require_react(), 1);
 
   // client/components/Login_Signup/dataHelper.js
-  function logIn(userInfo) {
-    return __async(this, null, function* () {
-      try {
-        const response = yield fetch("http://localhost:3000/api/login", {
-          method: "POST",
-          // or 'PUT'
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(userInfo)
-        });
-        console.log(JSON.stringify(userInfo));
-        if (response.status >= 400) {
-          throw new Error(`Request failed with response code ${response.status}`);
-        } else {
-          window.alert("Log In successfully");
-          return true;
-        }
-      } catch (err) {
-        window.alert("Failed to log in");
-        console.error("Failed to log in");
-        console.error(err);
-        return false;
-      }
-    });
-  }
   function signUp(userInfo) {
     return __async(this, null, function* () {
       try {
@@ -36170,22 +36168,33 @@
   function LoginCard(props) {
     const navigate = (0, import_react_router_dom2.useNavigate)();
     const { onLogIn } = props;
-    const [name, setName] = import_react58.default.useState("");
-    const [pass, setPass] = import_react58.default.useState("");
-    function handleSubmit(e) {
-      return __async(this, null, function* () {
-        e.preventDefault();
-        const user = {
-          username: name,
-          password: pass
-        };
-        if (yield logIn(user)) {
+    const [name, setName] = (0, import_react58.useState)("");
+    const [pass, setPass] = (0, import_react58.useState)("");
+    const [success, setSuccess] = (0, import_react58.useState)(false);
+    const [show, setShow] = (0, import_react58.useState)(false);
+    const handleShow = () => setShow(true);
+    const handleClose = () => setShow(false);
+    const onSuccessMessage = "Logged in successfully";
+    const onFailMessage = "Failed to log in";
+    const handleSubmit = (e) => __async(this, null, function* () {
+      e.preventDefault();
+      try {
+        const attemptLogin = yield login(name, pass);
+        if (attemptLogin) {
+          setSuccess(true);
           onLogIn(name);
+          handleShow();
+          yield wait(1e3);
           navigate("/");
+        } else {
+          setSuccess(false);
         }
-      });
-    }
-    return /* @__PURE__ */ import_react58.default.createElement("div", null, /* @__PURE__ */ import_react58.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react58.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react58.default.createElement("form", { method: "post", onSubmit: handleSubmit }, /* @__PURE__ */ import_react58.default.createElement("label", null, "Please enter your information to log in."), /* @__PURE__ */ import_react58.default.createElement("label", null, "Username: ", /* @__PURE__ */ import_react58.default.createElement(
+        handleShow();
+      } catch (error) {
+        console.log(error);
+      }
+    });
+    return /* @__PURE__ */ import_react58.default.createElement("div", null, /* @__PURE__ */ import_react58.default.createElement(Alert_default, { show, variant: success ? "success" : "danger", onClose: handleClose, dismissible: true }, /* @__PURE__ */ import_react58.default.createElement(Alert_default.Heading, null, "Login"), /* @__PURE__ */ import_react58.default.createElement("p", null, success ? onSuccessMessage : onFailMessage)), /* @__PURE__ */ import_react58.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react58.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react58.default.createElement("form", { method: "post", onSubmit: handleSubmit }, /* @__PURE__ */ import_react58.default.createElement("label", null, "Please enter your information to log in."), /* @__PURE__ */ import_react58.default.createElement("label", null, "Username: ", /* @__PURE__ */ import_react58.default.createElement(
       "input",
       {
         name: "username",
@@ -36205,6 +36214,9 @@
     onLogIn: import_prop_types7.default.func
   };
   var LoginRegisterForm_default = LoginCard;
+  function wait(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
 
   // client/components/Login_Signup/SignUpRegisterForm.jsx
   var import_react59 = __toESM(require_react(), 1);
@@ -36402,7 +36414,6 @@
     }
     const theme = darkMode ? "dark" : "light";
     document.getElementById("html").setAttribute("data-bs-theme", darkMode ? "dark" : "light");
-    console.log(darkMode);
     const accessKey = search.substring(11, search.length);
     return /* @__PURE__ */ import_react64.default.createElement(import_react64.default.Fragment, null, /* @__PURE__ */ import_react64.default.createElement("div", { "data-bs-theme": theme }, /* @__PURE__ */ import_react64.default.createElement(MyNavBar, { loggedIn: logInStatus, mode: theme, "data-bs-theme": theme, handleTheme: handleDarkMode, isDark: darkMode }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Routes, null, /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/", exact: true, element: /* @__PURE__ */ import_react64.default.createElement(HomePage_default, { theme, name: username, status: logInStatus }) }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/login", element: /* @__PURE__ */ import_react64.default.createElement(LoginRegisterForm_default, { onLogIn: onLogInChange }) }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/about", Component: IntroPage_default }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/signup", element: /* @__PURE__ */ import_react64.default.createElement(SignUpRegisterForm_default, { onSignUp: onLogInChange }) }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/monkeyTech", Component: MonkeyTechPage_default }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/setting", element: /* @__PURE__ */ import_react64.default.createElement(
       SettingsPage_default,
