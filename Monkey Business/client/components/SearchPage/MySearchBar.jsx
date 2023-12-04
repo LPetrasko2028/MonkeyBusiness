@@ -1,62 +1,98 @@
-import React from 'react'
-import * as data from './dataHelper.js'
-import { Row } from 'react-bootstrap'
+import React, { useRef, useEffect } from 'react'
+import { searchStockAPI } from '../../mbdataHelper.js'
+import { Card, Button, Table } from 'react-bootstrap'
 export const MySearchBar = () => {
   const [searchInput, setSearchInput] = React.useState('')
-  const [stock, setStock] = React.useState([])
   const [searchResult, setSearchResult] = React.useState([''])
-  React.useEffect(() => {
-    const fetchData = async () => {
-      const stockData = await data.retrieveStocks()
-      setStock(stockData)
+  const searchForm = useRef()
+
+  useEffect(() => {
+    document.body.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.body.removeEventListener('keydown', onKeyDown)
     }
-    fetchData()
   }, [])
-  const handleChange = (e) => {
-    e.preventDefault()
-    const newStocksName = []
-    setSearchInput(e.target.value)
-    if (e.target.value.length > 0) {
-      const regex = new RegExp(e.target.value, 'gmi')
-      stock.map((stockData) => {
-        if (String(stockData.name).match(regex) != null) {
-          newStocksName.push(stockData.name)
-        }
-        console.log('Stock' + newStocksName)
-        return ([])
-      })
-    } else {
-      stock.map((stockData) => {
-        newStocksName.push(stockData.name)
-        return ([])
-      })
+
+  async function onKeyDown (event) {
+    const submit = event.key === 'Enter'
+    if (submit) {
+      await handleSearch()
     }
-    setSearchResult(newStocksName)
   }
-  console.log('Result' + searchResult)
-  let k = 0
-  const stocks = searchResult.map(
-    (thisStock) => {
-      k++
-      console.log(thisStock)
-      return (
-      <Row className = 'px-3 py-3 pt-1 pb-2' key = {k}> {thisStock} </Row>
-      )
+  useEffect(() => {
+    searchForm.current.focus()
+  }, [])
+  const start = 0
+  const end = 5
+
+  const handleChange = async (e) => {
+    e.preventDefault()
+    console.log('searchInput: ', searchInput)
+    console.log('e.target.value: ', e.target.value)
+    setSearchInput(e.target.value)
+  }
+  async function handleSearch () {
+    const searchInput = searchForm.current.value
+    if (searchInput === '') {
+      console.log('searchInput is empty')
+      setSearchResult([''])
+    } else {
+      const searchResult = await searchStockAPI({ searchInput, start, end })
+      if (searchResult) {
+        setSearchResult(searchResult)
+      } else {
+        setSearchResult([''])
+      }
     }
-  )
+  }
   return (
     <React.Fragment>
-        <Row className = 'px-3 py-3 pt-1 pb-2 bg-dark'>
+      <div className="d-flex justify-content-center px-1 py-3">
+        <Card>
+          <Card.Body>
+            <Card.Header>Stock Search</Card.Header>
             <input
-              id = 'searchForm'
-              type='text'
-              placeholder='Search'
-              className='pl-1'
-              value = {searchInput}
-              onChange={ handleChange }
+              id="searchForm"
+              type="text"
+              placeholder="Search"
+              className="pl-1"
+              value={searchInput}
+              onChange={handleChange}
+              ref={searchForm}
             />
-        </Row>
-        {stocks}
-      </React.Fragment>
+            <Button
+              variant="outline-success"
+              className="ml-2"
+              onClick={handleSearch}
+            >
+              Search
+            </Button>
+          </Card.Body>
+        </Card>
+      </div>
+
+      <Table className="table">
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Quote Type</th>
+            <th>Industry</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          {searchResult.map((stock) => (
+            <tr key={stock.symbol}>
+              <td>{stock.symbol}</td>
+              <td>{stock.name}</td>
+              <td>{stock.quoteType}</td>
+              <td>{stock.industry}</td>
+              <td>{stock.score}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </React.Fragment>
   )
 }
