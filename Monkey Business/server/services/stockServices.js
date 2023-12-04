@@ -28,12 +28,14 @@ export async function getStockInfo (req, res) {
 }
 
 export async function searchForStock (req, res) {
-  const searchQuery = req.body.stockName.searchInput
+  const searchQuery = req.body.stockName
+  console.log(searchQuery)
+  console.log(req.body)
   if (searchQuery === undefined) {
     res.status(404).json({ error: true, message: 'No Search Query Provided' })
   }
-  const start = (req.body.stockName.start) ? parseInt(req.body.stockName.start) : 0
-  const end = (req.body.stockName.end) ? parseInt(req.body.stockName.end) : 5
+  const start = (req.body.start) ? parseInt(req.body.start) : 0
+  const end = (req.body.end) ? parseInt(req.body.end) : 5
   try {
     const stockName = await searchStockAPI(searchQuery, start, end)
     const stockNames = parseSearchData(stockName)
@@ -111,7 +113,7 @@ function parseStockDataArray (stockData) {
 }
 
 export async function getInvestorStocks (req, res) {
-  const username = req.body.username // const username = req.session.username
+  const username = req.session.username
   const start = (req.body.start) ? parseInt(req.body.start) : 0
   const end = (req.body.end) ? parseInt(req.body.end) : 5
   queryMongoDatabase(async db => {

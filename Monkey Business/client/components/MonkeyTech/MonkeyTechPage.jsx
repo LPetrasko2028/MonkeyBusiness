@@ -57,10 +57,11 @@ function MonkeyTech () {
         <Card key={currentValue.name} className="mx-3">
           <Card.Body>
             <Card.Title>
-              <div>
-                {currentValue.name}
-                <div>Monkey Investment Total: {currentValue.amount}</div>
-              </div>
+              <Row>
+                <Col>{currentValue.name}</Col>
+
+                <Col>Monkey Investment Cash Available: {currentValue.cash}</Col>
+              </Row>
               <div>
                 <Button variant="link" onClick={handleEditStockPool}>
                   {editStockPool ? 'Save' : 'Edit'} Stock Pool

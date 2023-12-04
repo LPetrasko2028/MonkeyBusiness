@@ -18,7 +18,7 @@ dataRouter.use(validationErrorMiddleware)
 
 // ------------------------------------ Stock Routes ------------------------------------
 dataRouter.post('/search', searchForStock) // anyone can access * with restrictions to prevent abuse
-dataRouter.get('/stocks', getInvestorStocks) // corresponding user can get their stocks
+dataRouter.get('/stocks', isAuthenticated, getInvestorStocks) // corresponding user can get their stocks
 dataRouter.get('/stockDetails', getStockInfo)
 async function addToQueue (req, res) {
   queue.add(() => updateStockCount(req, res))

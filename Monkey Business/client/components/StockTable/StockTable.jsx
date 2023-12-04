@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Table } from 'react-bootstrap'
 
 export default function StockTable ({ stocks }) {
+  console.log('stocks: ', stocks)
   return (
     <Table className="table">
       <thead>
@@ -16,12 +17,12 @@ export default function StockTable ({ stocks }) {
       </thead>
       <tbody>
         {stocks.map((stock) => (
-          <tr key={stock.name}>
-            <td>{stock.name}</td>
-            <td>{stock.price}</td>
-            <td>{stock.volume}</td>
-            <td>{stock.change}</td>
-            <td>{stock.marketCap}</td>
+          <tr key={(stock.name) ? stock.name : ''}>
+            <td>{(stock.name) ? stock.name : ''}</td>
+            <td>{(stock.price) ? stock.price : ''}</td>
+            <td>{(stock.volume) ? stock.volume : ''}</td>
+            <td>{(stock.change) ? stock.change : ''}</td>
+            <td>{(stock.marketCap) ? stock.marketCap : ''}</td>
           </tr>
         ))}
       </tbody>
@@ -31,9 +32,20 @@ export default function StockTable ({ stocks }) {
 StockTable.propTypes = {
   stocks: PropTypes.arrayOf(
     PropTypes.shape({
-      symbol: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired
+      price: PropTypes.number.isRequired,
+      volume: PropTypes.number.isRequired,
+      change: PropTypes.number.isRequired,
+      marketCap: PropTypes.number.isRequired
     })
   ).isRequired
+}
+StockTable.defaultProps = {
+  stocks: [{
+    name: '',
+    price: 0,
+    volume: 0,
+    change: 0,
+    marketCap: 0
+  }]
 }
