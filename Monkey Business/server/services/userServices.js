@@ -49,7 +49,7 @@ export async function signup (req, res) { // working without authentication ----
       const adminID = null
       const preferencesID = new ObjectId('651dec44f8c800a5da81622b')
       // initialize new_investor
-      const investorID = await db.collection('Investor').insertOne({ username, stocks: [], monkey: [] })
+      const investorID = await db.collection('Investor').insertOne({ username, stocks: [], monkey: [], balance: 0.0, stockHistory: [] })
       if (investorID.insertedCount !== null) {
         const insertDoc = await db.collection('Users').insertOne({ username, password: passwordHash, email, preferencesID, adminID })
         if (insertDoc.insertedCount !== null) { res.json({ error: false, message: `User: ${username} Signed Up Successfully` }) } else { res.status(404).json({ error: true, message: 'Failed to insert user info!' }) }
