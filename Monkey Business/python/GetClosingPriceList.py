@@ -8,7 +8,7 @@ def getClosingPriceList(name, timeframe):
     timeframe=str(timeframe)+"mo"
     #duration=convertTimeFrame(timeframe)
     stock=yf.Ticker(name)
-    hist = stock.history(timeframe)
+    hist = stock.history(period=timeframe)
     #print(hist)
     return hist.to_string()
 print(getClosingPriceList(name,timeframe))  # added after
