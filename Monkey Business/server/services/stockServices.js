@@ -6,9 +6,9 @@ export async function getStockInfo (req, res) {
   if (stockName === undefined) {
     res.status(404).json({ error: true, message: 'No Stock Name Provided' })
   }
-  const timeFrameMonths = (!req.body.timeFrameMonths) ? parseInt(req.body.timeFrameMonths) : 1
+  const timeFrameMonths = (!req.body.timeFrameMonths) ? 1 : parseInt(req.body.timeFrameMonths)
   try {
-    let stockData = await getStockDetails(stockName, (!timeFrameMonths) ? timeFrameMonths : 1)
+    let stockData = await getStockDetails(stockName, timeFrameMonths)
     stockData = stockData.split('\n')
     stockData.pop()
     stockData.pop()

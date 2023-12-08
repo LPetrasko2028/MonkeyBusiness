@@ -1,4 +1,5 @@
 import React from 'react';
+import StockChart from './StockChart.jsx';
 
 function StatsPage() {
   return (
@@ -8,7 +9,10 @@ function StatsPage() {
       </div>
 
       <div>
-        <p>This is where Stats stuff will go</p>
+        <p>this is a circle</p>
+        <StockChart stockName={"AAPL"}></StockChart>
+         
+        
       </div>
     </div>
   )
