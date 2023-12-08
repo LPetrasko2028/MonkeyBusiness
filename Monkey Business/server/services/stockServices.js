@@ -2,13 +2,17 @@ import queryMongoDatabase from '../data/mongoController.js'
 import { getStockShort, getStockDetails, searchStockAPI, GetCompareData } from './callPythonScripts.js'
 
 export async function getStockInfo (req, res) {
-  const stockName = req.body.stockName
+  const stockName = req.query.stockName
   if (stockName === undefined) {
     res.status(404).json({ error: true, message: 'No Stock Name Provided' })
+    return
   }
-  const timeFrameMonths = (!req.body.timeFrameMonths) ? 1 : parseInt(req.body.timeFrameMonths)
+  console.log(typeof req.query.timeFrame)
+  const timeFrameMonths = (parseInt(req.query.timeFrame) < 1) ? 1 : parseInt(req.query.timeFrame)
+console.log(timeFrameMonths)
   try {
     let stockData = await getStockDetails(stockName, timeFrameMonths)
+    console.log(stockData)
     stockData = stockData.split('\n')
     stockData.pop()
     stockData.pop()
@@ -28,14 +32,14 @@ export async function getStockInfo (req, res) {
 }
 
 export async function searchForStock (req, res) {
-  const searchQuery = req.body.stockName
+  const searchQuery = req.body.stockName.searchInput
   console.log(searchQuery)
-  console.log(req.body)
+  console.log(typeof searchQuery)
   if (searchQuery === undefined) {
     res.status(404).json({ error: true, message: 'No Search Query Provided' })
   }
-  const start = (req.body.start) ? parseInt(req.body.start) : 0
-  const end = (req.body.end) ? parseInt(req.body.end) : 5
+  const start = (req.body.stockName.start) ? parseInt(req.body.stockName.start) : 0
+  const end = (req.body.stockName.end) ? parseInt(req.body.stockName.end) : 5
   try {
     const stockName = await searchStockAPI(searchQuery, start, end)
     const stockNames = parseSearchData(stockName)
@@ -45,20 +49,20 @@ export async function searchForStock (req, res) {
   }
 }
 
-async function getInvestorStockNames (username) {
-  queryMongoDatabase(async db => {
-    const data = await db.collection('Investor').findOne({ username })
-    if ((data) < 1) {
-      return ('Failed to find investor')
-    }
-    const stockNames = []
-    for (const stock of data.stocks) {
-      stockNames.push(stock[0])
-    }
-    const userStockData = await getStockShort(stockNames)
-    return (userStockData)
-  }, 'MonkeyBusinessWebApp')
-}
+// async function getInvestorStockNames (username) {
+//   queryMongoDatabase(async db => {
+//     const data = await db.collection('Investor').findOne({ username })
+//     if ((data) < 1) {
+//       return ('Failed to find investor')
+//     }
+//     const stockNames = []
+//     for (const stock of data.stocks) {
+//       stockNames.push(stock[0])
+//     }
+//     const userStockData = await getStockShort(stockNames)
+//     return (userStockData)
+//   }, 'MonkeyBusinessWebApp')
+// }
 
 function parseSearchData (searchData) {
   // parse stock data
@@ -113,22 +117,29 @@ function parseStockDataArray (stockData) {
 }
 
 export async function getInvestorStocks (req, res) {
+  // console.log('Session: ' + req.session)
+  // console.log('Request body: ' + req.body)
+  // console.log('Request params: ' + req.params)
+  // console.log('Request params: ' + req.params.start)
+  // console.log('Request params: ' + req.params.end)
   const username = req.session.username
-  const start = (req.body.start) ? parseInt(req.body.start) : 0
-  const end = (req.body.end) ? parseInt(req.body.end) : 5
+  let start = 0
+  let end = 5
   queryMongoDatabase(async db => {
     const data = await db.collection('Investor').findOne({ username })
     if ((data) < 1) {
       res.status(404).json({ error: true, message: 'Failed to find investor' })
       return
     }
-    if (start > data.stocks.length || end > data.stocks.length) {
-      res.json({ error: true, message: 'Invalid Range' })
-      return
+    if (start > data.stocks.length) {
+      start = 0
+    }
+    if (end > data.stocks.length) {
+      end = data.stocks.length
     }
     const stockNames = []
     for (let i = start; i < end; i++) {
-      stockNames.push(data.stocks[i][0])
+      stockNames.push(data.stocks[i].stockName)
     }
     console.log(stockNames)
     console.log(typeof stockNames)

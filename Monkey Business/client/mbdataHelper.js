@@ -24,9 +24,9 @@ Example of stockPageObj to display the first 5 stocks (page 1):
   "end": 5
 }
 */
-export async function retrieveInvestorStocks () { // Failed Authentication should result in a redirect to a landing page or login page
+export async function retrieveInvestorStocks (start, end) { // Failed Authentication should result in a redirect to a landing page or login page
   try {
-    const response = await fetch('http://localhost:3000/api/stocks')
+    const response = await fetch('http://localhost:3000/api/stocks?' + new URLSearchParams({ start, end }))
     if (response.status >= 400) {
       throw new Error(`Request failed with response code ${response.status}`)
     }
@@ -38,9 +38,9 @@ export async function retrieveInvestorStocks () { // Failed Authentication shoul
   }
 }
 
-export async function retrieveStockDetails (stockSymbol) { // Examples of stockSymbol: 'GME', 'AMC', 'TSLA', 'AAPL', 'GOOG', 'MSFT', 'AMZN'
+export async function retrieveStockDetails (stockName, timeFrame) { // Examples of stockSymbol: 'GME', 'AMC', 'TSLA', 'AAPL', 'GOOG', 'MSFT', 'AMZN'
   try {
-    const response = await fetch(`http://localhost:3000/api/stockDetails/${stockSymbol}`)
+    const response = await fetch('http://localhost:3000/api/stockDetails?' + new URLSearchParams({ stockName, timeFrame }))
     if (response.status >= 400) {
       throw new Error(`Request failed with response code ${response.status}`)
     }
