@@ -11350,6 +11350,14 @@ fieldset:disabled .btn {
     display: none !important;
   }
 }
+
+/* client/components/MonkeyTech/testStyle.css */
+.card.sell-class {
+  background-color: rgb(248, 68, 68);
+}
+.card.buy-class {
+  background-color: lightgreen;
+}
 /*! Bundled license information:
 
 bootstrap/dist/css/bootstrap.min.css:

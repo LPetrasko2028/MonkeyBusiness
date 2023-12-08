@@ -34,10 +34,6 @@ export async function signup (req, res) { // working without authentication ----
   const passwordConfirm = req.body.passwordConfirm
   const email = req.body.email
 
-  // let errors = []
-  // if (!username || !password || !passwordConfirm || !email) { // file for validation errors ------------------TO DO --------------------
-  //   errors.push({ message: 'Please enter all fields' })
-  // }
   queryMongoDatabase(async db => {
     const signupSuccess = await db.collection('Users').findOne({ username })
 
@@ -49,7 +45,7 @@ export async function signup (req, res) { // working without authentication ----
       const adminID = null
       const preferencesID = new ObjectId('651dec44f8c800a5da81622b')
       // initialize new_investor
-      const investorID = await db.collection('Investor').insertOne({ username, stocks: [], monkey: [] })
+      const investorID = await db.collection('Investor').insertOne({ username, stocks: [], amount: 10000, history: [] })
       if (investorID.insertedCount !== null) {
         const insertDoc = await db.collection('Users').insertOne({ username, password: passwordHash, email, preferencesID, adminID })
         if (insertDoc.insertedCount !== null) { res.json({ error: false, message: `User: ${username} Signed Up Successfully` }) } else { res.status(404).json({ error: true, message: 'Failed to insert user info!' }) }

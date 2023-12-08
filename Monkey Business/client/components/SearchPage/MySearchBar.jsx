@@ -23,7 +23,7 @@ export const MySearchBar = () => {
     searchForm.current.focus()
   }, [])
   const start = 0
-  const end = 5
+  const end = 10
 
   const handleChange = async (e) => {
     e.preventDefault()
@@ -47,52 +47,59 @@ export const MySearchBar = () => {
   }
   return (
     <React.Fragment>
-      <div className="d-flex justify-content-center px-1 py-3">
-        <Card>
-          <Card.Body>
-            <Card.Header>Stock Search</Card.Header>
-            <input
-              id="searchForm"
-              type="text"
-              placeholder="Search"
-              className="pl-1"
-              value={searchInput}
-              onChange={handleChange}
-              ref={searchForm}
-            />
-            <Button
-              variant="outline-success"
-              className="ml-2"
-              onClick={handleSearch}
-            >
-              Search
-            </Button>
-          </Card.Body>
-        </Card>
-      </div>
-
-      <Table className="table">
-        <thead>
-          <tr>
-            <th>Symbol</th>
-            <th>Name</th>
-            <th>Quote Type</th>
-            <th>Industry</th>
-            <th>Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          {searchResult.map((stock) => (
-            <tr key={stock.symbol}>
-              <td>{stock.symbol}</td>
-              <td>{stock.name}</td>
-              <td>{stock.quoteType}</td>
-              <td>{stock.industry}</td>
-              <td>{stock.score}</td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+      <Card className="mx-5">
+        <Card.Body>
+          <Card.Header>Stock Search</Card.Header>
+          <Card.Text>
+            Search for a stock by symbol or name
+          </Card.Text>
+          <div className='input-group '>
+          <input
+            id="searchForm"
+            type="text"
+            placeholder="Search"
+            className="fill"
+            value={searchInput}
+            onChange={handleChange}
+            ref={searchForm}
+          />
+          <Button
+            variant="outline-success"
+            className="ml-2"
+            onClick={handleSearch}
+          >
+            Search
+          </Button>
+          </div>
+        </Card.Body>
+      </Card>
+      <Card className="mx-5">
+        <Card.Header>Search Results</Card.Header>
+        <Card.Body>
+          <Table className="table">
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Quote Type</th>
+                <th>Industry</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              {searchResult.map((stock) => (
+                <tr key={stock.symbol}>
+                  <td>{stock.symbol}</td>
+                  <td>{stock.name}</td>
+                  <td>{stock.quoteType}</td>
+                  <td>{stock.industry}</td>
+                  <td>{stock.score}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Card.Body>
+      </Card>
     </React.Fragment>
-  )
+  );
 }
