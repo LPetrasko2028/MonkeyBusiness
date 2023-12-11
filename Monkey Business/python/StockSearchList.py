@@ -3,9 +3,12 @@ import json
 import urllib
 import sys   
 
-query = sys.argv[1] # added after
-startRange = int(sys.argv[2]) # added after
-endRange = int(sys.argv[3]) # added after
+# query = sys.argv[1] # added after
+query = "microsoft"
+# startRange = int(sys.argv[2]) # added after
+startRange = 0
+# endRange = int(sys.argv[3]) # added after
+endRange = 7
 
 #This function intakes a search query and returns with the search results
 #query, string, the search term

@@ -3,9 +3,15 @@ import json
 import urllib
 import sys  # added after
 
-query = sys.argv[1] # added after
-startRange = int(sys.argv[2]) # added after
-endRange = int(sys.argv[3]) # added after
+# query = sys.argv[1] # added after
+# startRange = int(sys.argv[2]) # added after
+# endRange = int(sys.argv[3]) # added after
+
+query = "msft"
+startRange = 0
+endRange = 7
+
+
 
 #query: string, the search term
 #startRange: int, the earliest value to display, typical value is 0

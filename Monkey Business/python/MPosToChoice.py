@@ -4,14 +4,14 @@ import sys
 
 #This file is the function that takes the monkey tracking input value "X" position and translate that to the stock choice.
 
-inputList= sys.argv[1]
+# inputList= sys.argv[1]
 inputList=['AMZN', 'MSFT', 'AAPL', 'GOOG']
 # quantity= sys.argv[2]
 quantity = 2
-X= sys.argv[1]
-# X= random.randint(1080)
-screenWidth= sys.argv[2]
-# screenWidth=1080
+# X= sys.argv[1]
+X= random.randint(0,1080)
+# screenWidth= sys.argv[2]
+screenWidth=1080
 
 def defaultList():
     return ['AMZN', 'MSFT', 'AAPL', 'GOOG']
@@ -22,7 +22,7 @@ def defaultList():
 #quantity, int, the number of stocks the monkey is to choose between, if this value is greater than the input list, the function will return an error
 #this function returns a list of stock shortnames, culled to the quan tity specified, randomly
 def choicePicker(inputList, quantity):
-    if inputList==["default"]:
+    if inputList==[]:
         inputList=defaultList()
     output=[]
     if(len(inputList)<=0):
