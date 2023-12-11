@@ -2,11 +2,12 @@ import Express from 'express'
 import { validationErrorMiddleware, validator, loginSchema, signupSchema, stockSchema, monkeySchema } from './../middleware/validation.js'
 
 import { updateMonkey, getMonkeyInvestments } from './../services/monkeyServices.js'
-import { getInvestorStocks, searchForStock, updateStockCount, getStockInfo } from './../services/stockServices.js'
+import { getInvestorStocks, searchForStock, updateStockCount, getStockInfo, getGeneralStocks } from './../services/stockServices.js'
 import { login, signup, logout, updatePreferences, getPreferences, deleteUser } from './../services/userServices.js'
 
 import { isAuthenticated } from '../middleware/authentication.js'
 import { getAccountDetails, updateAccount, forgotPassword } from './../services/accountServices.js'
+
 
 const dataRouter = new Express.Router()
 
@@ -16,6 +17,8 @@ dataRouter.use(validationErrorMiddleware)
 dataRouter.get('/stocks/:search', searchForStock) // anyone can access * with restrictions to prevent abuse
 dataRouter.get('/stocks', getInvestorStocks) // corresponding user can get their stocks
 dataRouter.get('/stockDetails', getStockInfo)
+
+dataRouter.get('/generalstocks', getGeneralStocks)
 
 dataRouter.post('/stockChange', updateStockCount)
 

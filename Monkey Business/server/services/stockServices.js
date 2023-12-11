@@ -1,5 +1,5 @@
 import queryMongoDatabase from '../data/mongoController.js'
-import { getStockShort, getStockDetails, searchStockAPI } from './callPythonScripts.js'
+import { getStockShort, getStockDetails, searchStockAPI, russel1000API } from './callPythonScripts.js'
 
 export async function getStockInfo (req, res) {
   const stockName = req.body.stockName
@@ -181,4 +181,19 @@ export async function updateStockCount (req, res) {
       }
     }
   }, 'MonkeyBusinessWebApp')
+}
+
+
+export async function getGeneralStocks (req,res) {
+  const stockQuant = req.query.stockQuant 
+    if (StocknameArray === undefined) {
+      res.status(404).json({error: true, message: 'No Stock Name Provided'})
+
+    }
+    try {
+      const stockData = await russel1000API(stockQuant)
+      res.json(stockData)
+    } catch (err) {
+      console.log(err)
+    }
 }

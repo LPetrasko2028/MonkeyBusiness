@@ -1,4 +1,7 @@
 import random
+import sys
+
+quant = sys.argv[1]
 
 def reccomendStocks(quant):
 
@@ -23,11 +26,11 @@ def reccomendStocks(quant):
         quant=0
     i=0
     while(len(output)<quant):
-        temp=random.randint(0,999)
+        temp=random.randint(1,999)
         if (russel[temp] not in output):
             output.append(russel[temp])
             # i+=1
     return output
 
-print(reccomendStocks(1000))
+print(reccomendStocks(quant))
 
