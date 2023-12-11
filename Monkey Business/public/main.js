@@ -9,6 +9,7 @@
   var __getProtoOf = Object.getPrototypeOf;
   var __hasOwnProp = Object.prototype.hasOwnProperty;
   var __propIsEnum = Object.prototype.propertyIsEnumerable;
+  var __pow = Math.pow;
   var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
   var __spreadValues = (a, b) => {
     for (var prop in b || (b = {}))
@@ -69,7 +70,7 @@
           reject(e);
         }
       };
-      var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+      var step = (x2) => x2.done ? resolve(x2.value) : Promise.resolve(x2.value).then(fulfilled, rejected);
       step((generator = generator.apply(__this, __arguments)).next());
     });
   };
@@ -173,38 +174,38 @@
             ReactSharedInternals.ReactDebugCurrentFrame = ReactDebugCurrentFrame;
             ReactSharedInternals.ReactCurrentActQueue = ReactCurrentActQueue;
           }
-          function warn(format) {
+          function warn(format2) {
             {
               {
                 for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
                   args[_key - 1] = arguments[_key];
                 }
-                printWarning("warn", format, args);
+                printWarning("warn", format2, args);
               }
             }
           }
-          function error(format) {
+          function error(format2) {
             {
               {
                 for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
                   args[_key2 - 1] = arguments[_key2];
                 }
-                printWarning("error", format, args);
+                printWarning("error", format2, args);
               }
             }
           }
-          function printWarning(level, format, args) {
+          function printWarning(level, format2, args) {
             {
               var ReactDebugCurrentFrame2 = ReactSharedInternals.ReactDebugCurrentFrame;
               var stack = ReactDebugCurrentFrame2.getStackAddendum();
               if (stack !== "") {
-                format += "%s";
+                format2 += "%s";
                 args = args.concat([stack]);
               }
               var argsWithFormat = args.map(function(item) {
                 return String(item);
               });
-              argsWithFormat.unshift("Warning: " + format);
+              argsWithFormat.unshift("Warning: " + format2);
               Function.prototype.apply.call(console[level], console, argsWithFormat);
             }
           }
@@ -351,8 +352,8 @@
           function typeName(value) {
             {
               var hasToStringTag = typeof Symbol === "function" && Symbol.toStringTag;
-              var type = hasToStringTag && value[Symbol.toStringTag] || value.constructor.name || "Object";
-              return type;
+              var type2 = hasToStringTag && value[Symbol.toStringTag] || value.constructor.name || "Object";
+              return type2;
             }
           }
           function willCoercionThrow(value) {
@@ -384,25 +385,25 @@
             var functionName = innerType.displayName || innerType.name || "";
             return functionName !== "" ? wrapperName + "(" + functionName + ")" : wrapperName;
           }
-          function getContextName(type) {
-            return type.displayName || "Context";
+          function getContextName(type2) {
+            return type2.displayName || "Context";
           }
-          function getComponentNameFromType(type) {
-            if (type == null) {
+          function getComponentNameFromType(type2) {
+            if (type2 == null) {
               return null;
             }
             {
-              if (typeof type.tag === "number") {
+              if (typeof type2.tag === "number") {
                 error("Received an unexpected object in getComponentNameFromType(). This is likely a bug in React. Please file an issue.");
               }
             }
-            if (typeof type === "function") {
-              return type.displayName || type.name || null;
+            if (typeof type2 === "function") {
+              return type2.displayName || type2.name || null;
             }
-            if (typeof type === "string") {
-              return type;
+            if (typeof type2 === "string") {
+              return type2;
             }
-            switch (type) {
+            switch (type2) {
               case REACT_FRAGMENT_TYPE:
                 return "Fragment";
               case REACT_PORTAL_TYPE:
@@ -416,29 +417,29 @@
               case REACT_SUSPENSE_LIST_TYPE:
                 return "SuspenseList";
             }
-            if (typeof type === "object") {
-              switch (type.$$typeof) {
+            if (typeof type2 === "object") {
+              switch (type2.$$typeof) {
                 case REACT_CONTEXT_TYPE:
-                  var context5 = type;
+                  var context5 = type2;
                   return getContextName(context5) + ".Consumer";
                 case REACT_PROVIDER_TYPE:
-                  var provider = type;
+                  var provider = type2;
                   return getContextName(provider._context) + ".Provider";
                 case REACT_FORWARD_REF_TYPE:
-                  return getWrappedName(type, type.render, "ForwardRef");
+                  return getWrappedName(type2, type2.render, "ForwardRef");
                 case REACT_MEMO_TYPE:
-                  var outerName = type.displayName || null;
+                  var outerName = type2.displayName || null;
                   if (outerName !== null) {
                     return outerName;
                   }
-                  return getComponentNameFromType(type.type) || "Memo";
+                  return getComponentNameFromType(type2.type) || "Memo";
                 case REACT_LAZY_TYPE: {
-                  var lazyComponent = type;
+                  var lazyComponent = type2;
                   var payload = lazyComponent._payload;
-                  var init = lazyComponent._init;
+                  var init2 = lazyComponent._init;
                   try {
-                    return getComponentNameFromType(init(payload));
-                  } catch (x) {
+                    return getComponentNameFromType(init2(payload));
+                  } catch (x2) {
                     return null;
                   }
                 }
@@ -520,12 +521,12 @@
               }
             }
           }
-          var ReactElement = function(type, key, ref, self2, source, owner, props) {
+          var ReactElement = function(type2, key, ref, self2, source, owner, props) {
             var element = {
               // This tag allows us to uniquely identify this as a React Element
               $$typeof: REACT_ELEMENT_TYPE,
               // Built-in properties that belong on the element
-              type,
+              type: type2,
               key,
               ref,
               props,
@@ -559,7 +560,7 @@
             }
             return element;
           };
-          function createElement(type, config, children) {
+          function createElement(type2, config, children2) {
             var propName;
             var props = {};
             var key = null;
@@ -589,7 +590,7 @@
             }
             var childrenLength = arguments.length - 2;
             if (childrenLength === 1) {
-              props.children = children;
+              props.children = children2;
             } else if (childrenLength > 1) {
               var childArray = Array(childrenLength);
               for (var i = 0; i < childrenLength; i++) {
@@ -602,8 +603,8 @@
               }
               props.children = childArray;
             }
-            if (type && type.defaultProps) {
-              var defaultProps = type.defaultProps;
+            if (type2 && type2.defaultProps) {
+              var defaultProps = type2.defaultProps;
               for (propName in defaultProps) {
                 if (props[propName] === void 0) {
                   props[propName] = defaultProps[propName];
@@ -612,7 +613,7 @@
             }
             {
               if (key || ref) {
-                var displayName = typeof type === "function" ? type.displayName || type.name || "Unknown" : type;
+                var displayName = typeof type2 === "function" ? type2.displayName || type2.name || "Unknown" : type2;
                 if (key) {
                   defineKeyPropWarningGetter(props, displayName);
                 }
@@ -621,13 +622,13 @@
                 }
               }
             }
-            return ReactElement(type, key, ref, self2, source, ReactCurrentOwner.current, props);
+            return ReactElement(type2, key, ref, self2, source, ReactCurrentOwner.current, props);
           }
           function cloneAndReplaceKey(oldElement, newKey) {
             var newElement = ReactElement(oldElement.type, newKey, oldElement.ref, oldElement._self, oldElement._source, oldElement._owner, oldElement.props);
             return newElement;
           }
-          function cloneElement6(element, config, children) {
+          function cloneElement6(element, config, children2) {
             if (element === null || element === void 0) {
               throw new Error("React.cloneElement(...): The argument must be a React element, but you passed " + element + ".");
             }
@@ -665,7 +666,7 @@
             }
             var childrenLength = arguments.length - 2;
             if (childrenLength === 1) {
-              props.children = children;
+              props.children = children2;
             } else if (childrenLength > 1) {
               var childArray = Array(childrenLength);
               for (var i = 0; i < childrenLength; i++) {
@@ -705,22 +706,22 @@
             }
             return index.toString(36);
           }
-          function mapIntoArray(children, array, escapedPrefix, nameSoFar, callback) {
-            var type = typeof children;
-            if (type === "undefined" || type === "boolean") {
-              children = null;
+          function mapIntoArray(children2, array2, escapedPrefix, nameSoFar, callback) {
+            var type2 = typeof children2;
+            if (type2 === "undefined" || type2 === "boolean") {
+              children2 = null;
             }
             var invokeCallback = false;
-            if (children === null) {
+            if (children2 === null) {
               invokeCallback = true;
             } else {
-              switch (type) {
+              switch (type2) {
                 case "string":
                 case "number":
                   invokeCallback = true;
                   break;
                 case "object":
-                  switch (children.$$typeof) {
+                  switch (children2.$$typeof) {
                     case REACT_ELEMENT_TYPE:
                     case REACT_PORTAL_TYPE:
                       invokeCallback = true;
@@ -728,7 +729,7 @@
               }
             }
             if (invokeCallback) {
-              var _child = children;
+              var _child = children2;
               var mappedChild = callback(_child);
               var childKey = nameSoFar === "" ? SEPARATOR + getElementKey(_child, 0) : nameSoFar;
               if (isArray(mappedChild)) {
@@ -736,7 +737,7 @@
                 if (childKey != null) {
                   escapedChildKey = escapeUserProvidedKey(childKey) + "/";
                 }
-                mapIntoArray(mappedChild, array, escapedChildKey, "", function(c) {
+                mapIntoArray(mappedChild, array2, escapedChildKey, "", function(c) {
                   return c;
                 });
               } else if (mappedChild != null) {
@@ -758,7 +759,7 @@
                     ) : "") + childKey
                   );
                 }
-                array.push(mappedChild);
+                array2.push(mappedChild);
               }
               return 1;
             }
@@ -766,16 +767,16 @@
             var nextName;
             var subtreeCount = 0;
             var nextNamePrefix = nameSoFar === "" ? SEPARATOR : nameSoFar + SUBSEPARATOR;
-            if (isArray(children)) {
-              for (var i = 0; i < children.length; i++) {
-                child = children[i];
+            if (isArray(children2)) {
+              for (var i = 0; i < children2.length; i++) {
+                child = children2[i];
                 nextName = nextNamePrefix + getElementKey(child, i);
-                subtreeCount += mapIntoArray(child, array, escapedPrefix, nextName, callback);
+                subtreeCount += mapIntoArray(child, array2, escapedPrefix, nextName, callback);
               }
             } else {
-              var iteratorFn = getIteratorFn(children);
+              var iteratorFn = getIteratorFn(children2);
               if (typeof iteratorFn === "function") {
-                var iterableChildren = children;
+                var iterableChildren = children2;
                 {
                   if (iteratorFn === iterableChildren.entries) {
                     if (!didWarnAboutMaps) {
@@ -790,48 +791,48 @@
                 while (!(step = iterator.next()).done) {
                   child = step.value;
                   nextName = nextNamePrefix + getElementKey(child, ii++);
-                  subtreeCount += mapIntoArray(child, array, escapedPrefix, nextName, callback);
+                  subtreeCount += mapIntoArray(child, array2, escapedPrefix, nextName, callback);
                 }
-              } else if (type === "object") {
-                var childrenString = String(children);
-                throw new Error("Objects are not valid as a React child (found: " + (childrenString === "[object Object]" ? "object with keys {" + Object.keys(children).join(", ") + "}" : childrenString) + "). If you meant to render a collection of children, use an array instead.");
+              } else if (type2 === "object") {
+                var childrenString = String(children2);
+                throw new Error("Objects are not valid as a React child (found: " + (childrenString === "[object Object]" ? "object with keys {" + Object.keys(children2).join(", ") + "}" : childrenString) + "). If you meant to render a collection of children, use an array instead.");
               }
             }
             return subtreeCount;
           }
-          function mapChildren(children, func, context5) {
-            if (children == null) {
-              return children;
+          function mapChildren(children2, func, context5) {
+            if (children2 == null) {
+              return children2;
             }
             var result = [];
             var count = 0;
-            mapIntoArray(children, result, "", "", function(child) {
+            mapIntoArray(children2, result, "", "", function(child) {
               return func.call(context5, child, count++);
             });
             return result;
           }
-          function countChildren(children) {
+          function countChildren(children2) {
             var n = 0;
-            mapChildren(children, function() {
+            mapChildren(children2, function() {
               n++;
             });
             return n;
           }
-          function forEachChildren(children, forEachFunc, forEachContext) {
-            mapChildren(children, function() {
+          function forEachChildren(children2, forEachFunc, forEachContext) {
+            mapChildren(children2, function() {
               forEachFunc.apply(this, arguments);
             }, forEachContext);
           }
-          function toArray2(children) {
-            return mapChildren(children, function(child) {
+          function toArray2(children2) {
+            return mapChildren(children2, function(child) {
               return child;
             }) || [];
           }
-          function onlyChild(children) {
-            if (!isValidElement(children)) {
+          function onlyChild(children2) {
+            if (!isValidElement(children2)) {
               throw new Error("React.Children.only expected to receive a single React element child.");
             }
-            return children;
+            return children2;
           }
           function createContext11(defaultValue) {
             var context5 = {
@@ -1063,33 +1064,33 @@
           {
             REACT_MODULE_REFERENCE = Symbol.for("react.module.reference");
           }
-          function isValidElementType(type) {
-            if (typeof type === "string" || typeof type === "function") {
+          function isValidElementType(type2) {
+            if (typeof type2 === "string" || typeof type2 === "function") {
               return true;
             }
-            if (type === REACT_FRAGMENT_TYPE || type === REACT_PROFILER_TYPE || enableDebugTracing || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || enableLegacyHidden || type === REACT_OFFSCREEN_TYPE || enableScopeAPI || enableCacheElement || enableTransitionTracing) {
+            if (type2 === REACT_FRAGMENT_TYPE || type2 === REACT_PROFILER_TYPE || enableDebugTracing || type2 === REACT_STRICT_MODE_TYPE || type2 === REACT_SUSPENSE_TYPE || type2 === REACT_SUSPENSE_LIST_TYPE || enableLegacyHidden || type2 === REACT_OFFSCREEN_TYPE || enableScopeAPI || enableCacheElement || enableTransitionTracing) {
               return true;
             }
-            if (typeof type === "object" && type !== null) {
-              if (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || // This needs to include all possible module reference object
+            if (typeof type2 === "object" && type2 !== null) {
+              if (type2.$$typeof === REACT_LAZY_TYPE || type2.$$typeof === REACT_MEMO_TYPE || type2.$$typeof === REACT_PROVIDER_TYPE || type2.$$typeof === REACT_CONTEXT_TYPE || type2.$$typeof === REACT_FORWARD_REF_TYPE || // This needs to include all possible module reference object
               // types supported by any Flight configuration anywhere since
               // we don't know which Flight build this will end up being used
               // with.
-              type.$$typeof === REACT_MODULE_REFERENCE || type.getModuleId !== void 0) {
+              type2.$$typeof === REACT_MODULE_REFERENCE || type2.getModuleId !== void 0) {
                 return true;
               }
             }
             return false;
           }
-          function memo(type, compare) {
+          function memo(type2, compare) {
             {
-              if (!isValidElementType(type)) {
-                error("memo: The first argument must be a component. Instead received: %s", type === null ? "null" : typeof type);
+              if (!isValidElementType(type2)) {
+                error("memo: The first argument must be a component. Instead received: %s", type2 === null ? "null" : typeof type2);
               }
             }
             var elementType = {
               $$typeof: REACT_MEMO_TYPE,
-              type,
+              type: type2,
               compare: compare === void 0 ? null : compare
             };
             {
@@ -1102,8 +1103,8 @@
                 },
                 set: function(name) {
                   ownName = name;
-                  if (!type.name && !type.displayName) {
-                    type.displayName = name;
+                  if (!type2.name && !type2.displayName) {
+                    type2.displayName = name;
                   }
                 }
               });
@@ -1133,41 +1134,41 @@
             }
             return dispatcher.useContext(Context2);
           }
-          function useState17(initialState) {
+          function useState18(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
-          function useReducer2(reducer, initialArg, init) {
+          function useReducer2(reducer, initialArg, init2) {
             var dispatcher = resolveDispatcher();
-            return dispatcher.useReducer(reducer, initialArg, init);
+            return dispatcher.useReducer(reducer, initialArg, init2);
           }
-          function useRef14(initialValue) {
+          function useRef15(initialValue) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect19(create, deps) {
+          function useEffect20(create2, deps) {
             var dispatcher = resolveDispatcher();
-            return dispatcher.useEffect(create, deps);
+            return dispatcher.useEffect(create2, deps);
           }
-          function useInsertionEffect(create, deps) {
+          function useInsertionEffect(create2, deps) {
             var dispatcher = resolveDispatcher();
-            return dispatcher.useInsertionEffect(create, deps);
+            return dispatcher.useInsertionEffect(create2, deps);
           }
-          function useLayoutEffect2(create, deps) {
+          function useLayoutEffect2(create2, deps) {
             var dispatcher = resolveDispatcher();
-            return dispatcher.useLayoutEffect(create, deps);
+            return dispatcher.useLayoutEffect(create2, deps);
           }
           function useCallback12(callback, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useCallback(callback, deps);
           }
-          function useMemo11(create, deps) {
+          function useMemo11(create2, deps) {
             var dispatcher = resolveDispatcher();
-            return dispatcher.useMemo(create, deps);
+            return dispatcher.useMemo(create2, deps);
           }
-          function useImperativeHandle2(ref, create, deps) {
+          function useImperativeHandle2(ref, create2, deps) {
             var dispatcher = resolveDispatcher();
-            return dispatcher.useImperativeHandle(ref, create, deps);
+            return dispatcher.useImperativeHandle(ref, create2, deps);
           }
           function useDebugValue(value, formatterFn) {
             {
@@ -1276,8 +1277,8 @@
               if (prefix === void 0) {
                 try {
                   throw Error();
-                } catch (x) {
-                  var match = x.stack.trim().match(/\n( *(at )?)/);
+                } catch (x2) {
+                  var match = x2.stack.trim().match(/\n( *(at )?)/);
                   prefix = match && match[1] || "";
                 }
               }
@@ -1295,9 +1296,9 @@
               return "";
             }
             {
-              var frame = componentFrameCache.get(fn);
-              if (frame !== void 0) {
-                return frame;
+              var frame2 = componentFrameCache.get(fn);
+              if (frame2 !== void 0) {
+                return frame2;
               }
             }
             var control;
@@ -1323,23 +1324,23 @@
                 if (typeof Reflect === "object" && Reflect.construct) {
                   try {
                     Reflect.construct(Fake, []);
-                  } catch (x) {
-                    control = x;
+                  } catch (x2) {
+                    control = x2;
                   }
                   Reflect.construct(fn, [], Fake);
                 } else {
                   try {
                     Fake.call();
-                  } catch (x) {
-                    control = x;
+                  } catch (x2) {
+                    control = x2;
                   }
                   fn.call(Fake.prototype);
                 }
               } else {
                 try {
                   throw Error();
-                } catch (x) {
-                  control = x;
+                } catch (x2) {
+                  control = x2;
                 }
                 fn();
               }
@@ -1402,37 +1403,37 @@
             var prototype = Component2.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
-          function describeUnknownElementTypeFrameInDEV(type, source, ownerFn) {
-            if (type == null) {
+          function describeUnknownElementTypeFrameInDEV(type2, source, ownerFn) {
+            if (type2 == null) {
               return "";
             }
-            if (typeof type === "function") {
+            if (typeof type2 === "function") {
               {
-                return describeNativeComponentFrame(type, shouldConstruct(type));
+                return describeNativeComponentFrame(type2, shouldConstruct(type2));
               }
             }
-            if (typeof type === "string") {
-              return describeBuiltInComponentFrame(type);
+            if (typeof type2 === "string") {
+              return describeBuiltInComponentFrame(type2);
             }
-            switch (type) {
+            switch (type2) {
               case REACT_SUSPENSE_TYPE:
                 return describeBuiltInComponentFrame("Suspense");
               case REACT_SUSPENSE_LIST_TYPE:
                 return describeBuiltInComponentFrame("SuspenseList");
             }
-            if (typeof type === "object") {
-              switch (type.$$typeof) {
+            if (typeof type2 === "object") {
+              switch (type2.$$typeof) {
                 case REACT_FORWARD_REF_TYPE:
-                  return describeFunctionComponentFrame(type.render);
+                  return describeFunctionComponentFrame(type2.render);
                 case REACT_MEMO_TYPE:
-                  return describeUnknownElementTypeFrameInDEV(type.type, source, ownerFn);
+                  return describeUnknownElementTypeFrameInDEV(type2.type, source, ownerFn);
                 case REACT_LAZY_TYPE: {
-                  var lazyComponent = type;
+                  var lazyComponent = type2;
                   var payload = lazyComponent._payload;
-                  var init = lazyComponent._init;
+                  var init2 = lazyComponent._init;
                   try {
-                    return describeUnknownElementTypeFrameInDEV(init(payload), source, ownerFn);
-                  } catch (x) {
+                    return describeUnknownElementTypeFrameInDEV(init2(payload), source, ownerFn);
+                  } catch (x2) {
                   }
                 }
               }
@@ -1584,29 +1585,29 @@
           }
           function validatePropTypes(element) {
             {
-              var type = element.type;
-              if (type === null || type === void 0 || typeof type === "string") {
+              var type2 = element.type;
+              if (type2 === null || type2 === void 0 || typeof type2 === "string") {
                 return;
               }
               var propTypes2;
-              if (typeof type === "function") {
-                propTypes2 = type.propTypes;
-              } else if (typeof type === "object" && (type.$$typeof === REACT_FORWARD_REF_TYPE || // Note: Memo only checks outer props here.
+              if (typeof type2 === "function") {
+                propTypes2 = type2.propTypes;
+              } else if (typeof type2 === "object" && (type2.$$typeof === REACT_FORWARD_REF_TYPE || // Note: Memo only checks outer props here.
               // Inner props are checked in the reconciler.
-              type.$$typeof === REACT_MEMO_TYPE)) {
-                propTypes2 = type.propTypes;
+              type2.$$typeof === REACT_MEMO_TYPE)) {
+                propTypes2 = type2.propTypes;
               } else {
                 return;
               }
               if (propTypes2) {
-                var name = getComponentNameFromType(type);
+                var name = getComponentNameFromType(type2);
                 checkPropTypes(propTypes2, element.props, "prop", name, element);
-              } else if (type.PropTypes !== void 0 && !propTypesMisspellWarningShown) {
+              } else if (type2.PropTypes !== void 0 && !propTypesMisspellWarningShown) {
                 propTypesMisspellWarningShown = true;
-                var _name = getComponentNameFromType(type);
+                var _name = getComponentNameFromType(type2);
                 error("Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?", _name || "Unknown");
               }
-              if (typeof type.getDefaultProps === "function" && !type.getDefaultProps.isReactClassApproved) {
+              if (typeof type2.getDefaultProps === "function" && !type2.getDefaultProps.isReactClassApproved) {
                 error("getDefaultProps is only used on classic React.createClass definitions. Use a static property named `defaultProps` instead.");
               }
             }
@@ -1630,11 +1631,11 @@
               }
             }
           }
-          function createElementWithValidation(type, props, children) {
-            var validType = isValidElementType(type);
+          function createElementWithValidation(type2, props, children2) {
+            var validType = isValidElementType(type2);
             if (!validType) {
               var info = "";
-              if (type === void 0 || typeof type === "object" && type !== null && Object.keys(type).length === 0) {
+              if (type2 === void 0 || typeof type2 === "object" && type2 !== null && Object.keys(type2).length === 0) {
                 info += " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.";
               }
               var sourceInfo = getSourceInfoErrorAddendumForProps(props);
@@ -1644,15 +1645,15 @@
                 info += getDeclarationErrorAddendum();
               }
               var typeString;
-              if (type === null) {
+              if (type2 === null) {
                 typeString = "null";
-              } else if (isArray(type)) {
+              } else if (isArray(type2)) {
                 typeString = "array";
-              } else if (type !== void 0 && type.$$typeof === REACT_ELEMENT_TYPE) {
-                typeString = "<" + (getComponentNameFromType(type.type) || "Unknown") + " />";
+              } else if (type2 !== void 0 && type2.$$typeof === REACT_ELEMENT_TYPE) {
+                typeString = "<" + (getComponentNameFromType(type2.type) || "Unknown") + " />";
                 info = " Did you accidentally export a JSX literal instead of a component?";
               } else {
-                typeString = typeof type;
+                typeString = typeof type2;
               }
               {
                 error("React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, info);
@@ -1664,10 +1665,10 @@
             }
             if (validType) {
               for (var i = 2; i < arguments.length; i++) {
-                validateChildKeys(arguments[i], type);
+                validateChildKeys(arguments[i], type2);
               }
             }
-            if (type === REACT_FRAGMENT_TYPE) {
+            if (type2 === REACT_FRAGMENT_TYPE) {
               validateFragmentProps(element);
             } else {
               validatePropTypes(element);
@@ -1675,9 +1676,9 @@
             return element;
           }
           var didWarnAboutDeprecatedCreateFactory = false;
-          function createFactoryWithValidation(type) {
-            var validatedFactory = createElementWithValidation.bind(null, type);
-            validatedFactory.type = type;
+          function createFactoryWithValidation(type2) {
+            var validatedFactory = createElementWithValidation.bind(null, type2);
+            validatedFactory.type = type2;
             {
               if (!didWarnAboutDeprecatedCreateFactory) {
                 didWarnAboutDeprecatedCreateFactory = true;
@@ -1688,15 +1689,15 @@
                 get: function() {
                   warn("Factory.type is deprecated. Access the class directly before passing it to createFactory.");
                   Object.defineProperty(this, "type", {
-                    value: type
+                    value: type2
                   });
-                  return type;
+                  return type2;
                 }
               });
             }
             return validatedFactory;
           }
-          function cloneElementWithValidation(element, props, children) {
+          function cloneElementWithValidation(element, props, children2) {
             var newElement = cloneElement6.apply(this, arguments);
             for (var i = 2; i < arguments.length; i++) {
               validateChildKeys(arguments[i], newElement.type);
@@ -1927,15 +1928,15 @@
           exports.useContext = useContext14;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect19;
+          exports.useEffect = useEffect20;
           exports.useId = useId;
           exports.useImperativeHandle = useImperativeHandle2;
           exports.useInsertionEffect = useInsertionEffect;
           exports.useLayoutEffect = useLayoutEffect2;
           exports.useMemo = useMemo11;
           exports.useReducer = useReducer2;
-          exports.useRef = useRef14;
-          exports.useState = useState17;
+          exports.useRef = useRef15;
+          exports.useState = useState18;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition2;
           exports.version = ReactVersion;
@@ -2012,21 +2013,21 @@
             var halfLength = length >>> 1;
             while (index < halfLength) {
               var leftIndex = (index + 1) * 2 - 1;
-              var left = heap[leftIndex];
+              var left2 = heap[leftIndex];
               var rightIndex = leftIndex + 1;
-              var right = heap[rightIndex];
-              if (compare(left, node) < 0) {
-                if (rightIndex < length && compare(right, left) < 0) {
-                  heap[index] = right;
+              var right2 = heap[rightIndex];
+              if (compare(left2, node) < 0) {
+                if (rightIndex < length && compare(right2, left2) < 0) {
+                  heap[index] = right2;
                   heap[rightIndex] = node;
                   index = rightIndex;
                 } else {
-                  heap[index] = left;
+                  heap[index] = left2;
                   heap[leftIndex] = node;
                   index = leftIndex;
                 }
-              } else if (rightIndex < length && compare(right, node) < 0) {
-                heap[index] = right;
+              } else if (rightIndex < length && compare(right2, node) < 0) {
+                heap[index] = right2;
                 heap[rightIndex] = node;
                 index = rightIndex;
               } else {
@@ -2052,10 +2053,10 @@
               return localPerformance.now();
             };
           } else {
-            var localDate = Date;
-            var initialTime = localDate.now();
+            var localDate2 = Date;
+            var initialTime = localDate2.now();
             exports.unstable_now = function() {
-              return localDate.now() - initialTime;
+              return localDate2.now() - initialTime;
             };
           }
           var maxSigned31BitInt = 1073741823;
@@ -2077,18 +2078,18 @@
           var localSetImmediate = typeof setImmediate !== "undefined" ? setImmediate : null;
           var isInputPending = typeof navigator !== "undefined" && navigator.scheduling !== void 0 && navigator.scheduling.isInputPending !== void 0 ? navigator.scheduling.isInputPending.bind(navigator.scheduling) : null;
           function advanceTimers(currentTime) {
-            var timer = peek(timerQueue);
-            while (timer !== null) {
-              if (timer.callback === null) {
+            var timer2 = peek(timerQueue);
+            while (timer2 !== null) {
+              if (timer2.callback === null) {
                 pop(timerQueue);
-              } else if (timer.startTime <= currentTime) {
+              } else if (timer2.startTime <= currentTime) {
                 pop(timerQueue);
-                timer.sortIndex = timer.expirationTime;
-                push(taskQueue, timer);
+                timer2.sortIndex = timer2.expirationTime;
+                push(taskQueue, timer2);
               } else {
                 return;
               }
-              timer = peek(timerQueue);
+              timer2 = peek(timerQueue);
             }
           }
           function handleTimeout(currentTime) {
@@ -2237,26 +2238,26 @@
             } else {
               startTime2 = currentTime;
             }
-            var timeout2;
+            var timeout3;
             switch (priorityLevel) {
               case ImmediatePriority:
-                timeout2 = IMMEDIATE_PRIORITY_TIMEOUT;
+                timeout3 = IMMEDIATE_PRIORITY_TIMEOUT;
                 break;
               case UserBlockingPriority:
-                timeout2 = USER_BLOCKING_PRIORITY_TIMEOUT;
+                timeout3 = USER_BLOCKING_PRIORITY_TIMEOUT;
                 break;
               case IdlePriority:
-                timeout2 = IDLE_PRIORITY_TIMEOUT;
+                timeout3 = IDLE_PRIORITY_TIMEOUT;
                 break;
               case LowPriority:
-                timeout2 = LOW_PRIORITY_TIMEOUT;
+                timeout3 = LOW_PRIORITY_TIMEOUT;
                 break;
               case NormalPriority:
               default:
-                timeout2 = NORMAL_PRIORITY_TIMEOUT;
+                timeout3 = NORMAL_PRIORITY_TIMEOUT;
                 break;
             }
-            var expirationTime = startTime2 + timeout2;
+            var expirationTime = startTime2 + timeout3;
             var newTask = {
               id: taskIdCounter++,
               callback,
@@ -2431,47 +2432,47 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React87 = require_react();
+          var React89 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React87.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React89.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
               suppressWarning = newSuppressWarning;
             }
           }
-          function warn(format) {
+          function warn(format2) {
             {
               if (!suppressWarning) {
                 for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
                   args[_key - 1] = arguments[_key];
                 }
-                printWarning("warn", format, args);
+                printWarning("warn", format2, args);
               }
             }
           }
-          function error(format) {
+          function error(format2) {
             {
               if (!suppressWarning) {
                 for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
                   args[_key2 - 1] = arguments[_key2];
                 }
-                printWarning("error", format, args);
+                printWarning("error", format2, args);
               }
             }
           }
-          function printWarning(level, format, args) {
+          function printWarning(level, format2, args) {
             {
               var ReactDebugCurrentFrame2 = ReactSharedInternals.ReactDebugCurrentFrame;
               var stack = ReactDebugCurrentFrame2.getStackAddendum();
               if (stack !== "") {
-                format += "%s";
+                format2 += "%s";
                 args = args.concat([stack]);
               }
               var argsWithFormat = args.map(function(item) {
                 return String(item);
               });
-              argsWithFormat.unshift("Warning: " + format);
+              argsWithFormat.unshift("Warning: " + format2);
               Function.prototype.apply.call(console[level], console, argsWithFormat);
             }
           }
@@ -2541,8 +2542,8 @@
           function typeName(value) {
             {
               var hasToStringTag = typeof Symbol === "function" && Symbol.toStringTag;
-              var type = hasToStringTag && value[Symbol.toStringTag] || value.constructor.name || "Object";
-              return type;
+              var type2 = hasToStringTag && value[Symbol.toStringTag] || value.constructor.name || "Object";
+              return type2;
             }
           }
           function willCoercionThrow(value) {
@@ -2697,13 +2698,13 @@
           function getPropertyInfo(name) {
             return properties.hasOwnProperty(name) ? properties[name] : null;
           }
-          function PropertyInfoRecord(name, type, mustUseProperty, attributeName, attributeNamespace, sanitizeURL2, removeEmptyString) {
-            this.acceptsBooleans = type === BOOLEANISH_STRING || type === BOOLEAN || type === OVERLOADED_BOOLEAN;
+          function PropertyInfoRecord(name, type2, mustUseProperty, attributeName, attributeNamespace, sanitizeURL2, removeEmptyString) {
+            this.acceptsBooleans = type2 === BOOLEANISH_STRING || type2 === BOOLEAN || type2 === OVERLOADED_BOOLEAN;
             this.attributeName = attributeName;
             this.attributeNamespace = attributeNamespace;
             this.mustUseProperty = mustUseProperty;
             this.propertyName = name;
-            this.type = type;
+            this.type = type2;
             this.sanitizeURL = sanitizeURL2;
             this.removeEmptyString = removeEmptyString;
           }
@@ -3192,8 +3193,8 @@
             if (mustUseProperty) {
               var propertyName = propertyInfo.propertyName;
               if (value === null) {
-                var type = propertyInfo.type;
-                node[propertyName] = type === BOOLEAN ? false : "";
+                var type2 = propertyInfo.type;
+                node[propertyName] = type2 === BOOLEAN ? false : "";
               } else {
                 node[propertyName] = value;
               }
@@ -3341,8 +3342,8 @@
               if (prefix === void 0) {
                 try {
                   throw Error();
-                } catch (x) {
-                  var match = x.stack.trim().match(/\n( *(at )?)/);
+                } catch (x2) {
+                  var match = x2.stack.trim().match(/\n( *(at )?)/);
                   prefix = match && match[1] || "";
                 }
               }
@@ -3360,9 +3361,9 @@
               return "";
             }
             {
-              var frame = componentFrameCache.get(fn);
-              if (frame !== void 0) {
-                return frame;
+              var frame2 = componentFrameCache.get(fn);
+              if (frame2 !== void 0) {
+                return frame2;
               }
             }
             var control;
@@ -3388,23 +3389,23 @@
                 if (typeof Reflect === "object" && Reflect.construct) {
                   try {
                     Reflect.construct(Fake, []);
-                  } catch (x) {
-                    control = x;
+                  } catch (x2) {
+                    control = x2;
                   }
                   Reflect.construct(fn, [], Fake);
                 } else {
                   try {
                     Fake.call();
-                  } catch (x) {
-                    control = x;
+                  } catch (x2) {
+                    control = x2;
                   }
                   fn.call(Fake.prototype);
                 }
               } else {
                 try {
                   throw Error();
-                } catch (x) {
-                  control = x;
+                } catch (x2) {
+                  control = x2;
                 }
                 fn();
               }
@@ -3472,37 +3473,37 @@
             var prototype = Component.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
-          function describeUnknownElementTypeFrameInDEV(type, source, ownerFn) {
-            if (type == null) {
+          function describeUnknownElementTypeFrameInDEV(type2, source, ownerFn) {
+            if (type2 == null) {
               return "";
             }
-            if (typeof type === "function") {
+            if (typeof type2 === "function") {
               {
-                return describeNativeComponentFrame(type, shouldConstruct(type));
+                return describeNativeComponentFrame(type2, shouldConstruct(type2));
               }
             }
-            if (typeof type === "string") {
-              return describeBuiltInComponentFrame(type);
+            if (typeof type2 === "string") {
+              return describeBuiltInComponentFrame(type2);
             }
-            switch (type) {
+            switch (type2) {
               case REACT_SUSPENSE_TYPE:
                 return describeBuiltInComponentFrame("Suspense");
               case REACT_SUSPENSE_LIST_TYPE:
                 return describeBuiltInComponentFrame("SuspenseList");
             }
-            if (typeof type === "object") {
-              switch (type.$$typeof) {
+            if (typeof type2 === "object") {
+              switch (type2.$$typeof) {
                 case REACT_FORWARD_REF_TYPE:
-                  return describeFunctionComponentFrame(type.render);
+                  return describeFunctionComponentFrame(type2.render);
                 case REACT_MEMO_TYPE:
-                  return describeUnknownElementTypeFrameInDEV(type.type, source, ownerFn);
+                  return describeUnknownElementTypeFrameInDEV(type2.type, source, ownerFn);
                 case REACT_LAZY_TYPE: {
-                  var lazyComponent = type;
+                  var lazyComponent = type2;
                   var payload = lazyComponent._payload;
-                  var init = lazyComponent._init;
+                  var init2 = lazyComponent._init;
                   try {
-                    return describeUnknownElementTypeFrameInDEV(init(payload), source, ownerFn);
-                  } catch (x) {
+                    return describeUnknownElementTypeFrameInDEV(init2(payload), source, ownerFn);
+                  } catch (x2) {
                   }
                 }
               }
@@ -3542,8 +3543,8 @@
                 node = node.return;
               } while (node);
               return info;
-            } catch (x) {
-              return "\nError generating stack: " + x.message + "\n" + x.stack;
+            } catch (x2) {
+              return "\nError generating stack: " + x2.message + "\n" + x2.stack;
             }
           }
           function getWrappedName(outerType, innerType, wrapperName) {
@@ -3554,25 +3555,25 @@
             var functionName = innerType.displayName || innerType.name || "";
             return functionName !== "" ? wrapperName + "(" + functionName + ")" : wrapperName;
           }
-          function getContextName(type) {
-            return type.displayName || "Context";
+          function getContextName(type2) {
+            return type2.displayName || "Context";
           }
-          function getComponentNameFromType(type) {
-            if (type == null) {
+          function getComponentNameFromType(type2) {
+            if (type2 == null) {
               return null;
             }
             {
-              if (typeof type.tag === "number") {
+              if (typeof type2.tag === "number") {
                 error("Received an unexpected object in getComponentNameFromType(). This is likely a bug in React. Please file an issue.");
               }
             }
-            if (typeof type === "function") {
-              return type.displayName || type.name || null;
+            if (typeof type2 === "function") {
+              return type2.displayName || type2.name || null;
             }
-            if (typeof type === "string") {
-              return type;
+            if (typeof type2 === "string") {
+              return type2;
             }
-            switch (type) {
+            switch (type2) {
               case REACT_FRAGMENT_TYPE:
                 return "Fragment";
               case REACT_PORTAL_TYPE:
@@ -3586,29 +3587,29 @@
               case REACT_SUSPENSE_LIST_TYPE:
                 return "SuspenseList";
             }
-            if (typeof type === "object") {
-              switch (type.$$typeof) {
+            if (typeof type2 === "object") {
+              switch (type2.$$typeof) {
                 case REACT_CONTEXT_TYPE:
-                  var context5 = type;
+                  var context5 = type2;
                   return getContextName(context5) + ".Consumer";
                 case REACT_PROVIDER_TYPE:
-                  var provider = type;
+                  var provider = type2;
                   return getContextName(provider._context) + ".Provider";
                 case REACT_FORWARD_REF_TYPE:
-                  return getWrappedName(type, type.render, "ForwardRef");
+                  return getWrappedName(type2, type2.render, "ForwardRef");
                 case REACT_MEMO_TYPE:
-                  var outerName = type.displayName || null;
+                  var outerName = type2.displayName || null;
                   if (outerName !== null) {
                     return outerName;
                   }
-                  return getComponentNameFromType(type.type) || "Memo";
+                  return getComponentNameFromType(type2.type) || "Memo";
                 case REACT_LAZY_TYPE: {
-                  var lazyComponent = type;
+                  var lazyComponent = type2;
                   var payload = lazyComponent._payload;
-                  var init = lazyComponent._init;
+                  var init2 = lazyComponent._init;
                   try {
-                    return getComponentNameFromType(init(payload));
-                  } catch (x) {
+                    return getComponentNameFromType(init2(payload));
+                  } catch (x2) {
                     return null;
                   }
                 }
@@ -3620,28 +3621,28 @@
             var functionName = innerType.displayName || innerType.name || "";
             return outerType.displayName || (functionName !== "" ? wrapperName + "(" + functionName + ")" : wrapperName);
           }
-          function getContextName$1(type) {
-            return type.displayName || "Context";
+          function getContextName$1(type2) {
+            return type2.displayName || "Context";
           }
           function getComponentNameFromFiber(fiber) {
-            var tag = fiber.tag, type = fiber.type;
+            var tag = fiber.tag, type2 = fiber.type;
             switch (tag) {
               case CacheComponent:
                 return "Cache";
               case ContextConsumer:
-                var context5 = type;
+                var context5 = type2;
                 return getContextName$1(context5) + ".Consumer";
               case ContextProvider:
-                var provider = type;
+                var provider = type2;
                 return getContextName$1(provider._context) + ".Provider";
               case DehydratedFragment:
                 return "DehydratedFragment";
               case ForwardRef:
-                return getWrappedName$1(type, type.render, "ForwardRef");
+                return getWrappedName$1(type2, type2.render, "ForwardRef");
               case Fragment:
                 return "Fragment";
               case HostComponent:
-                return type;
+                return type2;
               case HostPortal:
                 return "Portal";
               case HostRoot:
@@ -3649,9 +3650,9 @@
               case HostText:
                 return "Text";
               case LazyComponent:
-                return getComponentNameFromType(type);
+                return getComponentNameFromType(type2);
               case Mode:
-                if (type === REACT_STRICT_MODE_TYPE) {
+                if (type2 === REACT_STRICT_MODE_TYPE) {
                   return "StrictMode";
                 }
                 return "Mode";
@@ -3673,11 +3674,11 @@
               case IndeterminateComponent:
               case MemoComponent:
               case SimpleMemoComponent:
-                if (typeof type === "function") {
-                  return type.displayName || type.name || null;
+                if (typeof type2 === "function") {
+                  return type2.displayName || type2.name || null;
                 }
-                if (typeof type === "string") {
-                  return type;
+                if (typeof type2 === "string") {
+                  return type2;
                 }
                 break;
             }
@@ -3769,9 +3770,9 @@
             }
           }
           function isCheckable(elem) {
-            var type = elem.type;
+            var type2 = elem.type;
             var nodeName = elem.nodeName;
-            return nodeName && nodeName.toLowerCase() === "input" && (type === "checkbox" || type === "radio");
+            return nodeName && nodeName.toLowerCase() === "input" && (type2 === "checkbox" || type2 === "radio");
           }
           function getTracker(node) {
             return node._valueTracker;
@@ -3801,18 +3802,18 @@
             if (node.hasOwnProperty(valueField) || typeof descriptor === "undefined" || typeof descriptor.get !== "function" || typeof descriptor.set !== "function") {
               return;
             }
-            var get2 = descriptor.get, set2 = descriptor.set;
+            var get4 = descriptor.get, set4 = descriptor.set;
             Object.defineProperty(node, valueField, {
               configurable: true,
               get: function() {
-                return get2.call(this);
+                return get4.call(this);
               },
               set: function(value) {
                 {
                   checkFormFieldValueStringCoercion(value);
                 }
                 currentValue = "" + value;
-                set2.call(this, value);
+                set4.call(this, value);
               }
             });
             Object.defineProperty(node, valueField, {
@@ -3929,9 +3930,9 @@
             }
             updateChecked(element, props);
             var value = getToStringValue(props.value);
-            var type = props.type;
+            var type2 = props.type;
             if (value != null) {
-              if (type === "number") {
+              if (type2 === "number") {
                 if (value === 0 && node.value === "" || // We explicitly want to coerce to number here if possible.
                 // eslint-disable-next-line
                 node.value != value) {
@@ -3940,7 +3941,7 @@
               } else if (node.value !== toString(value)) {
                 node.value = toString(value);
               }
-            } else if (type === "submit" || type === "reset") {
+            } else if (type2 === "submit" || type2 === "reset") {
               node.removeAttribute("value");
               return;
             }
@@ -3960,8 +3961,8 @@
           function postMountWrapper(element, props, isHydrating2) {
             var node = element;
             if (props.hasOwnProperty("value") || props.hasOwnProperty("defaultValue")) {
-              var type = props.type;
-              var isButton = type === "submit" || type === "reset";
+              var type2 = props.type;
+              var isButton = type2 === "submit" || type2 === "reset";
               if (isButton && (props.value === void 0 || props.value === null)) {
                 return;
               }
@@ -4019,10 +4020,10 @@
               }
             }
           }
-          function setDefaultValue(node, type, value) {
+          function setDefaultValue(node, type2, value) {
             if (
               // Focused number inputs synchronize on blur. See ChangeEventPlugin.js
-              type !== "number" || getActiveElement(node.ownerDocument) !== node
+              type2 !== "number" || getActiveElement(node.ownerDocument) !== node
             ) {
               if (value == null) {
                 node.defaultValue = toString(node._wrapperState.initialValue);
@@ -4038,7 +4039,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React87.Children.forEach(props.children, function(child) {
+                  React89.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -4214,8 +4215,8 @@
             }
             var initialValue = props.value;
             if (initialValue == null) {
-              var children = props.children, defaultValue = props.defaultValue;
-              if (children != null) {
+              var children2 = props.children, defaultValue = props.defaultValue;
+              if (children2 != null) {
                 {
                   error("Use the `defaultValue` or `value` props instead of setting children on <textarea>.");
                 }
@@ -4223,13 +4224,13 @@
                   if (defaultValue != null) {
                     throw new Error("If you supply `defaultValue` on a <textarea>, do not pass children.");
                   }
-                  if (isArray(children)) {
-                    if (children.length > 1) {
+                  if (isArray(children2)) {
+                    if (children2.length > 1) {
                       throw new Error("<textarea> can only have at most one child.");
                     }
-                    children = children[0];
+                    children2 = children2[0];
                   }
-                  defaultValue = children;
+                  defaultValue = children2;
                 }
               }
               if (defaultValue == null) {
@@ -4273,8 +4274,8 @@
           var HTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
           var MATH_NAMESPACE = "http://www.w3.org/1998/Math/MathML";
           var SVG_NAMESPACE = "http://www.w3.org/2000/svg";
-          function getIntrinsicNamespace(type) {
-            switch (type) {
+          function getIntrinsicNamespace(type2) {
+            switch (type2) {
               case "svg":
                 return SVG_NAMESPACE;
               case "math":
@@ -4283,11 +4284,11 @@
                 return HTML_NAMESPACE;
             }
           }
-          function getChildNamespace(parentNamespace, type) {
+          function getChildNamespace(parentNamespace, type2) {
             if (parentNamespace == null || parentNamespace === HTML_NAMESPACE) {
-              return getIntrinsicNamespace(type);
+              return getIntrinsicNamespace(type2);
             }
-            if (parentNamespace === SVG_NAMESPACE && type === "foreignObject") {
+            if (parentNamespace === SVG_NAMESPACE && type2 === "foreignObject") {
               return HTML_NAMESPACE;
             }
             return parentNamespace;
@@ -4309,12 +4310,12 @@
               if (!("innerHTML" in node)) {
                 reusableSVGContainer = reusableSVGContainer || document.createElement("div");
                 reusableSVGContainer.innerHTML = "<svg>" + html.valueOf().toString() + "</svg>";
-                var svgNode = reusableSVGContainer.firstChild;
+                var svgNode2 = reusableSVGContainer.firstChild;
                 while (node.firstChild) {
                   node.removeChild(node.firstChild);
                 }
-                while (svgNode.firstChild) {
-                  node.appendChild(svgNode.firstChild);
+                while (svgNode2.firstChild) {
+                  node.appendChild(svgNode2.firstChild);
                 }
                 return;
               }
@@ -4434,9 +4435,9 @@
           function prefixKey(prefix2, key) {
             return prefix2 + key.charAt(0).toUpperCase() + key.substring(1);
           }
-          var prefixes = ["Webkit", "ms", "Moz", "O"];
+          var prefixes2 = ["Webkit", "ms", "Moz", "O"];
           Object.keys(isUnitlessNumber).forEach(function(prop) {
-            prefixes.forEach(function(prefix2) {
+            prefixes2.forEach(function(prefix2) {
               isUnitlessNumber[prefixKey(prefix2, prop)] = isUnitlessNumber[prop];
             });
           });
@@ -4542,11 +4543,11 @@
                 if (!styles.hasOwnProperty(styleName)) {
                   continue;
                 }
-                var styleValue = styles[styleName];
-                if (styleValue != null) {
+                var styleValue2 = styles[styleName];
+                if (styleValue2 != null) {
                   var isCustomProperty = styleName.indexOf("--") === 0;
                   serialized += delimiter + (isCustomProperty ? styleName : hyphenateStyleName2(styleName)) + ":";
-                  serialized += dangerousStyleValue(styleName, styleValue, isCustomProperty);
+                  serialized += dangerousStyleValue(styleName, styleValue2, isCustomProperty);
                   delimiter = ";";
                 }
               }
@@ -4565,14 +4566,14 @@
                   warnValidStyle$1(styleName, styles[styleName]);
                 }
               }
-              var styleValue = dangerousStyleValue(styleName, styles[styleName], isCustomProperty);
+              var styleValue2 = dangerousStyleValue(styleName, styles[styleName], isCustomProperty);
               if (styleName === "float") {
                 styleName = "cssFloat";
               }
               if (isCustomProperty) {
-                style3.setProperty(styleName, styleValue);
+                style3.setProperty(styleName, styleValue2);
               } else {
-                style3[styleName] = styleValue;
+                style3[styleName] = styleValue2;
               }
             }
           }
@@ -5263,11 +5264,11 @@
             }
             return true;
           }
-          function warnInvalidARIAProps(type, props) {
+          function warnInvalidARIAProps(type2, props) {
             {
               var invalidProps = [];
               for (var key in props) {
-                var isValid = validateProperty(type, key);
+                var isValid = validateProperty(type2, key);
                 if (!isValid) {
                   invalidProps.push(key);
                 }
@@ -5276,30 +5277,30 @@
                 return "`" + prop + "`";
               }).join(", ");
               if (invalidProps.length === 1) {
-                error("Invalid aria prop %s on <%s> tag. For details, see https://reactjs.org/link/invalid-aria-props", unknownPropString, type);
+                error("Invalid aria prop %s on <%s> tag. For details, see https://reactjs.org/link/invalid-aria-props", unknownPropString, type2);
               } else if (invalidProps.length > 1) {
-                error("Invalid aria props %s on <%s> tag. For details, see https://reactjs.org/link/invalid-aria-props", unknownPropString, type);
+                error("Invalid aria props %s on <%s> tag. For details, see https://reactjs.org/link/invalid-aria-props", unknownPropString, type2);
               }
             }
           }
-          function validateProperties(type, props) {
-            if (isCustomComponent(type, props)) {
+          function validateProperties(type2, props) {
+            if (isCustomComponent(type2, props)) {
               return;
             }
-            warnInvalidARIAProps(type, props);
+            warnInvalidARIAProps(type2, props);
           }
           var didWarnValueNull = false;
-          function validateProperties$1(type, props) {
+          function validateProperties$1(type2, props) {
             {
-              if (type !== "input" && type !== "textarea" && type !== "select") {
+              if (type2 !== "input" && type2 !== "textarea" && type2 !== "select") {
                 return;
               }
               if (props != null && props.value === null && !didWarnValueNull) {
                 didWarnValueNull = true;
-                if (type === "select" && props.multiple) {
-                  error("`value` prop on `%s` should not be null. Consider using an empty array when `multiple` is set to `true` to clear the component or `undefined` for uncontrolled components.", type);
+                if (type2 === "select" && props.multiple) {
+                  error("`value` prop on `%s` should not be null. Consider using an empty array when `multiple` is set to `true` to clear the component or `undefined` for uncontrolled components.", type2);
                 } else {
-                  error("`value` prop on `%s` should not be null. Consider using an empty string to clear the component or `undefined` for uncontrolled components.", type);
+                  error("`value` prop on `%s` should not be null. Consider using an empty string to clear the component or `undefined` for uncontrolled components.", type2);
                 }
               }
             }
@@ -5406,11 +5407,11 @@
               return true;
             };
           }
-          var warnUnknownProperties = function(type, props, eventRegistry) {
+          var warnUnknownProperties = function(type2, props, eventRegistry) {
             {
               var unknownProps = [];
               for (var key in props) {
-                var isValid = validateProperty$1(type, key, props[key], eventRegistry);
+                var isValid = validateProperty$1(type2, key, props[key], eventRegistry);
                 if (!isValid) {
                   unknownProps.push(key);
                 }
@@ -5419,17 +5420,17 @@
                 return "`" + prop + "`";
               }).join(", ");
               if (unknownProps.length === 1) {
-                error("Invalid value for prop %s on <%s> tag. Either remove it from the element, or pass a string or number value to keep it in the DOM. For details, see https://reactjs.org/link/attribute-behavior ", unknownPropString, type);
+                error("Invalid value for prop %s on <%s> tag. Either remove it from the element, or pass a string or number value to keep it in the DOM. For details, see https://reactjs.org/link/attribute-behavior ", unknownPropString, type2);
               } else if (unknownProps.length > 1) {
-                error("Invalid values for props %s on <%s> tag. Either remove them from the element, or pass a string or number value to keep them in the DOM. For details, see https://reactjs.org/link/attribute-behavior ", unknownPropString, type);
+                error("Invalid values for props %s on <%s> tag. Either remove them from the element, or pass a string or number value to keep them in the DOM. For details, see https://reactjs.org/link/attribute-behavior ", unknownPropString, type2);
               }
             }
           };
-          function validateProperties$2(type, props, eventRegistry) {
-            if (isCustomComponent(type, props)) {
+          function validateProperties$2(type2, props, eventRegistry) {
+            if (isCustomComponent(type2, props)) {
               return;
             }
-            warnUnknownProperties(type, props, eventRegistry);
+            warnUnknownProperties(type2, props, eventRegistry);
           }
           var IS_EVENT_HANDLE_NON_MANAGED_NODE = 1;
           var IS_NON_DELEGATED = 1 << 1;
@@ -5543,7 +5544,7 @@
           function isInteractive(tag) {
             return tag === "button" || tag === "input" || tag === "select" || tag === "textarea";
           }
-          function shouldPreventMouseEvent(name, type, props) {
+          function shouldPreventMouseEvent(name, type2, props) {
             switch (name) {
               case "onClick":
               case "onClickCapture":
@@ -5556,7 +5557,7 @@
               case "onMouseUp":
               case "onMouseUpCapture":
               case "onMouseEnter":
-                return !!(props.disabled && isInteractive(type));
+                return !!(props.disabled && isInteractive(type2));
               default:
                 return false;
             }
@@ -5717,13 +5718,13 @@
               throw new Error("clearCaughtError was called but no error was captured. This error is likely caused by a bug in React. Please file an issue.");
             }
           }
-          function get(key) {
+          function get3(key) {
             return key._reactInternals;
           }
           function has(key) {
             return key._reactInternals !== void 0;
           }
-          function set(key, value) {
+          function set3(key, value) {
             key._reactInternals = value;
           }
           var NoFlags = (
@@ -5892,7 +5893,7 @@
                 instance._warnedAboutRefsInRender = true;
               }
             }
-            var fiber = get(component);
+            var fiber = get3(component);
             if (!fiber) {
               return false;
             }
@@ -6043,7 +6044,7 @@
           var cancelCallback = Scheduler.unstable_cancelCallback;
           var shouldYield = Scheduler.unstable_shouldYield;
           var requestPaint = Scheduler.unstable_requestPaint;
-          var now = Scheduler.unstable_now;
+          var now2 = Scheduler.unstable_now;
           var getCurrentPriorityLevel = Scheduler.unstable_getCurrentPriorityLevel;
           var ImmediatePriority = Scheduler.unstable_ImmediatePriority;
           var UserBlockingPriority = Scheduler.unstable_UserBlockingPriority;
@@ -6091,11 +6092,11 @@
               return false;
             }
           }
-          function onScheduleRoot(root3, children) {
+          function onScheduleRoot(root4, children2) {
             {
               if (injectedHook && typeof injectedHook.onScheduleFiberRoot === "function") {
                 try {
-                  injectedHook.onScheduleFiberRoot(rendererID, root3, children);
+                  injectedHook.onScheduleFiberRoot(rendererID, root4, children2);
                 } catch (err) {
                   if (!hasLoggedError) {
                     hasLoggedError = true;
@@ -6105,10 +6106,10 @@
               }
             }
           }
-          function onCommitRoot(root3, eventPriority) {
+          function onCommitRoot(root4, eventPriority) {
             if (injectedHook && typeof injectedHook.onCommitFiberRoot === "function") {
               try {
-                var didError = (root3.current.flags & DidCapture) === DidCapture;
+                var didError = (root4.current.flags & DidCapture) === DidCapture;
                 if (enableProfilerTimer) {
                   var schedulerPriority;
                   switch (eventPriority) {
@@ -6128,9 +6129,9 @@
                       schedulerPriority = NormalPriority;
                       break;
                   }
-                  injectedHook.onCommitFiberRoot(rendererID, root3, schedulerPriority, didError);
+                  injectedHook.onCommitFiberRoot(rendererID, root4, schedulerPriority, didError);
                 } else {
-                  injectedHook.onCommitFiberRoot(rendererID, root3, void 0, didError);
+                  injectedHook.onCommitFiberRoot(rendererID, root4, void 0, didError);
                 }
               } catch (err) {
                 {
@@ -6142,10 +6143,10 @@
               }
             }
           }
-          function onPostCommitRoot(root3) {
+          function onPostCommitRoot(root4) {
             if (injectedHook && typeof injectedHook.onPostCommitFiberRoot === "function") {
               try {
-                injectedHook.onPostCommitFiberRoot(rendererID, root3);
+                injectedHook.onPostCommitFiberRoot(rendererID, root4);
               } catch (err) {
                 {
                   if (!hasLoggedError) {
@@ -6195,14 +6196,14 @@
           }
           function getLaneLabelMap() {
             {
-              var map = /* @__PURE__ */ new Map();
+              var map2 = /* @__PURE__ */ new Map();
               var lane = 1;
               for (var index2 = 0; index2 < TotalLanes; index2++) {
                 var label = getLabelForLane(lane);
-                map.set(lane, label);
+                map2.set(lane, label);
                 lane *= 2;
               }
-              return map;
+              return map2;
             }
           }
           function markCommitStarted(lanes) {
@@ -6396,8 +6397,8 @@
           var clz32 = Math.clz32 ? Math.clz32 : clz32Fallback;
           var log = Math.log;
           var LN2 = Math.LN2;
-          function clz32Fallback(x) {
-            var asUint = x >>> 0;
+          function clz32Fallback(x2) {
+            var asUint = x2 >>> 0;
             if (asUint === 0) {
               return 32;
             }
@@ -6644,14 +6645,14 @@
                 return lanes;
             }
           }
-          function getNextLanes(root3, wipLanes) {
-            var pendingLanes = root3.pendingLanes;
+          function getNextLanes(root4, wipLanes) {
+            var pendingLanes = root4.pendingLanes;
             if (pendingLanes === NoLanes) {
               return NoLanes;
             }
             var nextLanes = NoLanes;
-            var suspendedLanes = root3.suspendedLanes;
-            var pingedLanes = root3.pingedLanes;
+            var suspendedLanes = root4.suspendedLanes;
+            var pingedLanes = root4.pingedLanes;
             var nonIdlePendingLanes = pendingLanes & NonIdleLanes;
             if (nonIdlePendingLanes !== NoLanes) {
               var nonIdleUnblockedLanes = nonIdlePendingLanes & ~suspendedLanes;
@@ -6695,9 +6696,9 @@
             if ((nextLanes & InputContinuousLane) !== NoLanes) {
               nextLanes |= pendingLanes & DefaultLane;
             }
-            var entangledLanes = root3.entangledLanes;
+            var entangledLanes = root4.entangledLanes;
             if (entangledLanes !== NoLanes) {
-              var entanglements = root3.entanglements;
+              var entanglements = root4.entanglements;
               var lanes = nextLanes & entangledLanes;
               while (lanes > 0) {
                 var index2 = pickArbitraryLaneIndex(lanes);
@@ -6708,8 +6709,8 @@
             }
             return nextLanes;
           }
-          function getMostRecentEventTime(root3, lanes) {
-            var eventTimes = root3.eventTimes;
+          function getMostRecentEventTime(root4, lanes) {
+            var eventTimes = root4.eventTimes;
             var mostRecentEventTime = NoTimestamp;
             while (lanes > 0) {
               var index2 = pickArbitraryLaneIndex(lanes);
@@ -6766,11 +6767,11 @@
                 return NoTimestamp;
             }
           }
-          function markStarvedLanesAsExpired(root3, currentTime) {
-            var pendingLanes = root3.pendingLanes;
-            var suspendedLanes = root3.suspendedLanes;
-            var pingedLanes = root3.pingedLanes;
-            var expirationTimes = root3.expirationTimes;
+          function markStarvedLanesAsExpired(root4, currentTime) {
+            var pendingLanes = root4.pendingLanes;
+            var suspendedLanes = root4.suspendedLanes;
+            var pingedLanes = root4.pingedLanes;
+            var expirationTimes = root4.expirationTimes;
             var lanes = pendingLanes;
             while (lanes > 0) {
               var index2 = pickArbitraryLaneIndex(lanes);
@@ -6781,16 +6782,16 @@
                   expirationTimes[index2] = computeExpirationTime(lane, currentTime);
                 }
               } else if (expirationTime <= currentTime) {
-                root3.expiredLanes |= lane;
+                root4.expiredLanes |= lane;
               }
               lanes &= ~lane;
             }
           }
-          function getHighestPriorityPendingLanes(root3) {
-            return getHighestPriorityLanes(root3.pendingLanes);
+          function getHighestPriorityPendingLanes(root4) {
+            return getHighestPriorityLanes(root4.pendingLanes);
           }
-          function getLanesToRetrySynchronouslyOnError(root3) {
-            var everythingButOffscreen = root3.pendingLanes & ~OffscreenLane;
+          function getLanesToRetrySynchronouslyOnError(root4) {
+            var everythingButOffscreen = root4.pendingLanes & ~OffscreenLane;
             if (everythingButOffscreen !== NoLanes) {
               return everythingButOffscreen;
             }
@@ -6815,12 +6816,12 @@
           function includesOnlyTransitions(lanes) {
             return (lanes & TransitionLanes) === lanes;
           }
-          function includesBlockingLane(root3, lanes) {
+          function includesBlockingLane(root4, lanes) {
             var SyncDefaultLanes = InputContinuousHydrationLane | InputContinuousLane | DefaultHydrationLane | DefaultLane;
             return (lanes & SyncDefaultLanes) !== NoLanes;
           }
-          function includesExpiredLane(root3, lanes) {
-            return (lanes & root3.expiredLanes) !== NoLanes;
+          function includesExpiredLane(root4, lanes) {
+            return (lanes & root4.expiredLanes) !== NoLanes;
           }
           function isTransitionLane(lane) {
             return (lane & TransitionLanes) !== NoLanes;
@@ -6856,14 +6857,14 @@
           function includesSomeLane(a, b) {
             return (a & b) !== NoLanes;
           }
-          function isSubsetOfLanes(set2, subset) {
-            return (set2 & subset) === subset;
+          function isSubsetOfLanes(set4, subset) {
+            return (set4 & subset) === subset;
           }
           function mergeLanes(a, b) {
             return a | b;
           }
-          function removeLanes(set2, subset) {
-            return set2 & ~subset;
+          function removeLanes(set4, subset) {
+            return set4 & ~subset;
           }
           function intersectLanes(a, b) {
             return a & b;
@@ -6881,20 +6882,20 @@
             }
             return laneMap;
           }
-          function markRootUpdated(root3, updateLane, eventTime) {
-            root3.pendingLanes |= updateLane;
+          function markRootUpdated(root4, updateLane, eventTime) {
+            root4.pendingLanes |= updateLane;
             if (updateLane !== IdleLane) {
-              root3.suspendedLanes = NoLanes;
-              root3.pingedLanes = NoLanes;
+              root4.suspendedLanes = NoLanes;
+              root4.pingedLanes = NoLanes;
             }
-            var eventTimes = root3.eventTimes;
+            var eventTimes = root4.eventTimes;
             var index2 = laneToIndex(updateLane);
             eventTimes[index2] = eventTime;
           }
-          function markRootSuspended(root3, suspendedLanes) {
-            root3.suspendedLanes |= suspendedLanes;
-            root3.pingedLanes &= ~suspendedLanes;
-            var expirationTimes = root3.expirationTimes;
+          function markRootSuspended(root4, suspendedLanes) {
+            root4.suspendedLanes |= suspendedLanes;
+            root4.pingedLanes &= ~suspendedLanes;
+            var expirationTimes = root4.expirationTimes;
             var lanes = suspendedLanes;
             while (lanes > 0) {
               var index2 = pickArbitraryLaneIndex(lanes);
@@ -6903,20 +6904,20 @@
               lanes &= ~lane;
             }
           }
-          function markRootPinged(root3, pingedLanes, eventTime) {
-            root3.pingedLanes |= root3.suspendedLanes & pingedLanes;
+          function markRootPinged(root4, pingedLanes, eventTime) {
+            root4.pingedLanes |= root4.suspendedLanes & pingedLanes;
           }
-          function markRootFinished(root3, remainingLanes) {
-            var noLongerPendingLanes = root3.pendingLanes & ~remainingLanes;
-            root3.pendingLanes = remainingLanes;
-            root3.suspendedLanes = NoLanes;
-            root3.pingedLanes = NoLanes;
-            root3.expiredLanes &= remainingLanes;
-            root3.mutableReadLanes &= remainingLanes;
-            root3.entangledLanes &= remainingLanes;
-            var entanglements = root3.entanglements;
-            var eventTimes = root3.eventTimes;
-            var expirationTimes = root3.expirationTimes;
+          function markRootFinished(root4, remainingLanes) {
+            var noLongerPendingLanes = root4.pendingLanes & ~remainingLanes;
+            root4.pendingLanes = remainingLanes;
+            root4.suspendedLanes = NoLanes;
+            root4.pingedLanes = NoLanes;
+            root4.expiredLanes &= remainingLanes;
+            root4.mutableReadLanes &= remainingLanes;
+            root4.entangledLanes &= remainingLanes;
+            var entanglements = root4.entanglements;
+            var eventTimes = root4.eventTimes;
+            var expirationTimes = root4.expirationTimes;
             var lanes = noLongerPendingLanes;
             while (lanes > 0) {
               var index2 = pickArbitraryLaneIndex(lanes);
@@ -6927,9 +6928,9 @@
               lanes &= ~lane;
             }
           }
-          function markRootEntangled(root3, entangledLanes) {
-            var rootEntangledLanes = root3.entangledLanes |= entangledLanes;
-            var entanglements = root3.entanglements;
+          function markRootEntangled(root4, entangledLanes) {
+            var rootEntangledLanes = root4.entangledLanes |= entangledLanes;
+            var entanglements = root4.entanglements;
             var lanes = rootEntangledLanes;
             while (lanes) {
               var index2 = pickArbitraryLaneIndex(lanes);
@@ -6944,7 +6945,7 @@
               lanes &= ~lane;
             }
           }
-          function getBumpedLaneForHydration(root3, renderLanes2) {
+          function getBumpedLaneForHydration(root4, renderLanes2) {
             var renderLane = getHighestPriorityLane(renderLanes2);
             var lane;
             switch (renderLane) {
@@ -6984,16 +6985,16 @@
                 lane = NoLane;
                 break;
             }
-            if ((lane & (root3.suspendedLanes | renderLanes2)) !== NoLane) {
+            if ((lane & (root4.suspendedLanes | renderLanes2)) !== NoLane) {
               return NoLane;
             }
             return lane;
           }
-          function addFiberToLanesMap(root3, fiber, lanes) {
+          function addFiberToLanesMap(root4, fiber, lanes) {
             if (!isDevToolsPresent) {
               return;
             }
-            var pendingUpdatersLaneMap = root3.pendingUpdatersLaneMap;
+            var pendingUpdatersLaneMap = root4.pendingUpdatersLaneMap;
             while (lanes > 0) {
               var index2 = laneToIndex(lanes);
               var lane = 1 << index2;
@@ -7002,12 +7003,12 @@
               lanes &= ~lane;
             }
           }
-          function movePendingFibersToMemoized(root3, lanes) {
+          function movePendingFibersToMemoized(root4, lanes) {
             if (!isDevToolsPresent) {
               return;
             }
-            var pendingUpdatersLaneMap = root3.pendingUpdatersLaneMap;
-            var memoizedUpdaters = root3.memoizedUpdaters;
+            var pendingUpdatersLaneMap = root4.pendingUpdatersLaneMap;
+            var memoizedUpdaters = root4.memoizedUpdaters;
             while (lanes > 0) {
               var index2 = laneToIndex(lanes);
               var lane = 1 << index2;
@@ -7024,7 +7025,7 @@
               lanes &= ~lane;
             }
           }
-          function getTransitionsForLanes(root3, lanes) {
+          function getTransitionsForLanes(root4, lanes) {
             {
               return null;
             }
@@ -7071,8 +7072,8 @@
             }
             return IdleEventPriority;
           }
-          function isRootDehydrated(root3) {
-            var currentState = root3.current.memoizedState;
+          function isRootDehydrated(root4) {
+            var currentState = root4.current.memoizedState;
             return currentState.isDehydrated;
           }
           var _attemptSynchronousHydration;
@@ -7243,8 +7244,8 @@
                     return;
                   }
                 } else if (tag === HostRoot) {
-                  var root3 = nearestMounted.stateNode;
-                  if (isRootDehydrated(root3)) {
+                  var root4 = nearestMounted.stateNode;
+                  if (isRootDehydrated(root4)) {
                     queuedTarget.blockedOn = getContainerFromFiber(nearestMounted);
                     return;
                   }
@@ -7299,9 +7300,9 @@
             }
             return true;
           }
-          function attemptReplayContinuousQueuedEventInMap(queuedEvent, key, map) {
+          function attemptReplayContinuousQueuedEventInMap(queuedEvent, key, map2) {
             if (attemptReplayContinuousQueuedEvent(queuedEvent)) {
-              map.delete(key);
+              map2.delete(key);
             }
           }
           function replayUnblockedEvents() {
@@ -7389,7 +7390,7 @@
                 break;
               case DefaultEventPriority:
               default:
-                listenerWrapper = dispatchEvent;
+                listenerWrapper = dispatchEvent2;
                 break;
             }
             return listenerWrapper.bind(null, domEventName, eventSystemFlags, targetContainer);
@@ -7400,7 +7401,7 @@
             ReactCurrentBatchConfig.transition = null;
             try {
               setCurrentUpdatePriority(DiscreteEventPriority);
-              dispatchEvent(domEventName, eventSystemFlags, container, nativeEvent);
+              dispatchEvent2(domEventName, eventSystemFlags, container, nativeEvent);
             } finally {
               setCurrentUpdatePriority(previousPriority);
               ReactCurrentBatchConfig.transition = prevTransition;
@@ -7412,13 +7413,13 @@
             ReactCurrentBatchConfig.transition = null;
             try {
               setCurrentUpdatePriority(ContinuousEventPriority);
-              dispatchEvent(domEventName, eventSystemFlags, container, nativeEvent);
+              dispatchEvent2(domEventName, eventSystemFlags, container, nativeEvent);
             } finally {
               setCurrentUpdatePriority(previousPriority);
               ReactCurrentBatchConfig.transition = prevTransition;
             }
           }
-          function dispatchEvent(domEventName, eventSystemFlags, targetContainer, nativeEvent) {
+          function dispatchEvent2(domEventName, eventSystemFlags, targetContainer, nativeEvent) {
             if (!_enabled) {
               return;
             }
@@ -7478,8 +7479,8 @@
                   }
                   targetInst = null;
                 } else if (tag === HostRoot) {
-                  var root3 = nearestMounted.stateNode;
-                  if (isRootDehydrated(root3)) {
+                  var root4 = nearestMounted.stateNode;
+                  if (isRootDehydrated(root4)) {
                     return getContainerFromFiber(nearestMounted);
                   }
                   targetInst = null;
@@ -7606,16 +7607,16 @@
             });
             return listener;
           }
-          var root2 = null;
+          var root3 = null;
           var startText = null;
           var fallbackText = null;
           function initialize(nativeEventTarget) {
-            root2 = nativeEventTarget;
+            root3 = nativeEventTarget;
             startText = getText();
             return true;
           }
           function reset() {
-            root2 = null;
+            root3 = null;
             startText = null;
             fallbackText = null;
           }
@@ -7623,32 +7624,32 @@
             if (fallbackText) {
               return fallbackText;
             }
-            var start;
+            var start2;
             var startValue = startText;
             var startLength = startValue.length;
             var end;
             var endValue = getText();
             var endLength = endValue.length;
-            for (start = 0; start < startLength; start++) {
-              if (startValue[start] !== endValue[start]) {
+            for (start2 = 0; start2 < startLength; start2++) {
+              if (startValue[start2] !== endValue[start2]) {
                 break;
               }
             }
-            var minEnd = startLength - start;
+            var minEnd = startLength - start2;
             for (end = 1; end <= minEnd; end++) {
               if (startValue[startLength - end] !== endValue[endLength - end]) {
                 break;
               }
             }
             var sliceTail = end > 1 ? 1 - end : void 0;
-            fallbackText = endValue.slice(start, sliceTail);
+            fallbackText = endValue.slice(start2, sliceTail);
             return fallbackText;
           }
           function getText() {
-            if ("value" in root2) {
-              return root2.value;
+            if ("value" in root3) {
+              return root3.value;
             }
-            return root2.textContent;
+            return root3.textContent;
           }
           function getEventCharCode(nativeEvent) {
             var charCode;
@@ -7687,9 +7688,9 @@
                 if (!Interface.hasOwnProperty(_propName)) {
                   continue;
                 }
-                var normalize = Interface[_propName];
-                if (normalize) {
-                  this[_propName] = normalize(nativeEvent);
+                var normalize2 = Interface[_propName];
+                if (normalize2) {
+                  this[_propName] = normalize2(nativeEvent);
                 } else {
                   this[_propName] = nativeEvent[_propName];
                 }
@@ -8428,8 +8429,8 @@
             }
             accumulateEnterLeaveTwoPhaseListeners(dispatchQueue, leave, enter, from, to);
           }
-          function is(x, y) {
-            return x === y && (x !== 0 || 1 / x === 1 / y) || x !== x && y !== y;
+          function is(x2, y2) {
+            return x2 === y2 && (x2 !== 0 || 1 / x2 === 1 / y2) || x2 !== x2 && y2 !== y2;
           }
           var objectIs = typeof Object.is === "function" ? Object.is : is;
           function shallowEqual(objA, objB) {
@@ -8466,8 +8467,8 @@
               node = node.parentNode;
             }
           }
-          function getNodeForCharacterOffset(root3, offset) {
-            var node = getLeafNode(root3);
+          function getNodeForCharacterOffset(root4, offset) {
+            var node = getLeafNode(root4);
             var nodeStart = 0;
             var nodeEnd = 0;
             while (node) {
@@ -8487,11 +8488,11 @@
           function getOffsets(outerNode) {
             var ownerDocument2 = outerNode.ownerDocument;
             var win = ownerDocument2 && ownerDocument2.defaultView || window;
-            var selection = win.getSelection && win.getSelection();
-            if (!selection || selection.rangeCount === 0) {
+            var selection2 = win.getSelection && win.getSelection();
+            if (!selection2 || selection2.rangeCount === 0) {
               return null;
             }
-            var anchorNode = selection.anchorNode, anchorOffset = selection.anchorOffset, focusNode = selection.focusNode, focusOffset = selection.focusOffset;
+            var anchorNode = selection2.anchorNode, anchorOffset = selection2.anchorOffset, focusNode = selection2.focusNode, focusOffset = selection2.focusOffset;
             try {
               anchorNode.nodeType;
               focusNode.nodeType;
@@ -8502,7 +8503,7 @@
           }
           function getModernOffsetsFromPoints(outerNode, anchorNode, anchorOffset, focusNode, focusOffset) {
             var length = 0;
-            var start = -1;
+            var start2 = -1;
             var end = -1;
             var indexWithinAnchor = 0;
             var indexWithinFocus = 0;
@@ -8513,7 +8514,7 @@
                 var next = null;
                 while (true) {
                   if (node === anchorNode && (anchorOffset === 0 || node.nodeType === TEXT_NODE)) {
-                    start = length + anchorOffset;
+                    start2 = length + anchorOffset;
                   }
                   if (node === focusNode && (focusOffset === 0 || node.nodeType === TEXT_NODE)) {
                     end = length + focusOffset;
@@ -8532,7 +8533,7 @@
                     break outer;
                   }
                   if (parentNode === anchorNode && ++indexWithinAnchor === anchorOffset) {
-                    start = length;
+                    start2 = length;
                   }
                   if (parentNode === focusNode && ++indexWithinFocus === focusOffset) {
                     end = length;
@@ -8545,11 +8546,11 @@
                 }
                 node = next;
               }
-            if (start === -1 || end === -1) {
+            if (start2 === -1 || end === -1) {
               return null;
             }
             return {
-              start,
+              start: start2,
               end
             };
           }
@@ -8559,30 +8560,30 @@
             if (!win.getSelection) {
               return;
             }
-            var selection = win.getSelection();
+            var selection2 = win.getSelection();
             var length = node.textContent.length;
-            var start = Math.min(offsets.start, length);
-            var end = offsets.end === void 0 ? start : Math.min(offsets.end, length);
-            if (!selection.extend && start > end) {
+            var start2 = Math.min(offsets.start, length);
+            var end = offsets.end === void 0 ? start2 : Math.min(offsets.end, length);
+            if (!selection2.extend && start2 > end) {
               var temp = end;
-              end = start;
-              start = temp;
+              end = start2;
+              start2 = temp;
             }
-            var startMarker = getNodeForCharacterOffset(node, start);
+            var startMarker = getNodeForCharacterOffset(node, start2);
             var endMarker = getNodeForCharacterOffset(node, end);
             if (startMarker && endMarker) {
-              if (selection.rangeCount === 1 && selection.anchorNode === startMarker.node && selection.anchorOffset === startMarker.offset && selection.focusNode === endMarker.node && selection.focusOffset === endMarker.offset) {
+              if (selection2.rangeCount === 1 && selection2.anchorNode === startMarker.node && selection2.anchorOffset === startMarker.offset && selection2.focusNode === endMarker.node && selection2.focusOffset === endMarker.offset) {
                 return;
               }
               var range = doc.createRange();
               range.setStart(startMarker.node, startMarker.offset);
-              selection.removeAllRanges();
-              if (start > end) {
-                selection.addRange(range);
-                selection.extend(endMarker.node, endMarker.offset);
+              selection2.removeAllRanges();
+              if (start2 > end) {
+                selection2.addRange(range);
+                selection2.extend(endMarker.node, endMarker.offset);
               } else {
                 range.setEnd(endMarker.node, endMarker.offset);
-                selection.addRange(range);
+                selection2.addRange(range);
               }
             }
           }
@@ -8670,28 +8671,28 @@
             }
           }
           function getSelection(input) {
-            var selection;
+            var selection2;
             if ("selectionStart" in input) {
-              selection = {
+              selection2 = {
                 start: input.selectionStart,
                 end: input.selectionEnd
               };
             } else {
-              selection = getOffsets(input);
+              selection2 = getOffsets(input);
             }
-            return selection || {
+            return selection2 || {
               start: 0,
               end: 0
             };
           }
           function setSelection(input, offsets) {
-            var start = offsets.start;
+            var start2 = offsets.start;
             var end = offsets.end;
             if (end === void 0) {
-              end = start;
+              end = start2;
             }
             if ("selectionStart" in input) {
-              input.selectionStart = start;
+              input.selectionStart = start2;
               input.selectionEnd = Math.min(end, input.value.length);
             } else {
               setOffsets(input, offsets);
@@ -8713,12 +8714,12 @@
               };
             } else {
               var win = node.ownerDocument && node.ownerDocument.defaultView || window;
-              var selection = win.getSelection();
+              var selection2 = win.getSelection();
               return {
-                anchorNode: selection.anchorNode,
-                anchorOffset: selection.anchorOffset,
-                focusNode: selection.focusNode,
-                focusOffset: selection.focusOffset
+                anchorNode: selection2.anchorNode,
+                anchorOffset: selection2.anchorOffset,
+                focusNode: selection2.focusNode,
+                focusOffset: selection2.focusOffset
               };
             }
           }
@@ -8778,11 +8779,11 @@
             }
           }
           function makePrefixMap(styleProp, eventName) {
-            var prefixes2 = {};
-            prefixes2[styleProp.toLowerCase()] = eventName.toLowerCase();
-            prefixes2["Webkit" + styleProp] = "webkit" + eventName;
-            prefixes2["Moz" + styleProp] = "moz" + eventName;
-            return prefixes2;
+            var prefixes3 = {};
+            prefixes3[styleProp.toLowerCase()] = eventName.toLowerCase();
+            prefixes3["Webkit" + styleProp] = "webkit" + eventName;
+            prefixes3["Moz" + styleProp] = "moz" + eventName;
+            return prefixes3;
           }
           var vendorPrefixes = {
             animationend: makePrefixMap("Animation", "AnimationEnd"),
@@ -8965,9 +8966,9 @@
           var mediaEventTypes = ["abort", "canplay", "canplaythrough", "durationchange", "emptied", "encrypted", "ended", "error", "loadeddata", "loadedmetadata", "loadstart", "pause", "play", "playing", "progress", "ratechange", "resize", "seeked", "seeking", "stalled", "suspend", "timeupdate", "volumechange", "waiting"];
           var nonDelegatedEvents = new Set(["cancel", "close", "invalid", "load", "scroll", "toggle"].concat(mediaEventTypes));
           function executeDispatch(event, listener, currentTarget) {
-            var type = event.type || "unknown-event";
+            var type2 = event.type || "unknown-event";
             event.currentTarget = currentTarget;
-            invokeGuardedCallbackAndCatchFirstError(type, listener, void 0, event);
+            invokeGuardedCallbackAndCatchFirstError(type2, listener, void 0, event);
             event.currentTarget = null;
           }
           function processDispatchQueueItemsInOrder(event, dispatchListeners, inCapturePhase) {
@@ -9297,10 +9298,10 @@
               // @see https://electronjs.org/docs/api/webview-tag
               webview: true
             };
-            validatePropertiesInDevelopment = function(type, props) {
-              validateProperties(type, props);
-              validateProperties$1(type, props);
-              validateProperties$2(type, props, {
+            validatePropertiesInDevelopment = function(type2, props) {
+              validateProperties(type2, props);
+              validateProperties$1(type2, props);
+              validateProperties$2(type2, props, {
                 registrationNameDependencies,
                 possibleRegistrationNames
               });
@@ -9372,10 +9373,10 @@
           function getOwnerDocumentFromRootContainer(rootContainerElement) {
             return rootContainerElement.nodeType === DOCUMENT_NODE ? rootContainerElement : rootContainerElement.ownerDocument;
           }
-          function noop3() {
+          function noop4() {
           }
           function trapClickOnNonInteractiveElement(node) {
-            node.onclick = noop3;
+            node.onclick = noop4;
           }
           function setInitialDOMProperties(tag, domElement, rootContainerElement, nextProps, isCustomComponentTag) {
             for (var propKey in nextProps) {
@@ -9437,33 +9438,33 @@
               }
             }
           }
-          function createElement(type, props, rootContainerElement, parentNamespace) {
+          function createElement(type2, props, rootContainerElement, parentNamespace) {
             var isCustomComponentTag;
             var ownerDocument2 = getOwnerDocumentFromRootContainer(rootContainerElement);
             var domElement;
             var namespaceURI = parentNamespace;
             if (namespaceURI === HTML_NAMESPACE) {
-              namespaceURI = getIntrinsicNamespace(type);
+              namespaceURI = getIntrinsicNamespace(type2);
             }
             if (namespaceURI === HTML_NAMESPACE) {
               {
-                isCustomComponentTag = isCustomComponent(type, props);
-                if (!isCustomComponentTag && type !== type.toLowerCase()) {
-                  error("<%s /> is using incorrect casing. Use PascalCase for React components, or lowercase for HTML elements.", type);
+                isCustomComponentTag = isCustomComponent(type2, props);
+                if (!isCustomComponentTag && type2 !== type2.toLowerCase()) {
+                  error("<%s /> is using incorrect casing. Use PascalCase for React components, or lowercase for HTML elements.", type2);
                 }
               }
-              if (type === "script") {
+              if (type2 === "script") {
                 var div = ownerDocument2.createElement("div");
                 div.innerHTML = "<script><\/script>";
                 var firstChild = div.firstChild;
                 domElement = div.removeChild(firstChild);
               } else if (typeof props.is === "string") {
-                domElement = ownerDocument2.createElement(type, {
+                domElement = ownerDocument2.createElement(type2, {
                   is: props.is
                 });
               } else {
-                domElement = ownerDocument2.createElement(type);
-                if (type === "select") {
+                domElement = ownerDocument2.createElement(type2);
+                if (type2 === "select") {
                   var node = domElement;
                   if (props.multiple) {
                     node.multiple = true;
@@ -9473,13 +9474,13 @@
                 }
               }
             } else {
-              domElement = ownerDocument2.createElementNS(namespaceURI, type);
+              domElement = ownerDocument2.createElementNS(namespaceURI, type2);
             }
             {
               if (namespaceURI === HTML_NAMESPACE) {
-                if (!isCustomComponentTag && Object.prototype.toString.call(domElement) === "[object HTMLUnknownElement]" && !hasOwnProperty.call(warnedUnknownTags, type)) {
-                  warnedUnknownTags[type] = true;
-                  error("The tag <%s> is unrecognized in this browser. If you meant to render a React component, start its name with an uppercase letter.", type);
+                if (!isCustomComponentTag && Object.prototype.toString.call(domElement) === "[object HTMLUnknownElement]" && !hasOwnProperty.call(warnedUnknownTags, type2)) {
+                  warnedUnknownTags[type2] = true;
+                  error("The tag <%s> is unrecognized in this browser. If you meant to render a React component, start its name with an uppercase letter.", type2);
                 }
               }
             }
@@ -10231,27 +10232,27 @@
           var eventsEnabled = null;
           var selectionInformation = null;
           function getRootHostContext(rootContainerInstance) {
-            var type;
+            var type2;
             var namespace;
             var nodeType = rootContainerInstance.nodeType;
             switch (nodeType) {
               case DOCUMENT_NODE:
               case DOCUMENT_FRAGMENT_NODE: {
-                type = nodeType === DOCUMENT_NODE ? "#document" : "#fragment";
-                var root3 = rootContainerInstance.documentElement;
-                namespace = root3 ? root3.namespaceURI : getChildNamespace(null, "");
+                type2 = nodeType === DOCUMENT_NODE ? "#document" : "#fragment";
+                var root4 = rootContainerInstance.documentElement;
+                namespace = root4 ? root4.namespaceURI : getChildNamespace(null, "");
                 break;
               }
               default: {
                 var container = nodeType === COMMENT_NODE ? rootContainerInstance.parentNode : rootContainerInstance;
                 var ownNamespace = container.namespaceURI || null;
-                type = container.tagName;
-                namespace = getChildNamespace(ownNamespace, type);
+                type2 = container.tagName;
+                namespace = getChildNamespace(ownNamespace, type2);
                 break;
               }
             }
             {
-              var validatedTag = type.toLowerCase();
+              var validatedTag = type2.toLowerCase();
               var ancestorInfo = updatedAncestorInfo(null, validatedTag);
               return {
                 namespace,
@@ -10259,11 +10260,11 @@
               };
             }
           }
-          function getChildHostContext(parentHostContext, type, rootContainerInstance) {
+          function getChildHostContext(parentHostContext, type2, rootContainerInstance) {
             {
               var parentHostContextDev = parentHostContext;
-              var namespace = getChildNamespace(parentHostContextDev.namespace, type);
-              var ancestorInfo = updatedAncestorInfo(parentHostContextDev.ancestorInfo, type);
+              var namespace = getChildNamespace(parentHostContextDev.namespace, type2);
+              var ancestorInfo = updatedAncestorInfo(parentHostContextDev.ancestorInfo, type2);
               return {
                 namespace,
                 ancestorInfo
@@ -10286,19 +10287,19 @@
             eventsEnabled = null;
             selectionInformation = null;
           }
-          function createInstance(type, props, rootContainerInstance, hostContext, internalInstanceHandle) {
+          function createInstance(type2, props, rootContainerInstance, hostContext, internalInstanceHandle) {
             var parentNamespace;
             {
               var hostContextDev = hostContext;
-              validateDOMNesting(type, null, hostContextDev.ancestorInfo);
+              validateDOMNesting(type2, null, hostContextDev.ancestorInfo);
               if (typeof props.children === "string" || typeof props.children === "number") {
                 var string = "" + props.children;
-                var ownAncestorInfo = updatedAncestorInfo(hostContextDev.ancestorInfo, type);
+                var ownAncestorInfo = updatedAncestorInfo(hostContextDev.ancestorInfo, type2);
                 validateDOMNesting(null, string, ownAncestorInfo);
               }
               parentNamespace = hostContextDev.namespace;
             }
-            var domElement = createElement(type, props, rootContainerInstance, parentNamespace);
+            var domElement = createElement(type2, props, rootContainerInstance, parentNamespace);
             precacheFiberNode(internalInstanceHandle, domElement);
             updateFiberProps(domElement, props);
             return domElement;
@@ -10306,9 +10307,9 @@
           function appendInitialChild(parentInstance, child) {
             parentInstance.appendChild(child);
           }
-          function finalizeInitialChildren(domElement, type, props, rootContainerInstance, hostContext) {
-            setInitialProperties(domElement, type, props, rootContainerInstance);
-            switch (type) {
+          function finalizeInitialChildren(domElement, type2, props, rootContainerInstance, hostContext) {
+            setInitialProperties(domElement, type2, props, rootContainerInstance);
+            switch (type2) {
               case "button":
               case "input":
               case "select":
@@ -10320,19 +10321,19 @@
                 return false;
             }
           }
-          function prepareUpdate(domElement, type, oldProps, newProps, rootContainerInstance, hostContext) {
+          function prepareUpdate(domElement, type2, oldProps, newProps, rootContainerInstance, hostContext) {
             {
               var hostContextDev = hostContext;
               if (typeof newProps.children !== typeof oldProps.children && (typeof newProps.children === "string" || typeof newProps.children === "number")) {
                 var string = "" + newProps.children;
-                var ownAncestorInfo = updatedAncestorInfo(hostContextDev.ancestorInfo, type);
+                var ownAncestorInfo = updatedAncestorInfo(hostContextDev.ancestorInfo, type2);
                 validateDOMNesting(null, string, ownAncestorInfo);
               }
             }
-            return diffProperties(domElement, type, oldProps, newProps);
+            return diffProperties(domElement, type2, oldProps, newProps);
           }
-          function shouldSetTextContent(type, props) {
-            return type === "textarea" || type === "noscript" || typeof props.children === "string" || typeof props.children === "number" || typeof props.dangerouslySetInnerHTML === "object" && props.dangerouslySetInnerHTML !== null && props.dangerouslySetInnerHTML.__html != null;
+          function shouldSetTextContent(type2, props) {
+            return type2 === "textarea" || type2 === "noscript" || typeof props.children === "string" || typeof props.children === "number" || typeof props.dangerouslySetInnerHTML === "object" && props.dangerouslySetInnerHTML !== null && props.dangerouslySetInnerHTML.__html != null;
           }
           function createTextInstance(text, rootContainerInstance, hostContext, internalInstanceHandle) {
             {
@@ -10362,8 +10363,8 @@
               throw error2;
             });
           }
-          function commitMount(domElement, type, newProps, internalInstanceHandle) {
-            switch (type) {
+          function commitMount(domElement, type2, newProps, internalInstanceHandle) {
+            switch (type2) {
               case "button":
               case "input":
               case "select":
@@ -10380,8 +10381,8 @@
               }
             }
           }
-          function commitUpdate(domElement, updatePayload, type, oldProps, newProps, internalInstanceHandle) {
-            updateProperties(domElement, updatePayload, type, oldProps, newProps);
+          function commitUpdate(domElement, updatePayload, type2, oldProps, newProps, internalInstanceHandle) {
+            updateProperties(domElement, updatePayload, type2, oldProps, newProps);
             updateFiberProps(domElement, newProps);
           }
           function resetTextContent(domElement) {
@@ -10489,8 +10490,8 @@
               }
             }
           }
-          function canHydrateInstance(instance, type, props) {
-            if (instance.nodeType !== ELEMENT_NODE || type.toLowerCase() !== instance.nodeName.toLowerCase()) {
+          function canHydrateInstance(instance, type2, props) {
+            if (instance.nodeType !== ELEMENT_NODE || type2.toLowerCase() !== instance.nodeName.toLowerCase()) {
               return null;
             }
             return instance;
@@ -10564,7 +10565,7 @@
           function getFirstHydratableChildWithinSuspenseInstance(parentInstance) {
             return getNextHydratable(parentInstance.nextSibling);
           }
-          function hydrateInstance(instance, type, props, rootContainerInstance, hostContext, internalInstanceHandle, shouldWarnDev) {
+          function hydrateInstance(instance, type2, props, rootContainerInstance, hostContext, internalInstanceHandle, shouldWarnDev) {
             precacheFiberNode(internalInstanceHandle, instance);
             updateFiberProps(instance, props);
             var parentNamespace;
@@ -10573,7 +10574,7 @@
               parentNamespace = hostContextDev.namespace;
             }
             var isConcurrentMode = (internalInstanceHandle.mode & ConcurrentMode) !== NoMode;
-            return diffHydratedProperties(instance, type, props, parentNamespace, rootContainerInstance, isConcurrentMode, shouldWarnDev);
+            return diffHydratedProperties(instance, type2, props, parentNamespace, rootContainerInstance, isConcurrentMode, shouldWarnDev);
           }
           function hydrateTextInstance(textInstance, text, internalInstanceHandle, shouldWarnDev) {
             precacheFiberNode(internalInstanceHandle, textInstance);
@@ -10680,9 +10681,9 @@
               }
             }
           }
-          function didNotFindHydratableInstanceWithinContainer(parentContainer, type, props) {
+          function didNotFindHydratableInstanceWithinContainer(parentContainer, type2, props) {
             {
-              warnForInsertedHydratedElement(parentContainer, type);
+              warnForInsertedHydratedElement(parentContainer, type2);
             }
           }
           function didNotFindHydratableTextInstanceWithinContainer(parentContainer, text) {
@@ -10690,11 +10691,11 @@
               warnForInsertedHydratedText(parentContainer, text);
             }
           }
-          function didNotFindHydratableInstanceWithinSuspenseInstance(parentInstance, type, props) {
+          function didNotFindHydratableInstanceWithinSuspenseInstance(parentInstance, type2, props) {
             {
               var parentNode = parentInstance.parentNode;
               if (parentNode !== null)
-                warnForInsertedHydratedElement(parentNode, type);
+                warnForInsertedHydratedElement(parentNode, type2);
             }
           }
           function didNotFindHydratableTextInstanceWithinSuspenseInstance(parentInstance, text) {
@@ -10704,10 +10705,10 @@
                 warnForInsertedHydratedText(parentNode, text);
             }
           }
-          function didNotFindHydratableInstance(parentType, parentProps, parentInstance, type, props, isConcurrentMode) {
+          function didNotFindHydratableInstance(parentType, parentProps, parentInstance, type2, props, isConcurrentMode) {
             {
               if (isConcurrentMode || parentProps[SUPPRESS_HYDRATION_WARNING$1] !== true) {
-                warnForInsertedHydratedElement(parentInstance, type);
+                warnForInsertedHydratedElement(parentInstance, type2);
               }
             }
           }
@@ -10919,8 +10920,8 @@
           }
           function getMaskedContext(workInProgress2, unmaskedContext) {
             {
-              var type = workInProgress2.type;
-              var contextTypes = type.contextTypes;
+              var type2 = workInProgress2.type;
+              var contextTypes = type2.contextTypes;
               if (!contextTypes) {
                 return emptyContextObject;
               }
@@ -10947,9 +10948,9 @@
               return didPerformWorkStackCursor.current;
             }
           }
-          function isContextProvider(type) {
+          function isContextProvider(type2) {
             {
-              var childContextTypes = type.childContextTypes;
+              var childContextTypes = type2.childContextTypes;
               return childContextTypes !== null && childContextTypes !== void 0;
             }
           }
@@ -10974,10 +10975,10 @@
               push(didPerformWorkStackCursor, didChange, fiber);
             }
           }
-          function processChildContext(fiber, type, parentContext) {
+          function processChildContext(fiber, type2, parentContext) {
             {
               var instance = fiber.stateNode;
-              var childContextTypes = type.childContextTypes;
+              var childContextTypes = type2.childContextTypes;
               if (typeof instance.getChildContext !== "function") {
                 {
                   var componentName = getComponentNameFromFiber(fiber) || "Unknown";
@@ -11011,14 +11012,14 @@
               return true;
             }
           }
-          function invalidateContextProvider(workInProgress2, type, didChange) {
+          function invalidateContextProvider(workInProgress2, type2, didChange) {
             {
               var instance = workInProgress2.stateNode;
               if (!instance) {
                 throw new Error("Expected to have an instance by this point. This error is likely caused by a bug in React. Please file an issue.");
               }
               if (didChange) {
-                var mergedContext = processChildContext(workInProgress2, type, previousContext);
+                var mergedContext = processChildContext(workInProgress2, type2, previousContext);
                 instance.__reactInternalMemoizedMergedChildContext = mergedContext;
                 pop(didPerformWorkStackCursor, workInProgress2);
                 pop(contextStackCursor, workInProgress2);
@@ -11124,8 +11125,8 @@
           function getTreeId() {
             var overflow = treeContextOverflow;
             var idWithLeadingBit = treeContextId;
-            var id = idWithLeadingBit & ~getLeadingBit(idWithLeadingBit);
-            return id.toString(32) + overflow;
+            var id2 = idWithLeadingBit & ~getLeadingBit(idWithLeadingBit);
+            return id2.toString(32) + overflow;
           }
           function pushTreeFork(workInProgress2, totalChildren) {
             warnIfNotHydrating();
@@ -11154,9 +11155,9 @@
               var restOfBaseLength = baseLength - numberOfOverflowBits;
               var restOfLength = getBitLength(totalChildren) + restOfBaseLength;
               var restOfNewBits = slot << restOfBaseLength;
-              var id = restOfNewBits | restOfBaseId;
+              var id2 = restOfNewBits | restOfBaseId;
               var overflow = newOverflow + baseOverflow;
-              treeContextId = 1 << restOfLength | id;
+              treeContextId = 1 << restOfLength | id2;
               treeContextOverflow = overflow;
             } else {
               var newBits = slot << baseLength;
@@ -11176,11 +11177,11 @@
               pushTreeId(workInProgress2, numberOfForks, slotIndex);
             }
           }
-          function getBitLength(number) {
-            return 32 - clz32(number);
+          function getBitLength(number5) {
+            return 32 - clz32(number5);
           }
-          function getLeadingBit(id) {
-            return 1 << getBitLength(id) - 1;
+          function getLeadingBit(id2) {
+            return 1 << getBitLength(id2) - 1;
           }
           function popTreeContext(workInProgress2) {
             while (workInProgress2 === treeForkProvider) {
@@ -11318,9 +11319,9 @@
                   var parentContainer = returnFiber.stateNode.containerInfo;
                   switch (fiber.tag) {
                     case HostComponent:
-                      var type = fiber.type;
+                      var type2 = fiber.type;
                       var props = fiber.pendingProps;
-                      didNotFindHydratableInstanceWithinContainer(parentContainer, type);
+                      didNotFindHydratableInstanceWithinContainer(parentContainer, type2);
                       break;
                     case HostText:
                       var text = fiber.pendingProps;
@@ -11394,9 +11395,9 @@
           function tryHydrate(fiber, nextInstance) {
             switch (fiber.tag) {
               case HostComponent: {
-                var type = fiber.type;
+                var type2 = fiber.type;
                 var props = fiber.pendingProps;
-                var instance = canHydrateInstance(nextInstance, type);
+                var instance = canHydrateInstance(nextInstance, type2);
                 if (instance !== null) {
                   fiber.stateNode = instance;
                   hydrationParentFiber = fiber;
@@ -11642,12 +11643,12 @@
               }
               return maybeStrictRoot;
             };
-            var setToSortedString = function(set2) {
-              var array = [];
-              set2.forEach(function(value) {
-                array.push(value);
+            var setToSortedString = function(set4) {
+              var array2 = [];
+              set4.forEach(function(value) {
+                array2.push(value);
               });
-              return array.sort().join(", ");
+              return array2.sort().join(", ");
             };
             var pendingComponentWillMountWarnings = [];
             var pendingUNSAFE_ComponentWillMountWarnings = [];
@@ -12117,8 +12118,8 @@
               parent = parent.return;
             }
             if (node.tag === HostRoot) {
-              var root3 = node.stateNode;
-              return root3;
+              var root4 = node.stateNode;
+              return root4;
             } else {
               return null;
             }
@@ -12199,7 +12200,7 @@
               return enqueueConcurrentClassUpdate(fiber, sharedQueue, update, lane);
             }
           }
-          function entangleTransitions(root3, fiber, lane) {
+          function entangleTransitions(root4, fiber, lane) {
             var updateQueue = fiber.updateQueue;
             if (updateQueue === null) {
               return;
@@ -12207,10 +12208,10 @@
             var sharedQueue = updateQueue.shared;
             if (isTransitionLane(lane)) {
               var queueLanes = sharedQueue.lanes;
-              queueLanes = intersectLanes(queueLanes, root3.pendingLanes);
+              queueLanes = intersectLanes(queueLanes, root4.pendingLanes);
               var newQueueLanes = mergeLanes(queueLanes, lane);
               sharedQueue.lanes = newQueueLanes;
-              markRootEntangled(root3, newQueueLanes);
+              markRootEntangled(root4, newQueueLanes);
             }
           }
           function enqueueCapturedUpdate(workInProgress2, capturedUpdate) {
@@ -12485,7 +12486,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React87.Component().refs;
+          var emptyRefsObject = new React89.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -12516,9 +12517,9 @@
                 error("%s(...): Expected the last optional `callback` argument to be a function. Instead received: %s.", callerName, callback);
               }
             };
-            warnOnUndefinedDerivedState = function(type, partialState) {
+            warnOnUndefinedDerivedState = function(type2, partialState) {
               if (partialState === void 0) {
-                var componentName = getComponentNameFromType(type) || "Component";
+                var componentName = getComponentNameFromType(type2) || "Component";
                 if (!didWarnAboutUndefinedDerivedState.has(componentName)) {
                   didWarnAboutUndefinedDerivedState.add(componentName);
                   error("%s.getDerivedStateFromProps(): A valid state object (or null) must be returned. You have returned undefined.", componentName);
@@ -12557,7 +12558,7 @@
           var classComponentUpdater = {
             isMounted,
             enqueueSetState: function(inst, payload, callback) {
-              var fiber = get(inst);
+              var fiber = get3(inst);
               var eventTime = requestEventTime();
               var lane = requestUpdateLane(fiber);
               var update = createUpdate(eventTime, lane);
@@ -12568,17 +12569,17 @@
                 }
                 update.callback = callback;
               }
-              var root3 = enqueueUpdate(fiber, update, lane);
-              if (root3 !== null) {
-                scheduleUpdateOnFiber(root3, fiber, lane, eventTime);
-                entangleTransitions(root3, fiber, lane);
+              var root4 = enqueueUpdate(fiber, update, lane);
+              if (root4 !== null) {
+                scheduleUpdateOnFiber(root4, fiber, lane, eventTime);
+                entangleTransitions(root4, fiber, lane);
               }
               {
                 markStateUpdateScheduled(fiber, lane);
               }
             },
             enqueueReplaceState: function(inst, payload, callback) {
-              var fiber = get(inst);
+              var fiber = get3(inst);
               var eventTime = requestEventTime();
               var lane = requestUpdateLane(fiber);
               var update = createUpdate(eventTime, lane);
@@ -12590,17 +12591,17 @@
                 }
                 update.callback = callback;
               }
-              var root3 = enqueueUpdate(fiber, update, lane);
-              if (root3 !== null) {
-                scheduleUpdateOnFiber(root3, fiber, lane, eventTime);
-                entangleTransitions(root3, fiber, lane);
+              var root4 = enqueueUpdate(fiber, update, lane);
+              if (root4 !== null) {
+                scheduleUpdateOnFiber(root4, fiber, lane, eventTime);
+                entangleTransitions(root4, fiber, lane);
               }
               {
                 markStateUpdateScheduled(fiber, lane);
               }
             },
             enqueueForceUpdate: function(inst, callback) {
-              var fiber = get(inst);
+              var fiber = get3(inst);
               var eventTime = requestEventTime();
               var lane = requestUpdateLane(fiber);
               var update = createUpdate(eventTime, lane);
@@ -12611,10 +12612,10 @@
                 }
                 update.callback = callback;
               }
-              var root3 = enqueueUpdate(fiber, update, lane);
-              if (root3 !== null) {
-                scheduleUpdateOnFiber(root3, fiber, lane, eventTime);
-                entangleTransitions(root3, fiber, lane);
+              var root4 = enqueueUpdate(fiber, update, lane);
+              if (root4 !== null) {
+                scheduleUpdateOnFiber(root4, fiber, lane, eventTime);
+                entangleTransitions(root4, fiber, lane);
               }
               {
                 markForceUpdateScheduled(fiber, lane);
@@ -12728,7 +12729,7 @@
           function adoptClassInstance(workInProgress2, instance) {
             instance.updater = classComponentUpdater;
             workInProgress2.stateNode = instance;
-            set(instance, workInProgress2);
+            set3(instance, workInProgress2);
             {
               instance._reactInternalInstance = fakeInternalInstance;
             }
@@ -13187,8 +13188,8 @@
           }
           function resolveLazy(lazyType) {
             var payload = lazyType._payload;
-            var init = lazyType._init;
-            return init(payload);
+            var init2 = lazyType._init;
+            return init2(payload);
           }
           function ChildReconciler(shouldTrackSideEffects) {
             function deleteChild(returnFiber, childToDelete) {
@@ -13340,8 +13341,8 @@
                   }
                   case REACT_LAZY_TYPE: {
                     var payload = newChild._payload;
-                    var init = newChild._init;
-                    return createChild(returnFiber, init(payload), lanes);
+                    var init2 = newChild._init;
+                    return createChild(returnFiber, init2(payload), lanes);
                   }
                 }
                 if (isArray(newChild) || getIteratorFn(newChild)) {
@@ -13384,8 +13385,8 @@
                   }
                   case REACT_LAZY_TYPE: {
                     var payload = newChild._payload;
-                    var init = newChild._init;
-                    return updateSlot(returnFiber, oldFiber, init(payload), lanes);
+                    var init2 = newChild._init;
+                    return updateSlot(returnFiber, oldFiber, init2(payload), lanes);
                   }
                 }
                 if (isArray(newChild) || getIteratorFn(newChild)) {
@@ -13420,8 +13421,8 @@
                   }
                   case REACT_LAZY_TYPE:
                     var payload = newChild._payload;
-                    var init = newChild._init;
-                    return updateFromMap(existingChildren, returnFiber, newIdx, init(payload), lanes);
+                    var init2 = newChild._init;
+                    return updateFromMap(existingChildren, returnFiber, newIdx, init2(payload), lanes);
                 }
                 if (isArray(newChild) || getIteratorFn(newChild)) {
                   var _matchedFiber3 = existingChildren.get(newIdx) || null;
@@ -13462,8 +13463,8 @@
                     break;
                   case REACT_LAZY_TYPE:
                     var payload = child._payload;
-                    var init = child._init;
-                    warnOnInvalidKey(init(payload), knownKeys, returnFiber);
+                    var init2 = child._init;
+                    warnOnInvalidKey(init2(payload), knownKeys, returnFiber);
                     break;
                 }
               }
@@ -13794,8 +13795,8 @@
                     return placeSingleChild(reconcileSinglePortal(returnFiber, currentFirstChild, newChild, lanes));
                   case REACT_LAZY_TYPE:
                     var payload = newChild._payload;
-                    var init = newChild._init;
-                    return reconcileChildFibers2(returnFiber, currentFirstChild, init(payload), lanes);
+                    var init2 = newChild._init;
+                    return reconcileChildFibers2(returnFiber, currentFirstChild, init2(payload), lanes);
                 }
                 if (isArray(newChild)) {
                   return reconcileChildrenArray(returnFiber, currentFirstChild, newChild, lanes);
@@ -13995,13 +13996,13 @@
             }
             workInProgressSources.length = 0;
           }
-          function registerMutableSourceForHydration(root3, mutableSource) {
+          function registerMutableSourceForHydration(root4, mutableSource) {
             var getVersion = mutableSource._getVersion;
             var version = getVersion(mutableSource._source);
-            if (root3.mutableSourceEagerHydrationData == null) {
-              root3.mutableSourceEagerHydrationData = [mutableSource, version];
+            if (root4.mutableSourceEagerHydrationData == null) {
+              root4.mutableSourceEagerHydrationData = [mutableSource, version];
             } else {
-              root3.mutableSourceEagerHydrationData.push(mutableSource, version);
+              root4.mutableSourceEagerHydrationData.push(mutableSource, version);
             }
           }
           var ReactCurrentDispatcher$1 = ReactSharedInternals.ReactCurrentDispatcher, ReactCurrentBatchConfig$2 = ReactSharedInternals.ReactCurrentBatchConfig;
@@ -14122,7 +14123,7 @@
                 ReactCurrentDispatcher$1.current = HooksDispatcherOnMountInDEV;
               }
             }
-            var children = Component(props, secondArg);
+            var children2 = Component(props, secondArg);
             if (didScheduleRenderPhaseUpdateDuringThisPass) {
               var numberOfReRenders = 0;
               do {
@@ -14142,7 +14143,7 @@
                   hookTypesUpdateIndexDev = -1;
                 }
                 ReactCurrentDispatcher$1.current = HooksDispatcherOnRerenderInDEV;
-                children = Component(props, secondArg);
+                children2 = Component(props, secondArg);
               } while (didScheduleRenderPhaseUpdateDuringThisPass);
             }
             ReactCurrentDispatcher$1.current = ContextOnlyDispatcher;
@@ -14171,7 +14172,7 @@
             if (didRenderTooFewHooks) {
               throw new Error("Rendered fewer hooks than expected. This may be caused by an accidental early return statement.");
             }
-            return children;
+            return children2;
           }
           function checkDidRenderIdHook() {
             var didRenderIdHook = localIdCounter !== 0;
@@ -14279,11 +14280,11 @@
           function basicStateReducer(state, action) {
             return typeof action === "function" ? action(state) : action;
           }
-          function mountReducer(reducer, initialArg, init) {
+          function mountReducer(reducer, initialArg, init2) {
             var hook = mountWorkInProgressHook();
             var initialState;
-            if (init !== void 0) {
-              initialState = init(initialArg);
+            if (init2 !== void 0) {
+              initialState = init2(initialArg);
             } else {
               initialState = initialArg;
             }
@@ -14297,10 +14298,10 @@
               lastRenderedState: initialState
             };
             hook.queue = queue;
-            var dispatch = queue.dispatch = dispatchReducerAction.bind(null, currentlyRenderingFiber$1, queue);
-            return [hook.memoizedState, dispatch];
+            var dispatch2 = queue.dispatch = dispatchReducerAction.bind(null, currentlyRenderingFiber$1, queue);
+            return [hook.memoizedState, dispatch2];
           }
-          function updateReducer(reducer, initialArg, init) {
+          function updateReducer(reducer, initialArg, init2) {
             var hook = updateWorkInProgressHook();
             var queue = hook.queue;
             if (queue === null) {
@@ -14398,17 +14399,17 @@
             } else if (baseQueue === null) {
               queue.lanes = NoLanes;
             }
-            var dispatch = queue.dispatch;
-            return [hook.memoizedState, dispatch];
+            var dispatch2 = queue.dispatch;
+            return [hook.memoizedState, dispatch2];
           }
-          function rerenderReducer(reducer, initialArg, init) {
+          function rerenderReducer(reducer, initialArg, init2) {
             var hook = updateWorkInProgressHook();
             var queue = hook.queue;
             if (queue === null) {
               throw new Error("Should have a queue. This is likely a bug in React. Please file an issue.");
             }
             queue.lastRenderedReducer = reducer;
-            var dispatch = queue.dispatch;
+            var dispatch2 = queue.dispatch;
             var lastRenderPhaseUpdate = queue.pending;
             var newState = hook.memoizedState;
             if (lastRenderPhaseUpdate !== null) {
@@ -14429,7 +14430,7 @@
               }
               queue.lastRenderedState = newState;
             }
-            return [newState, dispatch];
+            return [newState, dispatch2];
           }
           function mountMutableSource(source, getSnapshot, subscribe) {
             {
@@ -14470,11 +14471,11 @@
                   }
                 }
               }
-              var root3 = getWorkInProgressRoot();
-              if (root3 === null) {
+              var root4 = getWorkInProgressRoot();
+              if (root4 === null) {
                 throw new Error("Expected a work-in-progress root. This is a bug in React. Please file an issue.");
               }
-              if (!includesBlockingLane(root3, renderLanes)) {
+              if (!includesBlockingLane(root4, renderLanes)) {
                 pushStoreConsistencyCheck(fiber, getSnapshot, nextSnapshot);
               }
             }
@@ -14515,11 +14516,11 @@
             workInProgressHook !== null && workInProgressHook.memoizedState.tag & HasEffect) {
               fiber.flags |= Passive;
               pushEffect(HasEffect | Passive$1, updateStoreInstance.bind(null, fiber, inst, nextSnapshot, getSnapshot), void 0, null);
-              var root3 = getWorkInProgressRoot();
-              if (root3 === null) {
+              var root4 = getWorkInProgressRoot();
+              if (root4 === null) {
                 throw new Error("Expected a work-in-progress root. This is a bug in React. Please file an issue.");
               }
-              if (!includesBlockingLane(root3, renderLanes)) {
+              if (!includesBlockingLane(root4, renderLanes)) {
                 pushStoreConsistencyCheck(fiber, getSnapshot, nextSnapshot);
               }
             }
@@ -14571,9 +14572,9 @@
             }
           }
           function forceStoreRerender(fiber) {
-            var root3 = enqueueConcurrentRenderForLane(fiber, SyncLane);
-            if (root3 !== null) {
-              scheduleUpdateOnFiber(root3, fiber, SyncLane, NoTimestamp);
+            var root4 = enqueueConcurrentRenderForLane(fiber, SyncLane);
+            if (root4 !== null) {
+              scheduleUpdateOnFiber(root4, fiber, SyncLane, NoTimestamp);
             }
           }
           function mountState(initialState) {
@@ -14591,8 +14592,8 @@
               lastRenderedState: initialState
             };
             hook.queue = queue;
-            var dispatch = queue.dispatch = dispatchSetState.bind(null, currentlyRenderingFiber$1, queue);
-            return [hook.memoizedState, dispatch];
+            var dispatch2 = queue.dispatch = dispatchSetState.bind(null, currentlyRenderingFiber$1, queue);
+            return [hook.memoizedState, dispatch2];
           }
           function updateState(initialState) {
             return updateReducer(basicStateReducer);
@@ -14600,10 +14601,10 @@
           function rerenderState(initialState) {
             return rerenderReducer(basicStateReducer);
           }
-          function pushEffect(tag, create, destroy, deps) {
+          function pushEffect(tag, create2, destroy, deps) {
             var effect = {
               tag,
-              create,
+              create: create2,
               destroy,
               deps,
               // Circular
@@ -14641,13 +14642,13 @@
             var hook = updateWorkInProgressHook();
             return hook.memoizedState;
           }
-          function mountEffectImpl(fiberFlags, hookFlags, create, deps) {
+          function mountEffectImpl(fiberFlags, hookFlags, create2, deps) {
             var hook = mountWorkInProgressHook();
             var nextDeps = deps === void 0 ? null : deps;
             currentlyRenderingFiber$1.flags |= fiberFlags;
-            hook.memoizedState = pushEffect(HasEffect | hookFlags, create, void 0, nextDeps);
+            hook.memoizedState = pushEffect(HasEffect | hookFlags, create2, void 0, nextDeps);
           }
-          function updateEffectImpl(fiberFlags, hookFlags, create, deps) {
+          function updateEffectImpl(fiberFlags, hookFlags, create2, deps) {
             var hook = updateWorkInProgressHook();
             var nextDeps = deps === void 0 ? null : deps;
             var destroy = void 0;
@@ -14657,31 +14658,31 @@
               if (nextDeps !== null) {
                 var prevDeps = prevEffect.deps;
                 if (areHookInputsEqual(nextDeps, prevDeps)) {
-                  hook.memoizedState = pushEffect(hookFlags, create, destroy, nextDeps);
+                  hook.memoizedState = pushEffect(hookFlags, create2, destroy, nextDeps);
                   return;
                 }
               }
             }
             currentlyRenderingFiber$1.flags |= fiberFlags;
-            hook.memoizedState = pushEffect(HasEffect | hookFlags, create, destroy, nextDeps);
+            hook.memoizedState = pushEffect(HasEffect | hookFlags, create2, destroy, nextDeps);
           }
-          function mountEffect(create, deps) {
+          function mountEffect(create2, deps) {
             if ((currentlyRenderingFiber$1.mode & StrictEffectsMode) !== NoMode) {
-              return mountEffectImpl(MountPassiveDev | Passive | PassiveStatic, Passive$1, create, deps);
+              return mountEffectImpl(MountPassiveDev | Passive | PassiveStatic, Passive$1, create2, deps);
             } else {
-              return mountEffectImpl(Passive | PassiveStatic, Passive$1, create, deps);
+              return mountEffectImpl(Passive | PassiveStatic, Passive$1, create2, deps);
             }
           }
-          function updateEffect(create, deps) {
-            return updateEffectImpl(Passive, Passive$1, create, deps);
+          function updateEffect(create2, deps) {
+            return updateEffectImpl(Passive, Passive$1, create2, deps);
           }
-          function mountInsertionEffect(create, deps) {
-            return mountEffectImpl(Update, Insertion, create, deps);
+          function mountInsertionEffect(create2, deps) {
+            return mountEffectImpl(Update, Insertion, create2, deps);
           }
-          function updateInsertionEffect(create, deps) {
-            return updateEffectImpl(Update, Insertion, create, deps);
+          function updateInsertionEffect(create2, deps) {
+            return updateEffectImpl(Update, Insertion, create2, deps);
           }
-          function mountLayoutEffect(create, deps) {
+          function mountLayoutEffect(create2, deps) {
             var fiberFlags = Update;
             {
               fiberFlags |= LayoutStatic;
@@ -14689,15 +14690,15 @@
             if ((currentlyRenderingFiber$1.mode & StrictEffectsMode) !== NoMode) {
               fiberFlags |= MountLayoutDev;
             }
-            return mountEffectImpl(fiberFlags, Layout, create, deps);
+            return mountEffectImpl(fiberFlags, Layout, create2, deps);
           }
-          function updateLayoutEffect(create, deps) {
-            return updateEffectImpl(Update, Layout, create, deps);
+          function updateLayoutEffect(create2, deps) {
+            return updateEffectImpl(Update, Layout, create2, deps);
           }
-          function imperativeHandleEffect(create, ref) {
+          function imperativeHandleEffect(create2, ref) {
             if (typeof ref === "function") {
               var refCallback = ref;
-              var _inst = create();
+              var _inst = create2();
               refCallback(_inst);
               return function() {
                 refCallback(null);
@@ -14709,17 +14710,17 @@
                   error("Expected useImperativeHandle() first argument to either be a ref callback or React.createRef() object. Instead received: %s.", "an object with keys {" + Object.keys(refObject).join(", ") + "}");
                 }
               }
-              var _inst2 = create();
+              var _inst2 = create2();
               refObject.current = _inst2;
               return function() {
                 refObject.current = null;
               };
             }
           }
-          function mountImperativeHandle(ref, create, deps) {
+          function mountImperativeHandle(ref, create2, deps) {
             {
-              if (typeof create !== "function") {
-                error("Expected useImperativeHandle() second argument to be a function that creates a handle. Instead received: %s.", create !== null ? typeof create : "null");
+              if (typeof create2 !== "function") {
+                error("Expected useImperativeHandle() second argument to be a function that creates a handle. Instead received: %s.", create2 !== null ? typeof create2 : "null");
               }
             }
             var effectDeps = deps !== null && deps !== void 0 ? deps.concat([ref]) : null;
@@ -14730,16 +14731,16 @@
             if ((currentlyRenderingFiber$1.mode & StrictEffectsMode) !== NoMode) {
               fiberFlags |= MountLayoutDev;
             }
-            return mountEffectImpl(fiberFlags, Layout, imperativeHandleEffect.bind(null, create, ref), effectDeps);
+            return mountEffectImpl(fiberFlags, Layout, imperativeHandleEffect.bind(null, create2, ref), effectDeps);
           }
-          function updateImperativeHandle(ref, create, deps) {
+          function updateImperativeHandle(ref, create2, deps) {
             {
-              if (typeof create !== "function") {
-                error("Expected useImperativeHandle() second argument to be a function that creates a handle. Instead received: %s.", create !== null ? typeof create : "null");
+              if (typeof create2 !== "function") {
+                error("Expected useImperativeHandle() second argument to be a function that creates a handle. Instead received: %s.", create2 !== null ? typeof create2 : "null");
               }
             }
             var effectDeps = deps !== null && deps !== void 0 ? deps.concat([ref]) : null;
-            return updateEffectImpl(Update, Layout, imperativeHandleEffect.bind(null, create, ref), effectDeps);
+            return updateEffectImpl(Update, Layout, imperativeHandleEffect.bind(null, create2, ref), effectDeps);
           }
           function mountDebugValue(value, formatterFn) {
           }
@@ -14857,22 +14858,22 @@
           }
           function mountTransition() {
             var _mountState = mountState(false), isPending = _mountState[0], setPending = _mountState[1];
-            var start = startTransition.bind(null, setPending);
+            var start2 = startTransition.bind(null, setPending);
             var hook = mountWorkInProgressHook();
-            hook.memoizedState = start;
-            return [isPending, start];
+            hook.memoizedState = start2;
+            return [isPending, start2];
           }
           function updateTransition() {
             var _updateState = updateState(), isPending = _updateState[0];
             var hook = updateWorkInProgressHook();
-            var start = hook.memoizedState;
-            return [isPending, start];
+            var start2 = hook.memoizedState;
+            return [isPending, start2];
           }
           function rerenderTransition() {
             var _rerenderState = rerenderState(), isPending = _rerenderState[0];
             var hook = updateWorkInProgressHook();
-            var start = hook.memoizedState;
-            return [isPending, start];
+            var start2 = hook.memoizedState;
+            return [isPending, start2];
           }
           var isUpdatingOpaqueValueInRenderPhase = false;
           function getIsUpdatingOpaqueValueInRenderPhaseInDEV() {
@@ -14882,28 +14883,28 @@
           }
           function mountId() {
             var hook = mountWorkInProgressHook();
-            var root3 = getWorkInProgressRoot();
-            var identifierPrefix = root3.identifierPrefix;
-            var id;
+            var root4 = getWorkInProgressRoot();
+            var identifierPrefix = root4.identifierPrefix;
+            var id2;
             if (getIsHydrating()) {
               var treeId = getTreeId();
-              id = ":" + identifierPrefix + "R" + treeId;
+              id2 = ":" + identifierPrefix + "R" + treeId;
               var localId = localIdCounter++;
               if (localId > 0) {
-                id += "H" + localId.toString(32);
+                id2 += "H" + localId.toString(32);
               }
-              id += ":";
+              id2 += ":";
             } else {
               var globalClientId = globalClientIdCounter++;
-              id = ":" + identifierPrefix + "r" + globalClientId.toString(32) + ":";
+              id2 = ":" + identifierPrefix + "r" + globalClientId.toString(32) + ":";
             }
-            hook.memoizedState = id;
-            return id;
+            hook.memoizedState = id2;
+            return id2;
           }
           function updateId() {
             var hook = updateWorkInProgressHook();
-            var id = hook.memoizedState;
-            return id;
+            var id2 = hook.memoizedState;
+            return id2;
           }
           function dispatchReducerAction(fiber, queue, action) {
             {
@@ -14922,11 +14923,11 @@
             if (isRenderPhaseUpdate(fiber)) {
               enqueueRenderPhaseUpdate(queue, update);
             } else {
-              var root3 = enqueueConcurrentHookUpdate(fiber, queue, update, lane);
-              if (root3 !== null) {
+              var root4 = enqueueConcurrentHookUpdate(fiber, queue, update, lane);
+              if (root4 !== null) {
                 var eventTime = requestEventTime();
-                scheduleUpdateOnFiber(root3, fiber, lane, eventTime);
-                entangleTransitionUpdate(root3, queue, lane);
+                scheduleUpdateOnFiber(root4, fiber, lane, eventTime);
+                entangleTransitionUpdate(root4, queue, lane);
               }
             }
             markUpdateInDevTools(fiber, lane);
@@ -14974,11 +14975,11 @@
                   }
                 }
               }
-              var root3 = enqueueConcurrentHookUpdate(fiber, queue, update, lane);
-              if (root3 !== null) {
+              var root4 = enqueueConcurrentHookUpdate(fiber, queue, update, lane);
+              if (root4 !== null) {
                 var eventTime = requestEventTime();
-                scheduleUpdateOnFiber(root3, fiber, lane, eventTime);
-                entangleTransitionUpdate(root3, queue, lane);
+                scheduleUpdateOnFiber(root4, fiber, lane, eventTime);
+                entangleTransitionUpdate(root4, queue, lane);
               }
             }
             markUpdateInDevTools(fiber, lane);
@@ -14998,13 +14999,13 @@
             }
             queue.pending = update;
           }
-          function entangleTransitionUpdate(root3, queue, lane) {
+          function entangleTransitionUpdate(root4, queue, lane) {
             if (isTransitionLane(lane)) {
               var queueLanes = queue.lanes;
-              queueLanes = intersectLanes(queueLanes, root3.pendingLanes);
+              queueLanes = intersectLanes(queueLanes, root4.pendingLanes);
               var newQueueLanes = mergeLanes(queueLanes, lane);
               queue.lanes = newQueueLanes;
-              markRootEntangled(root3, newQueueLanes);
+              markRootEntangled(root4, newQueueLanes);
             }
           }
           function markUpdateInDevTools(fiber, lane, action) {
@@ -15061,49 +15062,49 @@
                 mountHookTypesDev();
                 return readContext(context5);
               },
-              useEffect: function(create, deps) {
+              useEffect: function(create2, deps) {
                 currentHookNameInDev = "useEffect";
                 mountHookTypesDev();
                 checkDepsAreArrayDev(deps);
-                return mountEffect(create, deps);
+                return mountEffect(create2, deps);
               },
-              useImperativeHandle: function(ref, create, deps) {
+              useImperativeHandle: function(ref, create2, deps) {
                 currentHookNameInDev = "useImperativeHandle";
                 mountHookTypesDev();
                 checkDepsAreArrayDev(deps);
-                return mountImperativeHandle(ref, create, deps);
+                return mountImperativeHandle(ref, create2, deps);
               },
-              useInsertionEffect: function(create, deps) {
+              useInsertionEffect: function(create2, deps) {
                 currentHookNameInDev = "useInsertionEffect";
                 mountHookTypesDev();
                 checkDepsAreArrayDev(deps);
-                return mountInsertionEffect(create, deps);
+                return mountInsertionEffect(create2, deps);
               },
-              useLayoutEffect: function(create, deps) {
+              useLayoutEffect: function(create2, deps) {
                 currentHookNameInDev = "useLayoutEffect";
                 mountHookTypesDev();
                 checkDepsAreArrayDev(deps);
-                return mountLayoutEffect(create, deps);
+                return mountLayoutEffect(create2, deps);
               },
-              useMemo: function(create, deps) {
+              useMemo: function(create2, deps) {
                 currentHookNameInDev = "useMemo";
                 mountHookTypesDev();
                 checkDepsAreArrayDev(deps);
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
                 try {
-                  return mountMemo(create, deps);
+                  return mountMemo(create2, deps);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useReducer: function(reducer, initialArg, init) {
+              useReducer: function(reducer, initialArg, init2) {
                 currentHookNameInDev = "useReducer";
                 mountHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
                 try {
-                  return mountReducer(reducer, initialArg, init);
+                  return mountReducer(reducer, initialArg, init2);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -15170,44 +15171,44 @@
                 updateHookTypesDev();
                 return readContext(context5);
               },
-              useEffect: function(create, deps) {
+              useEffect: function(create2, deps) {
                 currentHookNameInDev = "useEffect";
                 updateHookTypesDev();
-                return mountEffect(create, deps);
+                return mountEffect(create2, deps);
               },
-              useImperativeHandle: function(ref, create, deps) {
+              useImperativeHandle: function(ref, create2, deps) {
                 currentHookNameInDev = "useImperativeHandle";
                 updateHookTypesDev();
-                return mountImperativeHandle(ref, create, deps);
+                return mountImperativeHandle(ref, create2, deps);
               },
-              useInsertionEffect: function(create, deps) {
+              useInsertionEffect: function(create2, deps) {
                 currentHookNameInDev = "useInsertionEffect";
                 updateHookTypesDev();
-                return mountInsertionEffect(create, deps);
+                return mountInsertionEffect(create2, deps);
               },
-              useLayoutEffect: function(create, deps) {
+              useLayoutEffect: function(create2, deps) {
                 currentHookNameInDev = "useLayoutEffect";
                 updateHookTypesDev();
-                return mountLayoutEffect(create, deps);
+                return mountLayoutEffect(create2, deps);
               },
-              useMemo: function(create, deps) {
+              useMemo: function(create2, deps) {
                 currentHookNameInDev = "useMemo";
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
                 try {
-                  return mountMemo(create, deps);
+                  return mountMemo(create2, deps);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useReducer: function(reducer, initialArg, init) {
+              useReducer: function(reducer, initialArg, init2) {
                 currentHookNameInDev = "useReducer";
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
                 try {
-                  return mountReducer(reducer, initialArg, init);
+                  return mountReducer(reducer, initialArg, init2);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -15274,44 +15275,44 @@
                 updateHookTypesDev();
                 return readContext(context5);
               },
-              useEffect: function(create, deps) {
+              useEffect: function(create2, deps) {
                 currentHookNameInDev = "useEffect";
                 updateHookTypesDev();
-                return updateEffect(create, deps);
+                return updateEffect(create2, deps);
               },
-              useImperativeHandle: function(ref, create, deps) {
+              useImperativeHandle: function(ref, create2, deps) {
                 currentHookNameInDev = "useImperativeHandle";
                 updateHookTypesDev();
-                return updateImperativeHandle(ref, create, deps);
+                return updateImperativeHandle(ref, create2, deps);
               },
-              useInsertionEffect: function(create, deps) {
+              useInsertionEffect: function(create2, deps) {
                 currentHookNameInDev = "useInsertionEffect";
                 updateHookTypesDev();
-                return updateInsertionEffect(create, deps);
+                return updateInsertionEffect(create2, deps);
               },
-              useLayoutEffect: function(create, deps) {
+              useLayoutEffect: function(create2, deps) {
                 currentHookNameInDev = "useLayoutEffect";
                 updateHookTypesDev();
-                return updateLayoutEffect(create, deps);
+                return updateLayoutEffect(create2, deps);
               },
-              useMemo: function(create, deps) {
+              useMemo: function(create2, deps) {
                 currentHookNameInDev = "useMemo";
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
                 try {
-                  return updateMemo(create, deps);
+                  return updateMemo(create2, deps);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useReducer: function(reducer, initialArg, init) {
+              useReducer: function(reducer, initialArg, init2) {
                 currentHookNameInDev = "useReducer";
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
                 try {
-                  return updateReducer(reducer, initialArg, init);
+                  return updateReducer(reducer, initialArg, init2);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -15378,44 +15379,44 @@
                 updateHookTypesDev();
                 return readContext(context5);
               },
-              useEffect: function(create, deps) {
+              useEffect: function(create2, deps) {
                 currentHookNameInDev = "useEffect";
                 updateHookTypesDev();
-                return updateEffect(create, deps);
+                return updateEffect(create2, deps);
               },
-              useImperativeHandle: function(ref, create, deps) {
+              useImperativeHandle: function(ref, create2, deps) {
                 currentHookNameInDev = "useImperativeHandle";
                 updateHookTypesDev();
-                return updateImperativeHandle(ref, create, deps);
+                return updateImperativeHandle(ref, create2, deps);
               },
-              useInsertionEffect: function(create, deps) {
+              useInsertionEffect: function(create2, deps) {
                 currentHookNameInDev = "useInsertionEffect";
                 updateHookTypesDev();
-                return updateInsertionEffect(create, deps);
+                return updateInsertionEffect(create2, deps);
               },
-              useLayoutEffect: function(create, deps) {
+              useLayoutEffect: function(create2, deps) {
                 currentHookNameInDev = "useLayoutEffect";
                 updateHookTypesDev();
-                return updateLayoutEffect(create, deps);
+                return updateLayoutEffect(create2, deps);
               },
-              useMemo: function(create, deps) {
+              useMemo: function(create2, deps) {
                 currentHookNameInDev = "useMemo";
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnRerenderInDEV;
                 try {
-                  return updateMemo(create, deps);
+                  return updateMemo(create2, deps);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useReducer: function(reducer, initialArg, init) {
+              useReducer: function(reducer, initialArg, init2) {
                 currentHookNameInDev = "useReducer";
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnRerenderInDEV;
                 try {
-                  return rerenderReducer(reducer, initialArg, init);
+                  return rerenderReducer(reducer, initialArg, init2);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -15485,50 +15486,50 @@
                 mountHookTypesDev();
                 return readContext(context5);
               },
-              useEffect: function(create, deps) {
+              useEffect: function(create2, deps) {
                 currentHookNameInDev = "useEffect";
                 warnInvalidHookAccess();
                 mountHookTypesDev();
-                return mountEffect(create, deps);
+                return mountEffect(create2, deps);
               },
-              useImperativeHandle: function(ref, create, deps) {
+              useImperativeHandle: function(ref, create2, deps) {
                 currentHookNameInDev = "useImperativeHandle";
                 warnInvalidHookAccess();
                 mountHookTypesDev();
-                return mountImperativeHandle(ref, create, deps);
+                return mountImperativeHandle(ref, create2, deps);
               },
-              useInsertionEffect: function(create, deps) {
+              useInsertionEffect: function(create2, deps) {
                 currentHookNameInDev = "useInsertionEffect";
                 warnInvalidHookAccess();
                 mountHookTypesDev();
-                return mountInsertionEffect(create, deps);
+                return mountInsertionEffect(create2, deps);
               },
-              useLayoutEffect: function(create, deps) {
+              useLayoutEffect: function(create2, deps) {
                 currentHookNameInDev = "useLayoutEffect";
                 warnInvalidHookAccess();
                 mountHookTypesDev();
-                return mountLayoutEffect(create, deps);
+                return mountLayoutEffect(create2, deps);
               },
-              useMemo: function(create, deps) {
+              useMemo: function(create2, deps) {
                 currentHookNameInDev = "useMemo";
                 warnInvalidHookAccess();
                 mountHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
                 try {
-                  return mountMemo(create, deps);
+                  return mountMemo(create2, deps);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useReducer: function(reducer, initialArg, init) {
+              useReducer: function(reducer, initialArg, init2) {
                 currentHookNameInDev = "useReducer";
                 warnInvalidHookAccess();
                 mountHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnMountInDEV;
                 try {
-                  return mountReducer(reducer, initialArg, init);
+                  return mountReducer(reducer, initialArg, init2);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -15606,50 +15607,50 @@
                 updateHookTypesDev();
                 return readContext(context5);
               },
-              useEffect: function(create, deps) {
+              useEffect: function(create2, deps) {
                 currentHookNameInDev = "useEffect";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
-                return updateEffect(create, deps);
+                return updateEffect(create2, deps);
               },
-              useImperativeHandle: function(ref, create, deps) {
+              useImperativeHandle: function(ref, create2, deps) {
                 currentHookNameInDev = "useImperativeHandle";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
-                return updateImperativeHandle(ref, create, deps);
+                return updateImperativeHandle(ref, create2, deps);
               },
-              useInsertionEffect: function(create, deps) {
+              useInsertionEffect: function(create2, deps) {
                 currentHookNameInDev = "useInsertionEffect";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
-                return updateInsertionEffect(create, deps);
+                return updateInsertionEffect(create2, deps);
               },
-              useLayoutEffect: function(create, deps) {
+              useLayoutEffect: function(create2, deps) {
                 currentHookNameInDev = "useLayoutEffect";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
-                return updateLayoutEffect(create, deps);
+                return updateLayoutEffect(create2, deps);
               },
-              useMemo: function(create, deps) {
+              useMemo: function(create2, deps) {
                 currentHookNameInDev = "useMemo";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
                 try {
-                  return updateMemo(create, deps);
+                  return updateMemo(create2, deps);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useReducer: function(reducer, initialArg, init) {
+              useReducer: function(reducer, initialArg, init2) {
                 currentHookNameInDev = "useReducer";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
                 try {
-                  return updateReducer(reducer, initialArg, init);
+                  return updateReducer(reducer, initialArg, init2);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -15727,50 +15728,50 @@
                 updateHookTypesDev();
                 return readContext(context5);
               },
-              useEffect: function(create, deps) {
+              useEffect: function(create2, deps) {
                 currentHookNameInDev = "useEffect";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
-                return updateEffect(create, deps);
+                return updateEffect(create2, deps);
               },
-              useImperativeHandle: function(ref, create, deps) {
+              useImperativeHandle: function(ref, create2, deps) {
                 currentHookNameInDev = "useImperativeHandle";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
-                return updateImperativeHandle(ref, create, deps);
+                return updateImperativeHandle(ref, create2, deps);
               },
-              useInsertionEffect: function(create, deps) {
+              useInsertionEffect: function(create2, deps) {
                 currentHookNameInDev = "useInsertionEffect";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
-                return updateInsertionEffect(create, deps);
+                return updateInsertionEffect(create2, deps);
               },
-              useLayoutEffect: function(create, deps) {
+              useLayoutEffect: function(create2, deps) {
                 currentHookNameInDev = "useLayoutEffect";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
-                return updateLayoutEffect(create, deps);
+                return updateLayoutEffect(create2, deps);
               },
-              useMemo: function(create, deps) {
+              useMemo: function(create2, deps) {
                 currentHookNameInDev = "useMemo";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
                 try {
-                  return updateMemo(create, deps);
+                  return updateMemo(create2, deps);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
               },
-              useReducer: function(reducer, initialArg, init) {
+              useReducer: function(reducer, initialArg, init2) {
                 currentHookNameInDev = "useReducer";
                 warnInvalidHookAccess();
                 updateHookTypesDev();
                 var prevDispatcher = ReactCurrentDispatcher$1.current;
                 ReactCurrentDispatcher$1.current = InvalidNestedHooksDispatcherOnUpdateInDEV;
                 try {
-                  return rerenderReducer(reducer, initialArg, init);
+                  return rerenderReducer(reducer, initialArg, init2);
                 } finally {
                   ReactCurrentDispatcher$1.current = prevDispatcher;
                 }
@@ -15892,8 +15893,8 @@
               while (parentFiber !== null) {
                 switch (parentFiber.tag) {
                   case HostRoot:
-                    var root3 = parentFiber.stateNode;
-                    root3.effectDuration += elapsedTime;
+                    var root4 = parentFiber.stateNode;
+                    root4.effectDuration += elapsedTime;
                     return;
                   case Profiler:
                     var parentStateNode = parentFiber.stateNode;
@@ -15912,9 +15913,9 @@
               while (parentFiber !== null) {
                 switch (parentFiber.tag) {
                   case HostRoot:
-                    var root3 = parentFiber.stateNode;
-                    if (root3 !== null) {
-                      root3.passiveEffectDuration += elapsedTime;
+                    var root4 = parentFiber.stateNode;
+                    if (root4 !== null) {
+                      root4.passiveEffectDuration += elapsedTime;
                     }
                     return;
                   case Profiler:
@@ -16053,11 +16054,11 @@
             }
             return update;
           }
-          function attachPingListener(root3, wakeable, lanes) {
-            var pingCache = root3.pingCache;
+          function attachPingListener(root4, wakeable, lanes) {
+            var pingCache = root4.pingCache;
             var threadIDs;
             if (pingCache === null) {
-              pingCache = root3.pingCache = new PossiblyWeakMap$1();
+              pingCache = root4.pingCache = new PossiblyWeakMap$1();
               threadIDs = /* @__PURE__ */ new Set();
               pingCache.set(wakeable, threadIDs);
             } else {
@@ -16069,16 +16070,16 @@
             }
             if (!threadIDs.has(lanes)) {
               threadIDs.add(lanes);
-              var ping = pingSuspendedRoot.bind(null, root3, wakeable, lanes);
+              var ping = pingSuspendedRoot.bind(null, root4, wakeable, lanes);
               {
                 if (isDevToolsPresent) {
-                  restorePendingUpdaters(root3, lanes);
+                  restorePendingUpdaters(root4, lanes);
                 }
               }
               wakeable.then(ping, ping);
             }
           }
-          function attachRetryListener(suspenseBoundary, root3, wakeable, lanes) {
+          function attachRetryListener(suspenseBoundary, root4, wakeable, lanes) {
             var wakeables = suspenseBoundary.updateQueue;
             if (wakeables === null) {
               var updateQueue = /* @__PURE__ */ new Set();
@@ -16112,7 +16113,7 @@
             } while (node !== null);
             return null;
           }
-          function markSuspenseBoundaryShouldCapture(suspenseBoundary, returnFiber, sourceFiber, root3, rootRenderLanes) {
+          function markSuspenseBoundaryShouldCapture(suspenseBoundary, returnFiber, sourceFiber, root4, rootRenderLanes) {
             if ((suspenseBoundary.mode & ConcurrentMode) === NoMode) {
               if (suspenseBoundary === returnFiber) {
                 suspenseBoundary.flags |= ShouldCapture;
@@ -16138,11 +16139,11 @@
             suspenseBoundary.lanes = rootRenderLanes;
             return suspenseBoundary;
           }
-          function throwException(root3, returnFiber, sourceFiber, value, rootRenderLanes) {
+          function throwException(root4, returnFiber, sourceFiber, value, rootRenderLanes) {
             sourceFiber.flags |= Incomplete;
             {
               if (isDevToolsPresent) {
-                restorePendingUpdaters(root3, rootRenderLanes);
+                restorePendingUpdaters(root4, rootRenderLanes);
               }
             }
             if (value !== null && typeof value === "object" && typeof value.then === "function") {
@@ -16156,15 +16157,15 @@
               var suspenseBoundary = getNearestSuspenseBoundaryToCapture(returnFiber);
               if (suspenseBoundary !== null) {
                 suspenseBoundary.flags &= ~ForceClientRender;
-                markSuspenseBoundaryShouldCapture(suspenseBoundary, returnFiber, sourceFiber, root3, rootRenderLanes);
+                markSuspenseBoundaryShouldCapture(suspenseBoundary, returnFiber, sourceFiber, root4, rootRenderLanes);
                 if (suspenseBoundary.mode & ConcurrentMode) {
-                  attachPingListener(root3, wakeable, rootRenderLanes);
+                  attachPingListener(root4, wakeable, rootRenderLanes);
                 }
-                attachRetryListener(suspenseBoundary, root3, wakeable);
+                attachRetryListener(suspenseBoundary, root4, wakeable);
                 return;
               } else {
                 if (!includesSyncLane(rootRenderLanes)) {
-                  attachPingListener(root3, wakeable, rootRenderLanes);
+                  attachPingListener(root4, wakeable, rootRenderLanes);
                   renderDidSuspendDelayIfPossible();
                   return;
                 }
@@ -16179,7 +16180,7 @@
                   if ((_suspenseBoundary.flags & ShouldCapture) === NoFlags) {
                     _suspenseBoundary.flags |= ForceClientRender;
                   }
-                  markSuspenseBoundaryShouldCapture(_suspenseBoundary, returnFiber, sourceFiber, root3, rootRenderLanes);
+                  markSuspenseBoundaryShouldCapture(_suspenseBoundary, returnFiber, sourceFiber, root4, rootRenderLanes);
                   queueHydrationError(createCapturedValueAtFiber(value, sourceFiber));
                   return;
                 }
@@ -16307,29 +16308,29 @@
           }
           function updateMemoComponent(current2, workInProgress2, Component, nextProps, renderLanes2) {
             if (current2 === null) {
-              var type = Component.type;
-              if (isSimpleFunctionComponent(type) && Component.compare === null && // SimpleMemoComponent codepath doesn't resolve outer props either.
+              var type2 = Component.type;
+              if (isSimpleFunctionComponent(type2) && Component.compare === null && // SimpleMemoComponent codepath doesn't resolve outer props either.
               Component.defaultProps === void 0) {
-                var resolvedType = type;
+                var resolvedType = type2;
                 {
-                  resolvedType = resolveFunctionForHotReloading(type);
+                  resolvedType = resolveFunctionForHotReloading(type2);
                 }
                 workInProgress2.tag = SimpleMemoComponent;
                 workInProgress2.type = resolvedType;
                 {
-                  validateFunctionComponentInDev(workInProgress2, type);
+                  validateFunctionComponentInDev(workInProgress2, type2);
                 }
                 return updateSimpleMemoComponent(current2, workInProgress2, resolvedType, nextProps, renderLanes2);
               }
               {
-                var innerPropTypes = type.propTypes;
+                var innerPropTypes = type2.propTypes;
                 if (innerPropTypes) {
                   checkPropTypes(
                     innerPropTypes,
                     nextProps,
                     // Resolved props
                     "prop",
-                    getComponentNameFromType(type)
+                    getComponentNameFromType(type2)
                   );
                 }
               }
@@ -16376,10 +16377,10 @@
                 if (outerMemoType.$$typeof === REACT_LAZY_TYPE) {
                   var lazyComponent = outerMemoType;
                   var payload = lazyComponent._payload;
-                  var init = lazyComponent._init;
+                  var init2 = lazyComponent._init;
                   try {
-                    outerMemoType = init(payload);
-                  } catch (x) {
+                    outerMemoType = init2(payload);
+                  } catch (x2) {
                     outerMemoType = null;
                   }
                   var outerPropTypes = outerMemoType && outerMemoType.propTypes;
@@ -16673,13 +16674,13 @@
             return workInProgress2.child;
           }
           function pushHostRootContext(workInProgress2) {
-            var root3 = workInProgress2.stateNode;
-            if (root3.pendingContext) {
-              pushTopLevelContextObject(workInProgress2, root3.pendingContext, root3.pendingContext !== root3.context);
-            } else if (root3.context) {
-              pushTopLevelContextObject(workInProgress2, root3.context, false);
+            var root4 = workInProgress2.stateNode;
+            if (root4.pendingContext) {
+              pushTopLevelContextObject(workInProgress2, root4.pendingContext, root4.pendingContext !== root4.context);
+            } else if (root4.context) {
+              pushTopLevelContextObject(workInProgress2, root4.context, false);
             }
-            pushHostContainer(workInProgress2, root3.containerInfo);
+            pushHostContainer(workInProgress2, root4.containerInfo);
           }
           function updateHostRoot(current2, workInProgress2, renderLanes2) {
             pushHostRootContext(workInProgress2);
@@ -16692,7 +16693,7 @@
             cloneUpdateQueue(current2, workInProgress2);
             processUpdateQueue(workInProgress2, nextProps, null, renderLanes2);
             var nextState = workInProgress2.memoizedState;
-            var root3 = workInProgress2.stateNode;
+            var root4 = workInProgress2.stateNode;
             var nextChildren = nextState.element;
             if (prevState.isDehydrated) {
               var overrideState = {
@@ -16742,14 +16743,14 @@
             if (current2 === null) {
               tryToClaimNextHydratableInstance(workInProgress2);
             }
-            var type = workInProgress2.type;
+            var type2 = workInProgress2.type;
             var nextProps = workInProgress2.pendingProps;
             var prevProps = current2 !== null ? current2.memoizedProps : null;
             var nextChildren = nextProps.children;
-            var isDirectTextChild = shouldSetTextContent(type, nextProps);
+            var isDirectTextChild = shouldSetTextContent(type2, nextProps);
             if (isDirectTextChild) {
               nextChildren = null;
-            } else if (prevProps !== null && shouldSetTextContent(type, prevProps)) {
+            } else if (prevProps !== null && shouldSetTextContent(type2, prevProps)) {
               workInProgress2.flags |= ContentReset;
             }
             markRef(current2, workInProgress2);
@@ -16767,8 +16768,8 @@
             var props = workInProgress2.pendingProps;
             var lazyComponent = elementType;
             var payload = lazyComponent._payload;
-            var init = lazyComponent._init;
-            var Component = init(payload);
+            var init2 = lazyComponent._init;
+            var Component = init2(payload);
             workInProgress2.type = Component;
             var resolvedTag = workInProgress2.tag = resolveLazyComponentTag(Component);
             var resolvedProps = resolveDefaultProps(Component, props);
@@ -17273,14 +17274,14 @@
               }
               var hasContextChanged2 = includesSomeLane(renderLanes2, current2.childLanes);
               if (didReceiveUpdate || hasContextChanged2) {
-                var root3 = getWorkInProgressRoot();
-                if (root3 !== null) {
-                  var attemptHydrationAtLane = getBumpedLaneForHydration(root3, renderLanes2);
+                var root4 = getWorkInProgressRoot();
+                if (root4 !== null) {
+                  var attemptHydrationAtLane = getBumpedLaneForHydration(root4, renderLanes2);
                   if (attemptHydrationAtLane !== NoLane && attemptHydrationAtLane !== suspenseState.retryLane) {
                     suspenseState.retryLane = attemptHydrationAtLane;
                     var eventTime = NoTimestamp;
                     enqueueConcurrentRenderForLane(current2, attemptHydrationAtLane);
-                    scheduleUpdateOnFiber(root3, current2, attemptHydrationAtLane, eventTime);
+                    scheduleUpdateOnFiber(root4, current2, attemptHydrationAtLane, eventTime);
                   }
                 }
                 renderDidSuspendDelayIfPossible();
@@ -17412,26 +17413,26 @@
               var isAnArray = isArray(childSlot);
               var isIterable = !isAnArray && typeof getIteratorFn(childSlot) === "function";
               if (isAnArray || isIterable) {
-                var type = isAnArray ? "array" : "iterable";
-                error("A nested %s was passed to row #%s in <SuspenseList />. Wrap it in an additional SuspenseList to configure its revealOrder: <SuspenseList revealOrder=...> ... <SuspenseList revealOrder=...>{%s}</SuspenseList> ... </SuspenseList>", type, index2, type);
+                var type2 = isAnArray ? "array" : "iterable";
+                error("A nested %s was passed to row #%s in <SuspenseList />. Wrap it in an additional SuspenseList to configure its revealOrder: <SuspenseList revealOrder=...> ... <SuspenseList revealOrder=...>{%s}</SuspenseList> ... </SuspenseList>", type2, index2, type2);
                 return false;
               }
             }
             return true;
           }
-          function validateSuspenseListChildren(children, revealOrder) {
+          function validateSuspenseListChildren(children2, revealOrder) {
             {
-              if ((revealOrder === "forwards" || revealOrder === "backwards") && children !== void 0 && children !== null && children !== false) {
-                if (isArray(children)) {
-                  for (var i = 0; i < children.length; i++) {
-                    if (!validateSuspenseListNestedChild(children[i], i)) {
+              if ((revealOrder === "forwards" || revealOrder === "backwards") && children2 !== void 0 && children2 !== null && children2 !== false) {
+                if (isArray(children2)) {
+                  for (var i = 0; i < children2.length; i++) {
+                    if (!validateSuspenseListNestedChild(children2[i], i)) {
                       return;
                     }
                   }
                 } else {
-                  var iteratorFn = getIteratorFn(children);
+                  var iteratorFn = getIteratorFn(children2);
                   if (typeof iteratorFn === "function") {
-                    var childrenIterator = iteratorFn.call(children);
+                    var childrenIterator = iteratorFn.call(children2);
                     if (childrenIterator) {
                       var step = childrenIterator.next();
                       var _i = 0;
@@ -17725,7 +17726,7 @@
             switch (workInProgress2.tag) {
               case HostRoot:
                 pushHostRootContext(workInProgress2);
-                var root3 = workInProgress2.stateNode;
+                var root4 = workInProgress2.stateNode;
                 resetHydrationState();
                 break;
               case HostComponent:
@@ -17882,10 +17883,10 @@
               case HostPortal:
                 return updatePortalComponent(current2, workInProgress2, renderLanes2);
               case ForwardRef: {
-                var type = workInProgress2.type;
+                var type2 = workInProgress2.type;
                 var _unresolvedProps2 = workInProgress2.pendingProps;
-                var _resolvedProps2 = workInProgress2.elementType === type ? _unresolvedProps2 : resolveDefaultProps(type, _unresolvedProps2);
-                return updateForwardRef(current2, workInProgress2, type, _resolvedProps2, renderLanes2);
+                var _resolvedProps2 = workInProgress2.elementType === type2 ? _unresolvedProps2 : resolveDefaultProps(type2, _unresolvedProps2);
+                return updateForwardRef(current2, workInProgress2, type2, _resolvedProps2, renderLanes2);
               }
               case Fragment:
                 return updateFragment(current2, workInProgress2, renderLanes2);
@@ -17980,14 +17981,14 @@
             };
             updateHostContainer = function(current2, workInProgress2) {
             };
-            updateHostComponent$1 = function(current2, workInProgress2, type, newProps, rootContainerInstance) {
+            updateHostComponent$1 = function(current2, workInProgress2, type2, newProps, rootContainerInstance) {
               var oldProps = current2.memoizedProps;
               if (oldProps === newProps) {
                 return;
               }
               var instance = workInProgress2.stateNode;
               var currentHostContext = getHostContext();
-              var updatePayload = prepareUpdate(instance, type, oldProps, newProps, rootContainerInstance, currentHostContext);
+              var updatePayload = prepareUpdate(instance, type2, oldProps, newProps, rootContainerInstance, currentHostContext);
               workInProgress2.updateQueue = updatePayload;
               if (updatePayload) {
                 markUpdate(workInProgress2);
@@ -18209,9 +18210,9 @@
               case HostComponent: {
                 popHostContext(workInProgress2);
                 var rootContainerInstance = getRootHostContainer();
-                var type = workInProgress2.type;
+                var type2 = workInProgress2.type;
                 if (current2 !== null && workInProgress2.stateNode != null) {
-                  updateHostComponent$1(current2, workInProgress2, type, newProps, rootContainerInstance);
+                  updateHostComponent$1(current2, workInProgress2, type2, newProps, rootContainerInstance);
                   if (current2.ref !== workInProgress2.ref) {
                     markRef$1(workInProgress2);
                   }
@@ -18230,10 +18231,10 @@
                       markUpdate(workInProgress2);
                     }
                   } else {
-                    var instance = createInstance(type, newProps, rootContainerInstance, currentHostContext, workInProgress2);
+                    var instance = createInstance(type2, newProps, rootContainerInstance, currentHostContext, workInProgress2);
                     appendAllChildren(instance, workInProgress2, false, false);
                     workInProgress2.stateNode = instance;
-                    if (finalizeInitialChildren(instance, type, newProps, rootContainerInstance)) {
+                    if (finalizeInitialChildren(instance, type2, newProps, rootContainerInstance)) {
                       markUpdate(workInProgress2);
                     }
                   }
@@ -18376,7 +18377,7 @@
                         row = row.sibling;
                       }
                     }
-                    if (renderState.tail !== null && now() > getRenderTargetTime()) {
+                    if (renderState.tail !== null && now2() > getRenderTargetTime()) {
                       workInProgress2.flags |= DidCapture;
                       didSuspendAlready = true;
                       cutOffTailIfNeeded(renderState, false);
@@ -18405,7 +18406,7 @@
                       // The time it took to render last row is greater than the remaining
                       // time we have to render. So rendering one more row would likely
                       // exceed it.
-                      now() * 2 - renderState.renderingStartTime > getRenderTargetTime() && renderLanes2 !== OffscreenLane
+                      now2() * 2 - renderState.renderingStartTime > getRenderTargetTime() && renderLanes2 !== OffscreenLane
                     ) {
                       workInProgress2.flags |= DidCapture;
                       didSuspendAlready = true;
@@ -18430,7 +18431,7 @@
                   var next = renderState.tail;
                   renderState.rendering = next;
                   renderState.tail = next.sibling;
-                  renderState.renderingStartTime = now();
+                  renderState.renderingStartTime = now2();
                   next.sibling = null;
                   var suspenseContext = suspenseStackCursor.current;
                   if (didSuspendAlready) {
@@ -18502,7 +18503,7 @@
                 return null;
               }
               case HostRoot: {
-                var root3 = workInProgress2.stateNode;
+                var root4 = workInProgress2.stateNode;
                 popHostContainer(workInProgress2);
                 popTopLevelContextObject(workInProgress2);
                 resetWorkInProgressVersions();
@@ -18568,7 +18569,7 @@
                 break;
               }
               case HostRoot: {
-                var root3 = interruptedWork.stateNode;
+                var root4 = interruptedWork.stateNode;
                 popHostContainer(interruptedWork);
                 popTopLevelContextObject(interruptedWork);
                 resetWorkInProgressVersions();
@@ -18695,8 +18696,8 @@
           }
           var focusedInstanceHandle = null;
           var shouldFireAfterActiveInstanceBlur = false;
-          function commitBeforeMutationEffects(root3, firstChild) {
-            focusedInstanceHandle = prepareForCommit(root3.containerInfo);
+          function commitBeforeMutationEffects(root4, firstChild) {
+            focusedInstanceHandle = prepareForCommit(root4.containerInfo);
             nextEffect = firstChild;
             commitBeforeMutationEffects_begin();
             var shouldFire = shouldFireAfterActiveInstanceBlur;
@@ -18775,8 +18776,8 @@
                 }
                 case HostRoot: {
                   {
-                    var root3 = finishedWork.stateNode;
-                    clearContainer(root3.containerInfo);
+                    var root4 = finishedWork.stateNode;
+                    clearContainer(root4.containerInfo);
                   }
                   break;
                 }
@@ -18849,13 +18850,13 @@
                       markComponentLayoutEffectMountStarted(finishedWork);
                     }
                   }
-                  var create = effect.create;
+                  var create2 = effect.create;
                   {
                     if ((flags & Insertion) !== NoFlags$1) {
                       setIsRunningInsertionEffect(true);
                     }
                   }
-                  effect.destroy = create();
+                  effect.destroy = create2();
                   {
                     if ((flags & Insertion) !== NoFlags$1) {
                       setIsRunningInsertionEffect(false);
@@ -18901,7 +18902,7 @@
                 switch (finishedWork.tag) {
                   case Profiler: {
                     var passiveEffectDuration = finishedWork.stateNode.passiveEffectDuration;
-                    var _finishedWork$memoize = finishedWork.memoizedProps, id = _finishedWork$memoize.id, onPostCommit = _finishedWork$memoize.onPostCommit;
+                    var _finishedWork$memoize = finishedWork.memoizedProps, id2 = _finishedWork$memoize.id, onPostCommit = _finishedWork$memoize.onPostCommit;
                     var commitTime2 = getCommitTime();
                     var phase = finishedWork.alternate === null ? "mount" : "update";
                     {
@@ -18910,15 +18911,15 @@
                       }
                     }
                     if (typeof onPostCommit === "function") {
-                      onPostCommit(id, phase, passiveEffectDuration, commitTime2);
+                      onPostCommit(id2, phase, passiveEffectDuration, commitTime2);
                     }
                     var parentFiber = finishedWork.return;
                     outer:
                       while (parentFiber !== null) {
                         switch (parentFiber.tag) {
                           case HostRoot:
-                            var root3 = parentFiber.stateNode;
-                            root3.passiveEffectDuration += passiveEffectDuration;
+                            var root4 = parentFiber.stateNode;
+                            root4.passiveEffectDuration += passiveEffectDuration;
                             break outer;
                           case Profiler:
                             var parentStateNode = parentFiber.stateNode;
@@ -19041,9 +19042,9 @@
                 case HostComponent: {
                   var _instance2 = finishedWork.stateNode;
                   if (current2 === null && finishedWork.flags & Update) {
-                    var type = finishedWork.type;
+                    var type2 = finishedWork.type;
                     var props = finishedWork.memoizedProps;
-                    commitMount(_instance2, type, props);
+                    commitMount(_instance2, type2, props);
                   }
                   break;
                 }
@@ -19077,8 +19078,8 @@
                         while (parentFiber !== null) {
                           switch (parentFiber.tag) {
                             case HostRoot:
-                              var root3 = parentFiber.stateNode;
-                              root3.effectDuration += effectDuration;
+                              var root4 = parentFiber.stateNode;
+                              root4.effectDuration += effectDuration;
                               break outer;
                             case Profiler:
                               var parentStateNode = parentFiber.stateNode;
@@ -19397,7 +19398,7 @@
           }
           var hostParent = null;
           var hostParentIsContainer = false;
-          function commitDeletionEffects(root3, returnFiber, deletedFiber) {
+          function commitDeletionEffects(root4, returnFiber, deletedFiber) {
             {
               var parent = returnFiber;
               findParent:
@@ -19424,7 +19425,7 @@
               if (hostParent === null) {
                 throw new Error("Expected to find a host parent. This error is likely caused by a bug in React. Please file an issue.");
               }
-              commitDeletionEffectsOnFiber(root3, returnFiber, deletedFiber);
+              commitDeletionEffectsOnFiber(root4, returnFiber, deletedFiber);
               hostParent = null;
               hostParentIsContainer = false;
             }
@@ -19606,22 +19607,22 @@
               });
             }
           }
-          function commitMutationEffects(root3, finishedWork, committedLanes) {
+          function commitMutationEffects(root4, finishedWork, committedLanes) {
             inProgressLanes = committedLanes;
-            inProgressRoot = root3;
+            inProgressRoot = root4;
             setCurrentFiber(finishedWork);
-            commitMutationEffectsOnFiber(finishedWork, root3);
+            commitMutationEffectsOnFiber(finishedWork, root4);
             setCurrentFiber(finishedWork);
             inProgressLanes = null;
             inProgressRoot = null;
           }
-          function recursivelyTraverseMutationEffects(root3, parentFiber, lanes) {
+          function recursivelyTraverseMutationEffects(root4, parentFiber, lanes) {
             var deletions = parentFiber.deletions;
             if (deletions !== null) {
               for (var i = 0; i < deletions.length; i++) {
                 var childToDelete = deletions[i];
                 try {
-                  commitDeletionEffects(root3, parentFiber, childToDelete);
+                  commitDeletionEffects(root4, parentFiber, childToDelete);
                 } catch (error2) {
                   captureCommitPhaseError(childToDelete, parentFiber, error2);
                 }
@@ -19632,13 +19633,13 @@
               var child = parentFiber.child;
               while (child !== null) {
                 setCurrentFiber(child);
-                commitMutationEffectsOnFiber(child, root3);
+                commitMutationEffectsOnFiber(child, root4);
                 child = child.sibling;
               }
             }
             setCurrentFiber(prevDebugFiber);
           }
-          function commitMutationEffectsOnFiber(finishedWork, root3, lanes) {
+          function commitMutationEffectsOnFiber(finishedWork, root4, lanes) {
             var current2 = finishedWork.alternate;
             var flags = finishedWork.flags;
             switch (finishedWork.tag) {
@@ -19646,7 +19647,7 @@
               case ForwardRef:
               case MemoComponent:
               case SimpleMemoComponent: {
-                recursivelyTraverseMutationEffects(root3, finishedWork);
+                recursivelyTraverseMutationEffects(root4, finishedWork);
                 commitReconciliationEffects(finishedWork);
                 if (flags & Update) {
                   try {
@@ -19674,7 +19675,7 @@
                 return;
               }
               case ClassComponent: {
-                recursivelyTraverseMutationEffects(root3, finishedWork);
+                recursivelyTraverseMutationEffects(root4, finishedWork);
                 commitReconciliationEffects(finishedWork);
                 if (flags & Ref) {
                   if (current2 !== null) {
@@ -19684,7 +19685,7 @@
                 return;
               }
               case HostComponent: {
-                recursivelyTraverseMutationEffects(root3, finishedWork);
+                recursivelyTraverseMutationEffects(root4, finishedWork);
                 commitReconciliationEffects(finishedWork);
                 if (flags & Ref) {
                   if (current2 !== null) {
@@ -19705,12 +19706,12 @@
                     if (_instance4 != null) {
                       var newProps = finishedWork.memoizedProps;
                       var oldProps = current2 !== null ? current2.memoizedProps : newProps;
-                      var type = finishedWork.type;
+                      var type2 = finishedWork.type;
                       var updatePayload = finishedWork.updateQueue;
                       finishedWork.updateQueue = null;
                       if (updatePayload !== null) {
                         try {
-                          commitUpdate(_instance4, updatePayload, type, oldProps, newProps, finishedWork);
+                          commitUpdate(_instance4, updatePayload, type2, oldProps, newProps, finishedWork);
                         } catch (error2) {
                           captureCommitPhaseError(finishedWork, finishedWork.return, error2);
                         }
@@ -19721,7 +19722,7 @@
                 return;
               }
               case HostText: {
-                recursivelyTraverseMutationEffects(root3, finishedWork);
+                recursivelyTraverseMutationEffects(root4, finishedWork);
                 commitReconciliationEffects(finishedWork);
                 if (flags & Update) {
                   {
@@ -19741,7 +19742,7 @@
                 return;
               }
               case HostRoot: {
-                recursivelyTraverseMutationEffects(root3, finishedWork);
+                recursivelyTraverseMutationEffects(root4, finishedWork);
                 commitReconciliationEffects(finishedWork);
                 if (flags & Update) {
                   {
@@ -19749,7 +19750,7 @@
                       var prevRootState = current2.memoizedState;
                       if (prevRootState.isDehydrated) {
                         try {
-                          commitHydratedContainer(root3.containerInfo);
+                          commitHydratedContainer(root4.containerInfo);
                         } catch (error2) {
                           captureCommitPhaseError(finishedWork, finishedWork.return, error2);
                         }
@@ -19760,12 +19761,12 @@
                 return;
               }
               case HostPortal: {
-                recursivelyTraverseMutationEffects(root3, finishedWork);
+                recursivelyTraverseMutationEffects(root4, finishedWork);
                 commitReconciliationEffects(finishedWork);
                 return;
               }
               case SuspenseComponent: {
-                recursivelyTraverseMutationEffects(root3, finishedWork);
+                recursivelyTraverseMutationEffects(root4, finishedWork);
                 commitReconciliationEffects(finishedWork);
                 var offscreenFiber = finishedWork.child;
                 if (offscreenFiber.flags & Visibility) {
@@ -19798,10 +19799,10 @@
                 ) {
                   var prevOffscreenSubtreeWasHidden = offscreenSubtreeWasHidden;
                   offscreenSubtreeWasHidden = prevOffscreenSubtreeWasHidden || _wasHidden;
-                  recursivelyTraverseMutationEffects(root3, finishedWork);
+                  recursivelyTraverseMutationEffects(root4, finishedWork);
                   offscreenSubtreeWasHidden = prevOffscreenSubtreeWasHidden;
                 } else {
-                  recursivelyTraverseMutationEffects(root3, finishedWork);
+                  recursivelyTraverseMutationEffects(root4, finishedWork);
                 }
                 commitReconciliationEffects(finishedWork);
                 if (flags & Visibility) {
@@ -19832,7 +19833,7 @@
                 return;
               }
               case SuspenseListComponent: {
-                recursivelyTraverseMutationEffects(root3, finishedWork);
+                recursivelyTraverseMutationEffects(root4, finishedWork);
                 commitReconciliationEffects(finishedWork);
                 if (flags & Update) {
                   attachSuspenseRetryListeners(finishedWork);
@@ -19843,7 +19844,7 @@
                 return;
               }
               default: {
-                recursivelyTraverseMutationEffects(root3, finishedWork);
+                recursivelyTraverseMutationEffects(root4, finishedWork);
                 commitReconciliationEffects(finishedWork);
                 return;
               }
@@ -19863,15 +19864,15 @@
               finishedWork.flags &= ~Hydrating;
             }
           }
-          function commitLayoutEffects(finishedWork, root3, committedLanes) {
+          function commitLayoutEffects(finishedWork, root4, committedLanes) {
             inProgressLanes = committedLanes;
-            inProgressRoot = root3;
+            inProgressRoot = root4;
             nextEffect = finishedWork;
-            commitLayoutEffects_begin(finishedWork, root3, committedLanes);
+            commitLayoutEffects_begin(finishedWork, root4, committedLanes);
             inProgressLanes = null;
             inProgressRoot = null;
           }
-          function commitLayoutEffects_begin(subtreeRoot, root3, committedLanes) {
+          function commitLayoutEffects_begin(subtreeRoot, root4, committedLanes) {
             var isModernRoot = (subtreeRoot.mode & ConcurrentMode) !== NoMode;
             while (nextEffect !== null) {
               var fiber = nextEffect;
@@ -19880,7 +19881,7 @@
                 var isHidden = fiber.memoizedState !== null;
                 var newOffscreenSubtreeIsHidden = isHidden || offscreenSubtreeIsHidden;
                 if (newOffscreenSubtreeIsHidden) {
-                  commitLayoutMountEffects_complete(subtreeRoot, root3, committedLanes);
+                  commitLayoutMountEffects_complete(subtreeRoot, root4, committedLanes);
                   continue;
                 } else {
                   var current2 = fiber.alternate;
@@ -19900,7 +19901,7 @@
                     commitLayoutEffects_begin(
                       child,
                       // New root; bubble back up to here and stop.
-                      root3,
+                      root4,
                       committedLanes
                     );
                     child = child.sibling;
@@ -19908,7 +19909,7 @@
                   nextEffect = fiber;
                   offscreenSubtreeIsHidden = prevOffscreenSubtreeIsHidden;
                   offscreenSubtreeWasHidden = prevOffscreenSubtreeWasHidden;
-                  commitLayoutMountEffects_complete(subtreeRoot, root3, committedLanes);
+                  commitLayoutMountEffects_complete(subtreeRoot, root4, committedLanes);
                   continue;
                 }
               }
@@ -19916,18 +19917,18 @@
                 firstChild.return = fiber;
                 nextEffect = firstChild;
               } else {
-                commitLayoutMountEffects_complete(subtreeRoot, root3, committedLanes);
+                commitLayoutMountEffects_complete(subtreeRoot, root4, committedLanes);
               }
             }
           }
-          function commitLayoutMountEffects_complete(subtreeRoot, root3, committedLanes) {
+          function commitLayoutMountEffects_complete(subtreeRoot, root4, committedLanes) {
             while (nextEffect !== null) {
               var fiber = nextEffect;
               if ((fiber.flags & LayoutMask) !== NoFlags) {
                 var current2 = fiber.alternate;
                 setCurrentFiber(fiber);
                 try {
-                  commitLayoutEffectOnFiber(root3, current2, fiber, committedLanes);
+                  commitLayoutEffectOnFiber(root4, current2, fiber, committedLanes);
                 } catch (error2) {
                   captureCommitPhaseError(fiber, fiber.return, error2);
                 }
@@ -20054,11 +20055,11 @@
               nextEffect = fiber.return;
             }
           }
-          function commitPassiveMountEffects(root3, finishedWork, committedLanes, committedTransitions) {
+          function commitPassiveMountEffects(root4, finishedWork, committedLanes, committedTransitions) {
             nextEffect = finishedWork;
-            commitPassiveMountEffects_begin(finishedWork, root3, committedLanes, committedTransitions);
+            commitPassiveMountEffects_begin(finishedWork, root4, committedLanes, committedTransitions);
           }
-          function commitPassiveMountEffects_begin(subtreeRoot, root3, committedLanes, committedTransitions) {
+          function commitPassiveMountEffects_begin(subtreeRoot, root4, committedLanes, committedTransitions) {
             while (nextEffect !== null) {
               var fiber = nextEffect;
               var firstChild = fiber.child;
@@ -20066,17 +20067,17 @@
                 firstChild.return = fiber;
                 nextEffect = firstChild;
               } else {
-                commitPassiveMountEffects_complete(subtreeRoot, root3, committedLanes, committedTransitions);
+                commitPassiveMountEffects_complete(subtreeRoot, root4, committedLanes, committedTransitions);
               }
             }
           }
-          function commitPassiveMountEffects_complete(subtreeRoot, root3, committedLanes, committedTransitions) {
+          function commitPassiveMountEffects_complete(subtreeRoot, root4, committedLanes, committedTransitions) {
             while (nextEffect !== null) {
               var fiber = nextEffect;
               if ((fiber.flags & Passive) !== NoFlags) {
                 setCurrentFiber(fiber);
                 try {
-                  commitPassiveMountOnFiber(root3, fiber, committedLanes, committedTransitions);
+                  commitPassiveMountOnFiber(root4, fiber, committedLanes, committedTransitions);
                 } catch (error2) {
                   captureCommitPhaseError(fiber, fiber.return, error2);
                 }
@@ -20407,7 +20408,7 @@
           var RENDER_TIMEOUT_MS = 500;
           var workInProgressTransitions = null;
           function resetRenderTimer() {
-            workInProgressRootRenderTargetTime = now() + RENDER_TIMEOUT_MS;
+            workInProgressRootRenderTargetTime = now2() + RENDER_TIMEOUT_MS;
           }
           function getRenderTargetTime() {
             return workInProgressRootRenderTargetTime;
@@ -20436,12 +20437,12 @@
           }
           function requestEventTime() {
             if ((executionContext & (RenderContext | CommitContext)) !== NoContext) {
-              return now();
+              return now2();
             }
             if (currentEventTime !== NoTimestamp) {
               return currentEventTime;
             }
-            currentEventTime = now();
+            currentEventTime = now2();
             return currentEventTime;
           }
           function requestUpdateLane(fiber) {
@@ -20454,11 +20455,11 @@
             var isTransition = requestCurrentTransition() !== NoTransition;
             if (isTransition) {
               if (ReactCurrentBatchConfig$3.transition !== null) {
-                var transition = ReactCurrentBatchConfig$3.transition;
-                if (!transition._updatedFibers) {
-                  transition._updatedFibers = /* @__PURE__ */ new Set();
+                var transition2 = ReactCurrentBatchConfig$3.transition;
+                if (!transition2._updatedFibers) {
+                  transition2._updatedFibers = /* @__PURE__ */ new Set();
                 }
-                transition._updatedFibers.add(fiber);
+                transition2._updatedFibers.add(fiber);
               }
               if (currentEventTransitionLane === NoLane) {
                 currentEventTransitionLane = claimNextTransitionLane();
@@ -20479,7 +20480,7 @@
             }
             return claimNextRetryLane();
           }
-          function scheduleUpdateOnFiber(root3, fiber, lane, eventTime) {
+          function scheduleUpdateOnFiber(root4, fiber, lane, eventTime) {
             checkForNestedUpdates();
             {
               if (isRunningInsertionEffect) {
@@ -20491,25 +20492,25 @@
                 didScheduleUpdateDuringPassiveEffects = true;
               }
             }
-            markRootUpdated(root3, lane, eventTime);
-            if ((executionContext & RenderContext) !== NoLanes && root3 === workInProgressRoot) {
+            markRootUpdated(root4, lane, eventTime);
+            if ((executionContext & RenderContext) !== NoLanes && root4 === workInProgressRoot) {
               warnAboutRenderPhaseUpdatesInDEV(fiber);
             } else {
               {
                 if (isDevToolsPresent) {
-                  addFiberToLanesMap(root3, fiber, lane);
+                  addFiberToLanesMap(root4, fiber, lane);
                 }
               }
               warnIfUpdatesNotWrappedWithActDEV(fiber);
-              if (root3 === workInProgressRoot) {
+              if (root4 === workInProgressRoot) {
                 if ((executionContext & RenderContext) === NoContext) {
                   workInProgressRootInterleavedUpdatedLanes = mergeLanes(workInProgressRootInterleavedUpdatedLanes, lane);
                 }
                 if (workInProgressRootExitStatus === RootSuspendedWithDelay) {
-                  markRootSuspended$1(root3, workInProgressRootRenderLanes);
+                  markRootSuspended$1(root4, workInProgressRootRenderLanes);
                 }
               }
-              ensureRootIsScheduled(root3, eventTime);
+              ensureRootIsScheduled(root4, eventTime);
               if (lane === SyncLane && executionContext === NoContext && (fiber.mode & ConcurrentMode) === NoMode && // Treat `act` as if it's inside `batchedUpdates`, even in legacy mode.
               !ReactCurrentActQueue$1.isBatchingLegacy) {
                 resetRenderTimer();
@@ -20517,11 +20518,11 @@
               }
             }
           }
-          function scheduleInitialHydrationOnRoot(root3, lane, eventTime) {
-            var current2 = root3.current;
+          function scheduleInitialHydrationOnRoot(root4, lane, eventTime) {
+            var current2 = root4.current;
             current2.lanes = lane;
-            markRootUpdated(root3, lane, eventTime);
-            ensureRootIsScheduled(root3, eventTime);
+            markRootUpdated(root4, lane, eventTime);
+            ensureRootIsScheduled(root4, eventTime);
           }
           function isUnsafeClassRenderPhaseUpdate(fiber) {
             return (
@@ -20530,20 +20531,20 @@
               (executionContext & RenderContext) !== NoContext
             );
           }
-          function ensureRootIsScheduled(root3, currentTime) {
-            var existingCallbackNode = root3.callbackNode;
-            markStarvedLanesAsExpired(root3, currentTime);
-            var nextLanes = getNextLanes(root3, root3 === workInProgressRoot ? workInProgressRootRenderLanes : NoLanes);
+          function ensureRootIsScheduled(root4, currentTime) {
+            var existingCallbackNode = root4.callbackNode;
+            markStarvedLanesAsExpired(root4, currentTime);
+            var nextLanes = getNextLanes(root4, root4 === workInProgressRoot ? workInProgressRootRenderLanes : NoLanes);
             if (nextLanes === NoLanes) {
               if (existingCallbackNode !== null) {
                 cancelCallback$1(existingCallbackNode);
               }
-              root3.callbackNode = null;
-              root3.callbackPriority = NoLane;
+              root4.callbackNode = null;
+              root4.callbackPriority = NoLane;
               return;
             }
             var newCallbackPriority = getHighestPriorityLane(nextLanes);
-            var existingCallbackPriority = root3.callbackPriority;
+            var existingCallbackPriority = root4.callbackPriority;
             if (existingCallbackPriority === newCallbackPriority && // Special case related to `act`. If the currently scheduled task is a
             // Scheduler task, rather than an `act` task, cancel it and re-scheduled
             // on the `act` queue.
@@ -20560,13 +20561,13 @@
             }
             var newCallbackNode;
             if (newCallbackPriority === SyncLane) {
-              if (root3.tag === LegacyRoot) {
+              if (root4.tag === LegacyRoot) {
                 if (ReactCurrentActQueue$1.isBatchingLegacy !== null) {
                   ReactCurrentActQueue$1.didScheduleLegacyUpdate = true;
                 }
-                scheduleLegacySyncCallback(performSyncWorkOnRoot.bind(null, root3));
+                scheduleLegacySyncCallback(performSyncWorkOnRoot.bind(null, root4));
               } else {
-                scheduleSyncCallback(performSyncWorkOnRoot.bind(null, root3));
+                scheduleSyncCallback(performSyncWorkOnRoot.bind(null, root4));
               }
               {
                 if (ReactCurrentActQueue$1.current !== null) {
@@ -20599,12 +20600,12 @@
                   schedulerPriorityLevel = NormalPriority;
                   break;
               }
-              newCallbackNode = scheduleCallback$1(schedulerPriorityLevel, performConcurrentWorkOnRoot.bind(null, root3));
+              newCallbackNode = scheduleCallback$1(schedulerPriorityLevel, performConcurrentWorkOnRoot.bind(null, root4));
             }
-            root3.callbackPriority = newCallbackPriority;
-            root3.callbackNode = newCallbackNode;
+            root4.callbackPriority = newCallbackPriority;
+            root4.callbackNode = newCallbackNode;
           }
-          function performConcurrentWorkOnRoot(root3, didTimeout) {
+          function performConcurrentWorkOnRoot(root4, didTimeout) {
             {
               resetNestedUpdateFlag();
             }
@@ -20613,77 +20614,77 @@
             if ((executionContext & (RenderContext | CommitContext)) !== NoContext) {
               throw new Error("Should not already be working.");
             }
-            var originalCallbackNode = root3.callbackNode;
+            var originalCallbackNode = root4.callbackNode;
             var didFlushPassiveEffects = flushPassiveEffects();
             if (didFlushPassiveEffects) {
-              if (root3.callbackNode !== originalCallbackNode) {
+              if (root4.callbackNode !== originalCallbackNode) {
                 return null;
               }
             }
-            var lanes = getNextLanes(root3, root3 === workInProgressRoot ? workInProgressRootRenderLanes : NoLanes);
+            var lanes = getNextLanes(root4, root4 === workInProgressRoot ? workInProgressRootRenderLanes : NoLanes);
             if (lanes === NoLanes) {
               return null;
             }
-            var shouldTimeSlice = !includesBlockingLane(root3, lanes) && !includesExpiredLane(root3, lanes) && !didTimeout;
-            var exitStatus = shouldTimeSlice ? renderRootConcurrent(root3, lanes) : renderRootSync(root3, lanes);
+            var shouldTimeSlice = !includesBlockingLane(root4, lanes) && !includesExpiredLane(root4, lanes) && !didTimeout;
+            var exitStatus = shouldTimeSlice ? renderRootConcurrent(root4, lanes) : renderRootSync(root4, lanes);
             if (exitStatus !== RootInProgress) {
               if (exitStatus === RootErrored) {
-                var errorRetryLanes = getLanesToRetrySynchronouslyOnError(root3);
+                var errorRetryLanes = getLanesToRetrySynchronouslyOnError(root4);
                 if (errorRetryLanes !== NoLanes) {
                   lanes = errorRetryLanes;
-                  exitStatus = recoverFromConcurrentError(root3, errorRetryLanes);
+                  exitStatus = recoverFromConcurrentError(root4, errorRetryLanes);
                 }
               }
               if (exitStatus === RootFatalErrored) {
                 var fatalError = workInProgressRootFatalError;
-                prepareFreshStack(root3, NoLanes);
-                markRootSuspended$1(root3, lanes);
-                ensureRootIsScheduled(root3, now());
+                prepareFreshStack(root4, NoLanes);
+                markRootSuspended$1(root4, lanes);
+                ensureRootIsScheduled(root4, now2());
                 throw fatalError;
               }
               if (exitStatus === RootDidNotComplete) {
-                markRootSuspended$1(root3, lanes);
+                markRootSuspended$1(root4, lanes);
               } else {
-                var renderWasConcurrent = !includesBlockingLane(root3, lanes);
-                var finishedWork = root3.current.alternate;
+                var renderWasConcurrent = !includesBlockingLane(root4, lanes);
+                var finishedWork = root4.current.alternate;
                 if (renderWasConcurrent && !isRenderConsistentWithExternalStores(finishedWork)) {
-                  exitStatus = renderRootSync(root3, lanes);
+                  exitStatus = renderRootSync(root4, lanes);
                   if (exitStatus === RootErrored) {
-                    var _errorRetryLanes = getLanesToRetrySynchronouslyOnError(root3);
+                    var _errorRetryLanes = getLanesToRetrySynchronouslyOnError(root4);
                     if (_errorRetryLanes !== NoLanes) {
                       lanes = _errorRetryLanes;
-                      exitStatus = recoverFromConcurrentError(root3, _errorRetryLanes);
+                      exitStatus = recoverFromConcurrentError(root4, _errorRetryLanes);
                     }
                   }
                   if (exitStatus === RootFatalErrored) {
                     var _fatalError = workInProgressRootFatalError;
-                    prepareFreshStack(root3, NoLanes);
-                    markRootSuspended$1(root3, lanes);
-                    ensureRootIsScheduled(root3, now());
+                    prepareFreshStack(root4, NoLanes);
+                    markRootSuspended$1(root4, lanes);
+                    ensureRootIsScheduled(root4, now2());
                     throw _fatalError;
                   }
                 }
-                root3.finishedWork = finishedWork;
-                root3.finishedLanes = lanes;
-                finishConcurrentRender(root3, exitStatus, lanes);
+                root4.finishedWork = finishedWork;
+                root4.finishedLanes = lanes;
+                finishConcurrentRender(root4, exitStatus, lanes);
               }
             }
-            ensureRootIsScheduled(root3, now());
-            if (root3.callbackNode === originalCallbackNode) {
-              return performConcurrentWorkOnRoot.bind(null, root3);
+            ensureRootIsScheduled(root4, now2());
+            if (root4.callbackNode === originalCallbackNode) {
+              return performConcurrentWorkOnRoot.bind(null, root4);
             }
             return null;
           }
-          function recoverFromConcurrentError(root3, errorRetryLanes) {
+          function recoverFromConcurrentError(root4, errorRetryLanes) {
             var errorsFromFirstAttempt = workInProgressRootConcurrentErrors;
-            if (isRootDehydrated(root3)) {
-              var rootWorkInProgress = prepareFreshStack(root3, errorRetryLanes);
+            if (isRootDehydrated(root4)) {
+              var rootWorkInProgress = prepareFreshStack(root4, errorRetryLanes);
               rootWorkInProgress.flags |= ForceClientRender;
               {
-                errorHydratingContainer(root3.containerInfo);
+                errorHydratingContainer(root4.containerInfo);
               }
             }
-            var exitStatus = renderRootSync(root3, errorRetryLanes);
+            var exitStatus = renderRootSync(root4, errorRetryLanes);
             if (exitStatus !== RootErrored) {
               var errorsFromSecondAttempt = workInProgressRootRecoverableErrors;
               workInProgressRootRecoverableErrors = errorsFromFirstAttempt;
@@ -20700,59 +20701,59 @@
               workInProgressRootRecoverableErrors.push.apply(workInProgressRootRecoverableErrors, errors);
             }
           }
-          function finishConcurrentRender(root3, exitStatus, lanes) {
+          function finishConcurrentRender(root4, exitStatus, lanes) {
             switch (exitStatus) {
               case RootInProgress:
               case RootFatalErrored: {
                 throw new Error("Root did not complete. This is a bug in React.");
               }
               case RootErrored: {
-                commitRoot(root3, workInProgressRootRecoverableErrors, workInProgressTransitions);
+                commitRoot(root4, workInProgressRootRecoverableErrors, workInProgressTransitions);
                 break;
               }
               case RootSuspended: {
-                markRootSuspended$1(root3, lanes);
+                markRootSuspended$1(root4, lanes);
                 if (includesOnlyRetries(lanes) && // do not delay if we're inside an act() scope
                 !shouldForceFlushFallbacksInDEV()) {
-                  var msUntilTimeout = globalMostRecentFallbackTime + FALLBACK_THROTTLE_MS - now();
+                  var msUntilTimeout = globalMostRecentFallbackTime + FALLBACK_THROTTLE_MS - now2();
                   if (msUntilTimeout > 10) {
-                    var nextLanes = getNextLanes(root3, NoLanes);
+                    var nextLanes = getNextLanes(root4, NoLanes);
                     if (nextLanes !== NoLanes) {
                       break;
                     }
-                    var suspendedLanes = root3.suspendedLanes;
+                    var suspendedLanes = root4.suspendedLanes;
                     if (!isSubsetOfLanes(suspendedLanes, lanes)) {
                       var eventTime = requestEventTime();
-                      markRootPinged(root3, suspendedLanes);
+                      markRootPinged(root4, suspendedLanes);
                       break;
                     }
-                    root3.timeoutHandle = scheduleTimeout(commitRoot.bind(null, root3, workInProgressRootRecoverableErrors, workInProgressTransitions), msUntilTimeout);
+                    root4.timeoutHandle = scheduleTimeout(commitRoot.bind(null, root4, workInProgressRootRecoverableErrors, workInProgressTransitions), msUntilTimeout);
                     break;
                   }
                 }
-                commitRoot(root3, workInProgressRootRecoverableErrors, workInProgressTransitions);
+                commitRoot(root4, workInProgressRootRecoverableErrors, workInProgressTransitions);
                 break;
               }
               case RootSuspendedWithDelay: {
-                markRootSuspended$1(root3, lanes);
+                markRootSuspended$1(root4, lanes);
                 if (includesOnlyTransitions(lanes)) {
                   break;
                 }
                 if (!shouldForceFlushFallbacksInDEV()) {
-                  var mostRecentEventTime = getMostRecentEventTime(root3, lanes);
+                  var mostRecentEventTime = getMostRecentEventTime(root4, lanes);
                   var eventTimeMs = mostRecentEventTime;
-                  var timeElapsedMs = now() - eventTimeMs;
+                  var timeElapsedMs = now2() - eventTimeMs;
                   var _msUntilTimeout = jnd(timeElapsedMs) - timeElapsedMs;
                   if (_msUntilTimeout > 10) {
-                    root3.timeoutHandle = scheduleTimeout(commitRoot.bind(null, root3, workInProgressRootRecoverableErrors, workInProgressTransitions), _msUntilTimeout);
+                    root4.timeoutHandle = scheduleTimeout(commitRoot.bind(null, root4, workInProgressRootRecoverableErrors, workInProgressTransitions), _msUntilTimeout);
                     break;
                   }
                 }
-                commitRoot(root3, workInProgressRootRecoverableErrors, workInProgressTransitions);
+                commitRoot(root4, workInProgressRootRecoverableErrors, workInProgressTransitions);
                 break;
               }
               case RootCompleted: {
-                commitRoot(root3, workInProgressRootRecoverableErrors, workInProgressTransitions);
+                commitRoot(root4, workInProgressRootRecoverableErrors, workInProgressTransitions);
                 break;
               }
               default: {
@@ -20803,12 +20804,12 @@
             }
             return true;
           }
-          function markRootSuspended$1(root3, suspendedLanes) {
+          function markRootSuspended$1(root4, suspendedLanes) {
             suspendedLanes = removeLanes(suspendedLanes, workInProgressRootPingedLanes);
             suspendedLanes = removeLanes(suspendedLanes, workInProgressRootInterleavedUpdatedLanes);
-            markRootSuspended(root3, suspendedLanes);
+            markRootSuspended(root4, suspendedLanes);
           }
-          function performSyncWorkOnRoot(root3) {
+          function performSyncWorkOnRoot(root4) {
             {
               syncNestedUpdateFlag();
             }
@@ -20816,40 +20817,40 @@
               throw new Error("Should not already be working.");
             }
             flushPassiveEffects();
-            var lanes = getNextLanes(root3, NoLanes);
+            var lanes = getNextLanes(root4, NoLanes);
             if (!includesSomeLane(lanes, SyncLane)) {
-              ensureRootIsScheduled(root3, now());
+              ensureRootIsScheduled(root4, now2());
               return null;
             }
-            var exitStatus = renderRootSync(root3, lanes);
-            if (root3.tag !== LegacyRoot && exitStatus === RootErrored) {
-              var errorRetryLanes = getLanesToRetrySynchronouslyOnError(root3);
+            var exitStatus = renderRootSync(root4, lanes);
+            if (root4.tag !== LegacyRoot && exitStatus === RootErrored) {
+              var errorRetryLanes = getLanesToRetrySynchronouslyOnError(root4);
               if (errorRetryLanes !== NoLanes) {
                 lanes = errorRetryLanes;
-                exitStatus = recoverFromConcurrentError(root3, errorRetryLanes);
+                exitStatus = recoverFromConcurrentError(root4, errorRetryLanes);
               }
             }
             if (exitStatus === RootFatalErrored) {
               var fatalError = workInProgressRootFatalError;
-              prepareFreshStack(root3, NoLanes);
-              markRootSuspended$1(root3, lanes);
-              ensureRootIsScheduled(root3, now());
+              prepareFreshStack(root4, NoLanes);
+              markRootSuspended$1(root4, lanes);
+              ensureRootIsScheduled(root4, now2());
               throw fatalError;
             }
             if (exitStatus === RootDidNotComplete) {
               throw new Error("Root did not complete. This is a bug in React.");
             }
-            var finishedWork = root3.current.alternate;
-            root3.finishedWork = finishedWork;
-            root3.finishedLanes = lanes;
-            commitRoot(root3, workInProgressRootRecoverableErrors, workInProgressTransitions);
-            ensureRootIsScheduled(root3, now());
+            var finishedWork = root4.current.alternate;
+            root4.finishedWork = finishedWork;
+            root4.finishedLanes = lanes;
+            commitRoot(root4, workInProgressRootRecoverableErrors, workInProgressTransitions);
+            ensureRootIsScheduled(root4, now2());
             return null;
           }
-          function flushRoot(root3, lanes) {
+          function flushRoot(root4, lanes) {
             if (lanes !== NoLanes) {
-              markRootEntangled(root3, mergeLanes(lanes, SyncLane));
-              ensureRootIsScheduled(root3, now());
+              markRootEntangled(root4, mergeLanes(lanes, SyncLane));
+              ensureRootIsScheduled(root4, now2());
               if ((executionContext & (RenderContext | CommitContext)) === NoContext) {
                 resetRenderTimer();
                 flushSyncCallbacks();
@@ -20922,12 +20923,12 @@
             subtreeRenderLanes = subtreeRenderLanesCursor.current;
             pop(subtreeRenderLanesCursor, fiber);
           }
-          function prepareFreshStack(root3, lanes) {
-            root3.finishedWork = null;
-            root3.finishedLanes = NoLanes;
-            var timeoutHandle = root3.timeoutHandle;
+          function prepareFreshStack(root4, lanes) {
+            root4.finishedWork = null;
+            root4.finishedLanes = NoLanes;
+            var timeoutHandle = root4.timeoutHandle;
             if (timeoutHandle !== noTimeout) {
-              root3.timeoutHandle = noTimeout;
+              root4.timeoutHandle = noTimeout;
               cancelTimeout(timeoutHandle);
             }
             if (workInProgress !== null) {
@@ -20938,8 +20939,8 @@
                 interruptedWork = interruptedWork.return;
               }
             }
-            workInProgressRoot = root3;
-            var rootWorkInProgress = createWorkInProgress(root3.current, null);
+            workInProgressRoot = root4;
+            var rootWorkInProgress = createWorkInProgress(root4.current, null);
             workInProgress = rootWorkInProgress;
             workInProgressRootRenderLanes = subtreeRenderLanes = workInProgressRootIncludedLanes = lanes;
             workInProgressRootExitStatus = RootInProgress;
@@ -20955,7 +20956,7 @@
             }
             return rootWorkInProgress;
           }
-          function handleError(root3, thrownValue) {
+          function handleError(root4, thrownValue) {
             do {
               var erroredWork = workInProgress;
               try {
@@ -20981,7 +20982,7 @@
                     markComponentErrored(erroredWork, thrownValue, workInProgressRootRenderLanes);
                   }
                 }
-                throwException(root3, erroredWork.return, erroredWork, thrownValue, workInProgressRootRenderLanes);
+                throwException(root4, erroredWork.return, erroredWork, thrownValue, workInProgressRootRenderLanes);
                 completeUnitOfWork(erroredWork);
               } catch (yetAnotherThrownValue) {
                 thrownValue = yetAnotherThrownValue;
@@ -21009,7 +21010,7 @@
             ReactCurrentDispatcher$2.current = prevDispatcher;
           }
           function markCommitTimeOfFallback() {
-            globalMostRecentFallbackTime = now();
+            globalMostRecentFallbackTime = now2();
           }
           function markSkippedUpdateLanes(lane) {
             workInProgressRootSkippedLanes = mergeLanes(lane, workInProgressRootSkippedLanes);
@@ -21040,23 +21041,23 @@
           function renderHasNotSuspendedYet() {
             return workInProgressRootExitStatus === RootInProgress;
           }
-          function renderRootSync(root3, lanes) {
+          function renderRootSync(root4, lanes) {
             var prevExecutionContext = executionContext;
             executionContext |= RenderContext;
             var prevDispatcher = pushDispatcher();
-            if (workInProgressRoot !== root3 || workInProgressRootRenderLanes !== lanes) {
+            if (workInProgressRoot !== root4 || workInProgressRootRenderLanes !== lanes) {
               {
                 if (isDevToolsPresent) {
-                  var memoizedUpdaters = root3.memoizedUpdaters;
+                  var memoizedUpdaters = root4.memoizedUpdaters;
                   if (memoizedUpdaters.size > 0) {
-                    restorePendingUpdaters(root3, workInProgressRootRenderLanes);
+                    restorePendingUpdaters(root4, workInProgressRootRenderLanes);
                     memoizedUpdaters.clear();
                   }
-                  movePendingFibersToMemoized(root3, lanes);
+                  movePendingFibersToMemoized(root4, lanes);
                 }
               }
               workInProgressTransitions = getTransitionsForLanes();
-              prepareFreshStack(root3, lanes);
+              prepareFreshStack(root4, lanes);
             }
             {
               markRenderStarted(lanes);
@@ -21066,7 +21067,7 @@
                 workLoopSync();
                 break;
               } catch (thrownValue) {
-                handleError(root3, thrownValue);
+                handleError(root4, thrownValue);
               }
             } while (true);
             resetContextDependencies();
@@ -21087,24 +21088,24 @@
               performUnitOfWork(workInProgress);
             }
           }
-          function renderRootConcurrent(root3, lanes) {
+          function renderRootConcurrent(root4, lanes) {
             var prevExecutionContext = executionContext;
             executionContext |= RenderContext;
             var prevDispatcher = pushDispatcher();
-            if (workInProgressRoot !== root3 || workInProgressRootRenderLanes !== lanes) {
+            if (workInProgressRoot !== root4 || workInProgressRootRenderLanes !== lanes) {
               {
                 if (isDevToolsPresent) {
-                  var memoizedUpdaters = root3.memoizedUpdaters;
+                  var memoizedUpdaters = root4.memoizedUpdaters;
                   if (memoizedUpdaters.size > 0) {
-                    restorePendingUpdaters(root3, workInProgressRootRenderLanes);
+                    restorePendingUpdaters(root4, workInProgressRootRenderLanes);
                     memoizedUpdaters.clear();
                   }
-                  movePendingFibersToMemoized(root3, lanes);
+                  movePendingFibersToMemoized(root4, lanes);
                 }
               }
               workInProgressTransitions = getTransitionsForLanes();
               resetRenderTimer();
-              prepareFreshStack(root3, lanes);
+              prepareFreshStack(root4, lanes);
             }
             {
               markRenderStarted(lanes);
@@ -21114,7 +21115,7 @@
                 workLoopConcurrent();
                 break;
               } catch (thrownValue) {
-                handleError(root3, thrownValue);
+                handleError(root4, thrownValue);
               }
             } while (true);
             resetContextDependencies();
@@ -21218,20 +21219,20 @@
               workInProgressRootExitStatus = RootCompleted;
             }
           }
-          function commitRoot(root3, recoverableErrors, transitions) {
+          function commitRoot(root4, recoverableErrors, transitions) {
             var previousUpdateLanePriority = getCurrentUpdatePriority();
             var prevTransition = ReactCurrentBatchConfig$3.transition;
             try {
               ReactCurrentBatchConfig$3.transition = null;
               setCurrentUpdatePriority(DiscreteEventPriority);
-              commitRootImpl(root3, recoverableErrors, transitions, previousUpdateLanePriority);
+              commitRootImpl(root4, recoverableErrors, transitions, previousUpdateLanePriority);
             } finally {
               ReactCurrentBatchConfig$3.transition = prevTransition;
               setCurrentUpdatePriority(previousUpdateLanePriority);
             }
             return null;
           }
-          function commitRootImpl(root3, recoverableErrors, transitions, renderPriorityLevel) {
+          function commitRootImpl(root4, recoverableErrors, transitions, renderPriorityLevel) {
             do {
               flushPassiveEffects();
             } while (rootWithPendingPassiveEffects !== null);
@@ -21239,8 +21240,8 @@
             if ((executionContext & (RenderContext | CommitContext)) !== NoContext) {
               throw new Error("Should not already be working.");
             }
-            var finishedWork = root3.finishedWork;
-            var lanes = root3.finishedLanes;
+            var finishedWork = root4.finishedWork;
+            var lanes = root4.finishedLanes;
             {
               markCommitStarted(lanes);
             }
@@ -21256,16 +21257,16 @@
                 }
               }
             }
-            root3.finishedWork = null;
-            root3.finishedLanes = NoLanes;
-            if (finishedWork === root3.current) {
+            root4.finishedWork = null;
+            root4.finishedLanes = NoLanes;
+            if (finishedWork === root4.current) {
               throw new Error("Cannot commit the same tree as before. This error is likely caused by a bug in React. Please file an issue.");
             }
-            root3.callbackNode = null;
-            root3.callbackPriority = NoLane;
+            root4.callbackNode = null;
+            root4.callbackPriority = NoLane;
             var remainingLanes = mergeLanes(finishedWork.lanes, finishedWork.childLanes);
-            markRootFinished(root3, remainingLanes);
-            if (root3 === workInProgressRoot) {
+            markRootFinished(root4, remainingLanes);
+            if (root4 === workInProgressRoot) {
               workInProgressRoot = null;
               workInProgress = null;
               workInProgressRootRenderLanes = NoLanes;
@@ -21290,17 +21291,17 @@
               var prevExecutionContext = executionContext;
               executionContext |= CommitContext;
               ReactCurrentOwner$2.current = null;
-              var shouldFireAfterActiveInstanceBlur2 = commitBeforeMutationEffects(root3, finishedWork);
+              var shouldFireAfterActiveInstanceBlur2 = commitBeforeMutationEffects(root4, finishedWork);
               {
                 recordCommitTime();
               }
-              commitMutationEffects(root3, finishedWork, lanes);
-              resetAfterCommit(root3.containerInfo);
-              root3.current = finishedWork;
+              commitMutationEffects(root4, finishedWork, lanes);
+              resetAfterCommit(root4.containerInfo);
+              root4.current = finishedWork;
               {
                 markLayoutEffectsStarted(lanes);
               }
-              commitLayoutEffects(finishedWork, root3, lanes);
+              commitLayoutEffects(finishedWork, root4, lanes);
               {
                 markLayoutEffectsStopped();
               }
@@ -21309,7 +21310,7 @@
               setCurrentUpdatePriority(previousPriority);
               ReactCurrentBatchConfig$3.transition = prevTransition;
             } else {
-              root3.current = finishedWork;
+              root4.current = finishedWork;
               {
                 recordCommitTime();
               }
@@ -21317,7 +21318,7 @@
             var rootDidHavePassiveEffects = rootDoesHavePassiveEffects;
             if (rootDoesHavePassiveEffects) {
               rootDoesHavePassiveEffects = false;
-              rootWithPendingPassiveEffects = root3;
+              rootWithPendingPassiveEffects = root4;
               pendingPassiveEffectsLanes = lanes;
             } else {
               {
@@ -21325,27 +21326,27 @@
                 rootWithPassiveNestedUpdates = null;
               }
             }
-            remainingLanes = root3.pendingLanes;
+            remainingLanes = root4.pendingLanes;
             if (remainingLanes === NoLanes) {
               legacyErrorBoundariesThatAlreadyFailed = null;
             }
             {
               if (!rootDidHavePassiveEffects) {
-                commitDoubleInvokeEffectsInDEV(root3.current, false);
+                commitDoubleInvokeEffectsInDEV(root4.current, false);
               }
             }
             onCommitRoot(finishedWork.stateNode, renderPriorityLevel);
             {
               if (isDevToolsPresent) {
-                root3.memoizedUpdaters.clear();
+                root4.memoizedUpdaters.clear();
               }
             }
             {
               onCommitRoot$1();
             }
-            ensureRootIsScheduled(root3, now());
+            ensureRootIsScheduled(root4, now2());
             if (recoverableErrors !== null) {
-              var onRecoverableError = root3.onRecoverableError;
+              var onRecoverableError = root4.onRecoverableError;
               for (var i = 0; i < recoverableErrors.length; i++) {
                 var recoverableError = recoverableErrors[i];
                 var componentStack = recoverableError.stack;
@@ -21362,19 +21363,19 @@
               firstUncaughtError = null;
               throw error$1;
             }
-            if (includesSomeLane(pendingPassiveEffectsLanes, SyncLane) && root3.tag !== LegacyRoot) {
+            if (includesSomeLane(pendingPassiveEffectsLanes, SyncLane) && root4.tag !== LegacyRoot) {
               flushPassiveEffects();
             }
-            remainingLanes = root3.pendingLanes;
+            remainingLanes = root4.pendingLanes;
             if (includesSomeLane(remainingLanes, SyncLane)) {
               {
                 markNestedUpdateScheduled();
               }
-              if (root3 === rootWithNestedUpdates) {
+              if (root4 === rootWithNestedUpdates) {
                 nestedUpdateCount++;
               } else {
                 nestedUpdateCount = 0;
-                rootWithNestedUpdates = root3;
+                rootWithNestedUpdates = root4;
               }
             } else {
               nestedUpdateCount = 0;
@@ -21420,7 +21421,7 @@
             }
             var transitions = pendingPassiveTransitions;
             pendingPassiveTransitions = null;
-            var root3 = rootWithPendingPassiveEffects;
+            var root4 = rootWithPendingPassiveEffects;
             var lanes = pendingPassiveEffectsLanes;
             rootWithPendingPassiveEffects = null;
             pendingPassiveEffectsLanes = NoLanes;
@@ -21436,31 +21437,31 @@
             }
             var prevExecutionContext = executionContext;
             executionContext |= CommitContext;
-            commitPassiveUnmountEffects(root3.current);
-            commitPassiveMountEffects(root3, root3.current, lanes, transitions);
+            commitPassiveUnmountEffects(root4.current);
+            commitPassiveMountEffects(root4, root4.current, lanes, transitions);
             {
               var profilerEffects = pendingPassiveProfilerEffects;
               pendingPassiveProfilerEffects = [];
               for (var i = 0; i < profilerEffects.length; i++) {
                 var _fiber = profilerEffects[i];
-                commitPassiveEffectDurations(root3, _fiber);
+                commitPassiveEffectDurations(root4, _fiber);
               }
             }
             {
               markPassiveEffectsStopped();
             }
             {
-              commitDoubleInvokeEffectsInDEV(root3.current, true);
+              commitDoubleInvokeEffectsInDEV(root4.current, true);
             }
             executionContext = prevExecutionContext;
             flushSyncCallbacks();
             {
               if (didScheduleUpdateDuringPassiveEffects) {
-                if (root3 === rootWithPassiveNestedUpdates) {
+                if (root4 === rootWithPassiveNestedUpdates) {
                   nestedPassiveUpdateCount++;
                 } else {
                   nestedPassiveUpdateCount = 0;
-                  rootWithPassiveNestedUpdates = root3;
+                  rootWithPassiveNestedUpdates = root4;
                 }
               } else {
                 nestedPassiveUpdateCount = 0;
@@ -21468,9 +21469,9 @@
               isFlushingPassiveEffects = false;
               didScheduleUpdateDuringPassiveEffects = false;
             }
-            onPostCommitRoot(root3);
+            onPostCommitRoot(root4);
             {
-              var stateNode = root3.current.stateNode;
+              var stateNode = root4.current.stateNode;
               stateNode.effectDuration = 0;
               stateNode.passiveEffectDuration = 0;
             }
@@ -21496,11 +21497,11 @@
           function captureCommitPhaseErrorOnRoot(rootFiber, sourceFiber, error2) {
             var errorInfo = createCapturedValueAtFiber(error2, sourceFiber);
             var update = createRootErrorUpdate(rootFiber, errorInfo, SyncLane);
-            var root3 = enqueueUpdate(rootFiber, update, SyncLane);
+            var root4 = enqueueUpdate(rootFiber, update, SyncLane);
             var eventTime = requestEventTime();
-            if (root3 !== null) {
-              markRootUpdated(root3, SyncLane, eventTime);
-              ensureRootIsScheduled(root3, eventTime);
+            if (root4 !== null) {
+              markRootUpdated(root4, SyncLane, eventTime);
+              ensureRootIsScheduled(root4, eventTime);
             }
           }
           function captureCommitPhaseError(sourceFiber, nearestMountedAncestor, error$1) {
@@ -21526,11 +21527,11 @@
                 if (typeof ctor.getDerivedStateFromError === "function" || typeof instance.componentDidCatch === "function" && !isAlreadyFailedLegacyErrorBoundary(instance)) {
                   var errorInfo = createCapturedValueAtFiber(error$1, sourceFiber);
                   var update = createClassErrorUpdate(fiber, errorInfo, SyncLane);
-                  var root3 = enqueueUpdate(fiber, update, SyncLane);
+                  var root4 = enqueueUpdate(fiber, update, SyncLane);
                   var eventTime = requestEventTime();
-                  if (root3 !== null) {
-                    markRootUpdated(root3, SyncLane, eventTime);
-                    ensureRootIsScheduled(root3, eventTime);
+                  if (root4 !== null) {
+                    markRootUpdated(root4, SyncLane, eventTime);
+                    ensureRootIsScheduled(root4, eventTime);
                   }
                   return;
                 }
@@ -21541,32 +21542,32 @@
               error("Internal React error: Attempted to capture a commit phase error inside a detached tree. This indicates a bug in React. Likely causes include deleting the same fiber more than once, committing an already-finished tree, or an inconsistent return pointer.\n\nError message:\n\n%s", error$1);
             }
           }
-          function pingSuspendedRoot(root3, wakeable, pingedLanes) {
-            var pingCache = root3.pingCache;
+          function pingSuspendedRoot(root4, wakeable, pingedLanes) {
+            var pingCache = root4.pingCache;
             if (pingCache !== null) {
               pingCache.delete(wakeable);
             }
             var eventTime = requestEventTime();
-            markRootPinged(root3, pingedLanes);
-            warnIfSuspenseResolutionNotWrappedWithActDEV(root3);
-            if (workInProgressRoot === root3 && isSubsetOfLanes(workInProgressRootRenderLanes, pingedLanes)) {
-              if (workInProgressRootExitStatus === RootSuspendedWithDelay || workInProgressRootExitStatus === RootSuspended && includesOnlyRetries(workInProgressRootRenderLanes) && now() - globalMostRecentFallbackTime < FALLBACK_THROTTLE_MS) {
-                prepareFreshStack(root3, NoLanes);
+            markRootPinged(root4, pingedLanes);
+            warnIfSuspenseResolutionNotWrappedWithActDEV(root4);
+            if (workInProgressRoot === root4 && isSubsetOfLanes(workInProgressRootRenderLanes, pingedLanes)) {
+              if (workInProgressRootExitStatus === RootSuspendedWithDelay || workInProgressRootExitStatus === RootSuspended && includesOnlyRetries(workInProgressRootRenderLanes) && now2() - globalMostRecentFallbackTime < FALLBACK_THROTTLE_MS) {
+                prepareFreshStack(root4, NoLanes);
               } else {
                 workInProgressRootPingedLanes = mergeLanes(workInProgressRootPingedLanes, pingedLanes);
               }
             }
-            ensureRootIsScheduled(root3, eventTime);
+            ensureRootIsScheduled(root4, eventTime);
           }
           function retryTimedOutBoundary(boundaryFiber, retryLane) {
             if (retryLane === NoLane) {
               retryLane = requestRetryLane(boundaryFiber);
             }
             var eventTime = requestEventTime();
-            var root3 = enqueueConcurrentRenderForLane(boundaryFiber, retryLane);
-            if (root3 !== null) {
-              markRootUpdated(root3, retryLane, eventTime);
-              ensureRootIsScheduled(root3, eventTime);
+            var root4 = enqueueConcurrentRenderForLane(boundaryFiber, retryLane);
+            if (root4 !== null) {
+              markRootUpdated(root4, retryLane, eventTime);
+              ensureRootIsScheduled(root4, eventTime);
             }
           }
           function retryDehydratedSuspenseBoundary(boundaryFiber) {
@@ -21755,12 +21756,12 @@
               }
             }
           }
-          function restorePendingUpdaters(root3, lanes) {
+          function restorePendingUpdaters(root4, lanes) {
             {
               if (isDevToolsPresent) {
-                var memoizedUpdaters = root3.memoizedUpdaters;
+                var memoizedUpdaters = root4.memoizedUpdaters;
                 memoizedUpdaters.forEach(function(schedulingFiber) {
-                  addFiberToLanesMap(root3, schedulingFiber, lanes);
+                  addFiberToLanesMap(root4, schedulingFiber, lanes);
                 });
               }
             }
@@ -21818,9 +21819,9 @@
               }
             }
           }
-          function warnIfSuspenseResolutionNotWrappedWithActDEV(root3) {
+          function warnIfSuspenseResolutionNotWrappedWithActDEV(root4) {
             {
-              if (root3.tag !== LegacyRoot && isConcurrentActEnvironment() && ReactCurrentActQueue$1.current === null) {
+              if (root4.tag !== LegacyRoot && isConcurrentActEnvironment() && ReactCurrentActQueue$1.current === null) {
                 error("A suspended resource finished loading inside a test, but the event was not wrapped in act(...).\n\nWhen testing, code that resolves suspended data should be wrapped into act(...):\n\nact(() => {\n  /* finish loading suspended data */\n});\n/* assert on the output */\n\nThis ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act");
               }
             }
@@ -21837,42 +21838,42 @@
               resolveFamily = handler;
             }
           };
-          function resolveFunctionForHotReloading(type) {
+          function resolveFunctionForHotReloading(type2) {
             {
               if (resolveFamily === null) {
-                return type;
+                return type2;
               }
-              var family = resolveFamily(type);
+              var family = resolveFamily(type2);
               if (family === void 0) {
-                return type;
+                return type2;
               }
               return family.current;
             }
           }
-          function resolveClassForHotReloading(type) {
-            return resolveFunctionForHotReloading(type);
+          function resolveClassForHotReloading(type2) {
+            return resolveFunctionForHotReloading(type2);
           }
-          function resolveForwardRefForHotReloading(type) {
+          function resolveForwardRefForHotReloading(type2) {
             {
               if (resolveFamily === null) {
-                return type;
+                return type2;
               }
-              var family = resolveFamily(type);
+              var family = resolveFamily(type2);
               if (family === void 0) {
-                if (type !== null && type !== void 0 && typeof type.render === "function") {
-                  var currentRender = resolveFunctionForHotReloading(type.render);
-                  if (type.render !== currentRender) {
+                if (type2 !== null && type2 !== void 0 && typeof type2.render === "function") {
+                  var currentRender = resolveFunctionForHotReloading(type2.render);
+                  if (type2.render !== currentRender) {
                     var syntheticType = {
                       $$typeof: REACT_FORWARD_REF_TYPE,
                       render: currentRender
                     };
-                    if (type.displayName !== void 0) {
-                      syntheticType.displayName = type.displayName;
+                    if (type2.displayName !== void 0) {
+                      syntheticType.displayName = type2.displayName;
                     }
                     return syntheticType;
                   }
                 }
-                return type;
+                return type2;
               }
               return family.current;
             }
@@ -21944,7 +21945,7 @@
               failedBoundaries.add(fiber);
             }
           }
-          var scheduleRefresh = function(root3, update) {
+          var scheduleRefresh = function(root4, update) {
             {
               if (resolveFamily === null) {
                 return;
@@ -21952,33 +21953,33 @@
               var staleFamilies = update.staleFamilies, updatedFamilies = update.updatedFamilies;
               flushPassiveEffects();
               flushSync(function() {
-                scheduleFibersWithFamiliesRecursively(root3.current, updatedFamilies, staleFamilies);
+                scheduleFibersWithFamiliesRecursively(root4.current, updatedFamilies, staleFamilies);
               });
             }
           };
-          var scheduleRoot = function(root3, element) {
+          var scheduleRoot = function(root4, element) {
             {
-              if (root3.context !== emptyContextObject) {
+              if (root4.context !== emptyContextObject) {
                 return;
               }
               flushPassiveEffects();
               flushSync(function() {
-                updateContainer(element, root3, null, null);
+                updateContainer(element, root4, null, null);
               });
             }
           };
           function scheduleFibersWithFamiliesRecursively(fiber, updatedFamilies, staleFamilies) {
             {
-              var alternate = fiber.alternate, child = fiber.child, sibling = fiber.sibling, tag = fiber.tag, type = fiber.type;
+              var alternate = fiber.alternate, child = fiber.child, sibling = fiber.sibling, tag = fiber.tag, type2 = fiber.type;
               var candidateType = null;
               switch (tag) {
                 case FunctionComponent:
                 case SimpleMemoComponent:
                 case ClassComponent:
-                  candidateType = type;
+                  candidateType = type2;
                   break;
                 case ForwardRef:
-                  candidateType = type.render;
+                  candidateType = type2.render;
                   break;
               }
               if (resolveFamily === null) {
@@ -22022,28 +22023,28 @@
               }
             }
           }
-          var findHostInstancesForRefresh = function(root3, families) {
+          var findHostInstancesForRefresh = function(root4, families) {
             {
               var hostInstances = /* @__PURE__ */ new Set();
               var types = new Set(families.map(function(family) {
                 return family.current;
               }));
-              findHostInstancesForMatchingFibersRecursively(root3.current, types, hostInstances);
+              findHostInstancesForMatchingFibersRecursively(root4.current, types, hostInstances);
               return hostInstances;
             }
           };
           function findHostInstancesForMatchingFibersRecursively(fiber, types, hostInstances) {
             {
-              var child = fiber.child, sibling = fiber.sibling, tag = fiber.tag, type = fiber.type;
+              var child = fiber.child, sibling = fiber.sibling, tag = fiber.tag, type2 = fiber.type;
               var candidateType = null;
               switch (tag) {
                 case FunctionComponent:
                 case SimpleMemoComponent:
                 case ClassComponent:
-                  candidateType = type;
+                  candidateType = type2;
                   break;
                 case ForwardRef:
-                  candidateType = type.render;
+                  candidateType = type2.render;
                   break;
               }
               var didMatch = false;
@@ -22179,8 +22180,8 @@
             var prototype = Component.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
-          function isSimpleFunctionComponent(type) {
-            return typeof type === "function" && !shouldConstruct$1(type) && type.defaultProps === void 0;
+          function isSimpleFunctionComponent(type2) {
+            return typeof type2 === "function" && !shouldConstruct$1(type2) && type2.defaultProps === void 0;
           }
           function resolveLazyComponentTag(Component) {
             if (typeof Component === "function") {
@@ -22315,11 +22316,11 @@
             }
             return createFiber(HostRoot, null, null, mode);
           }
-          function createFiberFromTypeAndProps(type, key, pendingProps, owner, mode, lanes) {
+          function createFiberFromTypeAndProps(type2, key, pendingProps, owner, mode, lanes) {
             var fiberTag = IndeterminateComponent;
-            var resolvedType = type;
-            if (typeof type === "function") {
-              if (shouldConstruct$1(type)) {
+            var resolvedType = type2;
+            if (typeof type2 === "function") {
+              if (shouldConstruct$1(type2)) {
                 fiberTag = ClassComponent;
                 {
                   resolvedType = resolveClassForHotReloading(resolvedType);
@@ -22329,11 +22330,11 @@
                   resolvedType = resolveFunctionForHotReloading(resolvedType);
                 }
               }
-            } else if (typeof type === "string") {
+            } else if (typeof type2 === "string") {
               fiberTag = HostComponent;
             } else {
               getTag:
-                switch (type) {
+                switch (type2) {
                   case REACT_FRAGMENT_TYPE:
                     return createFiberFromFragment(pendingProps.children, mode, lanes, key);
                   case REACT_STRICT_MODE_TYPE:
@@ -22357,8 +22358,8 @@
                   case REACT_TRACING_MARKER_TYPE:
                   case REACT_DEBUG_TRACING_MODE_TYPE:
                   default: {
-                    if (typeof type === "object" && type !== null) {
-                      switch (type.$$typeof) {
+                    if (typeof type2 === "object" && type2 !== null) {
+                      switch (type2.$$typeof) {
                         case REACT_PROVIDER_TYPE:
                           fiberTag = ContextProvider;
                           break getTag;
@@ -22382,7 +22383,7 @@
                     }
                     var info = "";
                     {
-                      if (type === void 0 || typeof type === "object" && type !== null && Object.keys(type).length === 0) {
+                      if (type2 === void 0 || typeof type2 === "object" && type2 !== null && Object.keys(type2).length === 0) {
                         info += " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.";
                       }
                       var ownerName = owner ? getComponentNameFromFiber(owner) : null;
@@ -22390,12 +22391,12 @@
                         info += "\n\nCheck the render method of `" + ownerName + "`.";
                       }
                     }
-                    throw new Error("Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) " + ("but got: " + (type == null ? type : typeof type) + "." + info));
+                    throw new Error("Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) " + ("but got: " + (type2 == null ? type2 : typeof type2) + "." + info));
                   }
                 }
             }
             var fiber = createFiber(fiberTag, pendingProps, key, mode);
-            fiber.elementType = type;
+            fiber.elementType = type2;
             fiber.type = resolvedType;
             fiber.lanes = lanes;
             {
@@ -22408,10 +22409,10 @@
             {
               owner = element._owner;
             }
-            var type = element.type;
+            var type2 = element.type;
             var key = element.key;
             var pendingProps = element.props;
-            var fiber = createFiberFromTypeAndProps(type, key, pendingProps, owner, mode, lanes);
+            var fiber = createFiberFromTypeAndProps(type2, key, pendingProps, owner, mode, lanes);
             {
               fiber._debugSource = element._source;
               fiber._debugOwner = element._owner;
@@ -22577,10 +22578,10 @@
             }
           }
           function createFiberRoot(containerInfo, tag, hydrate2, initialChildren, hydrationCallbacks, isStrictMode, concurrentUpdatesByDefaultOverride, identifierPrefix, onRecoverableError, transitionCallbacks) {
-            var root3 = new FiberRootNode(containerInfo, tag, hydrate2, identifierPrefix, onRecoverableError);
+            var root4 = new FiberRootNode(containerInfo, tag, hydrate2, identifierPrefix, onRecoverableError);
             var uninitializedFiber = createHostRootFiber(tag, isStrictMode);
-            root3.current = uninitializedFiber;
-            uninitializedFiber.stateNode = root3;
+            root4.current = uninitializedFiber;
+            uninitializedFiber.stateNode = root4;
             {
               var _initialState = {
                 element: initialChildren,
@@ -22593,10 +22594,10 @@
               uninitializedFiber.memoizedState = _initialState;
             }
             initializeUpdateQueue(uninitializedFiber);
-            return root3;
+            return root4;
           }
           var ReactVersion = "18.2.0";
-          function createPortal(children, containerInfo, implementation) {
+          function createPortal(children2, containerInfo, implementation) {
             var key = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : null;
             {
               checkKeyStringCoercion(key);
@@ -22605,7 +22606,7 @@
               // This tag allow us to uniquely identify this as a React Portal
               $$typeof: REACT_PORTAL_TYPE,
               key: key == null ? null : "" + key,
-              children,
+              children: children2,
               containerInfo,
               implementation
             };
@@ -22620,7 +22621,7 @@
             if (!parentComponent) {
               return emptyContextObject;
             }
-            var fiber = get(parentComponent);
+            var fiber = get3(parentComponent);
             var parentContext = findCurrentUnmaskedContext(fiber);
             if (fiber.tag === ClassComponent) {
               var Component = fiber.type;
@@ -22632,7 +22633,7 @@
           }
           function findHostInstanceWithWarning(component, methodName) {
             {
-              var fiber = get(component);
+              var fiber = get3(component);
               if (fiber === void 0) {
                 if (typeof component.render === "function") {
                   throw new Error("Unable to find node on an unmounted component.");
@@ -22676,16 +22677,16 @@
           }
           function createHydrationContainer(initialChildren, callback, containerInfo, tag, hydrationCallbacks, isStrictMode, concurrentUpdatesByDefaultOverride, identifierPrefix, onRecoverableError, transitionCallbacks) {
             var hydrate2 = true;
-            var root3 = createFiberRoot(containerInfo, tag, hydrate2, initialChildren, hydrationCallbacks, isStrictMode, concurrentUpdatesByDefaultOverride, identifierPrefix, onRecoverableError);
-            root3.context = getContextForSubtree(null);
-            var current2 = root3.current;
+            var root4 = createFiberRoot(containerInfo, tag, hydrate2, initialChildren, hydrationCallbacks, isStrictMode, concurrentUpdatesByDefaultOverride, identifierPrefix, onRecoverableError);
+            root4.context = getContextForSubtree(null);
+            var current2 = root4.current;
             var eventTime = requestEventTime();
             var lane = requestUpdateLane(current2);
             var update = createUpdate(eventTime, lane);
             update.callback = callback !== void 0 && callback !== null ? callback : null;
             enqueueUpdate(current2, update, lane);
-            scheduleInitialHydrationOnRoot(root3, lane, eventTime);
-            return root3;
+            scheduleInitialHydrationOnRoot(root4, lane, eventTime);
+            return root4;
           }
           function updateContainer(element, container, parentComponent, callback) {
             {
@@ -22722,10 +22723,10 @@
               }
               update.callback = callback;
             }
-            var root3 = enqueueUpdate(current$1, update, lane);
-            if (root3 !== null) {
-              scheduleUpdateOnFiber(root3, current$1, lane, eventTime);
-              entangleTransitions(root3, current$1, lane);
+            var root4 = enqueueUpdate(current$1, update, lane);
+            if (root4 !== null) {
+              scheduleUpdateOnFiber(root4, current$1, lane, eventTime);
+              entangleTransitions(root4, current$1, lane);
             }
             return lane;
           }
@@ -22744,19 +22745,19 @@
           function attemptSynchronousHydration$1(fiber) {
             switch (fiber.tag) {
               case HostRoot: {
-                var root3 = fiber.stateNode;
-                if (isRootDehydrated(root3)) {
-                  var lanes = getHighestPriorityPendingLanes(root3);
-                  flushRoot(root3, lanes);
+                var root4 = fiber.stateNode;
+                if (isRootDehydrated(root4)) {
+                  var lanes = getHighestPriorityPendingLanes(root4);
+                  flushRoot(root4, lanes);
                 }
                 break;
               }
               case SuspenseComponent: {
                 flushSync(function() {
-                  var root4 = enqueueConcurrentRenderForLane(fiber, SyncLane);
-                  if (root4 !== null) {
+                  var root5 = enqueueConcurrentRenderForLane(fiber, SyncLane);
+                  if (root5 !== null) {
                     var eventTime = requestEventTime();
-                    scheduleUpdateOnFiber(root4, fiber, SyncLane, eventTime);
+                    scheduleUpdateOnFiber(root5, fiber, SyncLane, eventTime);
                   }
                 });
                 var retryLane = SyncLane;
@@ -22783,10 +22784,10 @@
               return;
             }
             var lane = SelectiveHydrationLane;
-            var root3 = enqueueConcurrentRenderForLane(fiber, lane);
-            if (root3 !== null) {
+            var root4 = enqueueConcurrentRenderForLane(fiber, lane);
+            if (root4 !== null) {
               var eventTime = requestEventTime();
-              scheduleUpdateOnFiber(root3, fiber, lane, eventTime);
+              scheduleUpdateOnFiber(root4, fiber, lane, eventTime);
             }
             markRetryLaneIfNotHydrated(fiber, lane);
           }
@@ -22795,10 +22796,10 @@
               return;
             }
             var lane = requestUpdateLane(fiber);
-            var root3 = enqueueConcurrentRenderForLane(fiber, lane);
-            if (root3 !== null) {
+            var root4 = enqueueConcurrentRenderForLane(fiber, lane);
+            if (root4 !== null) {
               var eventTime = requestEventTime();
-              scheduleUpdateOnFiber(root3, fiber, lane, eventTime);
+              scheduleUpdateOnFiber(root4, fiber, lane, eventTime);
             }
             markRetryLaneIfNotHydrated(fiber, lane);
           }
@@ -22831,10 +22832,10 @@
           var setErrorHandler = null;
           var setSuspenseHandler = null;
           {
-            var copyWithDeleteImpl = function(obj, path, index2) {
-              var key = path[index2];
+            var copyWithDeleteImpl = function(obj, path2, index2) {
+              var key = path2[index2];
               var updated = isArray(obj) ? obj.slice() : assign({}, obj);
-              if (index2 + 1 === path.length) {
+              if (index2 + 1 === path2.length) {
                 if (isArray(updated)) {
                   updated.splice(key, 1);
                 } else {
@@ -22842,11 +22843,11 @@
                 }
                 return updated;
               }
-              updated[key] = copyWithDeleteImpl(obj[key], path, index2 + 1);
+              updated[key] = copyWithDeleteImpl(obj[key], path2, index2 + 1);
               return updated;
             };
-            var copyWithDelete = function(obj, path) {
-              return copyWithDeleteImpl(obj, path, 0);
+            var copyWithDelete = function(obj, path2) {
+              return copyWithDeleteImpl(obj, path2, 0);
             };
             var copyWithRenameImpl = function(obj, oldPath, newPath, index2) {
               var oldKey = oldPath[index2];
@@ -22884,83 +22885,83 @@
               }
               return copyWithRenameImpl(obj, oldPath, newPath, 0);
             };
-            var copyWithSetImpl = function(obj, path, index2, value) {
-              if (index2 >= path.length) {
+            var copyWithSetImpl = function(obj, path2, index2, value) {
+              if (index2 >= path2.length) {
                 return value;
               }
-              var key = path[index2];
+              var key = path2[index2];
               var updated = isArray(obj) ? obj.slice() : assign({}, obj);
-              updated[key] = copyWithSetImpl(obj[key], path, index2 + 1, value);
+              updated[key] = copyWithSetImpl(obj[key], path2, index2 + 1, value);
               return updated;
             };
-            var copyWithSet = function(obj, path, value) {
-              return copyWithSetImpl(obj, path, 0, value);
+            var copyWithSet = function(obj, path2, value) {
+              return copyWithSetImpl(obj, path2, 0, value);
             };
-            var findHook = function(fiber, id) {
+            var findHook = function(fiber, id2) {
               var currentHook2 = fiber.memoizedState;
-              while (currentHook2 !== null && id > 0) {
+              while (currentHook2 !== null && id2 > 0) {
                 currentHook2 = currentHook2.next;
-                id--;
+                id2--;
               }
               return currentHook2;
             };
-            overrideHookState = function(fiber, id, path, value) {
-              var hook = findHook(fiber, id);
+            overrideHookState = function(fiber, id2, path2, value) {
+              var hook = findHook(fiber, id2);
               if (hook !== null) {
-                var newState = copyWithSet(hook.memoizedState, path, value);
+                var newState = copyWithSet(hook.memoizedState, path2, value);
                 hook.memoizedState = newState;
                 hook.baseState = newState;
                 fiber.memoizedProps = assign({}, fiber.memoizedProps);
-                var root3 = enqueueConcurrentRenderForLane(fiber, SyncLane);
-                if (root3 !== null) {
-                  scheduleUpdateOnFiber(root3, fiber, SyncLane, NoTimestamp);
+                var root4 = enqueueConcurrentRenderForLane(fiber, SyncLane);
+                if (root4 !== null) {
+                  scheduleUpdateOnFiber(root4, fiber, SyncLane, NoTimestamp);
                 }
               }
             };
-            overrideHookStateDeletePath = function(fiber, id, path) {
-              var hook = findHook(fiber, id);
+            overrideHookStateDeletePath = function(fiber, id2, path2) {
+              var hook = findHook(fiber, id2);
               if (hook !== null) {
-                var newState = copyWithDelete(hook.memoizedState, path);
+                var newState = copyWithDelete(hook.memoizedState, path2);
                 hook.memoizedState = newState;
                 hook.baseState = newState;
                 fiber.memoizedProps = assign({}, fiber.memoizedProps);
-                var root3 = enqueueConcurrentRenderForLane(fiber, SyncLane);
-                if (root3 !== null) {
-                  scheduleUpdateOnFiber(root3, fiber, SyncLane, NoTimestamp);
+                var root4 = enqueueConcurrentRenderForLane(fiber, SyncLane);
+                if (root4 !== null) {
+                  scheduleUpdateOnFiber(root4, fiber, SyncLane, NoTimestamp);
                 }
               }
             };
-            overrideHookStateRenamePath = function(fiber, id, oldPath, newPath) {
-              var hook = findHook(fiber, id);
+            overrideHookStateRenamePath = function(fiber, id2, oldPath, newPath) {
+              var hook = findHook(fiber, id2);
               if (hook !== null) {
                 var newState = copyWithRename(hook.memoizedState, oldPath, newPath);
                 hook.memoizedState = newState;
                 hook.baseState = newState;
                 fiber.memoizedProps = assign({}, fiber.memoizedProps);
-                var root3 = enqueueConcurrentRenderForLane(fiber, SyncLane);
-                if (root3 !== null) {
-                  scheduleUpdateOnFiber(root3, fiber, SyncLane, NoTimestamp);
+                var root4 = enqueueConcurrentRenderForLane(fiber, SyncLane);
+                if (root4 !== null) {
+                  scheduleUpdateOnFiber(root4, fiber, SyncLane, NoTimestamp);
                 }
               }
             };
-            overrideProps = function(fiber, path, value) {
-              fiber.pendingProps = copyWithSet(fiber.memoizedProps, path, value);
+            overrideProps = function(fiber, path2, value) {
+              fiber.pendingProps = copyWithSet(fiber.memoizedProps, path2, value);
               if (fiber.alternate) {
                 fiber.alternate.pendingProps = fiber.pendingProps;
               }
-              var root3 = enqueueConcurrentRenderForLane(fiber, SyncLane);
-              if (root3 !== null) {
-                scheduleUpdateOnFiber(root3, fiber, SyncLane, NoTimestamp);
+              var root4 = enqueueConcurrentRenderForLane(fiber, SyncLane);
+              if (root4 !== null) {
+                scheduleUpdateOnFiber(root4, fiber, SyncLane, NoTimestamp);
               }
             };
-            overridePropsDeletePath = function(fiber, path) {
-              fiber.pendingProps = copyWithDelete(fiber.memoizedProps, path);
+            overridePropsDeletePath = function(fiber, path2) {
+              fiber.pendingProps = copyWithDelete(fiber.memoizedProps, path2);
               if (fiber.alternate) {
                 fiber.alternate.pendingProps = fiber.pendingProps;
               }
-              var root3 = enqueueConcurrentRenderForLane(fiber, SyncLane);
-              if (root3 !== null) {
-                scheduleUpdateOnFiber(root3, fiber, SyncLane, NoTimestamp);
+              var root4 = enqueueConcurrentRenderForLane(fiber, SyncLane);
+              if (root4 !== null) {
+                scheduleUpdateOnFiber(root4, fiber, SyncLane, NoTimestamp);
               }
             };
             overridePropsRenamePath = function(fiber, oldPath, newPath) {
@@ -22968,15 +22969,15 @@
               if (fiber.alternate) {
                 fiber.alternate.pendingProps = fiber.pendingProps;
               }
-              var root3 = enqueueConcurrentRenderForLane(fiber, SyncLane);
-              if (root3 !== null) {
-                scheduleUpdateOnFiber(root3, fiber, SyncLane, NoTimestamp);
+              var root4 = enqueueConcurrentRenderForLane(fiber, SyncLane);
+              if (root4 !== null) {
+                scheduleUpdateOnFiber(root4, fiber, SyncLane, NoTimestamp);
               }
             };
             scheduleUpdate = function(fiber) {
-              var root3 = enqueueConcurrentRenderForLane(fiber, SyncLane);
-              if (root3 !== null) {
-                scheduleUpdateOnFiber(root3, fiber, SyncLane, NoTimestamp);
+              var root4 = enqueueConcurrentRenderForLane(fiber, SyncLane);
+              if (root4 !== null) {
+                scheduleUpdateOnFiber(root4, fiber, SyncLane, NoTimestamp);
               }
             };
             setErrorHandler = function(newShouldErrorImpl) {
@@ -23041,9 +23042,9 @@
           function ReactDOMRoot(internalRoot) {
             this._internalRoot = internalRoot;
           }
-          ReactDOMHydrationRoot.prototype.render = ReactDOMRoot.prototype.render = function(children) {
-            var root3 = this._internalRoot;
-            if (root3 === null) {
+          ReactDOMHydrationRoot.prototype.render = ReactDOMRoot.prototype.render = function(children2) {
+            var root4 = this._internalRoot;
+            if (root4 === null) {
               throw new Error("Cannot update an unmounted root.");
             }
             {
@@ -23054,9 +23055,9 @@
               } else if (typeof arguments[1] !== "undefined") {
                 error("You passed a second argument to root.render(...) but it only accepts one argument.");
               }
-              var container = root3.containerInfo;
+              var container = root4.containerInfo;
               if (container.nodeType !== COMMENT_NODE) {
-                var hostInstance = findHostInstanceWithNoPortals(root3.current);
+                var hostInstance = findHostInstanceWithNoPortals(root4.current);
                 if (hostInstance) {
                   if (hostInstance.parentNode !== container) {
                     error("render(...): It looks like the React-rendered content of the root container was removed without using React. This is not supported and will cause errors. Instead, call root.unmount() to empty a root's container.");
@@ -23064,7 +23065,7 @@
                 }
               }
             }
-            updateContainer(children, root3, null, null);
+            updateContainer(children2, root4, null, null);
           };
           ReactDOMHydrationRoot.prototype.unmount = ReactDOMRoot.prototype.unmount = function() {
             {
@@ -23072,17 +23073,17 @@
                 error("unmount(...): does not support a callback argument. To execute a side effect after rendering, declare it in a component body with useEffect().");
               }
             }
-            var root3 = this._internalRoot;
-            if (root3 !== null) {
+            var root4 = this._internalRoot;
+            if (root4 !== null) {
               this._internalRoot = null;
-              var container = root3.containerInfo;
+              var container = root4.containerInfo;
               {
                 if (isAlreadyRendering()) {
                   error("Attempted to synchronously unmount a root while React was already rendering. React cannot finish unmounting the root until the current render has completed, which may lead to a race condition.");
                 }
               }
               flushSync(function() {
-                updateContainer(null, root3, null, null);
+                updateContainer(null, root4, null, null);
               });
               unmarkContainerAsRoot(container);
             }
@@ -23120,11 +23121,11 @@
                 transitionCallbacks = options2.transitionCallbacks;
               }
             }
-            var root3 = createContainer(container, ConcurrentRoot, null, isStrictMode, concurrentUpdatesByDefaultOverride, identifierPrefix, onRecoverableError);
-            markContainerAsRoot(root3.current, container);
+            var root4 = createContainer(container, ConcurrentRoot, null, isStrictMode, concurrentUpdatesByDefaultOverride, identifierPrefix, onRecoverableError);
+            markContainerAsRoot(root4.current, container);
             var rootContainerElement = container.nodeType === COMMENT_NODE ? container.parentNode : container;
             listenToAllSupportedEvents(rootContainerElement);
-            return new ReactDOMRoot(root3);
+            return new ReactDOMRoot(root4);
           }
           function ReactDOMHydrationRoot(internalRoot) {
             this._internalRoot = internalRoot;
@@ -23162,16 +23163,16 @@
                 onRecoverableError = options2.onRecoverableError;
               }
             }
-            var root3 = createHydrationContainer(initialChildren, null, container, ConcurrentRoot, hydrationCallbacks, isStrictMode, concurrentUpdatesByDefaultOverride, identifierPrefix, onRecoverableError);
-            markContainerAsRoot(root3.current, container);
+            var root4 = createHydrationContainer(initialChildren, null, container, ConcurrentRoot, hydrationCallbacks, isStrictMode, concurrentUpdatesByDefaultOverride, identifierPrefix, onRecoverableError);
+            markContainerAsRoot(root4.current, container);
             listenToAllSupportedEvents(container);
             if (mutableSources) {
               for (var i = 0; i < mutableSources.length; i++) {
                 var mutableSource = mutableSources[i];
-                registerMutableSourceForHydration(root3, mutableSource);
+                registerMutableSourceForHydration(root4, mutableSource);
               }
             }
-            return new ReactDOMHydrationRoot(root3);
+            return new ReactDOMHydrationRoot(root4);
           }
           function isValidContainer(node) {
             return !!(node && (node.nodeType === ELEMENT_NODE || node.nodeType === DOCUMENT_NODE || node.nodeType === DOCUMENT_FRAGMENT_NODE || !disableCommentsAsDOMContainers));
@@ -23233,11 +23234,11 @@
               if (typeof callback === "function") {
                 var originalCallback = callback;
                 callback = function() {
-                  var instance = getPublicRootInstance(root3);
+                  var instance = getPublicRootInstance(root4);
                   originalCallback.call(instance);
                 };
               }
-              var root3 = createHydrationContainer(
+              var root4 = createHydrationContainer(
                 initialChildren,
                 callback,
                 container,
@@ -23252,12 +23253,12 @@
                 // identifierPrefix
                 noopOnRecoverableError
               );
-              container._reactRootContainer = root3;
-              markContainerAsRoot(root3.current, container);
+              container._reactRootContainer = root4;
+              markContainerAsRoot(root4.current, container);
               var rootContainerElement = container.nodeType === COMMENT_NODE ? container.parentNode : container;
               listenToAllSupportedEvents(rootContainerElement);
               flushSync();
-              return root3;
+              return root4;
             } else {
               var rootSibling;
               while (rootSibling = container.lastChild) {
@@ -23300,27 +23301,27 @@
               }
             }
           }
-          function legacyRenderSubtreeIntoContainer(parentComponent, children, container, forceHydrate, callback) {
+          function legacyRenderSubtreeIntoContainer(parentComponent, children2, container, forceHydrate, callback) {
             {
               topLevelUpdateWarnings(container);
               warnOnInvalidCallback$1(callback === void 0 ? null : callback, "render");
             }
             var maybeRoot = container._reactRootContainer;
-            var root3;
+            var root4;
             if (!maybeRoot) {
-              root3 = legacyCreateRootFromDOMContainer(container, children, parentComponent, callback, forceHydrate);
+              root4 = legacyCreateRootFromDOMContainer(container, children2, parentComponent, callback, forceHydrate);
             } else {
-              root3 = maybeRoot;
+              root4 = maybeRoot;
               if (typeof callback === "function") {
                 var originalCallback = callback;
                 callback = function() {
-                  var instance = getPublicRootInstance(root3);
+                  var instance = getPublicRootInstance(root4);
                   originalCallback.call(instance);
                 };
               }
-              updateContainer(children, root3, parentComponent, callback);
+              updateContainer(children2, root4, parentComponent, callback);
             }
-            return getPublicRootInstance(root3);
+            return getPublicRootInstance(root4);
           }
           function findDOMNode(componentOrElement) {
             {
@@ -23436,12 +23437,12 @@
           }
           setRestoreImplementation(restoreControlledState$3);
           setBatchingImplementation(batchedUpdates$1, discreteUpdates, flushSync);
-          function createPortal$1(children, container) {
+          function createPortal$1(children2, container) {
             var key = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : null;
             if (!isValidContainer(container)) {
               throw new Error("Target container is not a DOM element.");
             }
-            return createPortal(children, container, null, key);
+            return createPortal(children2, container, null, key);
           }
           function renderSubtreeIntoContainer(parentComponent, element, containerNode, callback) {
             return unstable_renderSubtreeIntoContainer(parentComponent, element, containerNode, callback);
@@ -23628,11 +23629,11 @@
             return new URL(createHref(to), "http://localhost");
           },
           encodeLocation(to) {
-            let path = typeof to === "string" ? parsePath(to) : to;
+            let path2 = typeof to === "string" ? parsePath(to) : to;
             return {
-              pathname: path.pathname || "",
-              search: path.search || "",
-              hash: path.hash || ""
+              pathname: path2.pathname || "",
+              search: path2.search || "",
+              hash: path2.hash || ""
             };
           },
           push(to, state) {
@@ -23804,21 +23805,21 @@
           pathname += hash.charAt(0) === "#" ? hash : "#" + hash;
         return pathname;
       }
-      function parsePath(path) {
+      function parsePath(path2) {
         let parsedPath = {};
-        if (path) {
-          let hashIndex = path.indexOf("#");
+        if (path2) {
+          let hashIndex = path2.indexOf("#");
           if (hashIndex >= 0) {
-            parsedPath.hash = path.substr(hashIndex);
-            path = path.substr(0, hashIndex);
+            parsedPath.hash = path2.substr(hashIndex);
+            path2 = path2.substr(0, hashIndex);
           }
-          let searchIndex = path.indexOf("?");
+          let searchIndex = path2.indexOf("?");
           if (searchIndex >= 0) {
-            parsedPath.search = path.substr(searchIndex);
-            path = path.substr(0, searchIndex);
+            parsedPath.search = path2.substr(searchIndex);
+            path2 = path2.substr(0, searchIndex);
           }
-          if (path) {
-            parsedPath.pathname = path;
+          if (path2) {
+            parsedPath.pathname = path2;
           }
         }
         return parsedPath;
@@ -23965,21 +23966,21 @@
         }
         return routes.map((route, index) => {
           let treePath = [...parentPath, index];
-          let id = typeof route.id === "string" ? route.id : treePath.join("-");
+          let id2 = typeof route.id === "string" ? route.id : treePath.join("-");
           invariant3(route.index !== true || !route.children, "Cannot specify children on an index route");
-          invariant3(!manifest[id], 'Found a route id collision on id "' + id + `".  Route id's must be globally unique within Data Router usages`);
+          invariant3(!manifest[id2], 'Found a route id collision on id "' + id2 + `".  Route id's must be globally unique within Data Router usages`);
           if (isIndexRoute(route)) {
             let indexRoute = _extends2({}, route, mapRouteProperties(route), {
-              id
+              id: id2
             });
-            manifest[id] = indexRoute;
+            manifest[id2] = indexRoute;
             return indexRoute;
           } else {
             let pathOrLayoutRoute = _extends2({}, route, mapRouteProperties(route), {
-              id,
+              id: id2,
               children: void 0
             });
-            manifest[id] = pathOrLayoutRoute;
+            manifest[id2] = pathOrLayoutRoute;
             if (route.children) {
               pathOrLayoutRoute.children = convertRoutesToDataRoutes(route.children, mapRouteProperties, treePath, manifest);
             }
@@ -24048,23 +24049,23 @@
             invariant3(meta.relativePath.startsWith(parentPath), 'Absolute route path "' + meta.relativePath + '" nested under path ' + ('"' + parentPath + '" is not valid. An absolute child route path ') + "must start with the combined path of all its parent routes.");
             meta.relativePath = meta.relativePath.slice(parentPath.length);
           }
-          let path = joinPaths([parentPath, meta.relativePath]);
+          let path2 = joinPaths([parentPath, meta.relativePath]);
           let routesMeta = parentsMeta.concat(meta);
           if (route.children && route.children.length > 0) {
             invariant3(
               // Our types know better, but runtime JS may not!
               // @ts-expect-error
               route.index !== true,
-              "Index routes must not have child routes. Please remove " + ('all child routes from route path "' + path + '".')
+              "Index routes must not have child routes. Please remove " + ('all child routes from route path "' + path2 + '".')
             );
-            flattenRoutes(route.children, branches, routesMeta, path);
+            flattenRoutes(route.children, branches, routesMeta, path2);
           }
           if (route.path == null && !route.index) {
             return;
           }
           branches.push({
-            path,
-            score: computeScore(path, route.index),
+            path: path2,
+            score: computeScore(path2, route.index),
             routesMeta
           });
         };
@@ -24080,8 +24081,8 @@
         });
         return branches;
       }
-      function explodeOptionalSegments(path) {
-        let segments = path.split("/");
+      function explodeOptionalSegments(path2) {
+        let segments = path2.split("/");
         if (segments.length === 0)
           return [];
         let [first, ...rest] = segments;
@@ -24096,7 +24097,7 @@
         if (isOptional) {
           result.push(...restExploded);
         }
-        return result.map((exploded) => path.startsWith("/") && exploded === "" ? "/" : exploded);
+        return result.map((exploded) => path2.startsWith("/") && exploded === "" ? "/" : exploded);
       }
       function rankRouteBranches(branches) {
         branches.sort((a, b) => a.score !== b.score ? b.score - a.score : compareIndexes(a.routesMeta.map((meta) => meta.childrenIndex), b.routesMeta.map((meta) => meta.childrenIndex)));
@@ -24108,8 +24109,8 @@
       var staticSegmentValue = 10;
       var splatPenalty = -2;
       var isSplat = (s) => s === "*";
-      function computeScore(path, index) {
-        let segments = path.split("/");
+      function computeScore(path2, index) {
+        let segments = path2.split("/");
         let initialScore = segments.length;
         if (segments.some(isSplat)) {
           initialScore += splatPenalty;
@@ -24170,15 +24171,15 @@
         if (params === void 0) {
           params = {};
         }
-        let path = originalPath;
-        if (path.endsWith("*") && path !== "*" && !path.endsWith("/*")) {
-          warning(false, 'Route path "' + path + '" will be treated as if it were ' + ('"' + path.replace(/\*$/, "/*") + '" because the `*` character must ') + "always follow a `/` in the pattern. To get rid of this warning, " + ('please change the route path to "' + path.replace(/\*$/, "/*") + '".'));
-          path = path.replace(/\*$/, "/*");
+        let path2 = originalPath;
+        if (path2.endsWith("*") && path2 !== "*" && !path2.endsWith("/*")) {
+          warning(false, 'Route path "' + path2 + '" will be treated as if it were ' + ('"' + path2.replace(/\*$/, "/*") + '" because the `*` character must ') + "always follow a `/` in the pattern. To get rid of this warning, " + ('please change the route path to "' + path2.replace(/\*$/, "/*") + '".'));
+          path2 = path2.replace(/\*$/, "/*");
         }
-        const prefix = path.startsWith("/") ? "/" : "";
+        const prefix = path2.startsWith("/") ? "/" : "";
         const stringify = (p) => p == null ? "" : typeof p === "string" ? p : String(p);
-        const segments = path.split(/\/+/).map((segment, index, array) => {
-          const isLastSegment = index === array.length - 1;
+        const segments = path2.split(/\/+/).map((segment, index, array2) => {
+          const isLastSegment = index === array2.length - 1;
           if (isLastSegment && segment === "*") {
             const star = "*";
             return stringify(params[star]);
@@ -24224,25 +24225,25 @@
           pattern
         };
       }
-      function compilePath(path, caseSensitive, end) {
+      function compilePath(path2, caseSensitive, end) {
         if (caseSensitive === void 0) {
           caseSensitive = false;
         }
         if (end === void 0) {
           end = true;
         }
-        warning(path === "*" || !path.endsWith("*") || path.endsWith("/*"), 'Route path "' + path + '" will be treated as if it were ' + ('"' + path.replace(/\*$/, "/*") + '" because the `*` character must ') + "always follow a `/` in the pattern. To get rid of this warning, " + ('please change the route path to "' + path.replace(/\*$/, "/*") + '".'));
+        warning(path2 === "*" || !path2.endsWith("*") || path2.endsWith("/*"), 'Route path "' + path2 + '" will be treated as if it were ' + ('"' + path2.replace(/\*$/, "/*") + '" because the `*` character must ') + "always follow a `/` in the pattern. To get rid of this warning, " + ('please change the route path to "' + path2.replace(/\*$/, "/*") + '".'));
         let paramNames = [];
-        let regexpSource = "^" + path.replace(/\/*\*?$/, "").replace(/^\/*/, "/").replace(/[\\.*+^$?{}|()[\]]/g, "\\$&").replace(/\/:(\w+)/g, (_, paramName) => {
+        let regexpSource = "^" + path2.replace(/\/*\*?$/, "").replace(/^\/*/, "/").replace(/[\\.*+^$?{}|()[\]]/g, "\\$&").replace(/\/:(\w+)/g, (_, paramName) => {
           paramNames.push(paramName);
           return "/([^\\/]+)";
         });
-        if (path.endsWith("*")) {
+        if (path2.endsWith("*")) {
           paramNames.push("*");
-          regexpSource += path === "*" || path === "/*" ? "(.*)$" : "(?:\\/(.+)|\\/*)$";
+          regexpSource += path2 === "*" || path2 === "/*" ? "(.*)$" : "(?:\\/(.+)|\\/*)$";
         } else if (end) {
           regexpSource += "\\/*$";
-        } else if (path !== "" && path !== "/") {
+        } else if (path2 !== "" && path2 !== "/") {
           regexpSource += "(?:(?=\\/|$))";
         } else
           ;
@@ -24307,8 +24308,8 @@
         });
         return segments.length > 1 ? segments.join("/") : "/";
       }
-      function getInvalidPathError(char, field, dest, path) {
-        return "Cannot include a '" + char + "' character in a manually specified " + ("`to." + field + "` field [" + JSON.stringify(path) + "].  Please separate it out to the ") + ("`to." + dest + "` field. Alternatively you may provide the full path as ") + 'a string in <Link to="..."> and the router will parse it for you.';
+      function getInvalidPathError(char, field, dest, path2) {
+        return "Cannot include a '" + char + "' character in a manually specified " + ("`to." + field + "` field [" + JSON.stringify(path2) + "].  Please separate it out to the ") + ("`to." + dest + "` field. Alternatively you may provide the full path as ") + 'a string in <Link to="..."> and the router will parse it for you.';
       }
       function getPathContributingMatches(matches) {
         return matches.filter((match, index) => index === 0 || match.route.path && match.route.path.length > 0);
@@ -24343,13 +24344,13 @@
           }
           from = routePathnameIndex >= 0 ? routePathnames[routePathnameIndex] : "/";
         }
-        let path = resolvePath(to, from);
+        let path2 = resolvePath(to, from);
         let hasExplicitTrailingSlash = toPathname && toPathname !== "/" && toPathname.endsWith("/");
         let hasCurrentTrailingSlash = (isEmptyPath || toPathname === ".") && locationPathname.endsWith("/");
-        if (!path.pathname.endsWith("/") && (hasExplicitTrailingSlash || hasCurrentTrailingSlash)) {
-          path.pathname += "/";
+        if (!path2.pathname.endsWith("/") && (hasExplicitTrailingSlash || hasCurrentTrailingSlash)) {
+          path2.pathname += "/";
         }
-        return path;
+        return path2;
       }
       function getToPathname(to) {
         return to === "" || to.pathname === "" ? "/" : typeof to === "string" ? parsePath(to).pathname : to.pathname;
@@ -24358,13 +24359,13 @@
       var normalizePathname = (pathname) => pathname.replace(/\/+$/, "").replace(/^\/*/, "/");
       var normalizeSearch = (search) => !search || search === "?" ? "" : search.startsWith("?") ? search : "?" + search;
       var normalizeHash = (hash) => !hash || hash === "#" ? "" : hash.startsWith("#") ? hash : "#" + hash;
-      var json = function json2(data, init) {
-        if (init === void 0) {
-          init = {};
+      var json = function json2(data, init2) {
+        if (init2 === void 0) {
+          init2 = {};
         }
-        let responseInit = typeof init === "number" ? {
-          status: init
-        } : init;
+        let responseInit = typeof init2 === "number" ? {
+          status: init2
+        } : init2;
         let headers = new Headers(responseInit.headers);
         if (!headers.has("Content-Type")) {
           headers.set("Content-Type", "application/json; charset=utf-8");
@@ -24503,20 +24504,20 @@
         }
         return value._data;
       }
-      var defer = function defer2(data, init) {
-        if (init === void 0) {
-          init = {};
+      var defer = function defer2(data, init2) {
+        if (init2 === void 0) {
+          init2 = {};
         }
-        let responseInit = typeof init === "number" ? {
-          status: init
-        } : init;
+        let responseInit = typeof init2 === "number" ? {
+          status: init2
+        } : init2;
         return new DeferredData(data, responseInit);
       };
-      var redirect = function redirect2(url, init) {
-        if (init === void 0) {
-          init = 302;
+      var redirect = function redirect2(url, init2) {
+        if (init2 === void 0) {
+          init2 = 302;
         }
-        let responseInit = init;
+        let responseInit = init2;
         if (typeof responseInit === "number") {
           responseInit = {
             status: responseInit
@@ -24530,8 +24531,8 @@
           headers
         }));
       };
-      var redirectDocument = (url, init) => {
-        let response = redirect(url, init);
+      var redirectDocument = (url, init2) => {
+        let response = redirect(url, init2);
         response.headers.set("X-Remix-Reload-Document", "true");
         return response;
       };
@@ -24590,16 +24591,16 @@
       var defaultMapRouteProperties = (route) => ({
         hasErrorBoundary: Boolean(route.hasErrorBoundary)
       });
-      function createRouter(init) {
-        const routerWindow = init.window ? init.window : typeof window !== "undefined" ? window : void 0;
+      function createRouter(init2) {
+        const routerWindow = init2.window ? init2.window : typeof window !== "undefined" ? window : void 0;
         const isBrowser = typeof routerWindow !== "undefined" && typeof routerWindow.document !== "undefined" && typeof routerWindow.document.createElement !== "undefined";
         const isServer = !isBrowser;
-        invariant3(init.routes.length > 0, "You must provide a non-empty routes array to createRouter");
+        invariant3(init2.routes.length > 0, "You must provide a non-empty routes array to createRouter");
         let mapRouteProperties;
-        if (init.mapRouteProperties) {
-          mapRouteProperties = init.mapRouteProperties;
-        } else if (init.detectErrorBoundary) {
-          let detectErrorBoundary = init.detectErrorBoundary;
+        if (init2.mapRouteProperties) {
+          mapRouteProperties = init2.mapRouteProperties;
+        } else if (init2.detectErrorBoundary) {
+          let detectErrorBoundary = init2.detectErrorBoundary;
           mapRouteProperties = (route) => ({
             hasErrorBoundary: detectErrorBoundary(route)
           });
@@ -24607,24 +24608,24 @@
           mapRouteProperties = defaultMapRouteProperties;
         }
         let manifest = {};
-        let dataRoutes = convertRoutesToDataRoutes(init.routes, mapRouteProperties, void 0, manifest);
+        let dataRoutes = convertRoutesToDataRoutes(init2.routes, mapRouteProperties, void 0, manifest);
         let inFlightDataRoutes;
-        let basename = init.basename || "/";
+        let basename = init2.basename || "/";
         let future = _extends2({
           v7_normalizeFormMethod: false,
           v7_prependBasename: false
-        }, init.future);
+        }, init2.future);
         let unlistenHistory = null;
         let subscribers = /* @__PURE__ */ new Set();
         let savedScrollPositions = null;
         let getScrollRestorationKey = null;
         let getScrollPosition = null;
-        let initialScrollRestored = init.hydrationData != null;
-        let initialMatches = matchRoutes(dataRoutes, init.history.location, basename);
+        let initialScrollRestored = init2.hydrationData != null;
+        let initialMatches = matchRoutes(dataRoutes, init2.history.location, basename);
         let initialErrors = null;
         if (initialMatches == null) {
           let error = getInternalRouterError(404, {
-            pathname: init.history.location.pathname
+            pathname: init2.history.location.pathname
           });
           let {
             matches,
@@ -24639,22 +24640,22 @@
           // All initialMatches need to be loaded before we're ready.  If we have lazy
           // functions around still then we'll need to run them in initialize()
           !initialMatches.some((m) => m.route.lazy) && // And we have to either have no loaders or have been provided hydrationData
-          (!initialMatches.some((m) => m.route.loader) || init.hydrationData != null)
+          (!initialMatches.some((m) => m.route.loader) || init2.hydrationData != null)
         );
         let router;
         let state = {
-          historyAction: init.history.action,
-          location: init.history.location,
+          historyAction: init2.history.action,
+          location: init2.history.location,
           matches: initialMatches,
           initialized,
           navigation: IDLE_NAVIGATION,
           // Don't restore on initial updateState() if we were SSR'd
-          restoreScrollPosition: init.hydrationData != null ? false : null,
+          restoreScrollPosition: init2.hydrationData != null ? false : null,
           preventScrollReset: false,
           revalidation: "idle",
-          loaderData: init.hydrationData && init.hydrationData.loaderData || {},
-          actionData: init.hydrationData && init.hydrationData.actionData || null,
-          errors: init.hydrationData && init.hydrationData.errors || initialErrors,
+          loaderData: init2.hydrationData && init2.hydrationData.loaderData || {},
+          actionData: init2.hydrationData && init2.hydrationData.actionData || null,
+          errors: init2.hydrationData && init2.hydrationData.errors || initialErrors,
           fetchers: /* @__PURE__ */ new Map(),
           blockers: /* @__PURE__ */ new Map()
         };
@@ -24675,7 +24676,7 @@
         let blockerFunctions = /* @__PURE__ */ new Map();
         let ignoreNextHistoryUpdate = false;
         function initialize() {
-          unlistenHistory = init.history.listen((_ref) => {
+          unlistenHistory = init2.history.listen((_ref) => {
             let {
               action: historyAction,
               location,
@@ -24693,7 +24694,7 @@
             });
             if (blockerKey && delta != null) {
               ignoreNextHistoryUpdate = true;
-              init.history.go(delta * -1);
+              init2.history.go(delta * -1);
               updateBlocker(blockerKey, {
                 state: "blocked",
                 location,
@@ -24704,7 +24705,7 @@
                     reset: void 0,
                     location
                   });
-                  init.history.go(delta);
+                  init2.history.go(delta);
                 },
                 reset() {
                   let blockers = new Map(state.blockers);
@@ -24771,9 +24772,9 @@
           else if (pendingAction === Action.Pop)
             ;
           else if (pendingAction === Action.Push) {
-            init.history.push(location, location.state);
+            init2.history.push(location, location.state);
           } else if (pendingAction === Action.Replace) {
-            init.history.replace(location, location.state);
+            init2.history.replace(location, location.state);
           }
           updateState(_extends2({}, newState, {
             // matches, errors, fetchers go through as-is
@@ -24798,18 +24799,18 @@
         function navigate(to, opts) {
           return __async(this, null, function* () {
             if (typeof to === "number") {
-              init.history.go(to);
+              init2.history.go(to);
               return;
             }
             let normalizedPath = normalizeTo(state.location, state.matches, basename, future.v7_prependBasename, to, opts == null ? void 0 : opts.fromRouteId, opts == null ? void 0 : opts.relative);
             let {
-              path,
+              path: path2,
               submission,
               error
             } = normalizeNavigateOptions(future.v7_normalizeFormMethod, false, normalizedPath, opts);
             let currentLocation = state.location;
-            let nextLocation = createLocation(state.location, path, opts && opts.state);
-            nextLocation = _extends2({}, nextLocation, init.history.encodeLocation(nextLocation));
+            let nextLocation = createLocation(state.location, path2, opts && opts.state);
+            nextLocation = _extends2({}, nextLocation, init2.history.encodeLocation(nextLocation));
             let userReplace = opts && opts.replace != null ? opts.replace : void 0;
             let historyAction = Action.Push;
             if (userReplace === true) {
@@ -24912,7 +24913,7 @@
               return;
             }
             pendingNavigationController = new AbortController();
-            let request = createClientSideRequest(init.history, location, pendingNavigationController.signal, opts && opts.submission);
+            let request = createClientSideRequest(init2.history, location, pendingNavigationController.signal, opts && opts.submission);
             let pendingActionData;
             let pendingError;
             if (opts && opts.pendingError) {
@@ -25026,7 +25027,7 @@
             let loadingNavigation = overrideNavigation || getLoadingNavigation(location, submission);
             let activeSubmission = submission || fetcherSubmission || getSubmissionFromNavigation(loadingNavigation);
             let routesToUse = inFlightDataRoutes || dataRoutes;
-            let [matchesToLoad, revalidatingFetchers] = getMatchesToLoad(init.history, state, matches, activeSubmission, location, isRevalidationRequired, cancelledDeferredRoutes, cancelledFetcherLoads, fetchLoadMatches, fetchRedirectIds, routesToUse, basename, pendingActionData, pendingError);
+            let [matchesToLoad, revalidatingFetchers] = getMatchesToLoad(init2.history, state, matches, activeSubmission, location, isRevalidationRequired, cancelledDeferredRoutes, cancelledFetcherLoads, fetchLoadMatches, fetchRedirectIds, routesToUse, basename, pendingActionData, pendingError);
             cancelActiveDeferreds((routeId) => !(matches && matches.some((m) => m.route.id === routeId)) || matchesToLoad && matchesToLoad.some((m) => m.route.id === routeId));
             pendingNavigationLoadId = ++incrementingLoadId;
             if (matchesToLoad.length === 0 && revalidatingFetchers.length === 0) {
@@ -25142,7 +25143,7 @@
             return;
           }
           let {
-            path,
+            path: path2,
             submission,
             error
           } = normalizeNavigateOptions(future.v7_normalizeFormMethod, true, normalizedPath, opts);
@@ -25150,26 +25151,26 @@
             setFetcherError(key, routeId, error);
             return;
           }
-          let match = getTargetMatch(matches, path);
+          let match = getTargetMatch(matches, path2);
           pendingPreventScrollReset = (opts && opts.preventScrollReset) === true;
           if (submission && isMutationMethod(submission.formMethod)) {
-            handleFetcherAction(key, routeId, path, match, matches, submission);
+            handleFetcherAction(key, routeId, path2, match, matches, submission);
             return;
           }
           fetchLoadMatches.set(key, {
             routeId,
-            path
+            path: path2
           });
-          handleFetcherLoader(key, routeId, path, match, matches, submission);
+          handleFetcherLoader(key, routeId, path2, match, matches, submission);
         }
-        function handleFetcherAction(key, routeId, path, match, requestMatches, submission) {
+        function handleFetcherAction(key, routeId, path2, match, requestMatches, submission) {
           return __async(this, null, function* () {
             interruptActiveLoads();
             fetchLoadMatches.delete(key);
             if (!match.route.action && !match.route.lazy) {
               let error = getInternalRouterError(405, {
                 method: submission.formMethod,
-                pathname: path,
+                pathname: path2,
                 routeId
               });
               setFetcherError(key, routeId, error);
@@ -25182,7 +25183,7 @@
               fetchers: new Map(state.fetchers)
             });
             let abortController = new AbortController();
-            let fetchRequest = createClientSideRequest(init.history, path, abortController.signal, submission);
+            let fetchRequest = createClientSideRequest(init2.history, path2, abortController.signal, submission);
             fetchControllers.set(key, abortController);
             let originatingLoadId = incrementingLoadId;
             let actionResult = yield callLoaderOrAction("action", fetchRequest, match, requestMatches, manifest, mapRouteProperties, basename);
@@ -25223,7 +25224,7 @@
               });
             }
             let nextLocation = state.navigation.location || state.location;
-            let revalidationRequest = createClientSideRequest(init.history, nextLocation, abortController.signal);
+            let revalidationRequest = createClientSideRequest(init2.history, nextLocation, abortController.signal);
             let routesToUse = inFlightDataRoutes || dataRoutes;
             let matches = state.navigation.state !== "idle" ? matchRoutes(routesToUse, state.navigation.location, basename) : state.matches;
             invariant3(matches, "Didn't find any matches after fetcher action");
@@ -25232,7 +25233,7 @@
             let loadFetcher = getLoadingFetcher(submission, actionResult.data);
             state.fetchers.set(key, loadFetcher);
             let [matchesToLoad, revalidatingFetchers] = getMatchesToLoad(
-              init.history,
+              init2.history,
               state,
               matches,
               submission,
@@ -25316,7 +25317,7 @@
             }
           });
         }
-        function handleFetcherLoader(key, routeId, path, match, matches, submission) {
+        function handleFetcherLoader(key, routeId, path2, match, matches, submission) {
           return __async(this, null, function* () {
             let existingFetcher = state.fetchers.get(key);
             let loadingFetcher = getLoadingFetcher(submission, existingFetcher ? existingFetcher.data : void 0);
@@ -25325,7 +25326,7 @@
               fetchers: new Map(state.fetchers)
             });
             let abortController = new AbortController();
-            let fetchRequest = createClientSideRequest(init.history, path, abortController.signal);
+            let fetchRequest = createClientSideRequest(init2.history, path2, abortController.signal);
             fetchControllers.set(key, abortController);
             let originatingLoadId = incrementingLoadId;
             let result = yield callLoaderOrAction("loader", fetchRequest, match, matches, manifest, mapRouteProperties, basename);
@@ -25390,7 +25391,7 @@
               if (redirect2.reloadDocument) {
                 isDocumentReload = true;
               } else if (ABSOLUTE_URL_REGEX.test(redirect2.location)) {
-                const url = init.history.createURL(redirect2.location);
+                const url = init2.history.createURL(redirect2.location);
                 isDocumentReload = // Hard reload if it's an absolute URL to a new origin
                 url.origin !== routerWindow.location.origin || // Hard reload if it's an absolute URL that does not match our basename
                 stripBasename(url.pathname, basename) == null;
@@ -25439,7 +25440,7 @@
           return __async(this, null, function* () {
             let results = yield Promise.all([...matchesToLoad.map((match) => callLoaderOrAction("loader", request, match, matches, manifest, mapRouteProperties, basename)), ...fetchersToLoad.map((f) => {
               if (f.matches && f.match && f.controller) {
-                return callLoaderOrAction("loader", createClientSideRequest(init.history, f.path, f.controller.signal), f.match, f.matches, manifest, mapRouteProperties, basename);
+                return callLoaderOrAction("loader", createClientSideRequest(init2.history, f.path, f.controller.signal), f.match, f.matches, manifest, mapRouteProperties, basename);
               } else {
                 let error = {
                   type: ResultType.error,
@@ -25520,8 +25521,8 @@
         }
         function abortStaleFetchLoads(landedId) {
           let yeetedKeys = [];
-          for (let [key, id] of fetchReloadIds) {
-            if (id < landedId) {
+          for (let [key, id2] of fetchReloadIds) {
+            if (id2 < landedId) {
               let fetcher = state.fetchers.get(key);
               invariant3(fetcher, "Expected fetcher: " + key);
               if (fetcher.state === "loading") {
@@ -25597,10 +25598,10 @@
           getScrollRestorationKey = getKey || null;
           if (!initialScrollRestored && state.navigation === IDLE_NAVIGATION) {
             initialScrollRestored = true;
-            let y = getSavedScrollPosition(state.location, state.matches);
-            if (y != null) {
+            let y2 = getSavedScrollPosition(state.location, state.matches);
+            if (y2 != null) {
               updateState({
-                restoreScrollPosition: y
+                restoreScrollPosition: y2
               });
             }
           }
@@ -25626,9 +25627,9 @@
         function getSavedScrollPosition(location, matches) {
           if (savedScrollPositions) {
             let key = getScrollKey(location, matches);
-            let y = savedScrollPositions[key];
-            if (typeof y === "number") {
-              return y;
+            let y2 = savedScrollPositions[key];
+            if (typeof y2 === "number") {
+              return y2;
             }
           }
           return null;
@@ -25655,8 +25656,8 @@
           revalidate,
           // Passthrough to history-aware createHref used by useHref so we get proper
           // hash-aware URLs in DOM paths
-          createHref: (to) => init.history.createHref(to),
-          encodeLocation: (to) => init.history.encodeLocation(to),
+          createHref: (to) => init2.history.createHref(to),
+          encodeLocation: (to) => init2.history.encodeLocation(to),
           getFetcher,
           deleteFetcher,
           dispose,
@@ -26009,42 +26010,42 @@
           contextualMatches = matches;
           activeRouteMatch = matches[matches.length - 1];
         }
-        let path = resolveTo(to ? to : ".", getPathContributingMatches(contextualMatches).map((m) => m.pathnameBase), stripBasename(location.pathname, basename) || location.pathname, relative === "path");
+        let path2 = resolveTo(to ? to : ".", getPathContributingMatches(contextualMatches).map((m) => m.pathnameBase), stripBasename(location.pathname, basename) || location.pathname, relative === "path");
         if (to == null) {
-          path.search = location.search;
-          path.hash = location.hash;
+          path2.search = location.search;
+          path2.hash = location.hash;
         }
-        if ((to == null || to === "" || to === ".") && activeRouteMatch && activeRouteMatch.route.index && !hasNakedIndexQuery(path.search)) {
-          path.search = path.search ? path.search.replace(/^\?/, "?index&") : "?index";
+        if ((to == null || to === "" || to === ".") && activeRouteMatch && activeRouteMatch.route.index && !hasNakedIndexQuery(path2.search)) {
+          path2.search = path2.search ? path2.search.replace(/^\?/, "?index&") : "?index";
         }
         if (prependBasename && basename !== "/") {
-          path.pathname = path.pathname === "/" ? basename : joinPaths([basename, path.pathname]);
+          path2.pathname = path2.pathname === "/" ? basename : joinPaths([basename, path2.pathname]);
         }
-        return createPath(path);
+        return createPath(path2);
       }
-      function normalizeNavigateOptions(normalizeFormMethod, isFetcher, path, opts) {
+      function normalizeNavigateOptions(normalizeFormMethod, isFetcher, path2, opts) {
         if (!opts || !isSubmissionNavigation(opts)) {
           return {
-            path
+            path: path2
           };
         }
         if (opts.formMethod && !isValidMethod(opts.formMethod)) {
           return {
-            path,
+            path: path2,
             error: getInternalRouterError(405, {
               method: opts.formMethod
             })
           };
         }
         let getInvalidBodyError = () => ({
-          path,
+          path: path2,
           error: getInternalRouterError(400, {
             type: "invalid-body"
           })
         });
         let rawFormMethod = opts.formMethod || "get";
         let formMethod = normalizeFormMethod ? rawFormMethod.toUpperCase() : rawFormMethod.toLowerCase();
-        let formAction = stripHashFromPath(path);
+        let formAction = stripHashFromPath(path2);
         if (opts.body !== void 0) {
           if (opts.formEncType === "text/plain") {
             if (!isMutationMethod(formMethod)) {
@@ -26058,7 +26059,7 @@
               }, "")
             ) : String(opts.body);
             return {
-              path,
+              path: path2,
               submission: {
                 formMethod,
                 formAction,
@@ -26075,7 +26076,7 @@
             try {
               let json2 = typeof opts.body === "string" ? JSON.parse(opts.body) : opts.body;
               return {
-                path,
+                path: path2,
                 submission: {
                   formMethod,
                   formAction,
@@ -26123,11 +26124,11 @@
         };
         if (isMutationMethod(submission.formMethod)) {
           return {
-            path,
+            path: path2,
             submission
           };
         }
-        let parsedPath = parsePath(path);
+        let parsedPath = parsePath(path2);
         if (isFetcher && parsedPath.search && hasNakedIndexQuery(parsedPath.search)) {
           searchParams.append("index", "");
         }
@@ -26160,7 +26161,7 @@
           if (match.route.loader == null) {
             return false;
           }
-          if (isNewLoader(state.loaderData, state.matches[index], match) || cancelledDeferredRoutes.some((id) => id === match.route.id)) {
+          if (isNewLoader(state.loaderData, state.matches[index], match) || cancelledDeferredRoutes.some((id2) => id2 === match.route.id)) {
             return true;
           }
           let currentRouteMatch = state.matches[index];
@@ -26285,7 +26286,7 @@
           }));
         });
       }
-      function callLoaderOrAction(type, request, match, matches, manifest, mapRouteProperties, basename, opts) {
+      function callLoaderOrAction(type2, request, match, matches, manifest, mapRouteProperties, basename, opts) {
         return __async(this, null, function* () {
           if (opts === void 0) {
             opts = {};
@@ -26305,7 +26306,7 @@
             }), abortPromise]);
           };
           try {
-            let handler = match.route[type];
+            let handler = match.route[type2];
             if (match.route.lazy) {
               if (handler) {
                 let handlerError;
@@ -26324,10 +26325,10 @@
                 result = values[0];
               } else {
                 yield loadLazyRouteModule(match.route, mapRouteProperties, manifest);
-                handler = match.route[type];
+                handler = match.route[type2];
                 if (handler) {
                   result = yield runHandler(handler);
-                } else if (type === "action") {
+                } else if (type2 === "action") {
                   let url = new URL(request.url);
                   let pathname = url.pathname + url.search;
                   throw getInternalRouterError(405, {
@@ -26351,7 +26352,7 @@
             } else {
               result = yield runHandler(handler);
             }
-            invariant3(result !== void 0, "You defined " + (type === "action" ? "an action" : "a loader") + " for route " + ('"' + match.route.id + "\" but didn't return anything from your `" + type + "` ") + "function. Please return a value or `null`.");
+            invariant3(result !== void 0, "You defined " + (type2 === "action" ? "an action" : "a loader") + " for route " + ('"' + match.route.id + "\" but didn't return anything from your `" + type2 + "` ") + "function. Please return a value or `null`.");
           } catch (e) {
             resultType = ResultType.error;
             result = e;
@@ -26438,7 +26439,7 @@
       }
       function createClientSideRequest(history, location, signal, submission) {
         let url = history.createURL(stripHashFromPath(location)).toString();
-        let init = {
+        let init2 = {
           signal
         };
         if (submission && isMutationMethod(submission.formMethod)) {
@@ -26446,21 +26447,21 @@
             formMethod,
             formEncType
           } = submission;
-          init.method = formMethod.toUpperCase();
+          init2.method = formMethod.toUpperCase();
           if (formEncType === "application/json") {
-            init.headers = new Headers({
+            init2.headers = new Headers({
               "Content-Type": formEncType
             });
-            init.body = JSON.stringify(submission.json);
+            init2.body = JSON.stringify(submission.json);
           } else if (formEncType === "text/plain") {
-            init.body = submission.text;
+            init2.body = submission.text;
           } else if (formEncType === "application/x-www-form-urlencoded" && submission.formData) {
-            init.body = convertFormDataToSearchParams(submission.formData);
+            init2.body = convertFormDataToSearchParams(submission.formData);
           } else {
-            init.body = submission.formData;
+            init2.body = submission.formData;
           }
         }
-        return new Request(url, init);
+        return new Request(url, init2);
       }
       function convertFormDataToSearchParams(formData) {
         let searchParams = new URLSearchParams();
@@ -26483,10 +26484,10 @@
         let foundError = false;
         let loaderHeaders = {};
         results.forEach((result, index) => {
-          let id = matchesToLoad[index].route.id;
+          let id2 = matchesToLoad[index].route.id;
           invariant3(!isRedirectResult(result), "Cannot handle redirect results in processLoaderData");
           if (isErrorResult(result)) {
-            let boundaryMatch = findNearestBoundary(matches, id);
+            let boundaryMatch = findNearestBoundary(matches, id2);
             let error = result.error;
             if (pendingError) {
               error = Object.values(pendingError)[0];
@@ -26496,26 +26497,26 @@
             if (errors[boundaryMatch.route.id] == null) {
               errors[boundaryMatch.route.id] = error;
             }
-            loaderData[id] = void 0;
+            loaderData[id2] = void 0;
             if (!foundError) {
               foundError = true;
               statusCode = isRouteErrorResponse(result.error) ? result.error.status : 500;
             }
             if (result.headers) {
-              loaderHeaders[id] = result.headers;
+              loaderHeaders[id2] = result.headers;
             }
           } else {
             if (isDeferredResult(result)) {
-              activeDeferreds.set(id, result.deferredData);
-              loaderData[id] = result.deferredData.data;
+              activeDeferreds.set(id2, result.deferredData);
+              loaderData[id2] = result.deferredData.data;
             } else {
-              loaderData[id] = result.data;
+              loaderData[id2] = result.data;
             }
             if (result.statusCode != null && result.statusCode !== 200 && !foundError) {
               statusCode = result.statusCode;
             }
             if (result.headers) {
-              loaderHeaders[id] = result.headers;
+              loaderHeaders[id2] = result.headers;
             }
           }
         });
@@ -26570,15 +26571,15 @@
       function mergeLoaderData(loaderData, newLoaderData, matches, errors) {
         let mergedLoaderData = _extends2({}, newLoaderData);
         for (let match of matches) {
-          let id = match.route.id;
-          if (newLoaderData.hasOwnProperty(id)) {
-            if (newLoaderData[id] !== void 0) {
-              mergedLoaderData[id] = newLoaderData[id];
+          let id2 = match.route.id;
+          if (newLoaderData.hasOwnProperty(id2)) {
+            if (newLoaderData[id2] !== void 0) {
+              mergedLoaderData[id2] = newLoaderData[id2];
             }
-          } else if (loaderData[id] !== void 0 && match.route.loader) {
-            mergedLoaderData[id] = loaderData[id];
+          } else if (loaderData[id2] !== void 0 && match.route.loader) {
+            mergedLoaderData[id2] = loaderData[id2];
           }
-          if (errors && errors.hasOwnProperty(id)) {
+          if (errors && errors.hasOwnProperty(id2)) {
             break;
           }
         }
@@ -26607,7 +26608,7 @@
           pathname,
           routeId,
           method,
-          type
+          type: type2
         } = _temp4 === void 0 ? {} : _temp4;
         let statusText = "Unknown Server Error";
         let errorMessage = "Unknown @remix-run/router error";
@@ -26615,9 +26616,9 @@
           statusText = "Bad Request";
           if (method && pathname && routeId) {
             errorMessage = "You made a " + method + ' request to "' + pathname + '" but ' + ('did not provide a `loader` for route "' + routeId + '", ') + "so there is no way to handle the request.";
-          } else if (type === "defer-action") {
+          } else if (type2 === "defer-action") {
             errorMessage = "defer() is not supported in actions";
-          } else if (type === "invalid-body") {
+          } else if (type2 === "invalid-body") {
             errorMessage = "Unable to encode submission body";
           }
         } else if (status === 403) {
@@ -26647,8 +26648,8 @@
           }
         }
       }
-      function stripHashFromPath(path) {
-        let parsedPath = typeof path === "string" ? parsePath(path) : path;
+      function stripHashFromPath(path2) {
+        let parsedPath = typeof path2 === "string" ? parsePath(path2) : path2;
         return createPath(_extends2({}, parsedPath, {
           hash: ""
         }));
@@ -26938,7 +26939,7 @@
     "node_modules/react-router-dom/node_modules/react-router/dist/umd/react-router.development.js"(exports, module) {
       (function(global2, factory) {
         typeof exports === "object" && typeof module !== "undefined" ? factory(exports, require_react(), require_router_cjs()) : typeof define === "function" && define.amd ? define(["exports", "react", "@remix-run/router"], factory) : (global2 = typeof globalThis !== "undefined" ? globalThis : global2 || self, factory(global2.ReactRouter = {}, global2.React, global2.RemixRouter));
-      })(exports, function(exports2, React87, router) {
+      })(exports, function(exports2, React89, router) {
         "use strict";
         function _interopNamespace(e) {
           if (e && e.__esModule)
@@ -26960,7 +26961,7 @@
           n["default"] = e;
           return Object.freeze(n);
         }
-        var React__namespace = /* @__PURE__ */ _interopNamespace(React87);
+        var React__namespace = /* @__PURE__ */ _interopNamespace(React89);
         function _extends2() {
           _extends2 = Object.assign ? Object.assign.bind() : function(target) {
             for (var i = 1; i < arguments.length; i++) {
@@ -27112,11 +27113,11 @@
               navigator2.go(to);
               return;
             }
-            let path = router.resolveTo(to, JSON.parse(routePathnamesJson), locationPathname, options.relative === "path");
+            let path2 = router.resolveTo(to, JSON.parse(routePathnamesJson), locationPathname, options.relative === "path");
             if (dataRouterContext == null && basename !== "/") {
-              path.pathname = path.pathname === "/" ? basename : router.joinPaths([basename, path.pathname]);
+              path2.pathname = path2.pathname === "/" ? basename : router.joinPaths([basename, path2.pathname]);
             }
-            (!!options.replace ? navigator2.replace : navigator2.push)(path, options.state, options);
+            (!!options.replace ? navigator2.replace : navigator2.push)(path2, options.state, options);
           }, [basename, navigator2, routePathnamesJson, locationPathname, dataRouterContext]);
           return navigate;
         }
@@ -27303,7 +27304,7 @@
           let {
             routeContext,
             match,
-            children
+            children: children2
           } = _ref;
           let dataRouterContext = React__namespace.useContext(DataRouterContext);
           if (dataRouterContext && dataRouterContext.static && dataRouterContext.staticContext && (match.route.errorElement || match.route.ErrorBoundary)) {
@@ -27311,7 +27312,7 @@
           }
           return /* @__PURE__ */ React__namespace.createElement(RouteContext.Provider, {
             value: routeContext
-          }, children);
+          }, children2);
         }
         function _renderMatches(matches, parentMatches, dataRouterState) {
           var _dataRouterState2;
@@ -27344,15 +27345,15 @@
             }
             let matches2 = parentMatches.concat(renderedMatches.slice(0, index + 1));
             let getChildren = () => {
-              let children;
+              let children2;
               if (error) {
-                children = errorElement;
+                children2 = errorElement;
               } else if (match.route.Component) {
-                children = /* @__PURE__ */ React__namespace.createElement(match.route.Component, null);
+                children2 = /* @__PURE__ */ React__namespace.createElement(match.route.Component, null);
               } else if (match.route.element) {
-                children = match.route.element;
+                children2 = match.route.element;
               } else {
-                children = outlet;
+                children2 = outlet;
               }
               return /* @__PURE__ */ React__namespace.createElement(RenderedRoute, {
                 match,
@@ -27361,7 +27362,7 @@
                   matches: matches2,
                   isDataRoute: dataRouterState != null
                 },
-                children
+                children: children2
               });
             };
             return dataRouterState && (match.route.ErrorBoundary || match.route.errorElement || index === 0) ? /* @__PURE__ */ React__namespace.createElement(RenderErrorBoundary, {
@@ -27526,7 +27527,7 @@
           let {
             router: router$1
           } = useDataRouterContext(DataRouterHook.UseNavigateStable);
-          let id = useCurrentRouteId(DataRouterStateHook.UseNavigateStable);
+          let id2 = useCurrentRouteId(DataRouterStateHook.UseNavigateStable);
           let activeRef = React__namespace.useRef(false);
           useIsomorphicLayoutEffect(() => {
             activeRef.current = true;
@@ -27542,10 +27543,10 @@
               router$1.navigate(to);
             } else {
               router$1.navigate(to, _extends2({
-                fromRouteId: id
+                fromRouteId: id2
               }, options));
             }
-          }, [router$1, id]);
+          }, [router$1, id2]);
           return navigate;
         }
         const alreadyWarned = {};
@@ -27618,7 +27619,7 @@
         function MemoryRouter(_ref3) {
           let {
             basename,
-            children,
+            children: children2,
             initialEntries,
             initialIndex,
             future
@@ -27645,7 +27646,7 @@
           React__namespace.useLayoutEffect(() => history.listen(setState), [history, setState]);
           return /* @__PURE__ */ React__namespace.createElement(Router2, {
             basename,
-            children,
+            children: children2,
             location: state.location,
             navigationType: state.action,
             navigator: history
@@ -27672,8 +27673,8 @@
             pathname: locationPathname
           } = useLocation2();
           let navigate = useNavigate3();
-          let path = router.resolveTo(to, router.UNSAFE_getPathContributingMatches(matches).map((match) => match.pathnameBase), locationPathname, relative === "path");
-          let jsonPath = JSON.stringify(path);
+          let path2 = router.resolveTo(to, router.UNSAFE_getPathContributingMatches(matches).map((match) => match.pathnameBase), locationPathname, relative === "path");
+          let jsonPath = JSON.stringify(path2);
           React__namespace.useEffect(() => navigate(JSON.parse(jsonPath), {
             replace,
             state,
@@ -27690,7 +27691,7 @@
         function Router2(_ref5) {
           let {
             basename: basenameProp = "/",
-            children = null,
+            children: children2 = null,
             location: locationProp,
             navigationType = router.Action.Pop,
             navigator: navigator2,
@@ -27736,27 +27737,27 @@
           return /* @__PURE__ */ React__namespace.createElement(NavigationContext.Provider, {
             value: navigationContext
           }, /* @__PURE__ */ React__namespace.createElement(LocationContext.Provider, {
-            children,
+            children: children2,
             value: locationContext
           }));
         }
         function Routes2(_ref6) {
           let {
-            children,
+            children: children2,
             location
           } = _ref6;
-          return useRoutes(createRoutesFromChildren(children), location);
+          return useRoutes(createRoutesFromChildren(children2), location);
         }
         function Await(_ref7) {
           let {
-            children,
+            children: children2,
             errorElement,
             resolve
           } = _ref7;
           return /* @__PURE__ */ React__namespace.createElement(AwaitErrorBoundary, {
             resolve,
             errorElement
-          }, /* @__PURE__ */ React__namespace.createElement(ResolveAwait, null, children));
+          }, /* @__PURE__ */ React__namespace.createElement(ResolveAwait, null, children2));
         }
         var AwaitRenderStatus = /* @__PURE__ */ function(AwaitRenderStatus2) {
           AwaitRenderStatus2[AwaitRenderStatus2["pending"] = 0] = "pending";
@@ -27783,7 +27784,7 @@
           }
           render() {
             let {
-              children,
+              children: children2,
               errorElement,
               resolve
             } = this.props;
@@ -27838,7 +27839,7 @@
             if (status === AwaitRenderStatus.success) {
               return /* @__PURE__ */ React__namespace.createElement(AwaitContext.Provider, {
                 value: promise,
-                children
+                children: children2
               });
             }
             throw promise;
@@ -27846,18 +27847,18 @@
         }
         function ResolveAwait(_ref8) {
           let {
-            children
+            children: children2
           } = _ref8;
           let data = useAsyncValue();
-          let toRender = typeof children === "function" ? children(data) : children;
+          let toRender = typeof children2 === "function" ? children2(data) : children2;
           return /* @__PURE__ */ React__namespace.createElement(React__namespace.Fragment, null, toRender);
         }
-        function createRoutesFromChildren(children, parentPath) {
+        function createRoutesFromChildren(children2, parentPath) {
           if (parentPath === void 0) {
             parentPath = [];
           }
           let routes = [];
-          React__namespace.Children.forEach(children, (element, index) => {
+          React__namespace.Children.forEach(children2, (element, index) => {
             if (!/* @__PURE__ */ React__namespace.isValidElement(element)) {
               return;
             }
@@ -28080,7 +28081,7 @@
     "node_modules/react-router-dom/dist/umd/react-router-dom.development.js"(exports, module) {
       (function(global2, factory) {
         typeof exports === "object" && typeof module !== "undefined" ? factory(exports, require_react(), require_main(), require_router_cjs()) : typeof define === "function" && define.amd ? define(["exports", "react", "react-router", "@remix-run/router"], factory) : (global2 = typeof globalThis !== "undefined" ? globalThis : global2 || self, factory(global2.ReactRouterDOM = {}, global2.React, global2.ReactRouter, global2.RemixRouter));
-      })(exports, function(exports2, React87, reactRouter, router) {
+      })(exports, function(exports2, React89, reactRouter, router) {
         "use strict";
         function _interopNamespace(e) {
           if (e && e.__esModule)
@@ -28102,7 +28103,7 @@
           n["default"] = e;
           return Object.freeze(n);
         }
-        var React__namespace = /* @__PURE__ */ _interopNamespace(React87);
+        var React__namespace = /* @__PURE__ */ _interopNamespace(React89);
         function _extends2() {
           _extends2 = Object.assign ? Object.assign.bind() : function(target) {
             for (var i = 1; i < arguments.length; i++) {
@@ -28153,12 +28154,12 @@
           (!target || target === "_self") && // Let browser handle "target=_blank" etc.
           !isModifiedEvent(event);
         }
-        function createSearchParams(init) {
-          if (init === void 0) {
-            init = "";
+        function createSearchParams(init2) {
+          if (init2 === void 0) {
+            init2 = "";
           }
-          return new URLSearchParams(typeof init === "string" || Array.isArray(init) || init instanceof URLSearchParams ? init : Object.keys(init).reduce((memo, key) => {
-            let value = init[key];
+          return new URLSearchParams(typeof init2 === "string" || Array.isArray(init2) || init2 instanceof URLSearchParams ? init2 : Object.keys(init2).reduce((memo, key) => {
+            let value = init2[key];
             return memo.concat(Array.isArray(value) ? value.map((v) => [key, v]) : [[key, value]]);
           }, []));
         }
@@ -28224,10 +28225,10 @@
             if (!isFormDataSubmitterSupported()) {
               let {
                 name,
-                type,
+                type: type2,
                 value
               } = target;
-              if (type === "image") {
+              if (type2 === "image") {
                 let prefix = name ? name + "." : "";
                 formData.append(prefix + "x", "0");
                 formData.append(prefix + "y", "0");
@@ -28330,7 +28331,7 @@
         function BrowserRouter2(_ref) {
           let {
             basename,
-            children,
+            children: children2,
             future,
             window: window2
           } = _ref;
@@ -28355,7 +28356,7 @@
           React__namespace.useLayoutEffect(() => history.listen(setState), [history, setState]);
           return /* @__PURE__ */ React__namespace.createElement(reactRouter.Router, {
             basename,
-            children,
+            children: children2,
             location: state.location,
             navigationType: state.action,
             navigator: history
@@ -28364,7 +28365,7 @@
         function HashRouter(_ref2) {
           let {
             basename,
-            children,
+            children: children2,
             future,
             window: window2
           } = _ref2;
@@ -28389,7 +28390,7 @@
           React__namespace.useLayoutEffect(() => history.listen(setState), [history, setState]);
           return /* @__PURE__ */ React__namespace.createElement(reactRouter.Router, {
             basename,
-            children,
+            children: children2,
             location: state.location,
             navigationType: state.action,
             navigator: history
@@ -28398,7 +28399,7 @@
         function HistoryRouter(_ref3) {
           let {
             basename,
-            children,
+            children: children2,
             future,
             history
           } = _ref3;
@@ -28415,7 +28416,7 @@
           React__namespace.useLayoutEffect(() => history.listen(setState), [history, setState]);
           return /* @__PURE__ */ React__namespace.createElement(reactRouter.Router, {
             basename,
-            children,
+            children: children2,
             location: state.location,
             navigationType: state.action,
             navigator: history
@@ -28448,9 +28449,9 @@
               try {
                 let currentUrl = new URL(window.location.href);
                 let targetUrl = to.startsWith("//") ? new URL(currentUrl.protocol + to) : new URL(to);
-                let path = router.stripBasename(targetUrl.pathname, basename);
-                if (targetUrl.origin === currentUrl.origin && path != null) {
-                  to = path + targetUrl.search + targetUrl.hash;
+                let path2 = router.stripBasename(targetUrl.pathname, basename);
+                if (targetUrl.origin === currentUrl.origin && path2 != null) {
+                  to = path2 + targetUrl.search + targetUrl.hash;
                 } else {
                   isExternal = true;
                 }
@@ -28497,9 +28498,9 @@
             end = false,
             style: styleProp,
             to,
-            children
+            children: children2
           } = _ref5, rest = _objectWithoutPropertiesLoose7(_ref5, _excluded22);
-          let path = reactRouter.useResolvedPath(to, {
+          let path2 = reactRouter.useResolvedPath(to, {
             relative: rest.relative
           });
           let location = reactRouter.useLocation();
@@ -28507,7 +28508,7 @@
           let {
             navigator: navigator2
           } = React__namespace.useContext(reactRouter.UNSAFE_NavigationContext);
-          let toPathname = navigator2.encodeLocation ? navigator2.encodeLocation(path).pathname : path.pathname;
+          let toPathname = navigator2.encodeLocation ? navigator2.encodeLocation(path2).pathname : path2.pathname;
           let locationPathname = location.pathname;
           let nextLocationPathname = routerState && routerState.navigation && routerState.navigation.location ? routerState.navigation.location.pathname : null;
           if (!caseSensitive) {
@@ -28537,10 +28538,10 @@
             ref,
             style: style2,
             to
-          }), typeof children === "function" ? children({
+          }), typeof children2 === "function" ? children2({
             isActive,
             isPending
-          }) : children);
+          }) : children2);
         });
         {
           NavLink2.displayName = "NavLink";
@@ -28645,13 +28646,13 @@
           } = _temp === void 0 ? {} : _temp;
           let navigate = reactRouter.useNavigate();
           let location = reactRouter.useLocation();
-          let path = reactRouter.useResolvedPath(to, {
+          let path2 = reactRouter.useResolvedPath(to, {
             relative
           });
           return React__namespace.useCallback((event) => {
             if (shouldProcessLinkClick(event, target)) {
               event.preventDefault();
-              let replace = replaceProp !== void 0 ? replaceProp : reactRouter.createPath(location) === reactRouter.createPath(path);
+              let replace = replaceProp !== void 0 ? replaceProp : reactRouter.createPath(location) === reactRouter.createPath(path2);
               navigate(to, {
                 replace,
                 state,
@@ -28659,7 +28660,7 @@
                 relative
               });
             }
-          }, [location, navigate, path, replaceProp, state, target, to, preventScrollReset, relative]);
+          }, [location, navigate, path2, replaceProp, state, target, to, preventScrollReset, relative]);
         }
         function useSearchParams(defaultInit) {
           router.UNSAFE_warning(typeof URLSearchParams !== "undefined", "You cannot use the `useSearchParams` hook in a browser that does not support the URLSearchParams API. If you need to support Internet Explorer 11, we recommend you load a polyfill such as https://github.com/ungap/url-search-params\n\nIf you're unsure how to load polyfills, we recommend you check out https://polyfill.io/v3/ which provides some recommendations about how to load polyfills only for users that need them, instead of for every user.");
@@ -28756,25 +28757,25 @@
           let routeContext = React__namespace.useContext(reactRouter.UNSAFE_RouteContext);
           !routeContext ? router.UNSAFE_invariant(false, "useFormAction must be used inside a RouteContext") : void 0;
           let [match] = routeContext.matches.slice(-1);
-          let path = _extends2({}, reactRouter.useResolvedPath(action ? action : ".", {
+          let path2 = _extends2({}, reactRouter.useResolvedPath(action ? action : ".", {
             relative
           }));
           let location = reactRouter.useLocation();
           if (action == null) {
-            path.search = location.search;
+            path2.search = location.search;
             if (match.route.index) {
-              let params = new URLSearchParams(path.search);
+              let params = new URLSearchParams(path2.search);
               params.delete("index");
-              path.search = params.toString() ? "?" + params.toString() : "";
+              path2.search = params.toString() ? "?" + params.toString() : "";
             }
           }
           if ((!action || action === ".") && match.route.index) {
-            path.search = path.search ? path.search.replace(/^\?/, "?index&") : "?index";
+            path2.search = path2.search ? path2.search.replace(/^\?/, "?index&") : "?index";
           }
           if (basename !== "/") {
-            path.pathname = path.pathname === "/" ? basename : router.joinPaths([basename, path.pathname]);
+            path2.pathname = path2.pathname === "/" ? basename : router.joinPaths([basename, path2.pathname]);
           }
-          return reactRouter.createPath(path);
+          return reactRouter.createPath(path2);
         }
         function createFetcherForm(fetcherKey, routeId) {
           let FetcherForm = /* @__PURE__ */ React__namespace.forwardRef((props, ref) => {
@@ -29361,15 +29362,15 @@
   var require_browser = __commonJS({
     "node_modules/invariant/browser.js"(exports, module) {
       "use strict";
-      var invariant3 = function(condition, format, a, b, c, d, e, f) {
+      var invariant3 = function(condition, format2, a, b, c, d, e, f) {
         if (true) {
-          if (format === void 0) {
+          if (format2 === void 0) {
             throw new Error("invariant requires an error message argument");
           }
         }
         if (!condition) {
           var error;
-          if (format === void 0) {
+          if (format2 === void 0) {
             error = new Error(
               "Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings."
             );
@@ -29377,7 +29378,7 @@
             var args = [a, b, c, d, e, f];
             var argIndex = 0;
             error = new Error(
-              format.replace(/%s/g, function() {
+              format2.replace(/%s/g, function() {
                 return args[argIndex++];
               })
             );
@@ -29398,7 +29399,7 @@
       if (true) {
         (function() {
           "use strict";
-          var React87 = require_react();
+          var React89 = require_react();
           var REACT_ELEMENT_TYPE = Symbol.for("react.element");
           var REACT_PORTAL_TYPE = Symbol.for("react.portal");
           var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
@@ -29424,29 +29425,29 @@
             }
             return null;
           }
-          var ReactSharedInternals = React87.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-          function error(format) {
+          var ReactSharedInternals = React89.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          function error(format2) {
             {
               {
                 for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
                   args[_key2 - 1] = arguments[_key2];
                 }
-                printWarning("error", format, args);
+                printWarning("error", format2, args);
               }
             }
           }
-          function printWarning(level, format, args) {
+          function printWarning(level, format2, args) {
             {
               var ReactDebugCurrentFrame2 = ReactSharedInternals.ReactDebugCurrentFrame;
               var stack = ReactDebugCurrentFrame2.getStackAddendum();
               if (stack !== "") {
-                format += "%s";
+                format2 += "%s";
                 args = args.concat([stack]);
               }
               var argsWithFormat = args.map(function(item) {
                 return String(item);
               });
-              argsWithFormat.unshift("Warning: " + format);
+              argsWithFormat.unshift("Warning: " + format2);
               Function.prototype.apply.call(console[level], console, argsWithFormat);
             }
           }
@@ -29459,19 +29460,19 @@
           {
             REACT_MODULE_REFERENCE = Symbol.for("react.module.reference");
           }
-          function isValidElementType(type) {
-            if (typeof type === "string" || typeof type === "function") {
+          function isValidElementType(type2) {
+            if (typeof type2 === "string" || typeof type2 === "function") {
               return true;
             }
-            if (type === REACT_FRAGMENT_TYPE || type === REACT_PROFILER_TYPE || enableDebugTracing || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || enableLegacyHidden || type === REACT_OFFSCREEN_TYPE || enableScopeAPI || enableCacheElement || enableTransitionTracing) {
+            if (type2 === REACT_FRAGMENT_TYPE || type2 === REACT_PROFILER_TYPE || enableDebugTracing || type2 === REACT_STRICT_MODE_TYPE || type2 === REACT_SUSPENSE_TYPE || type2 === REACT_SUSPENSE_LIST_TYPE || enableLegacyHidden || type2 === REACT_OFFSCREEN_TYPE || enableScopeAPI || enableCacheElement || enableTransitionTracing) {
               return true;
             }
-            if (typeof type === "object" && type !== null) {
-              if (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || // This needs to include all possible module reference object
+            if (typeof type2 === "object" && type2 !== null) {
+              if (type2.$$typeof === REACT_LAZY_TYPE || type2.$$typeof === REACT_MEMO_TYPE || type2.$$typeof === REACT_PROVIDER_TYPE || type2.$$typeof === REACT_CONTEXT_TYPE || type2.$$typeof === REACT_FORWARD_REF_TYPE || // This needs to include all possible module reference object
               // types supported by any Flight configuration anywhere since
               // we don't know which Flight build this will end up being used
               // with.
-              type.$$typeof === REACT_MODULE_REFERENCE || type.getModuleId !== void 0) {
+              type2.$$typeof === REACT_MODULE_REFERENCE || type2.getModuleId !== void 0) {
                 return true;
               }
             }
@@ -29485,25 +29486,25 @@
             var functionName = innerType.displayName || innerType.name || "";
             return functionName !== "" ? wrapperName + "(" + functionName + ")" : wrapperName;
           }
-          function getContextName(type) {
-            return type.displayName || "Context";
+          function getContextName(type2) {
+            return type2.displayName || "Context";
           }
-          function getComponentNameFromType(type) {
-            if (type == null) {
+          function getComponentNameFromType(type2) {
+            if (type2 == null) {
               return null;
             }
             {
-              if (typeof type.tag === "number") {
+              if (typeof type2.tag === "number") {
                 error("Received an unexpected object in getComponentNameFromType(). This is likely a bug in React. Please file an issue.");
               }
             }
-            if (typeof type === "function") {
-              return type.displayName || type.name || null;
+            if (typeof type2 === "function") {
+              return type2.displayName || type2.name || null;
             }
-            if (typeof type === "string") {
-              return type;
+            if (typeof type2 === "string") {
+              return type2;
             }
-            switch (type) {
+            switch (type2) {
               case REACT_FRAGMENT_TYPE:
                 return "Fragment";
               case REACT_PORTAL_TYPE:
@@ -29517,29 +29518,29 @@
               case REACT_SUSPENSE_LIST_TYPE:
                 return "SuspenseList";
             }
-            if (typeof type === "object") {
-              switch (type.$$typeof) {
+            if (typeof type2 === "object") {
+              switch (type2.$$typeof) {
                 case REACT_CONTEXT_TYPE:
-                  var context5 = type;
+                  var context5 = type2;
                   return getContextName(context5) + ".Consumer";
                 case REACT_PROVIDER_TYPE:
-                  var provider = type;
+                  var provider = type2;
                   return getContextName(provider._context) + ".Provider";
                 case REACT_FORWARD_REF_TYPE:
-                  return getWrappedName(type, type.render, "ForwardRef");
+                  return getWrappedName(type2, type2.render, "ForwardRef");
                 case REACT_MEMO_TYPE:
-                  var outerName = type.displayName || null;
+                  var outerName = type2.displayName || null;
                   if (outerName !== null) {
                     return outerName;
                   }
-                  return getComponentNameFromType(type.type) || "Memo";
+                  return getComponentNameFromType(type2.type) || "Memo";
                 case REACT_LAZY_TYPE: {
-                  var lazyComponent = type;
+                  var lazyComponent = type2;
                   var payload = lazyComponent._payload;
-                  var init = lazyComponent._init;
+                  var init2 = lazyComponent._init;
                   try {
-                    return getComponentNameFromType(init(payload));
-                  } catch (x) {
+                    return getComponentNameFromType(init2(payload));
+                  } catch (x2) {
                     return null;
                   }
                 }
@@ -29633,8 +29634,8 @@
               if (prefix === void 0) {
                 try {
                   throw Error();
-                } catch (x) {
-                  var match = x.stack.trim().match(/\n( *(at )?)/);
+                } catch (x2) {
+                  var match = x2.stack.trim().match(/\n( *(at )?)/);
                   prefix = match && match[1] || "";
                 }
               }
@@ -29652,9 +29653,9 @@
               return "";
             }
             {
-              var frame = componentFrameCache.get(fn);
-              if (frame !== void 0) {
-                return frame;
+              var frame2 = componentFrameCache.get(fn);
+              if (frame2 !== void 0) {
+                return frame2;
               }
             }
             var control;
@@ -29680,23 +29681,23 @@
                 if (typeof Reflect === "object" && Reflect.construct) {
                   try {
                     Reflect.construct(Fake, []);
-                  } catch (x) {
-                    control = x;
+                  } catch (x2) {
+                    control = x2;
                   }
                   Reflect.construct(fn, [], Fake);
                 } else {
                   try {
                     Fake.call();
-                  } catch (x) {
-                    control = x;
+                  } catch (x2) {
+                    control = x2;
                   }
                   fn.call(Fake.prototype);
                 }
               } else {
                 try {
                   throw Error();
-                } catch (x) {
-                  control = x;
+                } catch (x2) {
+                  control = x2;
                 }
                 fn();
               }
@@ -29759,37 +29760,37 @@
             var prototype = Component.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
-          function describeUnknownElementTypeFrameInDEV(type, source, ownerFn) {
-            if (type == null) {
+          function describeUnknownElementTypeFrameInDEV(type2, source, ownerFn) {
+            if (type2 == null) {
               return "";
             }
-            if (typeof type === "function") {
+            if (typeof type2 === "function") {
               {
-                return describeNativeComponentFrame(type, shouldConstruct(type));
+                return describeNativeComponentFrame(type2, shouldConstruct(type2));
               }
             }
-            if (typeof type === "string") {
-              return describeBuiltInComponentFrame(type);
+            if (typeof type2 === "string") {
+              return describeBuiltInComponentFrame(type2);
             }
-            switch (type) {
+            switch (type2) {
               case REACT_SUSPENSE_TYPE:
                 return describeBuiltInComponentFrame("Suspense");
               case REACT_SUSPENSE_LIST_TYPE:
                 return describeBuiltInComponentFrame("SuspenseList");
             }
-            if (typeof type === "object") {
-              switch (type.$$typeof) {
+            if (typeof type2 === "object") {
+              switch (type2.$$typeof) {
                 case REACT_FORWARD_REF_TYPE:
-                  return describeFunctionComponentFrame(type.render);
+                  return describeFunctionComponentFrame(type2.render);
                 case REACT_MEMO_TYPE:
-                  return describeUnknownElementTypeFrameInDEV(type.type, source, ownerFn);
+                  return describeUnknownElementTypeFrameInDEV(type2.type, source, ownerFn);
                 case REACT_LAZY_TYPE: {
-                  var lazyComponent = type;
+                  var lazyComponent = type2;
                   var payload = lazyComponent._payload;
-                  var init = lazyComponent._init;
+                  var init2 = lazyComponent._init;
                   try {
-                    return describeUnknownElementTypeFrameInDEV(init(payload), source, ownerFn);
-                  } catch (x) {
+                    return describeUnknownElementTypeFrameInDEV(init2(payload), source, ownerFn);
+                  } catch (x2) {
                   }
                 }
               }
@@ -29848,8 +29849,8 @@
           function typeName(value) {
             {
               var hasToStringTag = typeof Symbol === "function" && Symbol.toStringTag;
-              var type = hasToStringTag && value[Symbol.toStringTag] || value.constructor.name || "Object";
-              return type;
+              var type2 = hasToStringTag && value[Symbol.toStringTag] || value.constructor.name || "Object";
+              return type2;
             }
           }
           function willCoercionThrow(value) {
@@ -29949,12 +29950,12 @@
               });
             }
           }
-          var ReactElement = function(type, key, ref, self2, source, owner, props) {
+          var ReactElement = function(type2, key, ref, self2, source, owner, props) {
             var element = {
               // This tag allows us to uniquely identify this as a React Element
               $$typeof: REACT_ELEMENT_TYPE,
               // Built-in properties that belong on the element
-              type,
+              type: type2,
               key,
               ref,
               props,
@@ -29988,7 +29989,7 @@
             }
             return element;
           };
-          function jsxDEV(type, config, maybeKey, source, self2) {
+          function jsxDEV(type2, config, maybeKey, source, self2) {
             {
               var propName;
               var props = {};
@@ -30015,8 +30016,8 @@
                   props[propName] = config[propName];
                 }
               }
-              if (type && type.defaultProps) {
-                var defaultProps = type.defaultProps;
+              if (type2 && type2.defaultProps) {
+                var defaultProps = type2.defaultProps;
                 for (propName in defaultProps) {
                   if (props[propName] === void 0) {
                     props[propName] = defaultProps[propName];
@@ -30024,7 +30025,7 @@
                 }
               }
               if (key || ref) {
-                var displayName = typeof type === "function" ? type.displayName || type.name || "Unknown" : type;
+                var displayName = typeof type2 === "function" ? type2.displayName || type2.name || "Unknown" : type2;
                 if (key) {
                   defineKeyPropWarningGetter(props, displayName);
                 }
@@ -30032,7 +30033,7 @@
                   defineRefPropWarningGetter(props, displayName);
                 }
               }
-              return ReactElement(type, key, ref, self2, source, ReactCurrentOwner.current, props);
+              return ReactElement(type2, key, ref, self2, source, ReactCurrentOwner.current, props);
             }
           }
           var ReactCurrentOwner$1 = ReactSharedInternals.ReactCurrentOwner;
@@ -30145,29 +30146,29 @@
           }
           function validatePropTypes(element) {
             {
-              var type = element.type;
-              if (type === null || type === void 0 || typeof type === "string") {
+              var type2 = element.type;
+              if (type2 === null || type2 === void 0 || typeof type2 === "string") {
                 return;
               }
               var propTypes2;
-              if (typeof type === "function") {
-                propTypes2 = type.propTypes;
-              } else if (typeof type === "object" && (type.$$typeof === REACT_FORWARD_REF_TYPE || // Note: Memo only checks outer props here.
+              if (typeof type2 === "function") {
+                propTypes2 = type2.propTypes;
+              } else if (typeof type2 === "object" && (type2.$$typeof === REACT_FORWARD_REF_TYPE || // Note: Memo only checks outer props here.
               // Inner props are checked in the reconciler.
-              type.$$typeof === REACT_MEMO_TYPE)) {
-                propTypes2 = type.propTypes;
+              type2.$$typeof === REACT_MEMO_TYPE)) {
+                propTypes2 = type2.propTypes;
               } else {
                 return;
               }
               if (propTypes2) {
-                var name = getComponentNameFromType(type);
+                var name = getComponentNameFromType(type2);
                 checkPropTypes(propTypes2, element.props, "prop", name, element);
-              } else if (type.PropTypes !== void 0 && !propTypesMisspellWarningShown) {
+              } else if (type2.PropTypes !== void 0 && !propTypesMisspellWarningShown) {
                 propTypesMisspellWarningShown = true;
-                var _name = getComponentNameFromType(type);
+                var _name = getComponentNameFromType(type2);
                 error("Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?", _name || "Unknown");
               }
-              if (typeof type.getDefaultProps === "function" && !type.getDefaultProps.isReactClassApproved) {
+              if (typeof type2.getDefaultProps === "function" && !type2.getDefaultProps.isReactClassApproved) {
                 error("getDefaultProps is only used on classic React.createClass definitions. Use a static property named `defaultProps` instead.");
               }
             }
@@ -30191,12 +30192,12 @@
               }
             }
           }
-          function jsxWithValidation(type, props, key, isStaticChildren, source, self2) {
+          function jsxWithValidation(type2, props, key, isStaticChildren, source, self2) {
             {
-              var validType = isValidElementType(type);
+              var validType = isValidElementType(type2);
               if (!validType) {
                 var info = "";
-                if (type === void 0 || typeof type === "object" && type !== null && Object.keys(type).length === 0) {
+                if (type2 === void 0 || typeof type2 === "object" && type2 !== null && Object.keys(type2).length === 0) {
                   info += " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.";
                 }
                 var sourceInfo = getSourceInfoErrorAddendum(source);
@@ -30206,42 +30207,42 @@
                   info += getDeclarationErrorAddendum();
                 }
                 var typeString;
-                if (type === null) {
+                if (type2 === null) {
                   typeString = "null";
-                } else if (isArray(type)) {
+                } else if (isArray(type2)) {
                   typeString = "array";
-                } else if (type !== void 0 && type.$$typeof === REACT_ELEMENT_TYPE) {
-                  typeString = "<" + (getComponentNameFromType(type.type) || "Unknown") + " />";
+                } else if (type2 !== void 0 && type2.$$typeof === REACT_ELEMENT_TYPE) {
+                  typeString = "<" + (getComponentNameFromType(type2.type) || "Unknown") + " />";
                   info = " Did you accidentally export a JSX literal instead of a component?";
                 } else {
-                  typeString = typeof type;
+                  typeString = typeof type2;
                 }
                 error("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, info);
               }
-              var element = jsxDEV(type, props, key, source, self2);
+              var element = jsxDEV(type2, props, key, source, self2);
               if (element == null) {
                 return element;
               }
               if (validType) {
-                var children = props.children;
-                if (children !== void 0) {
+                var children2 = props.children;
+                if (children2 !== void 0) {
                   if (isStaticChildren) {
-                    if (isArray(children)) {
-                      for (var i = 0; i < children.length; i++) {
-                        validateChildKeys(children[i], type);
+                    if (isArray(children2)) {
+                      for (var i = 0; i < children2.length; i++) {
+                        validateChildKeys(children2[i], type2);
                       }
                       if (Object.freeze) {
-                        Object.freeze(children);
+                        Object.freeze(children2);
                       }
                     } else {
                       error("React.jsx: Static children should always be an array. You are likely explicitly calling React.jsxs or React.jsxDEV. Use the Babel transform instead.");
                     }
                   } else {
-                    validateChildKeys(children, type);
+                    validateChildKeys(children2, type2);
                   }
                 }
               }
-              if (type === REACT_FRAGMENT_TYPE) {
+              if (type2 === REACT_FRAGMENT_TYPE) {
                 validateFragmentProps(element);
               } else {
                 validatePropTypes(element);
@@ -30249,14 +30250,14 @@
               return element;
             }
           }
-          function jsxWithValidationStatic(type, props, key) {
+          function jsxWithValidationStatic(type2, props, key) {
             {
-              return jsxWithValidation(type, props, key, true);
+              return jsxWithValidation(type2, props, key, true);
             }
           }
-          function jsxWithValidationDynamic(type, props, key) {
+          function jsxWithValidationDynamic(type2, props, key) {
             {
-              return jsxWithValidation(type, props, key, false);
+              return jsxWithValidation(type2, props, key, false);
             }
           }
           var jsx = jsxWithValidationDynamic;
@@ -30307,26 +30308,26 @@
           var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for("react.fundamental") : 60117;
           var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for("react.responder") : 60118;
           var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for("react.scope") : 60119;
-          function isValidElementType(type) {
-            return typeof type === "string" || typeof type === "function" || // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
-            type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === "object" && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE || type.$$typeof === REACT_BLOCK_TYPE);
+          function isValidElementType(type2) {
+            return typeof type2 === "string" || typeof type2 === "function" || // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
+            type2 === REACT_FRAGMENT_TYPE || type2 === REACT_CONCURRENT_MODE_TYPE || type2 === REACT_PROFILER_TYPE || type2 === REACT_STRICT_MODE_TYPE || type2 === REACT_SUSPENSE_TYPE || type2 === REACT_SUSPENSE_LIST_TYPE || typeof type2 === "object" && type2 !== null && (type2.$$typeof === REACT_LAZY_TYPE || type2.$$typeof === REACT_MEMO_TYPE || type2.$$typeof === REACT_PROVIDER_TYPE || type2.$$typeof === REACT_CONTEXT_TYPE || type2.$$typeof === REACT_FORWARD_REF_TYPE || type2.$$typeof === REACT_FUNDAMENTAL_TYPE || type2.$$typeof === REACT_RESPONDER_TYPE || type2.$$typeof === REACT_SCOPE_TYPE || type2.$$typeof === REACT_BLOCK_TYPE);
           }
           function typeOf(object) {
             if (typeof object === "object" && object !== null) {
               var $$typeof = object.$$typeof;
               switch ($$typeof) {
                 case REACT_ELEMENT_TYPE:
-                  var type = object.type;
-                  switch (type) {
+                  var type2 = object.type;
+                  switch (type2) {
                     case REACT_ASYNC_MODE_TYPE:
                     case REACT_CONCURRENT_MODE_TYPE:
                     case REACT_FRAGMENT_TYPE:
                     case REACT_PROFILER_TYPE:
                     case REACT_STRICT_MODE_TYPE:
                     case REACT_SUSPENSE_TYPE:
-                      return type;
+                      return type2;
                     default:
-                      var $$typeofType = type && type.$$typeof;
+                      var $$typeofType = type2 && type2.$$typeof;
                       switch ($$typeofType) {
                         case REACT_CONTEXT_TYPE:
                         case REACT_FORWARD_REF_TYPE:
@@ -30551,7 +30552,7 @@
           }
           try {
             throw new Error(message);
-          } catch (x) {
+          } catch (x2) {
           }
         };
       }
@@ -30619,7 +30620,7 @@
           }
           try {
             throw new Error(message);
-          } catch (x) {
+          } catch (x2) {
           }
         };
       }
@@ -30657,11 +30658,11 @@
           shape: createShapeTypeChecker,
           exact: createStrictShapeTypeChecker
         };
-        function is(x, y) {
-          if (x === y) {
-            return x !== 0 || 1 / x === 1 / y;
+        function is(x2, y2) {
+          if (x2 === y2) {
+            return x2 !== 0 || 1 / x2 === 1 / y2;
           } else {
-            return x !== x && y !== y;
+            return x2 !== x2 && y2 !== y2;
           }
         }
         function PropTypeError(message, data) {
@@ -30805,8 +30806,8 @@
               }
             }
             var valuesString = JSON.stringify(expectedValues, function replacer(key, value) {
-              var type = getPreciseType(value);
-              if (type === "symbol") {
+              var type2 = getPreciseType(value);
+              if (type2 === "symbol") {
                 return String(value);
               }
               return value;
@@ -30877,9 +30878,9 @@
           }
           return createChainableTypeChecker(validate);
         }
-        function invalidValidatorError(componentName, location, propFullName, key, type) {
+        function invalidValidatorError(componentName, location, propFullName, key, type2) {
           return new PropTypeError(
-            (componentName || "React class") + ": " + location + " type `" + propFullName + "." + key + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + type + "`."
+            (componentName || "React class") + ": " + location + " type `" + propFullName + "." + key + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + type2 + "`."
           );
         }
         function createShapeTypeChecker(shapeTypes) {
@@ -31016,17 +31017,17 @@
           return propType;
         }
         function getPostfixForTypeWarning(value) {
-          var type = getPreciseType(value);
-          switch (type) {
+          var type2 = getPreciseType(value);
+          switch (type2) {
             case "array":
             case "object":
-              return "an " + type;
+              return "an " + type2;
             case "boolean":
             case "date":
             case "regexp":
-              return "a " + type;
+              return "a " + type2;
             default:
-              return type;
+              return type2;
           }
         }
         function getClassName(propValue) {
@@ -31216,19 +31217,19 @@
         return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
       };
       var LinkContainer2 = function LinkContainer3(_ref) {
-        var children = _ref.children, onClick = _ref.onClick, replace = _ref.replace, to = _ref.to, state = _ref.state, activeClassName = _ref.activeClassName, className = _ref.className, activeStyle = _ref.activeStyle, style2 = _ref.style, getIsActive = _ref.isActive, props = _objectWithoutProperties(_ref, _excluded6);
-        var path = _typeof(to) === "object" ? to.pathname || "" : to;
+        var children2 = _ref.children, onClick = _ref.onClick, replace = _ref.replace, to = _ref.to, state = _ref.state, activeClassName = _ref.activeClassName, className = _ref.className, activeStyle = _ref.activeStyle, style2 = _ref.style, getIsActive = _ref.isActive, props = _objectWithoutProperties(_ref, _excluded6);
+        var path2 = _typeof(to) === "object" ? to.pathname || "" : to;
         var navigate = (0, _reactRouterDom.useNavigate)();
         var href = (0, _reactRouterDom.useHref)(typeof to === "string" ? {
           pathname: to
         } : to);
-        var match = (0, _reactRouterDom.useMatch)(path);
+        var match = (0, _reactRouterDom.useMatch)(path2);
         var location = (0, _reactRouterDom.useLocation)();
-        var child = _react["default"].Children.only(children);
+        var child = _react["default"].Children.only(children2);
         var isActive = !!(getIsActive ? typeof getIsActive === "function" ? getIsActive(match, location) : getIsActive : match);
         var handleClick = function handleClick2(event) {
-          if (children.props.onClick) {
-            children.props.onClick(event);
+          if (children2.props.onClick) {
+            children2.props.onClick(event);
           }
           if (onClick) {
             onClick(event);
@@ -31285,7 +31286,7 @@
       });
       Object.defineProperty(exports, "LinkContainer", {
         enumerable: true,
-        get: function get() {
+        get: function get3() {
           return _LinkContainer["default"];
         }
       });
@@ -31297,11 +31298,11 @@
   });
 
   // client/main.jsx
-  var import_react66 = __toESM(require_react(), 1);
+  var import_react68 = __toESM(require_react(), 1);
   var import_client = __toESM(require_client(), 1);
 
   // client/components/App.jsx
-  var import_react65 = __toESM(require_react(), 1);
+  var import_react67 = __toESM(require_react(), 1);
   var import_react_router_dom5 = __toESM(require_main2(), 1);
 
   // client/components/Navigation/MyNavBar.jsx
@@ -31471,9 +31472,9 @@
   } = ThemeContext;
   function useBootstrapPrefix(prefix, defaultPrefix) {
     const {
-      prefixes
+      prefixes: prefixes2
     } = (0, import_react3.useContext)(ThemeContext);
-    return prefix || prefixes[defaultPrefix] || defaultPrefix;
+    return prefix || prefixes2[defaultPrefix] || defaultPrefix;
   }
   function useBootstrapBreakpoints() {
     const {
@@ -31614,8 +31615,8 @@
   var ENTERED = "entered";
   var EXITING = "exiting";
   var Transition = /* @__PURE__ */ function(_React$Component) {
-    _inheritsLoose(Transition2, _React$Component);
-    function Transition2(props, context5) {
+    _inheritsLoose(Transition3, _React$Component);
+    function Transition3(props, context5) {
       var _this;
       _this = _React$Component.call(this, props, context5) || this;
       var parentGroup = context5;
@@ -31642,7 +31643,7 @@
       _this.nextCallback = null;
       return _this;
     }
-    Transition2.getDerivedStateFromProps = function getDerivedStateFromProps(_ref, prevState) {
+    Transition3.getDerivedStateFromProps = function getDerivedStateFromProps(_ref, prevState) {
       var nextIn = _ref.in;
       if (nextIn && prevState.status === UNMOUNTED) {
         return {
@@ -31651,7 +31652,7 @@
       }
       return null;
     };
-    var _proto = Transition2.prototype;
+    var _proto = Transition3.prototype;
     _proto.componentDidMount = function componentDidMount() {
       this.updateStatus(true, this.appearStatus);
     };
@@ -31675,13 +31676,13 @@
       this.cancelNextCallback();
     };
     _proto.getTimeouts = function getTimeouts() {
-      var timeout2 = this.props.timeout;
+      var timeout3 = this.props.timeout;
       var exit, enter, appear;
-      exit = enter = appear = timeout2;
-      if (timeout2 != null && typeof timeout2 !== "number") {
-        exit = timeout2.exit;
-        enter = timeout2.enter;
-        appear = timeout2.appear !== void 0 ? timeout2.appear : enter;
+      exit = enter = appear = timeout3;
+      if (timeout3 != null && typeof timeout3 !== "number") {
+        exit = timeout3.exit;
+        enter = timeout3.enter;
+        appear = timeout3.appear !== void 0 ? timeout3.appear : enter;
       }
       return {
         exit,
@@ -31792,10 +31793,10 @@
       };
       return this.nextCallback;
     };
-    _proto.onTransitionEnd = function onTransitionEnd(timeout2, handler) {
+    _proto.onTransitionEnd = function onTransitionEnd(timeout3, handler) {
       this.setNextCallback(handler);
       var node = this.props.nodeRef ? this.props.nodeRef.current : import_react_dom.default.findDOMNode(this);
-      var doesNotHaveTimeoutOrListener = timeout2 == null && !this.props.addEndListener;
+      var doesNotHaveTimeoutOrListener = timeout3 == null && !this.props.addEndListener;
       if (!node || doesNotHaveTimeoutOrListener) {
         setTimeout(this.nextCallback, 0);
         return;
@@ -31804,8 +31805,8 @@
         var _ref3 = this.props.nodeRef ? [this.nextCallback] : [node, this.nextCallback], maybeNode = _ref3[0], maybeNextCallback = _ref3[1];
         this.props.addEndListener(maybeNode, maybeNextCallback);
       }
-      if (timeout2 != null) {
-        setTimeout(this.nextCallback, timeout2);
+      if (timeout3 != null) {
+        setTimeout(this.nextCallback, timeout3);
       }
     };
     _proto.render = function render() {
@@ -31813,15 +31814,15 @@
       if (status === UNMOUNTED) {
         return null;
       }
-      var _this$props = this.props, children = _this$props.children, _in = _this$props.in, _mountOnEnter = _this$props.mountOnEnter, _unmountOnExit = _this$props.unmountOnExit, _appear = _this$props.appear, _enter = _this$props.enter, _exit = _this$props.exit, _timeout = _this$props.timeout, _addEndListener = _this$props.addEndListener, _onEnter = _this$props.onEnter, _onEntering = _this$props.onEntering, _onEntered = _this$props.onEntered, _onExit = _this$props.onExit, _onExiting = _this$props.onExiting, _onExited = _this$props.onExited, _nodeRef = _this$props.nodeRef, childProps = _objectWithoutPropertiesLoose(_this$props, ["children", "in", "mountOnEnter", "unmountOnExit", "appear", "enter", "exit", "timeout", "addEndListener", "onEnter", "onEntering", "onEntered", "onExit", "onExiting", "onExited", "nodeRef"]);
+      var _this$props = this.props, children2 = _this$props.children, _in = _this$props.in, _mountOnEnter = _this$props.mountOnEnter, _unmountOnExit = _this$props.unmountOnExit, _appear = _this$props.appear, _enter = _this$props.enter, _exit = _this$props.exit, _timeout = _this$props.timeout, _addEndListener = _this$props.addEndListener, _onEnter = _this$props.onEnter, _onEntering = _this$props.onEntering, _onEntered = _this$props.onEntered, _onExit = _this$props.onExit, _onExiting = _this$props.onExiting, _onExited = _this$props.onExited, _nodeRef = _this$props.nodeRef, childProps = _objectWithoutPropertiesLoose(_this$props, ["children", "in", "mountOnEnter", "unmountOnExit", "appear", "enter", "exit", "timeout", "addEndListener", "onEnter", "onEntering", "onEntered", "onExit", "onExiting", "onExited", "nodeRef"]);
       return (
         // allows for nested Transitions
         /* @__PURE__ */ import_react5.default.createElement(TransitionGroupContext_default.Provider, {
           value: null
-        }, typeof children === "function" ? children(status, childProps) : import_react5.default.cloneElement(import_react5.default.Children.only(children), childProps))
+        }, typeof children2 === "function" ? children2(status, childProps) : import_react5.default.cloneElement(import_react5.default.Children.only(children2), childProps))
       );
     };
-    return Transition2;
+    return Transition3;
   }(import_react5.default.Component);
   Transition.contextType = TransitionGroupContext_default;
   Transition.propTypes = true ? {
@@ -32106,24 +32107,24 @@
       if (!called)
         triggerEvent(element, "transitionend", true);
     }, duration + padding);
-    var remove = listen_default(element, "transitionend", function() {
+    var remove2 = listen_default(element, "transitionend", function() {
       called = true;
     }, {
       once: true
     });
     return function() {
       clearTimeout(handle);
-      remove();
+      remove2();
     };
   }
   function transitionEnd(element, handler, duration, padding) {
     if (duration == null)
       duration = parseDuration(element) || 0;
     var removeEmulate = emulateTransitionEnd(element, duration, padding);
-    var remove = listen_default(element, "transitionend", handler);
+    var remove2 = listen_default(element, "transitionend", handler);
     return function() {
       removeEmulate();
-      remove();
+      remove2();
     };
   }
 
@@ -32136,9 +32137,9 @@
   function transitionEndListener(element, handler) {
     const duration = parseDuration2(element, "transitionDuration");
     const delay = parseDuration2(element, "transitionDelay");
-    const remove = transitionEnd(element, (e) => {
+    const remove2 = transitionEnd(element, (e) => {
       if (e.target === element) {
-        remove();
+        remove2();
         handler(e);
       }
     }, duration + delay);
@@ -32208,7 +32209,7 @@
       onExiting,
       onExited,
       addEndListener,
-      children,
+      children: children2,
       childRef
     } = _b, props = __objRest(_b, [
       "onEnter",
@@ -32226,18 +32227,18 @@
     const attachRef = (r) => {
       mergedRef(safeFindDOMNode(r));
     };
-    const normalize = (callback) => (param) => {
+    const normalize2 = (callback) => (param) => {
       if (callback && nodeRef.current) {
         callback(nodeRef.current, param);
       }
     };
-    const handleEnter = (0, import_react7.useCallback)(normalize(onEnter), [onEnter]);
-    const handleEntering = (0, import_react7.useCallback)(normalize(onEntering), [onEntering]);
-    const handleEntered = (0, import_react7.useCallback)(normalize(onEntered), [onEntered]);
-    const handleExit = (0, import_react7.useCallback)(normalize(onExit), [onExit]);
-    const handleExiting = (0, import_react7.useCallback)(normalize(onExiting), [onExiting]);
-    const handleExited = (0, import_react7.useCallback)(normalize(onExited), [onExited]);
-    const handleAddEndListener = (0, import_react7.useCallback)(normalize(addEndListener), [addEndListener]);
+    const handleEnter = (0, import_react7.useCallback)(normalize2(onEnter), [onEnter]);
+    const handleEntering = (0, import_react7.useCallback)(normalize2(onEntering), [onEntering]);
+    const handleEntered = (0, import_react7.useCallback)(normalize2(onEntered), [onEntered]);
+    const handleExit = (0, import_react7.useCallback)(normalize2(onExit), [onExit]);
+    const handleExiting = (0, import_react7.useCallback)(normalize2(onExiting), [onExiting]);
+    const handleExited = (0, import_react7.useCallback)(normalize2(onExited), [onExited]);
+    const handleAddEndListener = (0, import_react7.useCallback)(normalize2(addEndListener), [addEndListener]);
     return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Transition_default, __spreadProps(__spreadValues({
       ref
     }, props), {
@@ -32249,12 +32250,12 @@
       onExiting: handleExiting,
       addEndListener: handleAddEndListener,
       nodeRef,
-      children: typeof children === "function" ? (status, innerProps) => (
+      children: typeof children2 === "function" ? (status, innerProps) => (
         // TODO: Types for RTG missing innerProps, so need to cast.
-        children(status, __spreadProps(__spreadValues({}, innerProps), {
+        children2(status, __spreadProps(__spreadValues({}, innerProps), {
           ref: attachRef
         }))
-      ) : /* @__PURE__ */ import_react7.default.cloneElement(children, {
+      ) : /* @__PURE__ */ import_react7.default.cloneElement(children2, {
         ref: attachRef
       })
     }));
@@ -32289,10 +32290,10 @@
       onExit,
       onExiting,
       className,
-      children,
+      children: children2,
       dimension = "height",
       in: inProp = false,
-      timeout: timeout2 = 300,
+      timeout: timeout3 = 300,
       mountOnEnter = false,
       unmountOnExit = false,
       appear = false,
@@ -32341,14 +32342,14 @@
       onEntered: handleEntered,
       onExit: handleExit,
       onExiting: handleExiting,
-      childRef: children.ref,
+      childRef: children2.ref,
       in: inProp,
-      timeout: timeout2,
+      timeout: timeout3,
       mountOnEnter,
       unmountOnExit,
       appear,
-      children: (state, innerProps) => /* @__PURE__ */ import_react8.default.cloneElement(children, __spreadProps(__spreadValues({}, innerProps), {
-        className: (0, import_classnames.default)(className, children.props.className, collapseStyles[state], computedDimension === "width" && "collapse-horizontal")
+      children: (state, innerProps) => /* @__PURE__ */ import_react8.default.cloneElement(children2, __spreadProps(__spreadValues({}, innerProps), {
+        className: (0, import_classnames.default)(className, children2.props.className, collapseStyles[state], computedDimension === "width" && "collapse-horizontal")
       }))
     }));
   });
@@ -32370,7 +32371,7 @@
       as: Component = "div",
       bsPrefix,
       className,
-      children,
+      children: children2,
       eventKey
     } = _b, props = __objRest(_b, [
       "as",
@@ -32389,7 +32390,7 @@
     }, props), {
       className: (0, import_classnames2.default)(className, bsPrefix),
       children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Component, {
-        children: React8.Children.only(children)
+        children: React8.Children.only(children2)
       })
     }));
   });
@@ -32523,7 +32524,7 @@
       as: Component = "h2",
       bsPrefix,
       className,
-      children,
+      children: children2,
       onClick
     } = _b, props = __objRest(_b, [
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
@@ -32540,7 +32541,7 @@
       className: (0, import_classnames5.default)(className, bsPrefix),
       children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(AccordionButton_default, {
         onClick,
-        children
+        children: children2
       })
     }));
   });
@@ -32786,7 +32787,7 @@
     role,
     onClick,
     tabIndex = 0,
-    type
+    type: type2
   }) {
     if (!tagName) {
       if (href != null || target != null || rel != null) {
@@ -32800,7 +32801,7 @@
     };
     if (tagName === "button") {
       return [{
-        type: type || "button",
+        type: type2 || "button",
         disabled
       }, meta];
     }
@@ -32938,7 +32939,7 @@
   var Fade = /* @__PURE__ */ React20.forwardRef((_a, ref) => {
     var _b = _a, {
       className,
-      children,
+      children: children2,
       transitionClasses = {},
       onEnter
     } = _b, rest = __objRest(_b, [
@@ -32963,9 +32964,9 @@
       addEndListener: transitionEndListener
     }, props), {
       onEnter: handleEnter,
-      childRef: children.ref,
-      children: (status, innerProps) => /* @__PURE__ */ React20.cloneElement(children, __spreadProps(__spreadValues({}, innerProps), {
-        className: (0, import_classnames11.default)("fade", className, children.props.className, fadeStyles[status], transitionClasses[status])
+      childRef: children2.ref,
+      children: (status, innerProps) => /* @__PURE__ */ React20.cloneElement(children2, __spreadProps(__spreadValues({}, innerProps), {
+        className: (0, import_classnames11.default)("fade", className, children2.props.className, fadeStyles[status], transitionClasses[status])
       }))
     }));
   });
@@ -33022,11 +33023,11 @@
       closeLabel = "Close alert",
       closeVariant,
       className,
-      children,
+      children: children2,
       variant = "primary",
       onClose,
       dismissible,
-      transition = Fade_default
+      transition: transition2 = Fade_default
     } = _a, props = __objRest(_a, [
       "bsPrefix",
       "show",
@@ -33045,21 +33046,21 @@
         onClose(false, e);
       }
     });
-    const Transition2 = transition === true ? Fade_default : transition;
+    const Transition3 = transition2 === true ? Fade_default : transition2;
     const alert = /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", __spreadProps(__spreadValues({
       role: "alert"
-    }, !Transition2 ? props : void 0), {
+    }, !Transition3 ? props : void 0), {
       ref,
       className: (0, import_classnames13.default)(className, prefix, variant && `${prefix}-${variant}`, dismissible && `${prefix}-dismissible`),
       children: [dismissible && /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(CloseButton_default, {
         onClick: handleClose,
         "aria-label": closeLabel,
         variant: closeVariant
-      }), children]
+      }), children2]
     }));
-    if (!Transition2)
+    if (!Transition3)
       return show ? alert : null;
-    return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Transition2, __spreadProps(__spreadValues({
+    return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Transition3, __spreadProps(__spreadValues({
       unmountOnExit: true
     }, props), {
       ref: void 0,
@@ -33357,7 +33358,7 @@
       text,
       border,
       body = false,
-      children,
+      children: children2,
       as: Component = "div"
     } = _b, props = __objRest(_b, [
       "bsPrefix",
@@ -33376,8 +33377,8 @@
     }, props), {
       className: (0, import_classnames24.default)(className, prefix, bg && `bg-${bg}`, text && `text-${text}`, border && `border-${border}`),
       children: body ? /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(CardBody_default, {
-        children
-      }) : children
+        children: children2
+      }) : children2
     }));
   });
   Card.displayName = "Card";
@@ -33516,8 +33517,8 @@
   // node_modules/@restart/hooks/esm/useForceUpdate.js
   var import_react31 = __toESM(require_react());
   function useForceUpdate() {
-    const [, dispatch] = (0, import_react31.useReducer)((state) => !state, false);
-    return dispatch;
+    const [, dispatch2] = (0, import_react31.useReducer)((state) => !state, false);
+    return dispatch2;
   }
 
   // node_modules/dom-helpers/esm/contains.js
@@ -33600,7 +33601,7 @@
     key,
     onClick,
     active,
-    id,
+    id: id2,
     role,
     disabled
   }) {
@@ -33617,7 +33618,7 @@
       const contextControllerId = navContext.getControllerId(key != null ? key : null);
       const contextControlledId = navContext.getControlledId(key != null ? key : null);
       props[dataAttr("event-key")] = key;
-      props.id = contextControllerId || id;
+      props.id = contextControllerId || id2;
       isActive = active == null && key != null ? navContext.activeKey === key : active;
       if (isActive || !(tabContext != null && tabContext.unmountOnExit) && !(tabContext != null && tabContext.mountOnEnter))
         props["aria-controls"] = contextControlledId;
@@ -33965,7 +33966,7 @@
   // node_modules/@restart/ui/esm/NoopTransition.js
   var import_react36 = __toESM(require_react());
   function NoopTransition({
-    children,
+    children: children2,
     in: inProp,
     onExited,
     mountOnEnter,
@@ -33981,8 +33982,8 @@
         handleExited(ref.current);
       }
     }, [inProp, handleExited]);
-    const combinedRef = useMergedRefs_default(ref, children.ref);
-    const child = /* @__PURE__ */ (0, import_react36.cloneElement)(children, {
+    const combinedRef = useMergedRefs_default(ref, children2.ref);
+    const child = /* @__PURE__ */ (0, import_react36.cloneElement)(children2, {
       ref: combinedRef
     });
     if (inProp)
@@ -34030,11 +34031,11 @@
     return ref;
   }
   function ImperativeTransition({
-    children,
+    children: children2,
     in: inProp,
     onExited,
     onEntered,
-    transition
+    transition: transition2
   }) {
     const [exited, setExited] = (0, import_react37.useState)(!inProp);
     if (inProp && exited) {
@@ -34053,15 +34054,15 @@
             onExited == null ? void 0 : onExited(options.element);
           }
         };
-        Promise.resolve(transition(options)).then(onFinish, (error) => {
+        Promise.resolve(transition2(options)).then(onFinish, (error) => {
           if (!options.in)
             setExited(true);
           throw error;
         });
       }
     });
-    const combinedRef = useMergedRefs_default(ref, children.ref);
-    return exited && !inProp ? null : /* @__PURE__ */ (0, import_react37.cloneElement)(children, {
+    const combinedRef = useMergedRefs_default(ref, children2.ref);
+    return exited && !inProp ? null : /* @__PURE__ */ (0, import_react37.cloneElement)(children2, {
       ref: combinedRef
     });
   }
@@ -34134,12 +34135,12 @@
       role = "dialog",
       className,
       style: style2,
-      children,
+      children: children2,
       backdrop = true,
       keyboard = true,
       onBackdropClick,
       onEscapeKeyDown,
-      transition,
+      transition: transition2,
       runTransition,
       backdropTransition,
       runBackdropTransition,
@@ -34272,11 +34273,11 @@
       tabIndex: -1
     });
     let dialog = renderDialog ? renderDialog(dialogProps) : /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", Object.assign({}, dialogProps, {
-      children: /* @__PURE__ */ React44.cloneElement(children, {
+      children: /* @__PURE__ */ React44.cloneElement(children2, {
         role: "document"
       })
     }));
-    dialog = renderTransition(transition, runTransition, {
+    dialog = renderTransition(transition2, runTransition, {
       unmountOnExit: true,
       mountOnEnter: true,
       appear: true,
@@ -34444,7 +34445,7 @@
       centered,
       size: size2,
       fullscreen,
-      children,
+      children: children2,
       scrollable
     } = _b, props = __objRest(_b, [
       "bsPrefix",
@@ -34464,7 +34465,7 @@
       className: (0, import_classnames28.default)(dialogClass, className, size2 && `${bsPrefix}-${size2}`, centered && `${dialogClass}-centered`, scrollable && `${dialogClass}-scrollable`, fullscreen && fullScreenClass),
       children: /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("div", {
         className: (0, import_classnames28.default)(`${bsPrefix}-content`, contentClassName),
-        children
+        children: children2
       })
     }));
   });
@@ -34509,7 +34510,7 @@
       closeVariant,
       closeButton = false,
       onHide,
-      children
+      children: children2
     } = _b, props = __objRest(_b, [
       "closeLabel",
       "closeVariant",
@@ -34525,7 +34526,7 @@
     return /* @__PURE__ */ (0, import_jsx_runtime42.jsxs)("div", __spreadProps(__spreadValues({
       ref
     }, props), {
-      children: [children, closeButton && /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(CloseButton_default, {
+      children: [children2, closeButton && /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(CloseButton_default, {
         "aria-label": closeLabel,
         variant: closeVariant,
         onClick: handleClick
@@ -34603,7 +34604,7 @@
       style: style2,
       dialogClassName,
       contentClassName,
-      children,
+      children: children2,
       dialogAs: Dialog = ModalDialog_default,
       "aria-labelledby": ariaLabelledby,
       "aria-describedby": ariaDescribedby,
@@ -34781,7 +34782,7 @@
         onMouseDown: handleDialogMouseDown,
         className: dialogClassName,
         contentClassName,
-        children
+        children: children2
       }))
     }));
     return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(ModalContext_default.Provider, {
@@ -34984,7 +34985,7 @@
   var import_jsx_runtime50 = __toESM(require_jsx_runtime());
   var NavbarCollapse = /* @__PURE__ */ React57.forwardRef((_a, ref) => {
     var _b = _a, {
-      children,
+      children: children2,
       bsPrefix
     } = _b, props = __objRest(_b, [
       "children",
@@ -34998,7 +34999,7 @@
       children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", {
         ref,
         className: bsPrefix,
-        children
+        children: children2
       })
     }));
   });
@@ -35014,7 +35015,7 @@
     var _b = _a, {
       bsPrefix,
       className,
-      children,
+      children: children2,
       label = "Toggle navigation",
       as: Component = "button",
       onClick
@@ -35046,7 +35047,7 @@
       onClick: handleClick,
       "aria-label": label,
       className: (0, import_classnames37.default)(className, bsPrefix, !expanded && "collapsed"),
-      children: children || /* @__PURE__ */ (0, import_jsx_runtime51.jsx)("span", {
+      children: children2 || /* @__PURE__ */ (0, import_jsx_runtime51.jsx)("span", {
         className: `${bsPrefix}-icon`
       })
     }));
@@ -35207,7 +35208,7 @@
     var _b = _a, {
       bsPrefix,
       className,
-      children,
+      children: children2,
       in: inProp = false,
       mountOnEnter = false,
       unmountOnExit = false,
@@ -35230,9 +35231,9 @@
       unmountOnExit,
       appear
     }, props), {
-      childRef: children.ref,
-      children: (status, innerProps) => /* @__PURE__ */ React60.cloneElement(children, __spreadProps(__spreadValues({}, innerProps), {
-        className: (0, import_classnames39.default)(className, children.props.className, (status === ENTERING || status === EXITING) && `${bsPrefix}-toggling`, transitionStyles[status])
+      childRef: children2.ref,
+      children: (status, innerProps) => /* @__PURE__ */ React60.cloneElement(children2, __spreadProps(__spreadValues({}, innerProps), {
+        className: (0, import_classnames39.default)(className, children2.props.className, (status === ENTERING || status === EXITING) && `${bsPrefix}-toggling`, transitionStyles[status])
       }))
     }));
   });
@@ -35305,7 +35306,7 @@
     var _b = _a, {
       bsPrefix,
       className,
-      children,
+      children: children2,
       "aria-labelledby": ariaLabelledby,
       placement = "start",
       responsive,
@@ -35405,7 +35406,7 @@
     const renderDialog = (dialogProps) => /* @__PURE__ */ (0, import_jsx_runtime56.jsx)("div", __spreadProps(__spreadValues(__spreadValues({}, dialogProps), props), {
       className: (0, import_classnames42.default)(className, responsive ? `${bsPrefix}-${responsive}` : bsPrefix, `${bsPrefix}-${placement}`),
       "aria-labelledby": ariaLabelledby,
-      children
+      children: children2
     }));
     return /* @__PURE__ */ (0, import_jsx_runtime58.jsxs)(import_jsx_runtime57.Fragment, {
       children: [!showOffcanvas && (responsive || renderStaticNode) && renderDialog({}), /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(ModalContext_default.Provider, {
@@ -35838,7 +35839,7 @@
   };
 
   // client/mbdataHelper.js
-  function searchStockAPI(stockName, start, end) {
+  function searchStockAPI(stockName, start2, end) {
     return __async(this, null, function* () {
       try {
         const response = yield fetch("http://localhost:3000/api/search", {
@@ -35846,7 +35847,7 @@
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ stockName, start, end })
+          body: JSON.stringify({ stockName, start: start2, end })
         });
         if (response.status >= 400) {
           throw new Error(`Request failed with response code ${response.status}`);
@@ -35859,10 +35860,10 @@
       }
     });
   }
-  function retrieveInvestorStocks(start, end) {
+  function retrieveInvestorStocks(start2, end) {
     return __async(this, null, function* () {
       try {
-        const response = yield fetch("http://localhost:3000/api/stocks?" + new URLSearchParams({ start, end }));
+        const response = yield fetch("http://localhost:3000/api/stocks?" + new URLSearchParams({ start: start2, end }));
         if (response.status >= 400) {
           throw new Error(`Request failed with response code ${response.status}`);
         }
@@ -35990,8 +35991,8 @@
         const renderTestStockDetails = () => __async(this, null, function* () {
           const fetchTestStockDetails = yield retrieveStockDetails("AAPL", testTimeFrame);
           setTestStockDetails(fetchTestStockDetails);
-          fetchTestStockDetails.forEach((date) => {
-            console.log(date);
+          fetchTestStockDetails.forEach((date2) => {
+            console.log(date2);
           });
         });
         renderTestStockDetails();
@@ -36201,19 +36202,4601 @@
   var SettingsPage_default = SettingsPage;
 
   // client/components/Stat/StatsPage.jsx
+  var import_react59 = __toESM(require_react(), 1);
+
+  // client/components/Stat/LinePlot.jsx
   var import_react57 = __toESM(require_react(), 1);
+
+  // node_modules/d3-array/src/ascending.js
+  function ascending(a, b) {
+    return a == null || b == null ? NaN : a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
+  }
+
+  // node_modules/d3-array/src/descending.js
+  function descending(a, b) {
+    return a == null || b == null ? NaN : b < a ? -1 : b > a ? 1 : b >= a ? 0 : NaN;
+  }
+
+  // node_modules/d3-array/src/bisector.js
+  function bisector(f) {
+    let compare1, compare2, delta;
+    if (f.length !== 2) {
+      compare1 = ascending;
+      compare2 = (d, x2) => ascending(f(d), x2);
+      delta = (d, x2) => f(d) - x2;
+    } else {
+      compare1 = f === ascending || f === descending ? f : zero;
+      compare2 = f;
+      delta = f;
+    }
+    function left2(a, x2, lo = 0, hi = a.length) {
+      if (lo < hi) {
+        if (compare1(x2, x2) !== 0)
+          return hi;
+        do {
+          const mid = lo + hi >>> 1;
+          if (compare2(a[mid], x2) < 0)
+            lo = mid + 1;
+          else
+            hi = mid;
+        } while (lo < hi);
+      }
+      return lo;
+    }
+    function right2(a, x2, lo = 0, hi = a.length) {
+      if (lo < hi) {
+        if (compare1(x2, x2) !== 0)
+          return hi;
+        do {
+          const mid = lo + hi >>> 1;
+          if (compare2(a[mid], x2) <= 0)
+            lo = mid + 1;
+          else
+            hi = mid;
+        } while (lo < hi);
+      }
+      return lo;
+    }
+    function center2(a, x2, lo = 0, hi = a.length) {
+      const i = left2(a, x2, lo, hi - 1);
+      return i > lo && delta(a[i - 1], x2) > -delta(a[i], x2) ? i - 1 : i;
+    }
+    return { left: left2, center: center2, right: right2 };
+  }
+  function zero() {
+    return 0;
+  }
+
+  // node_modules/d3-array/src/number.js
+  function number(x2) {
+    return x2 === null ? NaN : +x2;
+  }
+
+  // node_modules/d3-array/src/bisect.js
+  var ascendingBisect = bisector(ascending);
+  var bisectRight = ascendingBisect.right;
+  var bisectLeft = ascendingBisect.left;
+  var bisectCenter = bisector(number).center;
+  var bisect_default = bisectRight;
+
+  // node_modules/d3-array/src/extent.js
+  function extent(values, valueof) {
+    let min2;
+    let max3;
+    if (valueof === void 0) {
+      for (const value of values) {
+        if (value != null) {
+          if (min2 === void 0) {
+            if (value >= value)
+              min2 = max3 = value;
+          } else {
+            if (min2 > value)
+              min2 = value;
+            if (max3 < value)
+              max3 = value;
+          }
+        }
+      }
+    } else {
+      let index = -1;
+      for (let value of values) {
+        if ((value = valueof(value, ++index, values)) != null) {
+          if (min2 === void 0) {
+            if (value >= value)
+              min2 = max3 = value;
+          } else {
+            if (min2 > value)
+              min2 = value;
+            if (max3 < value)
+              max3 = value;
+          }
+        }
+      }
+    }
+    return [min2, max3];
+  }
+
+  // node_modules/d3-array/src/ticks.js
+  var e10 = Math.sqrt(50);
+  var e5 = Math.sqrt(10);
+  var e2 = Math.sqrt(2);
+  function tickSpec(start2, stop, count) {
+    const step = (stop - start2) / Math.max(0, count), power = Math.floor(Math.log10(step)), error = step / Math.pow(10, power), factor = error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1;
+    let i1, i2, inc;
+    if (power < 0) {
+      inc = Math.pow(10, -power) / factor;
+      i1 = Math.round(start2 * inc);
+      i2 = Math.round(stop * inc);
+      if (i1 / inc < start2)
+        ++i1;
+      if (i2 / inc > stop)
+        --i2;
+      inc = -inc;
+    } else {
+      inc = Math.pow(10, power) * factor;
+      i1 = Math.round(start2 / inc);
+      i2 = Math.round(stop / inc);
+      if (i1 * inc < start2)
+        ++i1;
+      if (i2 * inc > stop)
+        --i2;
+    }
+    if (i2 < i1 && 0.5 <= count && count < 2)
+      return tickSpec(start2, stop, count * 2);
+    return [i1, i2, inc];
+  }
+  function ticks(start2, stop, count) {
+    stop = +stop, start2 = +start2, count = +count;
+    if (!(count > 0))
+      return [];
+    if (start2 === stop)
+      return [start2];
+    const reverse = stop < start2, [i1, i2, inc] = reverse ? tickSpec(stop, start2, count) : tickSpec(start2, stop, count);
+    if (!(i2 >= i1))
+      return [];
+    const n = i2 - i1 + 1, ticks2 = new Array(n);
+    if (reverse) {
+      if (inc < 0)
+        for (let i = 0; i < n; ++i)
+          ticks2[i] = (i2 - i) / -inc;
+      else
+        for (let i = 0; i < n; ++i)
+          ticks2[i] = (i2 - i) * inc;
+    } else {
+      if (inc < 0)
+        for (let i = 0; i < n; ++i)
+          ticks2[i] = (i1 + i) / -inc;
+      else
+        for (let i = 0; i < n; ++i)
+          ticks2[i] = (i1 + i) * inc;
+    }
+    return ticks2;
+  }
+  function tickIncrement(start2, stop, count) {
+    stop = +stop, start2 = +start2, count = +count;
+    return tickSpec(start2, stop, count)[2];
+  }
+  function tickStep(start2, stop, count) {
+    stop = +stop, start2 = +start2, count = +count;
+    const reverse = stop < start2, inc = reverse ? tickIncrement(stop, start2, count) : tickIncrement(start2, stop, count);
+    return (reverse ? -1 : 1) * (inc < 0 ? 1 / -inc : inc);
+  }
+
+  // node_modules/d3-array/src/max.js
+  function max(values, valueof) {
+    let max3;
+    if (valueof === void 0) {
+      for (const value of values) {
+        if (value != null && (max3 < value || max3 === void 0 && value >= value)) {
+          max3 = value;
+        }
+      }
+    } else {
+      let index = -1;
+      for (let value of values) {
+        if ((value = valueof(value, ++index, values)) != null && (max3 < value || max3 === void 0 && value >= value)) {
+          max3 = value;
+        }
+      }
+    }
+    return max3;
+  }
+
+  // node_modules/d3-axis/src/identity.js
+  function identity_default(x2) {
+    return x2;
+  }
+
+  // node_modules/d3-axis/src/axis.js
+  var top = 1;
+  var right = 2;
+  var bottom = 3;
+  var left = 4;
+  var epsilon = 1e-6;
+  function translateX(x2) {
+    return "translate(" + x2 + ",0)";
+  }
+  function translateY(y2) {
+    return "translate(0," + y2 + ")";
+  }
+  function number2(scale) {
+    return (d) => +scale(d);
+  }
+  function center(scale, offset) {
+    offset = Math.max(0, scale.bandwidth() - offset * 2) / 2;
+    if (scale.round())
+      offset = Math.round(offset);
+    return (d) => +scale(d) + offset;
+  }
+  function entering() {
+    return !this.__axis;
+  }
+  function axis(orient, scale) {
+    var tickArguments = [], tickValues = null, tickFormat2 = null, tickSizeInner = 6, tickSizeOuter = 6, tickPadding = 3, offset = typeof window !== "undefined" && window.devicePixelRatio > 1 ? 0 : 0.5, k = orient === top || orient === left ? -1 : 1, x2 = orient === left || orient === right ? "x" : "y", transform2 = orient === top || orient === bottom ? translateX : translateY;
+    function axis2(context5) {
+      var values = tickValues == null ? scale.ticks ? scale.ticks.apply(scale, tickArguments) : scale.domain() : tickValues, format2 = tickFormat2 == null ? scale.tickFormat ? scale.tickFormat.apply(scale, tickArguments) : identity_default : tickFormat2, spacing = Math.max(tickSizeInner, 0) + tickPadding, range = scale.range(), range0 = +range[0] + offset, range1 = +range[range.length - 1] + offset, position = (scale.bandwidth ? center : number2)(scale.copy(), offset), selection2 = context5.selection ? context5.selection() : context5, path2 = selection2.selectAll(".domain").data([null]), tick = selection2.selectAll(".tick").data(values, scale).order(), tickExit = tick.exit(), tickEnter = tick.enter().append("g").attr("class", "tick"), line = tick.select("line"), text = tick.select("text");
+      path2 = path2.merge(path2.enter().insert("path", ".tick").attr("class", "domain").attr("stroke", "currentColor"));
+      tick = tick.merge(tickEnter);
+      line = line.merge(tickEnter.append("line").attr("stroke", "currentColor").attr(x2 + "2", k * tickSizeInner));
+      text = text.merge(tickEnter.append("text").attr("fill", "currentColor").attr(x2, k * spacing).attr("dy", orient === top ? "0em" : orient === bottom ? "0.71em" : "0.32em"));
+      if (context5 !== selection2) {
+        path2 = path2.transition(context5);
+        tick = tick.transition(context5);
+        line = line.transition(context5);
+        text = text.transition(context5);
+        tickExit = tickExit.transition(context5).attr("opacity", epsilon).attr("transform", function(d) {
+          return isFinite(d = position(d)) ? transform2(d + offset) : this.getAttribute("transform");
+        });
+        tickEnter.attr("opacity", epsilon).attr("transform", function(d) {
+          var p = this.parentNode.__axis;
+          return transform2((p && isFinite(p = p(d)) ? p : position(d)) + offset);
+        });
+      }
+      tickExit.remove();
+      path2.attr("d", orient === left || orient === right ? tickSizeOuter ? "M" + k * tickSizeOuter + "," + range0 + "H" + offset + "V" + range1 + "H" + k * tickSizeOuter : "M" + offset + "," + range0 + "V" + range1 : tickSizeOuter ? "M" + range0 + "," + k * tickSizeOuter + "V" + offset + "H" + range1 + "V" + k * tickSizeOuter : "M" + range0 + "," + offset + "H" + range1);
+      tick.attr("opacity", 1).attr("transform", function(d) {
+        return transform2(position(d) + offset);
+      });
+      line.attr(x2 + "2", k * tickSizeInner);
+      text.attr(x2, k * spacing).text(format2);
+      selection2.filter(entering).attr("fill", "none").attr("font-size", 10).attr("font-family", "sans-serif").attr("text-anchor", orient === right ? "start" : orient === left ? "end" : "middle");
+      selection2.each(function() {
+        this.__axis = position;
+      });
+    }
+    axis2.scale = function(_) {
+      return arguments.length ? (scale = _, axis2) : scale;
+    };
+    axis2.ticks = function() {
+      return tickArguments = Array.from(arguments), axis2;
+    };
+    axis2.tickArguments = function(_) {
+      return arguments.length ? (tickArguments = _ == null ? [] : Array.from(_), axis2) : tickArguments.slice();
+    };
+    axis2.tickValues = function(_) {
+      return arguments.length ? (tickValues = _ == null ? null : Array.from(_), axis2) : tickValues && tickValues.slice();
+    };
+    axis2.tickFormat = function(_) {
+      return arguments.length ? (tickFormat2 = _, axis2) : tickFormat2;
+    };
+    axis2.tickSize = function(_) {
+      return arguments.length ? (tickSizeInner = tickSizeOuter = +_, axis2) : tickSizeInner;
+    };
+    axis2.tickSizeInner = function(_) {
+      return arguments.length ? (tickSizeInner = +_, axis2) : tickSizeInner;
+    };
+    axis2.tickSizeOuter = function(_) {
+      return arguments.length ? (tickSizeOuter = +_, axis2) : tickSizeOuter;
+    };
+    axis2.tickPadding = function(_) {
+      return arguments.length ? (tickPadding = +_, axis2) : tickPadding;
+    };
+    axis2.offset = function(_) {
+      return arguments.length ? (offset = +_, axis2) : offset;
+    };
+    return axis2;
+  }
+  function axisBottom(scale) {
+    return axis(bottom, scale);
+  }
+  function axisLeft(scale) {
+    return axis(left, scale);
+  }
+
+  // node_modules/d3-dispatch/src/dispatch.js
+  var noop3 = { value: () => {
+  } };
+  function dispatch() {
+    for (var i = 0, n = arguments.length, _ = {}, t; i < n; ++i) {
+      if (!(t = arguments[i] + "") || t in _ || /[\s.]/.test(t))
+        throw new Error("illegal type: " + t);
+      _[t] = [];
+    }
+    return new Dispatch(_);
+  }
+  function Dispatch(_) {
+    this._ = _;
+  }
+  function parseTypenames(typenames, types) {
+    return typenames.trim().split(/^|\s+/).map(function(t) {
+      var name = "", i = t.indexOf(".");
+      if (i >= 0)
+        name = t.slice(i + 1), t = t.slice(0, i);
+      if (t && !types.hasOwnProperty(t))
+        throw new Error("unknown type: " + t);
+      return { type: t, name };
+    });
+  }
+  Dispatch.prototype = dispatch.prototype = {
+    constructor: Dispatch,
+    on: function(typename, callback) {
+      var _ = this._, T = parseTypenames(typename + "", _), t, i = -1, n = T.length;
+      if (arguments.length < 2) {
+        while (++i < n)
+          if ((t = (typename = T[i]).type) && (t = get(_[t], typename.name)))
+            return t;
+        return;
+      }
+      if (callback != null && typeof callback !== "function")
+        throw new Error("invalid callback: " + callback);
+      while (++i < n) {
+        if (t = (typename = T[i]).type)
+          _[t] = set(_[t], typename.name, callback);
+        else if (callback == null)
+          for (t in _)
+            _[t] = set(_[t], typename.name, null);
+      }
+      return this;
+    },
+    copy: function() {
+      var copy2 = {}, _ = this._;
+      for (var t in _)
+        copy2[t] = _[t].slice();
+      return new Dispatch(copy2);
+    },
+    call: function(type2, that) {
+      if ((n = arguments.length - 2) > 0)
+        for (var args = new Array(n), i = 0, n, t; i < n; ++i)
+          args[i] = arguments[i + 2];
+      if (!this._.hasOwnProperty(type2))
+        throw new Error("unknown type: " + type2);
+      for (t = this._[type2], i = 0, n = t.length; i < n; ++i)
+        t[i].value.apply(that, args);
+    },
+    apply: function(type2, that, args) {
+      if (!this._.hasOwnProperty(type2))
+        throw new Error("unknown type: " + type2);
+      for (var t = this._[type2], i = 0, n = t.length; i < n; ++i)
+        t[i].value.apply(that, args);
+    }
+  };
+  function get(type2, name) {
+    for (var i = 0, n = type2.length, c; i < n; ++i) {
+      if ((c = type2[i]).name === name) {
+        return c.value;
+      }
+    }
+  }
+  function set(type2, name, callback) {
+    for (var i = 0, n = type2.length; i < n; ++i) {
+      if (type2[i].name === name) {
+        type2[i] = noop3, type2 = type2.slice(0, i).concat(type2.slice(i + 1));
+        break;
+      }
+    }
+    if (callback != null)
+      type2.push({ name, value: callback });
+    return type2;
+  }
+  var dispatch_default = dispatch;
+
+  // node_modules/d3-selection/src/namespaces.js
+  var xhtml = "http://www.w3.org/1999/xhtml";
+  var namespaces_default = {
+    svg: "http://www.w3.org/2000/svg",
+    xhtml,
+    xlink: "http://www.w3.org/1999/xlink",
+    xml: "http://www.w3.org/XML/1998/namespace",
+    xmlns: "http://www.w3.org/2000/xmlns/"
+  };
+
+  // node_modules/d3-selection/src/namespace.js
+  function namespace_default(name) {
+    var prefix = name += "", i = prefix.indexOf(":");
+    if (i >= 0 && (prefix = name.slice(0, i)) !== "xmlns")
+      name = name.slice(i + 1);
+    return namespaces_default.hasOwnProperty(prefix) ? { space: namespaces_default[prefix], local: name } : name;
+  }
+
+  // node_modules/d3-selection/src/creator.js
+  function creatorInherit(name) {
+    return function() {
+      var document2 = this.ownerDocument, uri = this.namespaceURI;
+      return uri === xhtml && document2.documentElement.namespaceURI === xhtml ? document2.createElement(name) : document2.createElementNS(uri, name);
+    };
+  }
+  function creatorFixed(fullname) {
+    return function() {
+      return this.ownerDocument.createElementNS(fullname.space, fullname.local);
+    };
+  }
+  function creator_default(name) {
+    var fullname = namespace_default(name);
+    return (fullname.local ? creatorFixed : creatorInherit)(fullname);
+  }
+
+  // node_modules/d3-selection/src/selector.js
+  function none() {
+  }
+  function selector_default(selector) {
+    return selector == null ? none : function() {
+      return this.querySelector(selector);
+    };
+  }
+
+  // node_modules/d3-selection/src/selection/select.js
+  function select_default(select) {
+    if (typeof select !== "function")
+      select = selector_default(select);
+    for (var groups = this._groups, m = groups.length, subgroups = new Array(m), j = 0; j < m; ++j) {
+      for (var group = groups[j], n = group.length, subgroup = subgroups[j] = new Array(n), node, subnode, i = 0; i < n; ++i) {
+        if ((node = group[i]) && (subnode = select.call(node, node.__data__, i, group))) {
+          if ("__data__" in node)
+            subnode.__data__ = node.__data__;
+          subgroup[i] = subnode;
+        }
+      }
+    }
+    return new Selection(subgroups, this._parents);
+  }
+
+  // node_modules/d3-selection/src/array.js
+  function array(x2) {
+    return x2 == null ? [] : Array.isArray(x2) ? x2 : Array.from(x2);
+  }
+
+  // node_modules/d3-selection/src/selectorAll.js
+  function empty() {
+    return [];
+  }
+  function selectorAll_default(selector) {
+    return selector == null ? empty : function() {
+      return this.querySelectorAll(selector);
+    };
+  }
+
+  // node_modules/d3-selection/src/selection/selectAll.js
+  function arrayAll(select) {
+    return function() {
+      return array(select.apply(this, arguments));
+    };
+  }
+  function selectAll_default(select) {
+    if (typeof select === "function")
+      select = arrayAll(select);
+    else
+      select = selectorAll_default(select);
+    for (var groups = this._groups, m = groups.length, subgroups = [], parents = [], j = 0; j < m; ++j) {
+      for (var group = groups[j], n = group.length, node, i = 0; i < n; ++i) {
+        if (node = group[i]) {
+          subgroups.push(select.call(node, node.__data__, i, group));
+          parents.push(node);
+        }
+      }
+    }
+    return new Selection(subgroups, parents);
+  }
+
+  // node_modules/d3-selection/src/matcher.js
+  function matcher_default(selector) {
+    return function() {
+      return this.matches(selector);
+    };
+  }
+  function childMatcher(selector) {
+    return function(node) {
+      return node.matches(selector);
+    };
+  }
+
+  // node_modules/d3-selection/src/selection/selectChild.js
+  var find = Array.prototype.find;
+  function childFind(match) {
+    return function() {
+      return find.call(this.children, match);
+    };
+  }
+  function childFirst() {
+    return this.firstElementChild;
+  }
+  function selectChild_default(match) {
+    return this.select(match == null ? childFirst : childFind(typeof match === "function" ? match : childMatcher(match)));
+  }
+
+  // node_modules/d3-selection/src/selection/selectChildren.js
+  var filter = Array.prototype.filter;
+  function children() {
+    return Array.from(this.children);
+  }
+  function childrenFilter(match) {
+    return function() {
+      return filter.call(this.children, match);
+    };
+  }
+  function selectChildren_default(match) {
+    return this.selectAll(match == null ? children : childrenFilter(typeof match === "function" ? match : childMatcher(match)));
+  }
+
+  // node_modules/d3-selection/src/selection/filter.js
+  function filter_default(match) {
+    if (typeof match !== "function")
+      match = matcher_default(match);
+    for (var groups = this._groups, m = groups.length, subgroups = new Array(m), j = 0; j < m; ++j) {
+      for (var group = groups[j], n = group.length, subgroup = subgroups[j] = [], node, i = 0; i < n; ++i) {
+        if ((node = group[i]) && match.call(node, node.__data__, i, group)) {
+          subgroup.push(node);
+        }
+      }
+    }
+    return new Selection(subgroups, this._parents);
+  }
+
+  // node_modules/d3-selection/src/selection/sparse.js
+  function sparse_default(update) {
+    return new Array(update.length);
+  }
+
+  // node_modules/d3-selection/src/selection/enter.js
+  function enter_default() {
+    return new Selection(this._enter || this._groups.map(sparse_default), this._parents);
+  }
+  function EnterNode(parent, datum2) {
+    this.ownerDocument = parent.ownerDocument;
+    this.namespaceURI = parent.namespaceURI;
+    this._next = null;
+    this._parent = parent;
+    this.__data__ = datum2;
+  }
+  EnterNode.prototype = {
+    constructor: EnterNode,
+    appendChild: function(child) {
+      return this._parent.insertBefore(child, this._next);
+    },
+    insertBefore: function(child, next) {
+      return this._parent.insertBefore(child, next);
+    },
+    querySelector: function(selector) {
+      return this._parent.querySelector(selector);
+    },
+    querySelectorAll: function(selector) {
+      return this._parent.querySelectorAll(selector);
+    }
+  };
+
+  // node_modules/d3-selection/src/constant.js
+  function constant_default(x2) {
+    return function() {
+      return x2;
+    };
+  }
+
+  // node_modules/d3-selection/src/selection/data.js
+  function bindIndex(parent, group, enter, update, exit, data) {
+    var i = 0, node, groupLength = group.length, dataLength = data.length;
+    for (; i < dataLength; ++i) {
+      if (node = group[i]) {
+        node.__data__ = data[i];
+        update[i] = node;
+      } else {
+        enter[i] = new EnterNode(parent, data[i]);
+      }
+    }
+    for (; i < groupLength; ++i) {
+      if (node = group[i]) {
+        exit[i] = node;
+      }
+    }
+  }
+  function bindKey(parent, group, enter, update, exit, data, key) {
+    var i, node, nodeByKeyValue = /* @__PURE__ */ new Map(), groupLength = group.length, dataLength = data.length, keyValues = new Array(groupLength), keyValue;
+    for (i = 0; i < groupLength; ++i) {
+      if (node = group[i]) {
+        keyValues[i] = keyValue = key.call(node, node.__data__, i, group) + "";
+        if (nodeByKeyValue.has(keyValue)) {
+          exit[i] = node;
+        } else {
+          nodeByKeyValue.set(keyValue, node);
+        }
+      }
+    }
+    for (i = 0; i < dataLength; ++i) {
+      keyValue = key.call(parent, data[i], i, data) + "";
+      if (node = nodeByKeyValue.get(keyValue)) {
+        update[i] = node;
+        node.__data__ = data[i];
+        nodeByKeyValue.delete(keyValue);
+      } else {
+        enter[i] = new EnterNode(parent, data[i]);
+      }
+    }
+    for (i = 0; i < groupLength; ++i) {
+      if ((node = group[i]) && nodeByKeyValue.get(keyValues[i]) === node) {
+        exit[i] = node;
+      }
+    }
+  }
+  function datum(node) {
+    return node.__data__;
+  }
+  function data_default(value, key) {
+    if (!arguments.length)
+      return Array.from(this, datum);
+    var bind = key ? bindKey : bindIndex, parents = this._parents, groups = this._groups;
+    if (typeof value !== "function")
+      value = constant_default(value);
+    for (var m = groups.length, update = new Array(m), enter = new Array(m), exit = new Array(m), j = 0; j < m; ++j) {
+      var parent = parents[j], group = groups[j], groupLength = group.length, data = arraylike(value.call(parent, parent && parent.__data__, j, parents)), dataLength = data.length, enterGroup = enter[j] = new Array(dataLength), updateGroup = update[j] = new Array(dataLength), exitGroup = exit[j] = new Array(groupLength);
+      bind(parent, group, enterGroup, updateGroup, exitGroup, data, key);
+      for (var i0 = 0, i1 = 0, previous, next; i0 < dataLength; ++i0) {
+        if (previous = enterGroup[i0]) {
+          if (i0 >= i1)
+            i1 = i0 + 1;
+          while (!(next = updateGroup[i1]) && ++i1 < dataLength)
+            ;
+          previous._next = next || null;
+        }
+      }
+    }
+    update = new Selection(update, parents);
+    update._enter = enter;
+    update._exit = exit;
+    return update;
+  }
+  function arraylike(data) {
+    return typeof data === "object" && "length" in data ? data : Array.from(data);
+  }
+
+  // node_modules/d3-selection/src/selection/exit.js
+  function exit_default() {
+    return new Selection(this._exit || this._groups.map(sparse_default), this._parents);
+  }
+
+  // node_modules/d3-selection/src/selection/join.js
+  function join_default(onenter, onupdate, onexit) {
+    var enter = this.enter(), update = this, exit = this.exit();
+    if (typeof onenter === "function") {
+      enter = onenter(enter);
+      if (enter)
+        enter = enter.selection();
+    } else {
+      enter = enter.append(onenter + "");
+    }
+    if (onupdate != null) {
+      update = onupdate(update);
+      if (update)
+        update = update.selection();
+    }
+    if (onexit == null)
+      exit.remove();
+    else
+      onexit(exit);
+    return enter && update ? enter.merge(update).order() : update;
+  }
+
+  // node_modules/d3-selection/src/selection/merge.js
+  function merge_default(context5) {
+    var selection2 = context5.selection ? context5.selection() : context5;
+    for (var groups0 = this._groups, groups1 = selection2._groups, m0 = groups0.length, m1 = groups1.length, m = Math.min(m0, m1), merges = new Array(m0), j = 0; j < m; ++j) {
+      for (var group0 = groups0[j], group1 = groups1[j], n = group0.length, merge = merges[j] = new Array(n), node, i = 0; i < n; ++i) {
+        if (node = group0[i] || group1[i]) {
+          merge[i] = node;
+        }
+      }
+    }
+    for (; j < m0; ++j) {
+      merges[j] = groups0[j];
+    }
+    return new Selection(merges, this._parents);
+  }
+
+  // node_modules/d3-selection/src/selection/order.js
+  function order_default() {
+    for (var groups = this._groups, j = -1, m = groups.length; ++j < m; ) {
+      for (var group = groups[j], i = group.length - 1, next = group[i], node; --i >= 0; ) {
+        if (node = group[i]) {
+          if (next && node.compareDocumentPosition(next) ^ 4)
+            next.parentNode.insertBefore(node, next);
+          next = node;
+        }
+      }
+    }
+    return this;
+  }
+
+  // node_modules/d3-selection/src/selection/sort.js
+  function sort_default(compare) {
+    if (!compare)
+      compare = ascending2;
+    function compareNode(a, b) {
+      return a && b ? compare(a.__data__, b.__data__) : !a - !b;
+    }
+    for (var groups = this._groups, m = groups.length, sortgroups = new Array(m), j = 0; j < m; ++j) {
+      for (var group = groups[j], n = group.length, sortgroup = sortgroups[j] = new Array(n), node, i = 0; i < n; ++i) {
+        if (node = group[i]) {
+          sortgroup[i] = node;
+        }
+      }
+      sortgroup.sort(compareNode);
+    }
+    return new Selection(sortgroups, this._parents).order();
+  }
+  function ascending2(a, b) {
+    return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
+  }
+
+  // node_modules/d3-selection/src/selection/call.js
+  function call_default() {
+    var callback = arguments[0];
+    arguments[0] = this;
+    callback.apply(null, arguments);
+    return this;
+  }
+
+  // node_modules/d3-selection/src/selection/nodes.js
+  function nodes_default() {
+    return Array.from(this);
+  }
+
+  // node_modules/d3-selection/src/selection/node.js
+  function node_default() {
+    for (var groups = this._groups, j = 0, m = groups.length; j < m; ++j) {
+      for (var group = groups[j], i = 0, n = group.length; i < n; ++i) {
+        var node = group[i];
+        if (node)
+          return node;
+      }
+    }
+    return null;
+  }
+
+  // node_modules/d3-selection/src/selection/size.js
+  function size_default() {
+    let size2 = 0;
+    for (const node of this)
+      ++size2;
+    return size2;
+  }
+
+  // node_modules/d3-selection/src/selection/empty.js
+  function empty_default() {
+    return !this.node();
+  }
+
+  // node_modules/d3-selection/src/selection/each.js
+  function each_default(callback) {
+    for (var groups = this._groups, j = 0, m = groups.length; j < m; ++j) {
+      for (var group = groups[j], i = 0, n = group.length, node; i < n; ++i) {
+        if (node = group[i])
+          callback.call(node, node.__data__, i, group);
+      }
+    }
+    return this;
+  }
+
+  // node_modules/d3-selection/src/selection/attr.js
+  function attrRemove(name) {
+    return function() {
+      this.removeAttribute(name);
+    };
+  }
+  function attrRemoveNS(fullname) {
+    return function() {
+      this.removeAttributeNS(fullname.space, fullname.local);
+    };
+  }
+  function attrConstant(name, value) {
+    return function() {
+      this.setAttribute(name, value);
+    };
+  }
+  function attrConstantNS(fullname, value) {
+    return function() {
+      this.setAttributeNS(fullname.space, fullname.local, value);
+    };
+  }
+  function attrFunction(name, value) {
+    return function() {
+      var v = value.apply(this, arguments);
+      if (v == null)
+        this.removeAttribute(name);
+      else
+        this.setAttribute(name, v);
+    };
+  }
+  function attrFunctionNS(fullname, value) {
+    return function() {
+      var v = value.apply(this, arguments);
+      if (v == null)
+        this.removeAttributeNS(fullname.space, fullname.local);
+      else
+        this.setAttributeNS(fullname.space, fullname.local, v);
+    };
+  }
+  function attr_default(name, value) {
+    var fullname = namespace_default(name);
+    if (arguments.length < 2) {
+      var node = this.node();
+      return fullname.local ? node.getAttributeNS(fullname.space, fullname.local) : node.getAttribute(fullname);
+    }
+    return this.each((value == null ? fullname.local ? attrRemoveNS : attrRemove : typeof value === "function" ? fullname.local ? attrFunctionNS : attrFunction : fullname.local ? attrConstantNS : attrConstant)(fullname, value));
+  }
+
+  // node_modules/d3-selection/src/window.js
+  function window_default(node) {
+    return node.ownerDocument && node.ownerDocument.defaultView || node.document && node || node.defaultView;
+  }
+
+  // node_modules/d3-selection/src/selection/style.js
+  function styleRemove(name) {
+    return function() {
+      this.style.removeProperty(name);
+    };
+  }
+  function styleConstant(name, value, priority) {
+    return function() {
+      this.style.setProperty(name, value, priority);
+    };
+  }
+  function styleFunction(name, value, priority) {
+    return function() {
+      var v = value.apply(this, arguments);
+      if (v == null)
+        this.style.removeProperty(name);
+      else
+        this.style.setProperty(name, v, priority);
+    };
+  }
+  function style_default(name, value, priority) {
+    return arguments.length > 1 ? this.each((value == null ? styleRemove : typeof value === "function" ? styleFunction : styleConstant)(name, value, priority == null ? "" : priority)) : styleValue(this.node(), name);
+  }
+  function styleValue(node, name) {
+    return node.style.getPropertyValue(name) || window_default(node).getComputedStyle(node, null).getPropertyValue(name);
+  }
+
+  // node_modules/d3-selection/src/selection/property.js
+  function propertyRemove(name) {
+    return function() {
+      delete this[name];
+    };
+  }
+  function propertyConstant(name, value) {
+    return function() {
+      this[name] = value;
+    };
+  }
+  function propertyFunction(name, value) {
+    return function() {
+      var v = value.apply(this, arguments);
+      if (v == null)
+        delete this[name];
+      else
+        this[name] = v;
+    };
+  }
+  function property_default(name, value) {
+    return arguments.length > 1 ? this.each((value == null ? propertyRemove : typeof value === "function" ? propertyFunction : propertyConstant)(name, value)) : this.node()[name];
+  }
+
+  // node_modules/d3-selection/src/selection/classed.js
+  function classArray(string) {
+    return string.trim().split(/^|\s+/);
+  }
+  function classList(node) {
+    return node.classList || new ClassList(node);
+  }
+  function ClassList(node) {
+    this._node = node;
+    this._names = classArray(node.getAttribute("class") || "");
+  }
+  ClassList.prototype = {
+    add: function(name) {
+      var i = this._names.indexOf(name);
+      if (i < 0) {
+        this._names.push(name);
+        this._node.setAttribute("class", this._names.join(" "));
+      }
+    },
+    remove: function(name) {
+      var i = this._names.indexOf(name);
+      if (i >= 0) {
+        this._names.splice(i, 1);
+        this._node.setAttribute("class", this._names.join(" "));
+      }
+    },
+    contains: function(name) {
+      return this._names.indexOf(name) >= 0;
+    }
+  };
+  function classedAdd(node, names) {
+    var list = classList(node), i = -1, n = names.length;
+    while (++i < n)
+      list.add(names[i]);
+  }
+  function classedRemove(node, names) {
+    var list = classList(node), i = -1, n = names.length;
+    while (++i < n)
+      list.remove(names[i]);
+  }
+  function classedTrue(names) {
+    return function() {
+      classedAdd(this, names);
+    };
+  }
+  function classedFalse(names) {
+    return function() {
+      classedRemove(this, names);
+    };
+  }
+  function classedFunction(names, value) {
+    return function() {
+      (value.apply(this, arguments) ? classedAdd : classedRemove)(this, names);
+    };
+  }
+  function classed_default(name, value) {
+    var names = classArray(name + "");
+    if (arguments.length < 2) {
+      var list = classList(this.node()), i = -1, n = names.length;
+      while (++i < n)
+        if (!list.contains(names[i]))
+          return false;
+      return true;
+    }
+    return this.each((typeof value === "function" ? classedFunction : value ? classedTrue : classedFalse)(names, value));
+  }
+
+  // node_modules/d3-selection/src/selection/text.js
+  function textRemove() {
+    this.textContent = "";
+  }
+  function textConstant(value) {
+    return function() {
+      this.textContent = value;
+    };
+  }
+  function textFunction(value) {
+    return function() {
+      var v = value.apply(this, arguments);
+      this.textContent = v == null ? "" : v;
+    };
+  }
+  function text_default(value) {
+    return arguments.length ? this.each(value == null ? textRemove : (typeof value === "function" ? textFunction : textConstant)(value)) : this.node().textContent;
+  }
+
+  // node_modules/d3-selection/src/selection/html.js
+  function htmlRemove() {
+    this.innerHTML = "";
+  }
+  function htmlConstant(value) {
+    return function() {
+      this.innerHTML = value;
+    };
+  }
+  function htmlFunction(value) {
+    return function() {
+      var v = value.apply(this, arguments);
+      this.innerHTML = v == null ? "" : v;
+    };
+  }
+  function html_default(value) {
+    return arguments.length ? this.each(value == null ? htmlRemove : (typeof value === "function" ? htmlFunction : htmlConstant)(value)) : this.node().innerHTML;
+  }
+
+  // node_modules/d3-selection/src/selection/raise.js
+  function raise() {
+    if (this.nextSibling)
+      this.parentNode.appendChild(this);
+  }
+  function raise_default() {
+    return this.each(raise);
+  }
+
+  // node_modules/d3-selection/src/selection/lower.js
+  function lower() {
+    if (this.previousSibling)
+      this.parentNode.insertBefore(this, this.parentNode.firstChild);
+  }
+  function lower_default() {
+    return this.each(lower);
+  }
+
+  // node_modules/d3-selection/src/selection/append.js
+  function append_default(name) {
+    var create2 = typeof name === "function" ? name : creator_default(name);
+    return this.select(function() {
+      return this.appendChild(create2.apply(this, arguments));
+    });
+  }
+
+  // node_modules/d3-selection/src/selection/insert.js
+  function constantNull() {
+    return null;
+  }
+  function insert_default(name, before) {
+    var create2 = typeof name === "function" ? name : creator_default(name), select = before == null ? constantNull : typeof before === "function" ? before : selector_default(before);
+    return this.select(function() {
+      return this.insertBefore(create2.apply(this, arguments), select.apply(this, arguments) || null);
+    });
+  }
+
+  // node_modules/d3-selection/src/selection/remove.js
+  function remove() {
+    var parent = this.parentNode;
+    if (parent)
+      parent.removeChild(this);
+  }
+  function remove_default() {
+    return this.each(remove);
+  }
+
+  // node_modules/d3-selection/src/selection/clone.js
+  function selection_cloneShallow() {
+    var clone = this.cloneNode(false), parent = this.parentNode;
+    return parent ? parent.insertBefore(clone, this.nextSibling) : clone;
+  }
+  function selection_cloneDeep() {
+    var clone = this.cloneNode(true), parent = this.parentNode;
+    return parent ? parent.insertBefore(clone, this.nextSibling) : clone;
+  }
+  function clone_default(deep) {
+    return this.select(deep ? selection_cloneDeep : selection_cloneShallow);
+  }
+
+  // node_modules/d3-selection/src/selection/datum.js
+  function datum_default(value) {
+    return arguments.length ? this.property("__data__", value) : this.node().__data__;
+  }
+
+  // node_modules/d3-selection/src/selection/on.js
+  function contextListener(listener) {
+    return function(event) {
+      listener.call(this, event, this.__data__);
+    };
+  }
+  function parseTypenames2(typenames) {
+    return typenames.trim().split(/^|\s+/).map(function(t) {
+      var name = "", i = t.indexOf(".");
+      if (i >= 0)
+        name = t.slice(i + 1), t = t.slice(0, i);
+      return { type: t, name };
+    });
+  }
+  function onRemove(typename) {
+    return function() {
+      var on = this.__on;
+      if (!on)
+        return;
+      for (var j = 0, i = -1, m = on.length, o; j < m; ++j) {
+        if (o = on[j], (!typename.type || o.type === typename.type) && o.name === typename.name) {
+          this.removeEventListener(o.type, o.listener, o.options);
+        } else {
+          on[++i] = o;
+        }
+      }
+      if (++i)
+        on.length = i;
+      else
+        delete this.__on;
+    };
+  }
+  function onAdd(typename, value, options) {
+    return function() {
+      var on = this.__on, o, listener = contextListener(value);
+      if (on)
+        for (var j = 0, m = on.length; j < m; ++j) {
+          if ((o = on[j]).type === typename.type && o.name === typename.name) {
+            this.removeEventListener(o.type, o.listener, o.options);
+            this.addEventListener(o.type, o.listener = listener, o.options = options);
+            o.value = value;
+            return;
+          }
+        }
+      this.addEventListener(typename.type, listener, options);
+      o = { type: typename.type, name: typename.name, value, listener, options };
+      if (!on)
+        this.__on = [o];
+      else
+        on.push(o);
+    };
+  }
+  function on_default(typename, value, options) {
+    var typenames = parseTypenames2(typename + ""), i, n = typenames.length, t;
+    if (arguments.length < 2) {
+      var on = this.node().__on;
+      if (on)
+        for (var j = 0, m = on.length, o; j < m; ++j) {
+          for (i = 0, o = on[j]; i < n; ++i) {
+            if ((t = typenames[i]).type === o.type && t.name === o.name) {
+              return o.value;
+            }
+          }
+        }
+      return;
+    }
+    on = value ? onAdd : onRemove;
+    for (i = 0; i < n; ++i)
+      this.each(on(typenames[i], value, options));
+    return this;
+  }
+
+  // node_modules/d3-selection/src/selection/dispatch.js
+  function dispatchEvent(node, type2, params) {
+    var window2 = window_default(node), event = window2.CustomEvent;
+    if (typeof event === "function") {
+      event = new event(type2, params);
+    } else {
+      event = window2.document.createEvent("Event");
+      if (params)
+        event.initEvent(type2, params.bubbles, params.cancelable), event.detail = params.detail;
+      else
+        event.initEvent(type2, false, false);
+    }
+    node.dispatchEvent(event);
+  }
+  function dispatchConstant(type2, params) {
+    return function() {
+      return dispatchEvent(this, type2, params);
+    };
+  }
+  function dispatchFunction(type2, params) {
+    return function() {
+      return dispatchEvent(this, type2, params.apply(this, arguments));
+    };
+  }
+  function dispatch_default2(type2, params) {
+    return this.each((typeof params === "function" ? dispatchFunction : dispatchConstant)(type2, params));
+  }
+
+  // node_modules/d3-selection/src/selection/iterator.js
+  function* iterator_default() {
+    for (var groups = this._groups, j = 0, m = groups.length; j < m; ++j) {
+      for (var group = groups[j], i = 0, n = group.length, node; i < n; ++i) {
+        if (node = group[i])
+          yield node;
+      }
+    }
+  }
+
+  // node_modules/d3-selection/src/selection/index.js
+  var root = [null];
+  function Selection(groups, parents) {
+    this._groups = groups;
+    this._parents = parents;
+  }
+  function selection() {
+    return new Selection([[document.documentElement]], root);
+  }
+  function selection_selection() {
+    return this;
+  }
+  Selection.prototype = selection.prototype = {
+    constructor: Selection,
+    select: select_default,
+    selectAll: selectAll_default,
+    selectChild: selectChild_default,
+    selectChildren: selectChildren_default,
+    filter: filter_default,
+    data: data_default,
+    enter: enter_default,
+    exit: exit_default,
+    join: join_default,
+    merge: merge_default,
+    selection: selection_selection,
+    order: order_default,
+    sort: sort_default,
+    call: call_default,
+    nodes: nodes_default,
+    node: node_default,
+    size: size_default,
+    empty: empty_default,
+    each: each_default,
+    attr: attr_default,
+    style: style_default,
+    property: property_default,
+    classed: classed_default,
+    text: text_default,
+    html: html_default,
+    raise: raise_default,
+    lower: lower_default,
+    append: append_default,
+    insert: insert_default,
+    remove: remove_default,
+    clone: clone_default,
+    datum: datum_default,
+    on: on_default,
+    dispatch: dispatch_default2,
+    [Symbol.iterator]: iterator_default
+  };
+  var selection_default = selection;
+
+  // node_modules/d3-selection/src/select.js
+  function select_default2(selector) {
+    return typeof selector === "string" ? new Selection([[document.querySelector(selector)]], [document.documentElement]) : new Selection([[selector]], root);
+  }
+
+  // node_modules/d3-color/src/define.js
+  function define_default(constructor, factory, prototype) {
+    constructor.prototype = factory.prototype = prototype;
+    prototype.constructor = constructor;
+  }
+  function extend(parent, definition) {
+    var prototype = Object.create(parent.prototype);
+    for (var key in definition)
+      prototype[key] = definition[key];
+    return prototype;
+  }
+
+  // node_modules/d3-color/src/color.js
+  function Color() {
+  }
+  var darker = 0.7;
+  var brighter = 1 / darker;
+  var reI = "\\s*([+-]?\\d+)\\s*";
+  var reN = "\\s*([+-]?(?:\\d*\\.)?\\d+(?:[eE][+-]?\\d+)?)\\s*";
+  var reP = "\\s*([+-]?(?:\\d*\\.)?\\d+(?:[eE][+-]?\\d+)?)%\\s*";
+  var reHex = /^#([0-9a-f]{3,8})$/;
+  var reRgbInteger = new RegExp(`^rgb\\(${reI},${reI},${reI}\\)$`);
+  var reRgbPercent = new RegExp(`^rgb\\(${reP},${reP},${reP}\\)$`);
+  var reRgbaInteger = new RegExp(`^rgba\\(${reI},${reI},${reI},${reN}\\)$`);
+  var reRgbaPercent = new RegExp(`^rgba\\(${reP},${reP},${reP},${reN}\\)$`);
+  var reHslPercent = new RegExp(`^hsl\\(${reN},${reP},${reP}\\)$`);
+  var reHslaPercent = new RegExp(`^hsla\\(${reN},${reP},${reP},${reN}\\)$`);
+  var named = {
+    aliceblue: 15792383,
+    antiquewhite: 16444375,
+    aqua: 65535,
+    aquamarine: 8388564,
+    azure: 15794175,
+    beige: 16119260,
+    bisque: 16770244,
+    black: 0,
+    blanchedalmond: 16772045,
+    blue: 255,
+    blueviolet: 9055202,
+    brown: 10824234,
+    burlywood: 14596231,
+    cadetblue: 6266528,
+    chartreuse: 8388352,
+    chocolate: 13789470,
+    coral: 16744272,
+    cornflowerblue: 6591981,
+    cornsilk: 16775388,
+    crimson: 14423100,
+    cyan: 65535,
+    darkblue: 139,
+    darkcyan: 35723,
+    darkgoldenrod: 12092939,
+    darkgray: 11119017,
+    darkgreen: 25600,
+    darkgrey: 11119017,
+    darkkhaki: 12433259,
+    darkmagenta: 9109643,
+    darkolivegreen: 5597999,
+    darkorange: 16747520,
+    darkorchid: 10040012,
+    darkred: 9109504,
+    darksalmon: 15308410,
+    darkseagreen: 9419919,
+    darkslateblue: 4734347,
+    darkslategray: 3100495,
+    darkslategrey: 3100495,
+    darkturquoise: 52945,
+    darkviolet: 9699539,
+    deeppink: 16716947,
+    deepskyblue: 49151,
+    dimgray: 6908265,
+    dimgrey: 6908265,
+    dodgerblue: 2003199,
+    firebrick: 11674146,
+    floralwhite: 16775920,
+    forestgreen: 2263842,
+    fuchsia: 16711935,
+    gainsboro: 14474460,
+    ghostwhite: 16316671,
+    gold: 16766720,
+    goldenrod: 14329120,
+    gray: 8421504,
+    green: 32768,
+    greenyellow: 11403055,
+    grey: 8421504,
+    honeydew: 15794160,
+    hotpink: 16738740,
+    indianred: 13458524,
+    indigo: 4915330,
+    ivory: 16777200,
+    khaki: 15787660,
+    lavender: 15132410,
+    lavenderblush: 16773365,
+    lawngreen: 8190976,
+    lemonchiffon: 16775885,
+    lightblue: 11393254,
+    lightcoral: 15761536,
+    lightcyan: 14745599,
+    lightgoldenrodyellow: 16448210,
+    lightgray: 13882323,
+    lightgreen: 9498256,
+    lightgrey: 13882323,
+    lightpink: 16758465,
+    lightsalmon: 16752762,
+    lightseagreen: 2142890,
+    lightskyblue: 8900346,
+    lightslategray: 7833753,
+    lightslategrey: 7833753,
+    lightsteelblue: 11584734,
+    lightyellow: 16777184,
+    lime: 65280,
+    limegreen: 3329330,
+    linen: 16445670,
+    magenta: 16711935,
+    maroon: 8388608,
+    mediumaquamarine: 6737322,
+    mediumblue: 205,
+    mediumorchid: 12211667,
+    mediumpurple: 9662683,
+    mediumseagreen: 3978097,
+    mediumslateblue: 8087790,
+    mediumspringgreen: 64154,
+    mediumturquoise: 4772300,
+    mediumvioletred: 13047173,
+    midnightblue: 1644912,
+    mintcream: 16121850,
+    mistyrose: 16770273,
+    moccasin: 16770229,
+    navajowhite: 16768685,
+    navy: 128,
+    oldlace: 16643558,
+    olive: 8421376,
+    olivedrab: 7048739,
+    orange: 16753920,
+    orangered: 16729344,
+    orchid: 14315734,
+    palegoldenrod: 15657130,
+    palegreen: 10025880,
+    paleturquoise: 11529966,
+    palevioletred: 14381203,
+    papayawhip: 16773077,
+    peachpuff: 16767673,
+    peru: 13468991,
+    pink: 16761035,
+    plum: 14524637,
+    powderblue: 11591910,
+    purple: 8388736,
+    rebeccapurple: 6697881,
+    red: 16711680,
+    rosybrown: 12357519,
+    royalblue: 4286945,
+    saddlebrown: 9127187,
+    salmon: 16416882,
+    sandybrown: 16032864,
+    seagreen: 3050327,
+    seashell: 16774638,
+    sienna: 10506797,
+    silver: 12632256,
+    skyblue: 8900331,
+    slateblue: 6970061,
+    slategray: 7372944,
+    slategrey: 7372944,
+    snow: 16775930,
+    springgreen: 65407,
+    steelblue: 4620980,
+    tan: 13808780,
+    teal: 32896,
+    thistle: 14204888,
+    tomato: 16737095,
+    turquoise: 4251856,
+    violet: 15631086,
+    wheat: 16113331,
+    white: 16777215,
+    whitesmoke: 16119285,
+    yellow: 16776960,
+    yellowgreen: 10145074
+  };
+  define_default(Color, color, {
+    copy(channels) {
+      return Object.assign(new this.constructor(), this, channels);
+    },
+    displayable() {
+      return this.rgb().displayable();
+    },
+    hex: color_formatHex,
+    // Deprecated! Use color.formatHex.
+    formatHex: color_formatHex,
+    formatHex8: color_formatHex8,
+    formatHsl: color_formatHsl,
+    formatRgb: color_formatRgb,
+    toString: color_formatRgb
+  });
+  function color_formatHex() {
+    return this.rgb().formatHex();
+  }
+  function color_formatHex8() {
+    return this.rgb().formatHex8();
+  }
+  function color_formatHsl() {
+    return hslConvert(this).formatHsl();
+  }
+  function color_formatRgb() {
+    return this.rgb().formatRgb();
+  }
+  function color(format2) {
+    var m, l;
+    format2 = (format2 + "").trim().toLowerCase();
+    return (m = reHex.exec(format2)) ? (l = m[1].length, m = parseInt(m[1], 16), l === 6 ? rgbn(m) : l === 3 ? new Rgb(m >> 8 & 15 | m >> 4 & 240, m >> 4 & 15 | m & 240, (m & 15) << 4 | m & 15, 1) : l === 8 ? rgba(m >> 24 & 255, m >> 16 & 255, m >> 8 & 255, (m & 255) / 255) : l === 4 ? rgba(m >> 12 & 15 | m >> 8 & 240, m >> 8 & 15 | m >> 4 & 240, m >> 4 & 15 | m & 240, ((m & 15) << 4 | m & 15) / 255) : null) : (m = reRgbInteger.exec(format2)) ? new Rgb(m[1], m[2], m[3], 1) : (m = reRgbPercent.exec(format2)) ? new Rgb(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, 1) : (m = reRgbaInteger.exec(format2)) ? rgba(m[1], m[2], m[3], m[4]) : (m = reRgbaPercent.exec(format2)) ? rgba(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, m[4]) : (m = reHslPercent.exec(format2)) ? hsla(m[1], m[2] / 100, m[3] / 100, 1) : (m = reHslaPercent.exec(format2)) ? hsla(m[1], m[2] / 100, m[3] / 100, m[4]) : named.hasOwnProperty(format2) ? rgbn(named[format2]) : format2 === "transparent" ? new Rgb(NaN, NaN, NaN, 0) : null;
+  }
+  function rgbn(n) {
+    return new Rgb(n >> 16 & 255, n >> 8 & 255, n & 255, 1);
+  }
+  function rgba(r, g, b, a) {
+    if (a <= 0)
+      r = g = b = NaN;
+    return new Rgb(r, g, b, a);
+  }
+  function rgbConvert(o) {
+    if (!(o instanceof Color))
+      o = color(o);
+    if (!o)
+      return new Rgb();
+    o = o.rgb();
+    return new Rgb(o.r, o.g, o.b, o.opacity);
+  }
+  function rgb(r, g, b, opacity) {
+    return arguments.length === 1 ? rgbConvert(r) : new Rgb(r, g, b, opacity == null ? 1 : opacity);
+  }
+  function Rgb(r, g, b, opacity) {
+    this.r = +r;
+    this.g = +g;
+    this.b = +b;
+    this.opacity = +opacity;
+  }
+  define_default(Rgb, rgb, extend(Color, {
+    brighter(k) {
+      k = k == null ? brighter : Math.pow(brighter, k);
+      return new Rgb(this.r * k, this.g * k, this.b * k, this.opacity);
+    },
+    darker(k) {
+      k = k == null ? darker : Math.pow(darker, k);
+      return new Rgb(this.r * k, this.g * k, this.b * k, this.opacity);
+    },
+    rgb() {
+      return this;
+    },
+    clamp() {
+      return new Rgb(clampi(this.r), clampi(this.g), clampi(this.b), clampa(this.opacity));
+    },
+    displayable() {
+      return -0.5 <= this.r && this.r < 255.5 && (-0.5 <= this.g && this.g < 255.5) && (-0.5 <= this.b && this.b < 255.5) && (0 <= this.opacity && this.opacity <= 1);
+    },
+    hex: rgb_formatHex,
+    // Deprecated! Use color.formatHex.
+    formatHex: rgb_formatHex,
+    formatHex8: rgb_formatHex8,
+    formatRgb: rgb_formatRgb,
+    toString: rgb_formatRgb
+  }));
+  function rgb_formatHex() {
+    return `#${hex(this.r)}${hex(this.g)}${hex(this.b)}`;
+  }
+  function rgb_formatHex8() {
+    return `#${hex(this.r)}${hex(this.g)}${hex(this.b)}${hex((isNaN(this.opacity) ? 1 : this.opacity) * 255)}`;
+  }
+  function rgb_formatRgb() {
+    const a = clampa(this.opacity);
+    return `${a === 1 ? "rgb(" : "rgba("}${clampi(this.r)}, ${clampi(this.g)}, ${clampi(this.b)}${a === 1 ? ")" : `, ${a})`}`;
+  }
+  function clampa(opacity) {
+    return isNaN(opacity) ? 1 : Math.max(0, Math.min(1, opacity));
+  }
+  function clampi(value) {
+    return Math.max(0, Math.min(255, Math.round(value) || 0));
+  }
+  function hex(value) {
+    value = clampi(value);
+    return (value < 16 ? "0" : "") + value.toString(16);
+  }
+  function hsla(h, s, l, a) {
+    if (a <= 0)
+      h = s = l = NaN;
+    else if (l <= 0 || l >= 1)
+      h = s = NaN;
+    else if (s <= 0)
+      h = NaN;
+    return new Hsl(h, s, l, a);
+  }
+  function hslConvert(o) {
+    if (o instanceof Hsl)
+      return new Hsl(o.h, o.s, o.l, o.opacity);
+    if (!(o instanceof Color))
+      o = color(o);
+    if (!o)
+      return new Hsl();
+    if (o instanceof Hsl)
+      return o;
+    o = o.rgb();
+    var r = o.r / 255, g = o.g / 255, b = o.b / 255, min2 = Math.min(r, g, b), max3 = Math.max(r, g, b), h = NaN, s = max3 - min2, l = (max3 + min2) / 2;
+    if (s) {
+      if (r === max3)
+        h = (g - b) / s + (g < b) * 6;
+      else if (g === max3)
+        h = (b - r) / s + 2;
+      else
+        h = (r - g) / s + 4;
+      s /= l < 0.5 ? max3 + min2 : 2 - max3 - min2;
+      h *= 60;
+    } else {
+      s = l > 0 && l < 1 ? 0 : h;
+    }
+    return new Hsl(h, s, l, o.opacity);
+  }
+  function hsl(h, s, l, opacity) {
+    return arguments.length === 1 ? hslConvert(h) : new Hsl(h, s, l, opacity == null ? 1 : opacity);
+  }
+  function Hsl(h, s, l, opacity) {
+    this.h = +h;
+    this.s = +s;
+    this.l = +l;
+    this.opacity = +opacity;
+  }
+  define_default(Hsl, hsl, extend(Color, {
+    brighter(k) {
+      k = k == null ? brighter : Math.pow(brighter, k);
+      return new Hsl(this.h, this.s, this.l * k, this.opacity);
+    },
+    darker(k) {
+      k = k == null ? darker : Math.pow(darker, k);
+      return new Hsl(this.h, this.s, this.l * k, this.opacity);
+    },
+    rgb() {
+      var h = this.h % 360 + (this.h < 0) * 360, s = isNaN(h) || isNaN(this.s) ? 0 : this.s, l = this.l, m2 = l + (l < 0.5 ? l : 1 - l) * s, m1 = 2 * l - m2;
+      return new Rgb(
+        hsl2rgb(h >= 240 ? h - 240 : h + 120, m1, m2),
+        hsl2rgb(h, m1, m2),
+        hsl2rgb(h < 120 ? h + 240 : h - 120, m1, m2),
+        this.opacity
+      );
+    },
+    clamp() {
+      return new Hsl(clamph(this.h), clampt(this.s), clampt(this.l), clampa(this.opacity));
+    },
+    displayable() {
+      return (0 <= this.s && this.s <= 1 || isNaN(this.s)) && (0 <= this.l && this.l <= 1) && (0 <= this.opacity && this.opacity <= 1);
+    },
+    formatHsl() {
+      const a = clampa(this.opacity);
+      return `${a === 1 ? "hsl(" : "hsla("}${clamph(this.h)}, ${clampt(this.s) * 100}%, ${clampt(this.l) * 100}%${a === 1 ? ")" : `, ${a})`}`;
+    }
+  }));
+  function clamph(value) {
+    value = (value || 0) % 360;
+    return value < 0 ? value + 360 : value;
+  }
+  function clampt(value) {
+    return Math.max(0, Math.min(1, value || 0));
+  }
+  function hsl2rgb(h, m1, m2) {
+    return (h < 60 ? m1 + (m2 - m1) * h / 60 : h < 180 ? m2 : h < 240 ? m1 + (m2 - m1) * (240 - h) / 60 : m1) * 255;
+  }
+
+  // node_modules/d3-interpolate/src/basis.js
+  function basis(t12, v0, v1, v2, v3) {
+    var t2 = t12 * t12, t3 = t2 * t12;
+    return ((1 - 3 * t12 + 3 * t2 - t3) * v0 + (4 - 6 * t2 + 3 * t3) * v1 + (1 + 3 * t12 + 3 * t2 - 3 * t3) * v2 + t3 * v3) / 6;
+  }
+  function basis_default(values) {
+    var n = values.length - 1;
+    return function(t) {
+      var i = t <= 0 ? t = 0 : t >= 1 ? (t = 1, n - 1) : Math.floor(t * n), v1 = values[i], v2 = values[i + 1], v0 = i > 0 ? values[i - 1] : 2 * v1 - v2, v3 = i < n - 1 ? values[i + 2] : 2 * v2 - v1;
+      return basis((t - i / n) * n, v0, v1, v2, v3);
+    };
+  }
+
+  // node_modules/d3-interpolate/src/basisClosed.js
+  function basisClosed_default(values) {
+    var n = values.length;
+    return function(t) {
+      var i = Math.floor(((t %= 1) < 0 ? ++t : t) * n), v0 = values[(i + n - 1) % n], v1 = values[i % n], v2 = values[(i + 1) % n], v3 = values[(i + 2) % n];
+      return basis((t - i / n) * n, v0, v1, v2, v3);
+    };
+  }
+
+  // node_modules/d3-interpolate/src/constant.js
+  var constant_default2 = (x2) => () => x2;
+
+  // node_modules/d3-interpolate/src/color.js
+  function linear(a, d) {
+    return function(t) {
+      return a + t * d;
+    };
+  }
+  function exponential(a, b, y2) {
+    return a = Math.pow(a, y2), b = Math.pow(b, y2) - a, y2 = 1 / y2, function(t) {
+      return Math.pow(a + t * b, y2);
+    };
+  }
+  function gamma(y2) {
+    return (y2 = +y2) === 1 ? nogamma : function(a, b) {
+      return b - a ? exponential(a, b, y2) : constant_default2(isNaN(a) ? b : a);
+    };
+  }
+  function nogamma(a, b) {
+    var d = b - a;
+    return d ? linear(a, d) : constant_default2(isNaN(a) ? b : a);
+  }
+
+  // node_modules/d3-interpolate/src/rgb.js
+  var rgb_default = function rgbGamma(y2) {
+    var color2 = gamma(y2);
+    function rgb2(start2, end) {
+      var r = color2((start2 = rgb(start2)).r, (end = rgb(end)).r), g = color2(start2.g, end.g), b = color2(start2.b, end.b), opacity = nogamma(start2.opacity, end.opacity);
+      return function(t) {
+        start2.r = r(t);
+        start2.g = g(t);
+        start2.b = b(t);
+        start2.opacity = opacity(t);
+        return start2 + "";
+      };
+    }
+    rgb2.gamma = rgbGamma;
+    return rgb2;
+  }(1);
+  function rgbSpline(spline) {
+    return function(colors) {
+      var n = colors.length, r = new Array(n), g = new Array(n), b = new Array(n), i, color2;
+      for (i = 0; i < n; ++i) {
+        color2 = rgb(colors[i]);
+        r[i] = color2.r || 0;
+        g[i] = color2.g || 0;
+        b[i] = color2.b || 0;
+      }
+      r = spline(r);
+      g = spline(g);
+      b = spline(b);
+      color2.opacity = 1;
+      return function(t) {
+        color2.r = r(t);
+        color2.g = g(t);
+        color2.b = b(t);
+        return color2 + "";
+      };
+    };
+  }
+  var rgbBasis = rgbSpline(basis_default);
+  var rgbBasisClosed = rgbSpline(basisClosed_default);
+
+  // node_modules/d3-interpolate/src/numberArray.js
+  function numberArray_default(a, b) {
+    if (!b)
+      b = [];
+    var n = a ? Math.min(b.length, a.length) : 0, c = b.slice(), i;
+    return function(t) {
+      for (i = 0; i < n; ++i)
+        c[i] = a[i] * (1 - t) + b[i] * t;
+      return c;
+    };
+  }
+  function isNumberArray(x2) {
+    return ArrayBuffer.isView(x2) && !(x2 instanceof DataView);
+  }
+
+  // node_modules/d3-interpolate/src/array.js
+  function genericArray(a, b) {
+    var nb = b ? b.length : 0, na = a ? Math.min(nb, a.length) : 0, x2 = new Array(na), c = new Array(nb), i;
+    for (i = 0; i < na; ++i)
+      x2[i] = value_default(a[i], b[i]);
+    for (; i < nb; ++i)
+      c[i] = b[i];
+    return function(t) {
+      for (i = 0; i < na; ++i)
+        c[i] = x2[i](t);
+      return c;
+    };
+  }
+
+  // node_modules/d3-interpolate/src/date.js
+  function date_default(a, b) {
+    var d = /* @__PURE__ */ new Date();
+    return a = +a, b = +b, function(t) {
+      return d.setTime(a * (1 - t) + b * t), d;
+    };
+  }
+
+  // node_modules/d3-interpolate/src/number.js
+  function number_default(a, b) {
+    return a = +a, b = +b, function(t) {
+      return a * (1 - t) + b * t;
+    };
+  }
+
+  // node_modules/d3-interpolate/src/object.js
+  function object_default(a, b) {
+    var i = {}, c = {}, k;
+    if (a === null || typeof a !== "object")
+      a = {};
+    if (b === null || typeof b !== "object")
+      b = {};
+    for (k in b) {
+      if (k in a) {
+        i[k] = value_default(a[k], b[k]);
+      } else {
+        c[k] = b[k];
+      }
+    }
+    return function(t) {
+      for (k in i)
+        c[k] = i[k](t);
+      return c;
+    };
+  }
+
+  // node_modules/d3-interpolate/src/string.js
+  var reA = /[-+]?(?:\d+\.?\d*|\.?\d+)(?:[eE][-+]?\d+)?/g;
+  var reB = new RegExp(reA.source, "g");
+  function zero2(b) {
+    return function() {
+      return b;
+    };
+  }
+  function one(b) {
+    return function(t) {
+      return b(t) + "";
+    };
+  }
+  function string_default(a, b) {
+    var bi = reA.lastIndex = reB.lastIndex = 0, am, bm, bs, i = -1, s = [], q = [];
+    a = a + "", b = b + "";
+    while ((am = reA.exec(a)) && (bm = reB.exec(b))) {
+      if ((bs = bm.index) > bi) {
+        bs = b.slice(bi, bs);
+        if (s[i])
+          s[i] += bs;
+        else
+          s[++i] = bs;
+      }
+      if ((am = am[0]) === (bm = bm[0])) {
+        if (s[i])
+          s[i] += bm;
+        else
+          s[++i] = bm;
+      } else {
+        s[++i] = null;
+        q.push({ i, x: number_default(am, bm) });
+      }
+      bi = reB.lastIndex;
+    }
+    if (bi < b.length) {
+      bs = b.slice(bi);
+      if (s[i])
+        s[i] += bs;
+      else
+        s[++i] = bs;
+    }
+    return s.length < 2 ? q[0] ? one(q[0].x) : zero2(b) : (b = q.length, function(t) {
+      for (var i2 = 0, o; i2 < b; ++i2)
+        s[(o = q[i2]).i] = o.x(t);
+      return s.join("");
+    });
+  }
+
+  // node_modules/d3-interpolate/src/value.js
+  function value_default(a, b) {
+    var t = typeof b, c;
+    return b == null || t === "boolean" ? constant_default2(b) : (t === "number" ? number_default : t === "string" ? (c = color(b)) ? (b = c, rgb_default) : string_default : b instanceof color ? rgb_default : b instanceof Date ? date_default : isNumberArray(b) ? numberArray_default : Array.isArray(b) ? genericArray : typeof b.valueOf !== "function" && typeof b.toString !== "function" || isNaN(b) ? object_default : number_default)(a, b);
+  }
+
+  // node_modules/d3-interpolate/src/round.js
+  function round_default(a, b) {
+    return a = +a, b = +b, function(t) {
+      return Math.round(a * (1 - t) + b * t);
+    };
+  }
+
+  // node_modules/d3-interpolate/src/transform/decompose.js
+  var degrees = 180 / Math.PI;
+  var identity = {
+    translateX: 0,
+    translateY: 0,
+    rotate: 0,
+    skewX: 0,
+    scaleX: 1,
+    scaleY: 1
+  };
+  function decompose_default(a, b, c, d, e, f) {
+    var scaleX, scaleY, skewX;
+    if (scaleX = Math.sqrt(a * a + b * b))
+      a /= scaleX, b /= scaleX;
+    if (skewX = a * c + b * d)
+      c -= a * skewX, d -= b * skewX;
+    if (scaleY = Math.sqrt(c * c + d * d))
+      c /= scaleY, d /= scaleY, skewX /= scaleY;
+    if (a * d < b * c)
+      a = -a, b = -b, skewX = -skewX, scaleX = -scaleX;
+    return {
+      translateX: e,
+      translateY: f,
+      rotate: Math.atan2(b, a) * degrees,
+      skewX: Math.atan(skewX) * degrees,
+      scaleX,
+      scaleY
+    };
+  }
+
+  // node_modules/d3-interpolate/src/transform/parse.js
+  var svgNode;
+  function parseCss(value) {
+    const m = new (typeof DOMMatrix === "function" ? DOMMatrix : WebKitCSSMatrix)(value + "");
+    return m.isIdentity ? identity : decompose_default(m.a, m.b, m.c, m.d, m.e, m.f);
+  }
+  function parseSvg(value) {
+    if (value == null)
+      return identity;
+    if (!svgNode)
+      svgNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    svgNode.setAttribute("transform", value);
+    if (!(value = svgNode.transform.baseVal.consolidate()))
+      return identity;
+    value = value.matrix;
+    return decompose_default(value.a, value.b, value.c, value.d, value.e, value.f);
+  }
+
+  // node_modules/d3-interpolate/src/transform/index.js
+  function interpolateTransform(parse, pxComma, pxParen, degParen) {
+    function pop(s) {
+      return s.length ? s.pop() + " " : "";
+    }
+    function translate(xa, ya, xb, yb, s, q) {
+      if (xa !== xb || ya !== yb) {
+        var i = s.push("translate(", null, pxComma, null, pxParen);
+        q.push({ i: i - 4, x: number_default(xa, xb) }, { i: i - 2, x: number_default(ya, yb) });
+      } else if (xb || yb) {
+        s.push("translate(" + xb + pxComma + yb + pxParen);
+      }
+    }
+    function rotate(a, b, s, q) {
+      if (a !== b) {
+        if (a - b > 180)
+          b += 360;
+        else if (b - a > 180)
+          a += 360;
+        q.push({ i: s.push(pop(s) + "rotate(", null, degParen) - 2, x: number_default(a, b) });
+      } else if (b) {
+        s.push(pop(s) + "rotate(" + b + degParen);
+      }
+    }
+    function skewX(a, b, s, q) {
+      if (a !== b) {
+        q.push({ i: s.push(pop(s) + "skewX(", null, degParen) - 2, x: number_default(a, b) });
+      } else if (b) {
+        s.push(pop(s) + "skewX(" + b + degParen);
+      }
+    }
+    function scale(xa, ya, xb, yb, s, q) {
+      if (xa !== xb || ya !== yb) {
+        var i = s.push(pop(s) + "scale(", null, ",", null, ")");
+        q.push({ i: i - 4, x: number_default(xa, xb) }, { i: i - 2, x: number_default(ya, yb) });
+      } else if (xb !== 1 || yb !== 1) {
+        s.push(pop(s) + "scale(" + xb + "," + yb + ")");
+      }
+    }
+    return function(a, b) {
+      var s = [], q = [];
+      a = parse(a), b = parse(b);
+      translate(a.translateX, a.translateY, b.translateX, b.translateY, s, q);
+      rotate(a.rotate, b.rotate, s, q);
+      skewX(a.skewX, b.skewX, s, q);
+      scale(a.scaleX, a.scaleY, b.scaleX, b.scaleY, s, q);
+      a = b = null;
+      return function(t) {
+        var i = -1, n = q.length, o;
+        while (++i < n)
+          s[(o = q[i]).i] = o.x(t);
+        return s.join("");
+      };
+    };
+  }
+  var interpolateTransformCss = interpolateTransform(parseCss, "px, ", "px)", "deg)");
+  var interpolateTransformSvg = interpolateTransform(parseSvg, ", ", ")", ")");
+
+  // node_modules/d3-timer/src/timer.js
+  var frame = 0;
+  var timeout2 = 0;
+  var interval = 0;
+  var pokeDelay = 1e3;
+  var taskHead;
+  var taskTail;
+  var clockLast = 0;
+  var clockNow = 0;
+  var clockSkew = 0;
+  var clock = typeof performance === "object" && performance.now ? performance : Date;
+  var setFrame = typeof window === "object" && window.requestAnimationFrame ? window.requestAnimationFrame.bind(window) : function(f) {
+    setTimeout(f, 17);
+  };
+  function now() {
+    return clockNow || (setFrame(clearNow), clockNow = clock.now() + clockSkew);
+  }
+  function clearNow() {
+    clockNow = 0;
+  }
+  function Timer() {
+    this._call = this._time = this._next = null;
+  }
+  Timer.prototype = timer.prototype = {
+    constructor: Timer,
+    restart: function(callback, delay, time) {
+      if (typeof callback !== "function")
+        throw new TypeError("callback is not a function");
+      time = (time == null ? now() : +time) + (delay == null ? 0 : +delay);
+      if (!this._next && taskTail !== this) {
+        if (taskTail)
+          taskTail._next = this;
+        else
+          taskHead = this;
+        taskTail = this;
+      }
+      this._call = callback;
+      this._time = time;
+      sleep();
+    },
+    stop: function() {
+      if (this._call) {
+        this._call = null;
+        this._time = Infinity;
+        sleep();
+      }
+    }
+  };
+  function timer(callback, delay, time) {
+    var t = new Timer();
+    t.restart(callback, delay, time);
+    return t;
+  }
+  function timerFlush() {
+    now();
+    ++frame;
+    var t = taskHead, e;
+    while (t) {
+      if ((e = clockNow - t._time) >= 0)
+        t._call.call(void 0, e);
+      t = t._next;
+    }
+    --frame;
+  }
+  function wake() {
+    clockNow = (clockLast = clock.now()) + clockSkew;
+    frame = timeout2 = 0;
+    try {
+      timerFlush();
+    } finally {
+      frame = 0;
+      nap();
+      clockNow = 0;
+    }
+  }
+  function poke() {
+    var now2 = clock.now(), delay = now2 - clockLast;
+    if (delay > pokeDelay)
+      clockSkew -= delay, clockLast = now2;
+  }
+  function nap() {
+    var t02, t12 = taskHead, t2, time = Infinity;
+    while (t12) {
+      if (t12._call) {
+        if (time > t12._time)
+          time = t12._time;
+        t02 = t12, t12 = t12._next;
+      } else {
+        t2 = t12._next, t12._next = null;
+        t12 = t02 ? t02._next = t2 : taskHead = t2;
+      }
+    }
+    taskTail = t02;
+    sleep(time);
+  }
+  function sleep(time) {
+    if (frame)
+      return;
+    if (timeout2)
+      timeout2 = clearTimeout(timeout2);
+    var delay = time - clockNow;
+    if (delay > 24) {
+      if (time < Infinity)
+        timeout2 = setTimeout(wake, time - clock.now() - clockSkew);
+      if (interval)
+        interval = clearInterval(interval);
+    } else {
+      if (!interval)
+        clockLast = clock.now(), interval = setInterval(poke, pokeDelay);
+      frame = 1, setFrame(wake);
+    }
+  }
+
+  // node_modules/d3-timer/src/timeout.js
+  function timeout_default(callback, delay, time) {
+    var t = new Timer();
+    delay = delay == null ? 0 : +delay;
+    t.restart((elapsed) => {
+      t.stop();
+      callback(elapsed + delay);
+    }, delay, time);
+    return t;
+  }
+
+  // node_modules/d3-transition/src/transition/schedule.js
+  var emptyOn = dispatch_default("start", "end", "cancel", "interrupt");
+  var emptyTween = [];
+  var CREATED = 0;
+  var SCHEDULED = 1;
+  var STARTING = 2;
+  var STARTED = 3;
+  var RUNNING = 4;
+  var ENDING = 5;
+  var ENDED = 6;
+  function schedule_default(node, name, id2, index, group, timing) {
+    var schedules = node.__transition;
+    if (!schedules)
+      node.__transition = {};
+    else if (id2 in schedules)
+      return;
+    create(node, id2, {
+      name,
+      index,
+      // For context during callback.
+      group,
+      // For context during callback.
+      on: emptyOn,
+      tween: emptyTween,
+      time: timing.time,
+      delay: timing.delay,
+      duration: timing.duration,
+      ease: timing.ease,
+      timer: null,
+      state: CREATED
+    });
+  }
+  function init(node, id2) {
+    var schedule = get2(node, id2);
+    if (schedule.state > CREATED)
+      throw new Error("too late; already scheduled");
+    return schedule;
+  }
+  function set2(node, id2) {
+    var schedule = get2(node, id2);
+    if (schedule.state > STARTED)
+      throw new Error("too late; already running");
+    return schedule;
+  }
+  function get2(node, id2) {
+    var schedule = node.__transition;
+    if (!schedule || !(schedule = schedule[id2]))
+      throw new Error("transition not found");
+    return schedule;
+  }
+  function create(node, id2, self2) {
+    var schedules = node.__transition, tween;
+    schedules[id2] = self2;
+    self2.timer = timer(schedule, 0, self2.time);
+    function schedule(elapsed) {
+      self2.state = SCHEDULED;
+      self2.timer.restart(start2, self2.delay, self2.time);
+      if (self2.delay <= elapsed)
+        start2(elapsed - self2.delay);
+    }
+    function start2(elapsed) {
+      var i, j, n, o;
+      if (self2.state !== SCHEDULED)
+        return stop();
+      for (i in schedules) {
+        o = schedules[i];
+        if (o.name !== self2.name)
+          continue;
+        if (o.state === STARTED)
+          return timeout_default(start2);
+        if (o.state === RUNNING) {
+          o.state = ENDED;
+          o.timer.stop();
+          o.on.call("interrupt", node, node.__data__, o.index, o.group);
+          delete schedules[i];
+        } else if (+i < id2) {
+          o.state = ENDED;
+          o.timer.stop();
+          o.on.call("cancel", node, node.__data__, o.index, o.group);
+          delete schedules[i];
+        }
+      }
+      timeout_default(function() {
+        if (self2.state === STARTED) {
+          self2.state = RUNNING;
+          self2.timer.restart(tick, self2.delay, self2.time);
+          tick(elapsed);
+        }
+      });
+      self2.state = STARTING;
+      self2.on.call("start", node, node.__data__, self2.index, self2.group);
+      if (self2.state !== STARTING)
+        return;
+      self2.state = STARTED;
+      tween = new Array(n = self2.tween.length);
+      for (i = 0, j = -1; i < n; ++i) {
+        if (o = self2.tween[i].value.call(node, node.__data__, self2.index, self2.group)) {
+          tween[++j] = o;
+        }
+      }
+      tween.length = j + 1;
+    }
+    function tick(elapsed) {
+      var t = elapsed < self2.duration ? self2.ease.call(null, elapsed / self2.duration) : (self2.timer.restart(stop), self2.state = ENDING, 1), i = -1, n = tween.length;
+      while (++i < n) {
+        tween[i].call(node, t);
+      }
+      if (self2.state === ENDING) {
+        self2.on.call("end", node, node.__data__, self2.index, self2.group);
+        stop();
+      }
+    }
+    function stop() {
+      self2.state = ENDED;
+      self2.timer.stop();
+      delete schedules[id2];
+      for (var i in schedules)
+        return;
+      delete node.__transition;
+    }
+  }
+
+  // node_modules/d3-transition/src/interrupt.js
+  function interrupt_default(node, name) {
+    var schedules = node.__transition, schedule, active, empty2 = true, i;
+    if (!schedules)
+      return;
+    name = name == null ? null : name + "";
+    for (i in schedules) {
+      if ((schedule = schedules[i]).name !== name) {
+        empty2 = false;
+        continue;
+      }
+      active = schedule.state > STARTING && schedule.state < ENDING;
+      schedule.state = ENDED;
+      schedule.timer.stop();
+      schedule.on.call(active ? "interrupt" : "cancel", node, node.__data__, schedule.index, schedule.group);
+      delete schedules[i];
+    }
+    if (empty2)
+      delete node.__transition;
+  }
+
+  // node_modules/d3-transition/src/selection/interrupt.js
+  function interrupt_default2(name) {
+    return this.each(function() {
+      interrupt_default(this, name);
+    });
+  }
+
+  // node_modules/d3-transition/src/transition/tween.js
+  function tweenRemove(id2, name) {
+    var tween0, tween1;
+    return function() {
+      var schedule = set2(this, id2), tween = schedule.tween;
+      if (tween !== tween0) {
+        tween1 = tween0 = tween;
+        for (var i = 0, n = tween1.length; i < n; ++i) {
+          if (tween1[i].name === name) {
+            tween1 = tween1.slice();
+            tween1.splice(i, 1);
+            break;
+          }
+        }
+      }
+      schedule.tween = tween1;
+    };
+  }
+  function tweenFunction(id2, name, value) {
+    var tween0, tween1;
+    if (typeof value !== "function")
+      throw new Error();
+    return function() {
+      var schedule = set2(this, id2), tween = schedule.tween;
+      if (tween !== tween0) {
+        tween1 = (tween0 = tween).slice();
+        for (var t = { name, value }, i = 0, n = tween1.length; i < n; ++i) {
+          if (tween1[i].name === name) {
+            tween1[i] = t;
+            break;
+          }
+        }
+        if (i === n)
+          tween1.push(t);
+      }
+      schedule.tween = tween1;
+    };
+  }
+  function tween_default(name, value) {
+    var id2 = this._id;
+    name += "";
+    if (arguments.length < 2) {
+      var tween = get2(this.node(), id2).tween;
+      for (var i = 0, n = tween.length, t; i < n; ++i) {
+        if ((t = tween[i]).name === name) {
+          return t.value;
+        }
+      }
+      return null;
+    }
+    return this.each((value == null ? tweenRemove : tweenFunction)(id2, name, value));
+  }
+  function tweenValue(transition2, name, value) {
+    var id2 = transition2._id;
+    transition2.each(function() {
+      var schedule = set2(this, id2);
+      (schedule.value || (schedule.value = {}))[name] = value.apply(this, arguments);
+    });
+    return function(node) {
+      return get2(node, id2).value[name];
+    };
+  }
+
+  // node_modules/d3-transition/src/transition/interpolate.js
+  function interpolate_default(a, b) {
+    var c;
+    return (typeof b === "number" ? number_default : b instanceof color ? rgb_default : (c = color(b)) ? (b = c, rgb_default) : string_default)(a, b);
+  }
+
+  // node_modules/d3-transition/src/transition/attr.js
+  function attrRemove2(name) {
+    return function() {
+      this.removeAttribute(name);
+    };
+  }
+  function attrRemoveNS2(fullname) {
+    return function() {
+      this.removeAttributeNS(fullname.space, fullname.local);
+    };
+  }
+  function attrConstant2(name, interpolate, value1) {
+    var string00, string1 = value1 + "", interpolate0;
+    return function() {
+      var string0 = this.getAttribute(name);
+      return string0 === string1 ? null : string0 === string00 ? interpolate0 : interpolate0 = interpolate(string00 = string0, value1);
+    };
+  }
+  function attrConstantNS2(fullname, interpolate, value1) {
+    var string00, string1 = value1 + "", interpolate0;
+    return function() {
+      var string0 = this.getAttributeNS(fullname.space, fullname.local);
+      return string0 === string1 ? null : string0 === string00 ? interpolate0 : interpolate0 = interpolate(string00 = string0, value1);
+    };
+  }
+  function attrFunction2(name, interpolate, value) {
+    var string00, string10, interpolate0;
+    return function() {
+      var string0, value1 = value(this), string1;
+      if (value1 == null)
+        return void this.removeAttribute(name);
+      string0 = this.getAttribute(name);
+      string1 = value1 + "";
+      return string0 === string1 ? null : string0 === string00 && string1 === string10 ? interpolate0 : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
+    };
+  }
+  function attrFunctionNS2(fullname, interpolate, value) {
+    var string00, string10, interpolate0;
+    return function() {
+      var string0, value1 = value(this), string1;
+      if (value1 == null)
+        return void this.removeAttributeNS(fullname.space, fullname.local);
+      string0 = this.getAttributeNS(fullname.space, fullname.local);
+      string1 = value1 + "";
+      return string0 === string1 ? null : string0 === string00 && string1 === string10 ? interpolate0 : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
+    };
+  }
+  function attr_default2(name, value) {
+    var fullname = namespace_default(name), i = fullname === "transform" ? interpolateTransformSvg : interpolate_default;
+    return this.attrTween(name, typeof value === "function" ? (fullname.local ? attrFunctionNS2 : attrFunction2)(fullname, i, tweenValue(this, "attr." + name, value)) : value == null ? (fullname.local ? attrRemoveNS2 : attrRemove2)(fullname) : (fullname.local ? attrConstantNS2 : attrConstant2)(fullname, i, value));
+  }
+
+  // node_modules/d3-transition/src/transition/attrTween.js
+  function attrInterpolate(name, i) {
+    return function(t) {
+      this.setAttribute(name, i.call(this, t));
+    };
+  }
+  function attrInterpolateNS(fullname, i) {
+    return function(t) {
+      this.setAttributeNS(fullname.space, fullname.local, i.call(this, t));
+    };
+  }
+  function attrTweenNS(fullname, value) {
+    var t02, i0;
+    function tween() {
+      var i = value.apply(this, arguments);
+      if (i !== i0)
+        t02 = (i0 = i) && attrInterpolateNS(fullname, i);
+      return t02;
+    }
+    tween._value = value;
+    return tween;
+  }
+  function attrTween(name, value) {
+    var t02, i0;
+    function tween() {
+      var i = value.apply(this, arguments);
+      if (i !== i0)
+        t02 = (i0 = i) && attrInterpolate(name, i);
+      return t02;
+    }
+    tween._value = value;
+    return tween;
+  }
+  function attrTween_default(name, value) {
+    var key = "attr." + name;
+    if (arguments.length < 2)
+      return (key = this.tween(key)) && key._value;
+    if (value == null)
+      return this.tween(key, null);
+    if (typeof value !== "function")
+      throw new Error();
+    var fullname = namespace_default(name);
+    return this.tween(key, (fullname.local ? attrTweenNS : attrTween)(fullname, value));
+  }
+
+  // node_modules/d3-transition/src/transition/delay.js
+  function delayFunction(id2, value) {
+    return function() {
+      init(this, id2).delay = +value.apply(this, arguments);
+    };
+  }
+  function delayConstant(id2, value) {
+    return value = +value, function() {
+      init(this, id2).delay = value;
+    };
+  }
+  function delay_default(value) {
+    var id2 = this._id;
+    return arguments.length ? this.each((typeof value === "function" ? delayFunction : delayConstant)(id2, value)) : get2(this.node(), id2).delay;
+  }
+
+  // node_modules/d3-transition/src/transition/duration.js
+  function durationFunction(id2, value) {
+    return function() {
+      set2(this, id2).duration = +value.apply(this, arguments);
+    };
+  }
+  function durationConstant(id2, value) {
+    return value = +value, function() {
+      set2(this, id2).duration = value;
+    };
+  }
+  function duration_default(value) {
+    var id2 = this._id;
+    return arguments.length ? this.each((typeof value === "function" ? durationFunction : durationConstant)(id2, value)) : get2(this.node(), id2).duration;
+  }
+
+  // node_modules/d3-transition/src/transition/ease.js
+  function easeConstant(id2, value) {
+    if (typeof value !== "function")
+      throw new Error();
+    return function() {
+      set2(this, id2).ease = value;
+    };
+  }
+  function ease_default(value) {
+    var id2 = this._id;
+    return arguments.length ? this.each(easeConstant(id2, value)) : get2(this.node(), id2).ease;
+  }
+
+  // node_modules/d3-transition/src/transition/easeVarying.js
+  function easeVarying(id2, value) {
+    return function() {
+      var v = value.apply(this, arguments);
+      if (typeof v !== "function")
+        throw new Error();
+      set2(this, id2).ease = v;
+    };
+  }
+  function easeVarying_default(value) {
+    if (typeof value !== "function")
+      throw new Error();
+    return this.each(easeVarying(this._id, value));
+  }
+
+  // node_modules/d3-transition/src/transition/filter.js
+  function filter_default2(match) {
+    if (typeof match !== "function")
+      match = matcher_default(match);
+    for (var groups = this._groups, m = groups.length, subgroups = new Array(m), j = 0; j < m; ++j) {
+      for (var group = groups[j], n = group.length, subgroup = subgroups[j] = [], node, i = 0; i < n; ++i) {
+        if ((node = group[i]) && match.call(node, node.__data__, i, group)) {
+          subgroup.push(node);
+        }
+      }
+    }
+    return new Transition2(subgroups, this._parents, this._name, this._id);
+  }
+
+  // node_modules/d3-transition/src/transition/merge.js
+  function merge_default2(transition2) {
+    if (transition2._id !== this._id)
+      throw new Error();
+    for (var groups0 = this._groups, groups1 = transition2._groups, m0 = groups0.length, m1 = groups1.length, m = Math.min(m0, m1), merges = new Array(m0), j = 0; j < m; ++j) {
+      for (var group0 = groups0[j], group1 = groups1[j], n = group0.length, merge = merges[j] = new Array(n), node, i = 0; i < n; ++i) {
+        if (node = group0[i] || group1[i]) {
+          merge[i] = node;
+        }
+      }
+    }
+    for (; j < m0; ++j) {
+      merges[j] = groups0[j];
+    }
+    return new Transition2(merges, this._parents, this._name, this._id);
+  }
+
+  // node_modules/d3-transition/src/transition/on.js
+  function start(name) {
+    return (name + "").trim().split(/^|\s+/).every(function(t) {
+      var i = t.indexOf(".");
+      if (i >= 0)
+        t = t.slice(0, i);
+      return !t || t === "start";
+    });
+  }
+  function onFunction(id2, name, listener) {
+    var on0, on1, sit = start(name) ? init : set2;
+    return function() {
+      var schedule = sit(this, id2), on = schedule.on;
+      if (on !== on0)
+        (on1 = (on0 = on).copy()).on(name, listener);
+      schedule.on = on1;
+    };
+  }
+  function on_default2(name, listener) {
+    var id2 = this._id;
+    return arguments.length < 2 ? get2(this.node(), id2).on.on(name) : this.each(onFunction(id2, name, listener));
+  }
+
+  // node_modules/d3-transition/src/transition/remove.js
+  function removeFunction(id2) {
+    return function() {
+      var parent = this.parentNode;
+      for (var i in this.__transition)
+        if (+i !== id2)
+          return;
+      if (parent)
+        parent.removeChild(this);
+    };
+  }
+  function remove_default2() {
+    return this.on("end.remove", removeFunction(this._id));
+  }
+
+  // node_modules/d3-transition/src/transition/select.js
+  function select_default3(select) {
+    var name = this._name, id2 = this._id;
+    if (typeof select !== "function")
+      select = selector_default(select);
+    for (var groups = this._groups, m = groups.length, subgroups = new Array(m), j = 0; j < m; ++j) {
+      for (var group = groups[j], n = group.length, subgroup = subgroups[j] = new Array(n), node, subnode, i = 0; i < n; ++i) {
+        if ((node = group[i]) && (subnode = select.call(node, node.__data__, i, group))) {
+          if ("__data__" in node)
+            subnode.__data__ = node.__data__;
+          subgroup[i] = subnode;
+          schedule_default(subgroup[i], name, id2, i, subgroup, get2(node, id2));
+        }
+      }
+    }
+    return new Transition2(subgroups, this._parents, name, id2);
+  }
+
+  // node_modules/d3-transition/src/transition/selectAll.js
+  function selectAll_default2(select) {
+    var name = this._name, id2 = this._id;
+    if (typeof select !== "function")
+      select = selectorAll_default(select);
+    for (var groups = this._groups, m = groups.length, subgroups = [], parents = [], j = 0; j < m; ++j) {
+      for (var group = groups[j], n = group.length, node, i = 0; i < n; ++i) {
+        if (node = group[i]) {
+          for (var children2 = select.call(node, node.__data__, i, group), child, inherit2 = get2(node, id2), k = 0, l = children2.length; k < l; ++k) {
+            if (child = children2[k]) {
+              schedule_default(child, name, id2, k, children2, inherit2);
+            }
+          }
+          subgroups.push(children2);
+          parents.push(node);
+        }
+      }
+    }
+    return new Transition2(subgroups, parents, name, id2);
+  }
+
+  // node_modules/d3-transition/src/transition/selection.js
+  var Selection2 = selection_default.prototype.constructor;
+  function selection_default2() {
+    return new Selection2(this._groups, this._parents);
+  }
+
+  // node_modules/d3-transition/src/transition/style.js
+  function styleNull(name, interpolate) {
+    var string00, string10, interpolate0;
+    return function() {
+      var string0 = styleValue(this, name), string1 = (this.style.removeProperty(name), styleValue(this, name));
+      return string0 === string1 ? null : string0 === string00 && string1 === string10 ? interpolate0 : interpolate0 = interpolate(string00 = string0, string10 = string1);
+    };
+  }
+  function styleRemove2(name) {
+    return function() {
+      this.style.removeProperty(name);
+    };
+  }
+  function styleConstant2(name, interpolate, value1) {
+    var string00, string1 = value1 + "", interpolate0;
+    return function() {
+      var string0 = styleValue(this, name);
+      return string0 === string1 ? null : string0 === string00 ? interpolate0 : interpolate0 = interpolate(string00 = string0, value1);
+    };
+  }
+  function styleFunction2(name, interpolate, value) {
+    var string00, string10, interpolate0;
+    return function() {
+      var string0 = styleValue(this, name), value1 = value(this), string1 = value1 + "";
+      if (value1 == null)
+        string1 = value1 = (this.style.removeProperty(name), styleValue(this, name));
+      return string0 === string1 ? null : string0 === string00 && string1 === string10 ? interpolate0 : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
+    };
+  }
+  function styleMaybeRemove(id2, name) {
+    var on0, on1, listener0, key = "style." + name, event = "end." + key, remove2;
+    return function() {
+      var schedule = set2(this, id2), on = schedule.on, listener = schedule.value[key] == null ? remove2 || (remove2 = styleRemove2(name)) : void 0;
+      if (on !== on0 || listener0 !== listener)
+        (on1 = (on0 = on).copy()).on(event, listener0 = listener);
+      schedule.on = on1;
+    };
+  }
+  function style_default2(name, value, priority) {
+    var i = (name += "") === "transform" ? interpolateTransformCss : interpolate_default;
+    return value == null ? this.styleTween(name, styleNull(name, i)).on("end.style." + name, styleRemove2(name)) : typeof value === "function" ? this.styleTween(name, styleFunction2(name, i, tweenValue(this, "style." + name, value))).each(styleMaybeRemove(this._id, name)) : this.styleTween(name, styleConstant2(name, i, value), priority).on("end.style." + name, null);
+  }
+
+  // node_modules/d3-transition/src/transition/styleTween.js
+  function styleInterpolate(name, i, priority) {
+    return function(t) {
+      this.style.setProperty(name, i.call(this, t), priority);
+    };
+  }
+  function styleTween(name, value, priority) {
+    var t, i0;
+    function tween() {
+      var i = value.apply(this, arguments);
+      if (i !== i0)
+        t = (i0 = i) && styleInterpolate(name, i, priority);
+      return t;
+    }
+    tween._value = value;
+    return tween;
+  }
+  function styleTween_default(name, value, priority) {
+    var key = "style." + (name += "");
+    if (arguments.length < 2)
+      return (key = this.tween(key)) && key._value;
+    if (value == null)
+      return this.tween(key, null);
+    if (typeof value !== "function")
+      throw new Error();
+    return this.tween(key, styleTween(name, value, priority == null ? "" : priority));
+  }
+
+  // node_modules/d3-transition/src/transition/text.js
+  function textConstant2(value) {
+    return function() {
+      this.textContent = value;
+    };
+  }
+  function textFunction2(value) {
+    return function() {
+      var value1 = value(this);
+      this.textContent = value1 == null ? "" : value1;
+    };
+  }
+  function text_default2(value) {
+    return this.tween("text", typeof value === "function" ? textFunction2(tweenValue(this, "text", value)) : textConstant2(value == null ? "" : value + ""));
+  }
+
+  // node_modules/d3-transition/src/transition/textTween.js
+  function textInterpolate(i) {
+    return function(t) {
+      this.textContent = i.call(this, t);
+    };
+  }
+  function textTween(value) {
+    var t02, i0;
+    function tween() {
+      var i = value.apply(this, arguments);
+      if (i !== i0)
+        t02 = (i0 = i) && textInterpolate(i);
+      return t02;
+    }
+    tween._value = value;
+    return tween;
+  }
+  function textTween_default(value) {
+    var key = "text";
+    if (arguments.length < 1)
+      return (key = this.tween(key)) && key._value;
+    if (value == null)
+      return this.tween(key, null);
+    if (typeof value !== "function")
+      throw new Error();
+    return this.tween(key, textTween(value));
+  }
+
+  // node_modules/d3-transition/src/transition/transition.js
+  function transition_default() {
+    var name = this._name, id0 = this._id, id1 = newId();
+    for (var groups = this._groups, m = groups.length, j = 0; j < m; ++j) {
+      for (var group = groups[j], n = group.length, node, i = 0; i < n; ++i) {
+        if (node = group[i]) {
+          var inherit2 = get2(node, id0);
+          schedule_default(node, name, id1, i, group, {
+            time: inherit2.time + inherit2.delay + inherit2.duration,
+            delay: 0,
+            duration: inherit2.duration,
+            ease: inherit2.ease
+          });
+        }
+      }
+    }
+    return new Transition2(groups, this._parents, name, id1);
+  }
+
+  // node_modules/d3-transition/src/transition/end.js
+  function end_default() {
+    var on0, on1, that = this, id2 = that._id, size2 = that.size();
+    return new Promise(function(resolve, reject) {
+      var cancel = { value: reject }, end = { value: function() {
+        if (--size2 === 0)
+          resolve();
+      } };
+      that.each(function() {
+        var schedule = set2(this, id2), on = schedule.on;
+        if (on !== on0) {
+          on1 = (on0 = on).copy();
+          on1._.cancel.push(cancel);
+          on1._.interrupt.push(cancel);
+          on1._.end.push(end);
+        }
+        schedule.on = on1;
+      });
+      if (size2 === 0)
+        resolve();
+    });
+  }
+
+  // node_modules/d3-transition/src/transition/index.js
+  var id = 0;
+  function Transition2(groups, parents, name, id2) {
+    this._groups = groups;
+    this._parents = parents;
+    this._name = name;
+    this._id = id2;
+  }
+  function transition(name) {
+    return selection_default().transition(name);
+  }
+  function newId() {
+    return ++id;
+  }
+  var selection_prototype = selection_default.prototype;
+  Transition2.prototype = transition.prototype = {
+    constructor: Transition2,
+    select: select_default3,
+    selectAll: selectAll_default2,
+    selectChild: selection_prototype.selectChild,
+    selectChildren: selection_prototype.selectChildren,
+    filter: filter_default2,
+    merge: merge_default2,
+    selection: selection_default2,
+    transition: transition_default,
+    call: selection_prototype.call,
+    nodes: selection_prototype.nodes,
+    node: selection_prototype.node,
+    size: selection_prototype.size,
+    empty: selection_prototype.empty,
+    each: selection_prototype.each,
+    on: on_default2,
+    attr: attr_default2,
+    attrTween: attrTween_default,
+    style: style_default2,
+    styleTween: styleTween_default,
+    text: text_default2,
+    textTween: textTween_default,
+    remove: remove_default2,
+    tween: tween_default,
+    delay: delay_default,
+    duration: duration_default,
+    ease: ease_default,
+    easeVarying: easeVarying_default,
+    end: end_default,
+    [Symbol.iterator]: selection_prototype[Symbol.iterator]
+  };
+
+  // node_modules/d3-ease/src/cubic.js
+  function cubicInOut(t) {
+    return ((t *= 2) <= 1 ? t * t * t : (t -= 2) * t * t + 2) / 2;
+  }
+
+  // node_modules/d3-transition/src/selection/transition.js
+  var defaultTiming = {
+    time: null,
+    // Set on use.
+    delay: 0,
+    duration: 250,
+    ease: cubicInOut
+  };
+  function inherit(node, id2) {
+    var timing;
+    while (!(timing = node.__transition) || !(timing = timing[id2])) {
+      if (!(node = node.parentNode)) {
+        throw new Error(`transition ${id2} not found`);
+      }
+    }
+    return timing;
+  }
+  function transition_default2(name) {
+    var id2, timing;
+    if (name instanceof Transition2) {
+      id2 = name._id, name = name._name;
+    } else {
+      id2 = newId(), (timing = defaultTiming).time = now(), name = name == null ? null : name + "";
+    }
+    for (var groups = this._groups, m = groups.length, j = 0; j < m; ++j) {
+      for (var group = groups[j], n = group.length, node, i = 0; i < n; ++i) {
+        if (node = group[i]) {
+          schedule_default(node, name, id2, i, group, timing || inherit(node, id2));
+        }
+      }
+    }
+    return new Transition2(groups, this._parents, name, id2);
+  }
+
+  // node_modules/d3-transition/src/selection/index.js
+  selection_default.prototype.interrupt = interrupt_default2;
+  selection_default.prototype.transition = transition_default2;
+
+  // node_modules/d3-brush/src/brush.js
+  var { abs, max: max2, min } = Math;
+  function number1(e) {
+    return [+e[0], +e[1]];
+  }
+  function number22(e) {
+    return [number1(e[0]), number1(e[1])];
+  }
+  var X = {
+    name: "x",
+    handles: ["w", "e"].map(type),
+    input: function(x2, e) {
+      return x2 == null ? null : [[+x2[0], e[0][1]], [+x2[1], e[1][1]]];
+    },
+    output: function(xy) {
+      return xy && [xy[0][0], xy[1][0]];
+    }
+  };
+  var Y = {
+    name: "y",
+    handles: ["n", "s"].map(type),
+    input: function(y2, e) {
+      return y2 == null ? null : [[e[0][0], +y2[0]], [e[1][0], +y2[1]]];
+    },
+    output: function(xy) {
+      return xy && [xy[0][1], xy[1][1]];
+    }
+  };
+  var XY = {
+    name: "xy",
+    handles: ["n", "w", "e", "s", "nw", "ne", "sw", "se"].map(type),
+    input: function(xy) {
+      return xy == null ? null : number22(xy);
+    },
+    output: function(xy) {
+      return xy;
+    }
+  };
+  function type(t) {
+    return { type: t };
+  }
+
+  // node_modules/d3-path/src/path.js
+  var pi = Math.PI;
+  var tau = 2 * pi;
+  var epsilon2 = 1e-6;
+  var tauEpsilon = tau - epsilon2;
+  function append(strings) {
+    this._ += strings[0];
+    for (let i = 1, n = strings.length; i < n; ++i) {
+      this._ += arguments[i] + strings[i];
+    }
+  }
+  function appendRound(digits) {
+    let d = Math.floor(digits);
+    if (!(d >= 0))
+      throw new Error(`invalid digits: ${digits}`);
+    if (d > 15)
+      return append;
+    const k = __pow(10, d);
+    return function(strings) {
+      this._ += strings[0];
+      for (let i = 1, n = strings.length; i < n; ++i) {
+        this._ += Math.round(arguments[i] * k) / k + strings[i];
+      }
+    };
+  }
+  var Path = class {
+    constructor(digits) {
+      this._x0 = this._y0 = // start of current subpath
+      this._x1 = this._y1 = null;
+      this._ = "";
+      this._append = digits == null ? append : appendRound(digits);
+    }
+    moveTo(x2, y2) {
+      this._append`M${this._x0 = this._x1 = +x2},${this._y0 = this._y1 = +y2}`;
+    }
+    closePath() {
+      if (this._x1 !== null) {
+        this._x1 = this._x0, this._y1 = this._y0;
+        this._append`Z`;
+      }
+    }
+    lineTo(x2, y2) {
+      this._append`L${this._x1 = +x2},${this._y1 = +y2}`;
+    }
+    quadraticCurveTo(x1, y1, x2, y2) {
+      this._append`Q${+x1},${+y1},${this._x1 = +x2},${this._y1 = +y2}`;
+    }
+    bezierCurveTo(x1, y1, x2, y2, x3, y3) {
+      this._append`C${+x1},${+y1},${+x2},${+y2},${this._x1 = +x3},${this._y1 = +y3}`;
+    }
+    arcTo(x1, y1, x2, y2, r) {
+      x1 = +x1, y1 = +y1, x2 = +x2, y2 = +y2, r = +r;
+      if (r < 0)
+        throw new Error(`negative radius: ${r}`);
+      let x0 = this._x1, y0 = this._y1, x21 = x2 - x1, y21 = y2 - y1, x01 = x0 - x1, y01 = y0 - y1, l01_2 = x01 * x01 + y01 * y01;
+      if (this._x1 === null) {
+        this._append`M${this._x1 = x1},${this._y1 = y1}`;
+      } else if (!(l01_2 > epsilon2))
+        ;
+      else if (!(Math.abs(y01 * x21 - y21 * x01) > epsilon2) || !r) {
+        this._append`L${this._x1 = x1},${this._y1 = y1}`;
+      } else {
+        let x20 = x2 - x0, y20 = y2 - y0, l21_2 = x21 * x21 + y21 * y21, l20_2 = x20 * x20 + y20 * y20, l21 = Math.sqrt(l21_2), l01 = Math.sqrt(l01_2), l = r * Math.tan((pi - Math.acos((l21_2 + l01_2 - l20_2) / (2 * l21 * l01))) / 2), t01 = l / l01, t21 = l / l21;
+        if (Math.abs(t01 - 1) > epsilon2) {
+          this._append`L${x1 + t01 * x01},${y1 + t01 * y01}`;
+        }
+        this._append`A${r},${r},0,0,${+(y01 * x20 > x01 * y20)},${this._x1 = x1 + t21 * x21},${this._y1 = y1 + t21 * y21}`;
+      }
+    }
+    arc(x2, y2, r, a0, a1, ccw) {
+      x2 = +x2, y2 = +y2, r = +r, ccw = !!ccw;
+      if (r < 0)
+        throw new Error(`negative radius: ${r}`);
+      let dx = r * Math.cos(a0), dy = r * Math.sin(a0), x0 = x2 + dx, y0 = y2 + dy, cw = 1 ^ ccw, da = ccw ? a0 - a1 : a1 - a0;
+      if (this._x1 === null) {
+        this._append`M${x0},${y0}`;
+      } else if (Math.abs(this._x1 - x0) > epsilon2 || Math.abs(this._y1 - y0) > epsilon2) {
+        this._append`L${x0},${y0}`;
+      }
+      if (!r)
+        return;
+      if (da < 0)
+        da = da % tau + tau;
+      if (da > tauEpsilon) {
+        this._append`A${r},${r},0,1,${cw},${x2 - dx},${y2 - dy}A${r},${r},0,1,${cw},${this._x1 = x0},${this._y1 = y0}`;
+      } else if (da > epsilon2) {
+        this._append`A${r},${r},0,${+(da >= pi)},${cw},${this._x1 = x2 + r * Math.cos(a1)},${this._y1 = y2 + r * Math.sin(a1)}`;
+      }
+    }
+    rect(x2, y2, w, h) {
+      this._append`M${this._x0 = this._x1 = +x2},${this._y0 = this._y1 = +y2}h${w = +w}v${+h}h${-w}Z`;
+    }
+    toString() {
+      return this._;
+    }
+  };
+  function path() {
+    return new Path();
+  }
+  path.prototype = Path.prototype;
+
+  // node_modules/d3-format/src/formatDecimal.js
+  function formatDecimal_default(x2) {
+    return Math.abs(x2 = Math.round(x2)) >= 1e21 ? x2.toLocaleString("en").replace(/,/g, "") : x2.toString(10);
+  }
+  function formatDecimalParts(x2, p) {
+    if ((i = (x2 = p ? x2.toExponential(p - 1) : x2.toExponential()).indexOf("e")) < 0)
+      return null;
+    var i, coefficient = x2.slice(0, i);
+    return [
+      coefficient.length > 1 ? coefficient[0] + coefficient.slice(2) : coefficient,
+      +x2.slice(i + 1)
+    ];
+  }
+
+  // node_modules/d3-format/src/exponent.js
+  function exponent_default(x2) {
+    return x2 = formatDecimalParts(Math.abs(x2)), x2 ? x2[1] : NaN;
+  }
+
+  // node_modules/d3-format/src/formatGroup.js
+  function formatGroup_default(grouping, thousands) {
+    return function(value, width) {
+      var i = value.length, t = [], j = 0, g = grouping[0], length = 0;
+      while (i > 0 && g > 0) {
+        if (length + g + 1 > width)
+          g = Math.max(1, width - length);
+        t.push(value.substring(i -= g, i + g));
+        if ((length += g + 1) > width)
+          break;
+        g = grouping[j = (j + 1) % grouping.length];
+      }
+      return t.reverse().join(thousands);
+    };
+  }
+
+  // node_modules/d3-format/src/formatNumerals.js
+  function formatNumerals_default(numerals) {
+    return function(value) {
+      return value.replace(/[0-9]/g, function(i) {
+        return numerals[+i];
+      });
+    };
+  }
+
+  // node_modules/d3-format/src/formatSpecifier.js
+  var re = /^(?:(.)?([<>=^]))?([+\-( ])?([$#])?(0)?(\d+)?(,)?(\.\d+)?(~)?([a-z%])?$/i;
+  function formatSpecifier(specifier) {
+    if (!(match = re.exec(specifier)))
+      throw new Error("invalid format: " + specifier);
+    var match;
+    return new FormatSpecifier({
+      fill: match[1],
+      align: match[2],
+      sign: match[3],
+      symbol: match[4],
+      zero: match[5],
+      width: match[6],
+      comma: match[7],
+      precision: match[8] && match[8].slice(1),
+      trim: match[9],
+      type: match[10]
+    });
+  }
+  formatSpecifier.prototype = FormatSpecifier.prototype;
+  function FormatSpecifier(specifier) {
+    this.fill = specifier.fill === void 0 ? " " : specifier.fill + "";
+    this.align = specifier.align === void 0 ? ">" : specifier.align + "";
+    this.sign = specifier.sign === void 0 ? "-" : specifier.sign + "";
+    this.symbol = specifier.symbol === void 0 ? "" : specifier.symbol + "";
+    this.zero = !!specifier.zero;
+    this.width = specifier.width === void 0 ? void 0 : +specifier.width;
+    this.comma = !!specifier.comma;
+    this.precision = specifier.precision === void 0 ? void 0 : +specifier.precision;
+    this.trim = !!specifier.trim;
+    this.type = specifier.type === void 0 ? "" : specifier.type + "";
+  }
+  FormatSpecifier.prototype.toString = function() {
+    return this.fill + this.align + this.sign + this.symbol + (this.zero ? "0" : "") + (this.width === void 0 ? "" : Math.max(1, this.width | 0)) + (this.comma ? "," : "") + (this.precision === void 0 ? "" : "." + Math.max(0, this.precision | 0)) + (this.trim ? "~" : "") + this.type;
+  };
+
+  // node_modules/d3-format/src/formatTrim.js
+  function formatTrim_default(s) {
+    out:
+      for (var n = s.length, i = 1, i0 = -1, i1; i < n; ++i) {
+        switch (s[i]) {
+          case ".":
+            i0 = i1 = i;
+            break;
+          case "0":
+            if (i0 === 0)
+              i0 = i;
+            i1 = i;
+            break;
+          default:
+            if (!+s[i])
+              break out;
+            if (i0 > 0)
+              i0 = 0;
+            break;
+        }
+      }
+    return i0 > 0 ? s.slice(0, i0) + s.slice(i1 + 1) : s;
+  }
+
+  // node_modules/d3-format/src/formatPrefixAuto.js
+  var prefixExponent;
+  function formatPrefixAuto_default(x2, p) {
+    var d = formatDecimalParts(x2, p);
+    if (!d)
+      return x2 + "";
+    var coefficient = d[0], exponent = d[1], i = exponent - (prefixExponent = Math.max(-8, Math.min(8, Math.floor(exponent / 3))) * 3) + 1, n = coefficient.length;
+    return i === n ? coefficient : i > n ? coefficient + new Array(i - n + 1).join("0") : i > 0 ? coefficient.slice(0, i) + "." + coefficient.slice(i) : "0." + new Array(1 - i).join("0") + formatDecimalParts(x2, Math.max(0, p + i - 1))[0];
+  }
+
+  // node_modules/d3-format/src/formatRounded.js
+  function formatRounded_default(x2, p) {
+    var d = formatDecimalParts(x2, p);
+    if (!d)
+      return x2 + "";
+    var coefficient = d[0], exponent = d[1];
+    return exponent < 0 ? "0." + new Array(-exponent).join("0") + coefficient : coefficient.length > exponent + 1 ? coefficient.slice(0, exponent + 1) + "." + coefficient.slice(exponent + 1) : coefficient + new Array(exponent - coefficient.length + 2).join("0");
+  }
+
+  // node_modules/d3-format/src/formatTypes.js
+  var formatTypes_default = {
+    "%": (x2, p) => (x2 * 100).toFixed(p),
+    "b": (x2) => Math.round(x2).toString(2),
+    "c": (x2) => x2 + "",
+    "d": formatDecimal_default,
+    "e": (x2, p) => x2.toExponential(p),
+    "f": (x2, p) => x2.toFixed(p),
+    "g": (x2, p) => x2.toPrecision(p),
+    "o": (x2) => Math.round(x2).toString(8),
+    "p": (x2, p) => formatRounded_default(x2 * 100, p),
+    "r": formatRounded_default,
+    "s": formatPrefixAuto_default,
+    "X": (x2) => Math.round(x2).toString(16).toUpperCase(),
+    "x": (x2) => Math.round(x2).toString(16)
+  };
+
+  // node_modules/d3-format/src/identity.js
+  function identity_default2(x2) {
+    return x2;
+  }
+
+  // node_modules/d3-format/src/locale.js
+  var map = Array.prototype.map;
+  var prefixes = ["y", "z", "a", "f", "p", "n", "\xB5", "m", "", "k", "M", "G", "T", "P", "E", "Z", "Y"];
+  function locale_default(locale3) {
+    var group = locale3.grouping === void 0 || locale3.thousands === void 0 ? identity_default2 : formatGroup_default(map.call(locale3.grouping, Number), locale3.thousands + ""), currencyPrefix = locale3.currency === void 0 ? "" : locale3.currency[0] + "", currencySuffix = locale3.currency === void 0 ? "" : locale3.currency[1] + "", decimal = locale3.decimal === void 0 ? "." : locale3.decimal + "", numerals = locale3.numerals === void 0 ? identity_default2 : formatNumerals_default(map.call(locale3.numerals, String)), percent = locale3.percent === void 0 ? "%" : locale3.percent + "", minus = locale3.minus === void 0 ? "\u2212" : locale3.minus + "", nan = locale3.nan === void 0 ? "NaN" : locale3.nan + "";
+    function newFormat(specifier) {
+      specifier = formatSpecifier(specifier);
+      var fill = specifier.fill, align = specifier.align, sign = specifier.sign, symbol = specifier.symbol, zero3 = specifier.zero, width = specifier.width, comma = specifier.comma, precision = specifier.precision, trim = specifier.trim, type2 = specifier.type;
+      if (type2 === "n")
+        comma = true, type2 = "g";
+      else if (!formatTypes_default[type2])
+        precision === void 0 && (precision = 12), trim = true, type2 = "g";
+      if (zero3 || fill === "0" && align === "=")
+        zero3 = true, fill = "0", align = "=";
+      var prefix = symbol === "$" ? currencyPrefix : symbol === "#" && /[boxX]/.test(type2) ? "0" + type2.toLowerCase() : "", suffix = symbol === "$" ? currencySuffix : /[%p]/.test(type2) ? percent : "";
+      var formatType = formatTypes_default[type2], maybeSuffix = /[defgprs%]/.test(type2);
+      precision = precision === void 0 ? 6 : /[gprs]/.test(type2) ? Math.max(1, Math.min(21, precision)) : Math.max(0, Math.min(20, precision));
+      function format2(value) {
+        var valuePrefix = prefix, valueSuffix = suffix, i, n, c;
+        if (type2 === "c") {
+          valueSuffix = formatType(value) + valueSuffix;
+          value = "";
+        } else {
+          value = +value;
+          var valueNegative = value < 0 || 1 / value < 0;
+          value = isNaN(value) ? nan : formatType(Math.abs(value), precision);
+          if (trim)
+            value = formatTrim_default(value);
+          if (valueNegative && +value === 0 && sign !== "+")
+            valueNegative = false;
+          valuePrefix = (valueNegative ? sign === "(" ? sign : minus : sign === "-" || sign === "(" ? "" : sign) + valuePrefix;
+          valueSuffix = (type2 === "s" ? prefixes[8 + prefixExponent / 3] : "") + valueSuffix + (valueNegative && sign === "(" ? ")" : "");
+          if (maybeSuffix) {
+            i = -1, n = value.length;
+            while (++i < n) {
+              if (c = value.charCodeAt(i), 48 > c || c > 57) {
+                valueSuffix = (c === 46 ? decimal + value.slice(i + 1) : value.slice(i)) + valueSuffix;
+                value = value.slice(0, i);
+                break;
+              }
+            }
+          }
+        }
+        if (comma && !zero3)
+          value = group(value, Infinity);
+        var length = valuePrefix.length + value.length + valueSuffix.length, padding = length < width ? new Array(width - length + 1).join(fill) : "";
+        if (comma && zero3)
+          value = group(padding + value, padding.length ? width - valueSuffix.length : Infinity), padding = "";
+        switch (align) {
+          case "<":
+            value = valuePrefix + value + valueSuffix + padding;
+            break;
+          case "=":
+            value = valuePrefix + padding + value + valueSuffix;
+            break;
+          case "^":
+            value = padding.slice(0, length = padding.length >> 1) + valuePrefix + value + valueSuffix + padding.slice(length);
+            break;
+          default:
+            value = padding + valuePrefix + value + valueSuffix;
+            break;
+        }
+        return numerals(value);
+      }
+      format2.toString = function() {
+        return specifier + "";
+      };
+      return format2;
+    }
+    function formatPrefix2(specifier, value) {
+      var f = newFormat((specifier = formatSpecifier(specifier), specifier.type = "f", specifier)), e = Math.max(-8, Math.min(8, Math.floor(exponent_default(value) / 3))) * 3, k = Math.pow(10, -e), prefix = prefixes[8 + e / 3];
+      return function(value2) {
+        return f(k * value2) + prefix;
+      };
+    }
+    return {
+      format: newFormat,
+      formatPrefix: formatPrefix2
+    };
+  }
+
+  // node_modules/d3-format/src/defaultLocale.js
+  var locale;
+  var format;
+  var formatPrefix;
+  defaultLocale({
+    thousands: ",",
+    grouping: [3],
+    currency: ["$", ""]
+  });
+  function defaultLocale(definition) {
+    locale = locale_default(definition);
+    format = locale.format;
+    formatPrefix = locale.formatPrefix;
+    return locale;
+  }
+
+  // node_modules/d3-format/src/precisionFixed.js
+  function precisionFixed_default(step) {
+    return Math.max(0, -exponent_default(Math.abs(step)));
+  }
+
+  // node_modules/d3-format/src/precisionPrefix.js
+  function precisionPrefix_default(step, value) {
+    return Math.max(0, Math.max(-8, Math.min(8, Math.floor(exponent_default(value) / 3))) * 3 - exponent_default(Math.abs(step)));
+  }
+
+  // node_modules/d3-format/src/precisionRound.js
+  function precisionRound_default(step, max3) {
+    step = Math.abs(step), max3 = Math.abs(max3) - step;
+    return Math.max(0, exponent_default(max3) - exponent_default(step)) + 1;
+  }
+
+  // node_modules/d3-scale/src/init.js
+  function initRange(domain, range) {
+    switch (arguments.length) {
+      case 0:
+        break;
+      case 1:
+        this.range(domain);
+        break;
+      default:
+        this.range(range).domain(domain);
+        break;
+    }
+    return this;
+  }
+
+  // node_modules/d3-scale/src/constant.js
+  function constants(x2) {
+    return function() {
+      return x2;
+    };
+  }
+
+  // node_modules/d3-scale/src/number.js
+  function number3(x2) {
+    return +x2;
+  }
+
+  // node_modules/d3-scale/src/continuous.js
+  var unit = [0, 1];
+  function identity2(x2) {
+    return x2;
+  }
+  function normalize(a, b) {
+    return (b -= a = +a) ? function(x2) {
+      return (x2 - a) / b;
+    } : constants(isNaN(b) ? NaN : 0.5);
+  }
+  function clamper(a, b) {
+    var t;
+    if (a > b)
+      t = a, a = b, b = t;
+    return function(x2) {
+      return Math.max(a, Math.min(b, x2));
+    };
+  }
+  function bimap(domain, range, interpolate) {
+    var d0 = domain[0], d1 = domain[1], r0 = range[0], r1 = range[1];
+    if (d1 < d0)
+      d0 = normalize(d1, d0), r0 = interpolate(r1, r0);
+    else
+      d0 = normalize(d0, d1), r0 = interpolate(r0, r1);
+    return function(x2) {
+      return r0(d0(x2));
+    };
+  }
+  function polymap(domain, range, interpolate) {
+    var j = Math.min(domain.length, range.length) - 1, d = new Array(j), r = new Array(j), i = -1;
+    if (domain[j] < domain[0]) {
+      domain = domain.slice().reverse();
+      range = range.slice().reverse();
+    }
+    while (++i < j) {
+      d[i] = normalize(domain[i], domain[i + 1]);
+      r[i] = interpolate(range[i], range[i + 1]);
+    }
+    return function(x2) {
+      var i2 = bisect_default(domain, x2, 1, j) - 1;
+      return r[i2](d[i2](x2));
+    };
+  }
+  function copy(source, target) {
+    return target.domain(source.domain()).range(source.range()).interpolate(source.interpolate()).clamp(source.clamp()).unknown(source.unknown());
+  }
+  function transformer() {
+    var domain = unit, range = unit, interpolate = value_default, transform2, untransform, unknown, clamp = identity2, piecewise, output, input;
+    function rescale() {
+      var n = Math.min(domain.length, range.length);
+      if (clamp !== identity2)
+        clamp = clamper(domain[0], domain[n - 1]);
+      piecewise = n > 2 ? polymap : bimap;
+      output = input = null;
+      return scale;
+    }
+    function scale(x2) {
+      return x2 == null || isNaN(x2 = +x2) ? unknown : (output || (output = piecewise(domain.map(transform2), range, interpolate)))(transform2(clamp(x2)));
+    }
+    scale.invert = function(y2) {
+      return clamp(untransform((input || (input = piecewise(range, domain.map(transform2), number_default)))(y2)));
+    };
+    scale.domain = function(_) {
+      return arguments.length ? (domain = Array.from(_, number3), rescale()) : domain.slice();
+    };
+    scale.range = function(_) {
+      return arguments.length ? (range = Array.from(_), rescale()) : range.slice();
+    };
+    scale.rangeRound = function(_) {
+      return range = Array.from(_), interpolate = round_default, rescale();
+    };
+    scale.clamp = function(_) {
+      return arguments.length ? (clamp = _ ? true : identity2, rescale()) : clamp !== identity2;
+    };
+    scale.interpolate = function(_) {
+      return arguments.length ? (interpolate = _, rescale()) : interpolate;
+    };
+    scale.unknown = function(_) {
+      return arguments.length ? (unknown = _, scale) : unknown;
+    };
+    return function(t, u) {
+      transform2 = t, untransform = u;
+      return rescale();
+    };
+  }
+  function continuous() {
+    return transformer()(identity2, identity2);
+  }
+
+  // node_modules/d3-scale/src/tickFormat.js
+  function tickFormat(start2, stop, count, specifier) {
+    var step = tickStep(start2, stop, count), precision;
+    specifier = formatSpecifier(specifier == null ? ",f" : specifier);
+    switch (specifier.type) {
+      case "s": {
+        var value = Math.max(Math.abs(start2), Math.abs(stop));
+        if (specifier.precision == null && !isNaN(precision = precisionPrefix_default(step, value)))
+          specifier.precision = precision;
+        return formatPrefix(specifier, value);
+      }
+      case "":
+      case "e":
+      case "g":
+      case "p":
+      case "r": {
+        if (specifier.precision == null && !isNaN(precision = precisionRound_default(step, Math.max(Math.abs(start2), Math.abs(stop)))))
+          specifier.precision = precision - (specifier.type === "e");
+        break;
+      }
+      case "f":
+      case "%": {
+        if (specifier.precision == null && !isNaN(precision = precisionFixed_default(step)))
+          specifier.precision = precision - (specifier.type === "%") * 2;
+        break;
+      }
+    }
+    return format(specifier);
+  }
+
+  // node_modules/d3-scale/src/linear.js
+  function linearish(scale) {
+    var domain = scale.domain;
+    scale.ticks = function(count) {
+      var d = domain();
+      return ticks(d[0], d[d.length - 1], count == null ? 10 : count);
+    };
+    scale.tickFormat = function(count, specifier) {
+      var d = domain();
+      return tickFormat(d[0], d[d.length - 1], count == null ? 10 : count, specifier);
+    };
+    scale.nice = function(count) {
+      if (count == null)
+        count = 10;
+      var d = domain();
+      var i0 = 0;
+      var i1 = d.length - 1;
+      var start2 = d[i0];
+      var stop = d[i1];
+      var prestep;
+      var step;
+      var maxIter = 10;
+      if (stop < start2) {
+        step = start2, start2 = stop, stop = step;
+        step = i0, i0 = i1, i1 = step;
+      }
+      while (maxIter-- > 0) {
+        step = tickIncrement(start2, stop, count);
+        if (step === prestep) {
+          d[i0] = start2;
+          d[i1] = stop;
+          return domain(d);
+        } else if (step > 0) {
+          start2 = Math.floor(start2 / step) * step;
+          stop = Math.ceil(stop / step) * step;
+        } else if (step < 0) {
+          start2 = Math.ceil(start2 * step) / step;
+          stop = Math.floor(stop * step) / step;
+        } else {
+          break;
+        }
+        prestep = step;
+      }
+      return scale;
+    };
+    return scale;
+  }
+  function linear2() {
+    var scale = continuous();
+    scale.copy = function() {
+      return copy(scale, linear2());
+    };
+    initRange.apply(scale, arguments);
+    return linearish(scale);
+  }
+
+  // node_modules/d3-scale/src/nice.js
+  function nice(domain, interval2) {
+    domain = domain.slice();
+    var i0 = 0, i1 = domain.length - 1, x0 = domain[i0], x1 = domain[i1], t;
+    if (x1 < x0) {
+      t = i0, i0 = i1, i1 = t;
+      t = x0, x0 = x1, x1 = t;
+    }
+    domain[i0] = interval2.floor(x0);
+    domain[i1] = interval2.ceil(x1);
+    return domain;
+  }
+
+  // node_modules/d3-time/src/interval.js
+  var t0 = /* @__PURE__ */ new Date();
+  var t1 = /* @__PURE__ */ new Date();
+  function timeInterval(floori, offseti, count, field) {
+    function interval2(date2) {
+      return floori(date2 = arguments.length === 0 ? /* @__PURE__ */ new Date() : /* @__PURE__ */ new Date(+date2)), date2;
+    }
+    interval2.floor = (date2) => {
+      return floori(date2 = /* @__PURE__ */ new Date(+date2)), date2;
+    };
+    interval2.ceil = (date2) => {
+      return floori(date2 = new Date(date2 - 1)), offseti(date2, 1), floori(date2), date2;
+    };
+    interval2.round = (date2) => {
+      const d0 = interval2(date2), d1 = interval2.ceil(date2);
+      return date2 - d0 < d1 - date2 ? d0 : d1;
+    };
+    interval2.offset = (date2, step) => {
+      return offseti(date2 = /* @__PURE__ */ new Date(+date2), step == null ? 1 : Math.floor(step)), date2;
+    };
+    interval2.range = (start2, stop, step) => {
+      const range = [];
+      start2 = interval2.ceil(start2);
+      step = step == null ? 1 : Math.floor(step);
+      if (!(start2 < stop) || !(step > 0))
+        return range;
+      let previous;
+      do
+        range.push(previous = /* @__PURE__ */ new Date(+start2)), offseti(start2, step), floori(start2);
+      while (previous < start2 && start2 < stop);
+      return range;
+    };
+    interval2.filter = (test) => {
+      return timeInterval((date2) => {
+        if (date2 >= date2)
+          while (floori(date2), !test(date2))
+            date2.setTime(date2 - 1);
+      }, (date2, step) => {
+        if (date2 >= date2) {
+          if (step < 0)
+            while (++step <= 0) {
+              while (offseti(date2, -1), !test(date2)) {
+              }
+            }
+          else
+            while (--step >= 0) {
+              while (offseti(date2, 1), !test(date2)) {
+              }
+            }
+        }
+      });
+    };
+    if (count) {
+      interval2.count = (start2, end) => {
+        t0.setTime(+start2), t1.setTime(+end);
+        floori(t0), floori(t1);
+        return Math.floor(count(t0, t1));
+      };
+      interval2.every = (step) => {
+        step = Math.floor(step);
+        return !isFinite(step) || !(step > 0) ? null : !(step > 1) ? interval2 : interval2.filter(field ? (d) => field(d) % step === 0 : (d) => interval2.count(0, d) % step === 0);
+      };
+    }
+    return interval2;
+  }
+
+  // node_modules/d3-time/src/millisecond.js
+  var millisecond = timeInterval(() => {
+  }, (date2, step) => {
+    date2.setTime(+date2 + step);
+  }, (start2, end) => {
+    return end - start2;
+  });
+  millisecond.every = (k) => {
+    k = Math.floor(k);
+    if (!isFinite(k) || !(k > 0))
+      return null;
+    if (!(k > 1))
+      return millisecond;
+    return timeInterval((date2) => {
+      date2.setTime(Math.floor(date2 / k) * k);
+    }, (date2, step) => {
+      date2.setTime(+date2 + step * k);
+    }, (start2, end) => {
+      return (end - start2) / k;
+    });
+  };
+  var milliseconds = millisecond.range;
+
+  // node_modules/d3-time/src/duration.js
+  var durationSecond = 1e3;
+  var durationMinute = durationSecond * 60;
+  var durationHour = durationMinute * 60;
+  var durationDay = durationHour * 24;
+  var durationWeek = durationDay * 7;
+  var durationMonth = durationDay * 30;
+  var durationYear = durationDay * 365;
+
+  // node_modules/d3-time/src/second.js
+  var second = timeInterval((date2) => {
+    date2.setTime(date2 - date2.getMilliseconds());
+  }, (date2, step) => {
+    date2.setTime(+date2 + step * durationSecond);
+  }, (start2, end) => {
+    return (end - start2) / durationSecond;
+  }, (date2) => {
+    return date2.getUTCSeconds();
+  });
+  var seconds = second.range;
+
+  // node_modules/d3-time/src/minute.js
+  var timeMinute = timeInterval((date2) => {
+    date2.setTime(date2 - date2.getMilliseconds() - date2.getSeconds() * durationSecond);
+  }, (date2, step) => {
+    date2.setTime(+date2 + step * durationMinute);
+  }, (start2, end) => {
+    return (end - start2) / durationMinute;
+  }, (date2) => {
+    return date2.getMinutes();
+  });
+  var timeMinutes = timeMinute.range;
+  var utcMinute = timeInterval((date2) => {
+    date2.setUTCSeconds(0, 0);
+  }, (date2, step) => {
+    date2.setTime(+date2 + step * durationMinute);
+  }, (start2, end) => {
+    return (end - start2) / durationMinute;
+  }, (date2) => {
+    return date2.getUTCMinutes();
+  });
+  var utcMinutes = utcMinute.range;
+
+  // node_modules/d3-time/src/hour.js
+  var timeHour = timeInterval((date2) => {
+    date2.setTime(date2 - date2.getMilliseconds() - date2.getSeconds() * durationSecond - date2.getMinutes() * durationMinute);
+  }, (date2, step) => {
+    date2.setTime(+date2 + step * durationHour);
+  }, (start2, end) => {
+    return (end - start2) / durationHour;
+  }, (date2) => {
+    return date2.getHours();
+  });
+  var timeHours = timeHour.range;
+  var utcHour = timeInterval((date2) => {
+    date2.setUTCMinutes(0, 0, 0);
+  }, (date2, step) => {
+    date2.setTime(+date2 + step * durationHour);
+  }, (start2, end) => {
+    return (end - start2) / durationHour;
+  }, (date2) => {
+    return date2.getUTCHours();
+  });
+  var utcHours = utcHour.range;
+
+  // node_modules/d3-time/src/day.js
+  var timeDay = timeInterval(
+    (date2) => date2.setHours(0, 0, 0, 0),
+    (date2, step) => date2.setDate(date2.getDate() + step),
+    (start2, end) => (end - start2 - (end.getTimezoneOffset() - start2.getTimezoneOffset()) * durationMinute) / durationDay,
+    (date2) => date2.getDate() - 1
+  );
+  var timeDays = timeDay.range;
+  var utcDay = timeInterval((date2) => {
+    date2.setUTCHours(0, 0, 0, 0);
+  }, (date2, step) => {
+    date2.setUTCDate(date2.getUTCDate() + step);
+  }, (start2, end) => {
+    return (end - start2) / durationDay;
+  }, (date2) => {
+    return date2.getUTCDate() - 1;
+  });
+  var utcDays = utcDay.range;
+  var unixDay = timeInterval((date2) => {
+    date2.setUTCHours(0, 0, 0, 0);
+  }, (date2, step) => {
+    date2.setUTCDate(date2.getUTCDate() + step);
+  }, (start2, end) => {
+    return (end - start2) / durationDay;
+  }, (date2) => {
+    return Math.floor(date2 / durationDay);
+  });
+  var unixDays = unixDay.range;
+
+  // node_modules/d3-time/src/week.js
+  function timeWeekday(i) {
+    return timeInterval((date2) => {
+      date2.setDate(date2.getDate() - (date2.getDay() + 7 - i) % 7);
+      date2.setHours(0, 0, 0, 0);
+    }, (date2, step) => {
+      date2.setDate(date2.getDate() + step * 7);
+    }, (start2, end) => {
+      return (end - start2 - (end.getTimezoneOffset() - start2.getTimezoneOffset()) * durationMinute) / durationWeek;
+    });
+  }
+  var timeSunday = timeWeekday(0);
+  var timeMonday = timeWeekday(1);
+  var timeTuesday = timeWeekday(2);
+  var timeWednesday = timeWeekday(3);
+  var timeThursday = timeWeekday(4);
+  var timeFriday = timeWeekday(5);
+  var timeSaturday = timeWeekday(6);
+  var timeSundays = timeSunday.range;
+  var timeMondays = timeMonday.range;
+  var timeTuesdays = timeTuesday.range;
+  var timeWednesdays = timeWednesday.range;
+  var timeThursdays = timeThursday.range;
+  var timeFridays = timeFriday.range;
+  var timeSaturdays = timeSaturday.range;
+  function utcWeekday(i) {
+    return timeInterval((date2) => {
+      date2.setUTCDate(date2.getUTCDate() - (date2.getUTCDay() + 7 - i) % 7);
+      date2.setUTCHours(0, 0, 0, 0);
+    }, (date2, step) => {
+      date2.setUTCDate(date2.getUTCDate() + step * 7);
+    }, (start2, end) => {
+      return (end - start2) / durationWeek;
+    });
+  }
+  var utcSunday = utcWeekday(0);
+  var utcMonday = utcWeekday(1);
+  var utcTuesday = utcWeekday(2);
+  var utcWednesday = utcWeekday(3);
+  var utcThursday = utcWeekday(4);
+  var utcFriday = utcWeekday(5);
+  var utcSaturday = utcWeekday(6);
+  var utcSundays = utcSunday.range;
+  var utcMondays = utcMonday.range;
+  var utcTuesdays = utcTuesday.range;
+  var utcWednesdays = utcWednesday.range;
+  var utcThursdays = utcThursday.range;
+  var utcFridays = utcFriday.range;
+  var utcSaturdays = utcSaturday.range;
+
+  // node_modules/d3-time/src/month.js
+  var timeMonth = timeInterval((date2) => {
+    date2.setDate(1);
+    date2.setHours(0, 0, 0, 0);
+  }, (date2, step) => {
+    date2.setMonth(date2.getMonth() + step);
+  }, (start2, end) => {
+    return end.getMonth() - start2.getMonth() + (end.getFullYear() - start2.getFullYear()) * 12;
+  }, (date2) => {
+    return date2.getMonth();
+  });
+  var timeMonths = timeMonth.range;
+  var utcMonth = timeInterval((date2) => {
+    date2.setUTCDate(1);
+    date2.setUTCHours(0, 0, 0, 0);
+  }, (date2, step) => {
+    date2.setUTCMonth(date2.getUTCMonth() + step);
+  }, (start2, end) => {
+    return end.getUTCMonth() - start2.getUTCMonth() + (end.getUTCFullYear() - start2.getUTCFullYear()) * 12;
+  }, (date2) => {
+    return date2.getUTCMonth();
+  });
+  var utcMonths = utcMonth.range;
+
+  // node_modules/d3-time/src/year.js
+  var timeYear = timeInterval((date2) => {
+    date2.setMonth(0, 1);
+    date2.setHours(0, 0, 0, 0);
+  }, (date2, step) => {
+    date2.setFullYear(date2.getFullYear() + step);
+  }, (start2, end) => {
+    return end.getFullYear() - start2.getFullYear();
+  }, (date2) => {
+    return date2.getFullYear();
+  });
+  timeYear.every = (k) => {
+    return !isFinite(k = Math.floor(k)) || !(k > 0) ? null : timeInterval((date2) => {
+      date2.setFullYear(Math.floor(date2.getFullYear() / k) * k);
+      date2.setMonth(0, 1);
+      date2.setHours(0, 0, 0, 0);
+    }, (date2, step) => {
+      date2.setFullYear(date2.getFullYear() + step * k);
+    });
+  };
+  var timeYears = timeYear.range;
+  var utcYear = timeInterval((date2) => {
+    date2.setUTCMonth(0, 1);
+    date2.setUTCHours(0, 0, 0, 0);
+  }, (date2, step) => {
+    date2.setUTCFullYear(date2.getUTCFullYear() + step);
+  }, (start2, end) => {
+    return end.getUTCFullYear() - start2.getUTCFullYear();
+  }, (date2) => {
+    return date2.getUTCFullYear();
+  });
+  utcYear.every = (k) => {
+    return !isFinite(k = Math.floor(k)) || !(k > 0) ? null : timeInterval((date2) => {
+      date2.setUTCFullYear(Math.floor(date2.getUTCFullYear() / k) * k);
+      date2.setUTCMonth(0, 1);
+      date2.setUTCHours(0, 0, 0, 0);
+    }, (date2, step) => {
+      date2.setUTCFullYear(date2.getUTCFullYear() + step * k);
+    });
+  };
+  var utcYears = utcYear.range;
+
+  // node_modules/d3-time/src/ticks.js
+  function ticker(year, month, week, day, hour, minute) {
+    const tickIntervals = [
+      [second, 1, durationSecond],
+      [second, 5, 5 * durationSecond],
+      [second, 15, 15 * durationSecond],
+      [second, 30, 30 * durationSecond],
+      [minute, 1, durationMinute],
+      [minute, 5, 5 * durationMinute],
+      [minute, 15, 15 * durationMinute],
+      [minute, 30, 30 * durationMinute],
+      [hour, 1, durationHour],
+      [hour, 3, 3 * durationHour],
+      [hour, 6, 6 * durationHour],
+      [hour, 12, 12 * durationHour],
+      [day, 1, durationDay],
+      [day, 2, 2 * durationDay],
+      [week, 1, durationWeek],
+      [month, 1, durationMonth],
+      [month, 3, 3 * durationMonth],
+      [year, 1, durationYear]
+    ];
+    function ticks2(start2, stop, count) {
+      const reverse = stop < start2;
+      if (reverse)
+        [start2, stop] = [stop, start2];
+      const interval2 = count && typeof count.range === "function" ? count : tickInterval(start2, stop, count);
+      const ticks3 = interval2 ? interval2.range(start2, +stop + 1) : [];
+      return reverse ? ticks3.reverse() : ticks3;
+    }
+    function tickInterval(start2, stop, count) {
+      const target = Math.abs(stop - start2) / count;
+      const i = bisector(([, , step2]) => step2).right(tickIntervals, target);
+      if (i === tickIntervals.length)
+        return year.every(tickStep(start2 / durationYear, stop / durationYear, count));
+      if (i === 0)
+        return millisecond.every(Math.max(tickStep(start2, stop, count), 1));
+      const [t, step] = tickIntervals[target / tickIntervals[i - 1][2] < tickIntervals[i][2] / target ? i - 1 : i];
+      return t.every(step);
+    }
+    return [ticks2, tickInterval];
+  }
+  var [utcTicks, utcTickInterval] = ticker(utcYear, utcMonth, utcSunday, unixDay, utcHour, utcMinute);
+  var [timeTicks, timeTickInterval] = ticker(timeYear, timeMonth, timeSunday, timeDay, timeHour, timeMinute);
+
+  // node_modules/d3-time-format/src/locale.js
+  function localDate(d) {
+    if (0 <= d.y && d.y < 100) {
+      var date2 = new Date(-1, d.m, d.d, d.H, d.M, d.S, d.L);
+      date2.setFullYear(d.y);
+      return date2;
+    }
+    return new Date(d.y, d.m, d.d, d.H, d.M, d.S, d.L);
+  }
+  function utcDate(d) {
+    if (0 <= d.y && d.y < 100) {
+      var date2 = new Date(Date.UTC(-1, d.m, d.d, d.H, d.M, d.S, d.L));
+      date2.setUTCFullYear(d.y);
+      return date2;
+    }
+    return new Date(Date.UTC(d.y, d.m, d.d, d.H, d.M, d.S, d.L));
+  }
+  function newDate(y2, m, d) {
+    return { y: y2, m, d, H: 0, M: 0, S: 0, L: 0 };
+  }
+  function formatLocale(locale3) {
+    var locale_dateTime = locale3.dateTime, locale_date = locale3.date, locale_time = locale3.time, locale_periods = locale3.periods, locale_weekdays = locale3.days, locale_shortWeekdays = locale3.shortDays, locale_months = locale3.months, locale_shortMonths = locale3.shortMonths;
+    var periodRe = formatRe(locale_periods), periodLookup = formatLookup(locale_periods), weekdayRe = formatRe(locale_weekdays), weekdayLookup = formatLookup(locale_weekdays), shortWeekdayRe = formatRe(locale_shortWeekdays), shortWeekdayLookup = formatLookup(locale_shortWeekdays), monthRe = formatRe(locale_months), monthLookup = formatLookup(locale_months), shortMonthRe = formatRe(locale_shortMonths), shortMonthLookup = formatLookup(locale_shortMonths);
+    var formats = {
+      "a": formatShortWeekday,
+      "A": formatWeekday,
+      "b": formatShortMonth,
+      "B": formatMonth,
+      "c": null,
+      "d": formatDayOfMonth,
+      "e": formatDayOfMonth,
+      "f": formatMicroseconds,
+      "g": formatYearISO,
+      "G": formatFullYearISO,
+      "H": formatHour24,
+      "I": formatHour12,
+      "j": formatDayOfYear,
+      "L": formatMilliseconds,
+      "m": formatMonthNumber,
+      "M": formatMinutes,
+      "p": formatPeriod,
+      "q": formatQuarter,
+      "Q": formatUnixTimestamp,
+      "s": formatUnixTimestampSeconds,
+      "S": formatSeconds,
+      "u": formatWeekdayNumberMonday,
+      "U": formatWeekNumberSunday,
+      "V": formatWeekNumberISO,
+      "w": formatWeekdayNumberSunday,
+      "W": formatWeekNumberMonday,
+      "x": null,
+      "X": null,
+      "y": formatYear,
+      "Y": formatFullYear,
+      "Z": formatZone,
+      "%": formatLiteralPercent
+    };
+    var utcFormats = {
+      "a": formatUTCShortWeekday,
+      "A": formatUTCWeekday,
+      "b": formatUTCShortMonth,
+      "B": formatUTCMonth,
+      "c": null,
+      "d": formatUTCDayOfMonth,
+      "e": formatUTCDayOfMonth,
+      "f": formatUTCMicroseconds,
+      "g": formatUTCYearISO,
+      "G": formatUTCFullYearISO,
+      "H": formatUTCHour24,
+      "I": formatUTCHour12,
+      "j": formatUTCDayOfYear,
+      "L": formatUTCMilliseconds,
+      "m": formatUTCMonthNumber,
+      "M": formatUTCMinutes,
+      "p": formatUTCPeriod,
+      "q": formatUTCQuarter,
+      "Q": formatUnixTimestamp,
+      "s": formatUnixTimestampSeconds,
+      "S": formatUTCSeconds,
+      "u": formatUTCWeekdayNumberMonday,
+      "U": formatUTCWeekNumberSunday,
+      "V": formatUTCWeekNumberISO,
+      "w": formatUTCWeekdayNumberSunday,
+      "W": formatUTCWeekNumberMonday,
+      "x": null,
+      "X": null,
+      "y": formatUTCYear,
+      "Y": formatUTCFullYear,
+      "Z": formatUTCZone,
+      "%": formatLiteralPercent
+    };
+    var parses = {
+      "a": parseShortWeekday,
+      "A": parseWeekday,
+      "b": parseShortMonth,
+      "B": parseMonth,
+      "c": parseLocaleDateTime,
+      "d": parseDayOfMonth,
+      "e": parseDayOfMonth,
+      "f": parseMicroseconds,
+      "g": parseYear,
+      "G": parseFullYear,
+      "H": parseHour24,
+      "I": parseHour24,
+      "j": parseDayOfYear,
+      "L": parseMilliseconds,
+      "m": parseMonthNumber,
+      "M": parseMinutes,
+      "p": parsePeriod,
+      "q": parseQuarter,
+      "Q": parseUnixTimestamp,
+      "s": parseUnixTimestampSeconds,
+      "S": parseSeconds,
+      "u": parseWeekdayNumberMonday,
+      "U": parseWeekNumberSunday,
+      "V": parseWeekNumberISO,
+      "w": parseWeekdayNumberSunday,
+      "W": parseWeekNumberMonday,
+      "x": parseLocaleDate,
+      "X": parseLocaleTime,
+      "y": parseYear,
+      "Y": parseFullYear,
+      "Z": parseZone,
+      "%": parseLiteralPercent
+    };
+    formats.x = newFormat(locale_date, formats);
+    formats.X = newFormat(locale_time, formats);
+    formats.c = newFormat(locale_dateTime, formats);
+    utcFormats.x = newFormat(locale_date, utcFormats);
+    utcFormats.X = newFormat(locale_time, utcFormats);
+    utcFormats.c = newFormat(locale_dateTime, utcFormats);
+    function newFormat(specifier, formats2) {
+      return function(date2) {
+        var string = [], i = -1, j = 0, n = specifier.length, c, pad2, format2;
+        if (!(date2 instanceof Date))
+          date2 = /* @__PURE__ */ new Date(+date2);
+        while (++i < n) {
+          if (specifier.charCodeAt(i) === 37) {
+            string.push(specifier.slice(j, i));
+            if ((pad2 = pads[c = specifier.charAt(++i)]) != null)
+              c = specifier.charAt(++i);
+            else
+              pad2 = c === "e" ? " " : "0";
+            if (format2 = formats2[c])
+              c = format2(date2, pad2);
+            string.push(c);
+            j = i + 1;
+          }
+        }
+        string.push(specifier.slice(j, i));
+        return string.join("");
+      };
+    }
+    function newParse(specifier, Z) {
+      return function(string) {
+        var d = newDate(1900, void 0, 1), i = parseSpecifier(d, specifier, string += "", 0), week, day;
+        if (i != string.length)
+          return null;
+        if ("Q" in d)
+          return new Date(d.Q);
+        if ("s" in d)
+          return new Date(d.s * 1e3 + ("L" in d ? d.L : 0));
+        if (Z && !("Z" in d))
+          d.Z = 0;
+        if ("p" in d)
+          d.H = d.H % 12 + d.p * 12;
+        if (d.m === void 0)
+          d.m = "q" in d ? d.q : 0;
+        if ("V" in d) {
+          if (d.V < 1 || d.V > 53)
+            return null;
+          if (!("w" in d))
+            d.w = 1;
+          if ("Z" in d) {
+            week = utcDate(newDate(d.y, 0, 1)), day = week.getUTCDay();
+            week = day > 4 || day === 0 ? utcMonday.ceil(week) : utcMonday(week);
+            week = utcDay.offset(week, (d.V - 1) * 7);
+            d.y = week.getUTCFullYear();
+            d.m = week.getUTCMonth();
+            d.d = week.getUTCDate() + (d.w + 6) % 7;
+          } else {
+            week = localDate(newDate(d.y, 0, 1)), day = week.getDay();
+            week = day > 4 || day === 0 ? timeMonday.ceil(week) : timeMonday(week);
+            week = timeDay.offset(week, (d.V - 1) * 7);
+            d.y = week.getFullYear();
+            d.m = week.getMonth();
+            d.d = week.getDate() + (d.w + 6) % 7;
+          }
+        } else if ("W" in d || "U" in d) {
+          if (!("w" in d))
+            d.w = "u" in d ? d.u % 7 : "W" in d ? 1 : 0;
+          day = "Z" in d ? utcDate(newDate(d.y, 0, 1)).getUTCDay() : localDate(newDate(d.y, 0, 1)).getDay();
+          d.m = 0;
+          d.d = "W" in d ? (d.w + 6) % 7 + d.W * 7 - (day + 5) % 7 : d.w + d.U * 7 - (day + 6) % 7;
+        }
+        if ("Z" in d) {
+          d.H += d.Z / 100 | 0;
+          d.M += d.Z % 100;
+          return utcDate(d);
+        }
+        return localDate(d);
+      };
+    }
+    function parseSpecifier(d, specifier, string, j) {
+      var i = 0, n = specifier.length, m = string.length, c, parse;
+      while (i < n) {
+        if (j >= m)
+          return -1;
+        c = specifier.charCodeAt(i++);
+        if (c === 37) {
+          c = specifier.charAt(i++);
+          parse = parses[c in pads ? specifier.charAt(i++) : c];
+          if (!parse || (j = parse(d, string, j)) < 0)
+            return -1;
+        } else if (c != string.charCodeAt(j++)) {
+          return -1;
+        }
+      }
+      return j;
+    }
+    function parsePeriod(d, string, i) {
+      var n = periodRe.exec(string.slice(i));
+      return n ? (d.p = periodLookup.get(n[0].toLowerCase()), i + n[0].length) : -1;
+    }
+    function parseShortWeekday(d, string, i) {
+      var n = shortWeekdayRe.exec(string.slice(i));
+      return n ? (d.w = shortWeekdayLookup.get(n[0].toLowerCase()), i + n[0].length) : -1;
+    }
+    function parseWeekday(d, string, i) {
+      var n = weekdayRe.exec(string.slice(i));
+      return n ? (d.w = weekdayLookup.get(n[0].toLowerCase()), i + n[0].length) : -1;
+    }
+    function parseShortMonth(d, string, i) {
+      var n = shortMonthRe.exec(string.slice(i));
+      return n ? (d.m = shortMonthLookup.get(n[0].toLowerCase()), i + n[0].length) : -1;
+    }
+    function parseMonth(d, string, i) {
+      var n = monthRe.exec(string.slice(i));
+      return n ? (d.m = monthLookup.get(n[0].toLowerCase()), i + n[0].length) : -1;
+    }
+    function parseLocaleDateTime(d, string, i) {
+      return parseSpecifier(d, locale_dateTime, string, i);
+    }
+    function parseLocaleDate(d, string, i) {
+      return parseSpecifier(d, locale_date, string, i);
+    }
+    function parseLocaleTime(d, string, i) {
+      return parseSpecifier(d, locale_time, string, i);
+    }
+    function formatShortWeekday(d) {
+      return locale_shortWeekdays[d.getDay()];
+    }
+    function formatWeekday(d) {
+      return locale_weekdays[d.getDay()];
+    }
+    function formatShortMonth(d) {
+      return locale_shortMonths[d.getMonth()];
+    }
+    function formatMonth(d) {
+      return locale_months[d.getMonth()];
+    }
+    function formatPeriod(d) {
+      return locale_periods[+(d.getHours() >= 12)];
+    }
+    function formatQuarter(d) {
+      return 1 + ~~(d.getMonth() / 3);
+    }
+    function formatUTCShortWeekday(d) {
+      return locale_shortWeekdays[d.getUTCDay()];
+    }
+    function formatUTCWeekday(d) {
+      return locale_weekdays[d.getUTCDay()];
+    }
+    function formatUTCShortMonth(d) {
+      return locale_shortMonths[d.getUTCMonth()];
+    }
+    function formatUTCMonth(d) {
+      return locale_months[d.getUTCMonth()];
+    }
+    function formatUTCPeriod(d) {
+      return locale_periods[+(d.getUTCHours() >= 12)];
+    }
+    function formatUTCQuarter(d) {
+      return 1 + ~~(d.getUTCMonth() / 3);
+    }
+    return {
+      format: function(specifier) {
+        var f = newFormat(specifier += "", formats);
+        f.toString = function() {
+          return specifier;
+        };
+        return f;
+      },
+      parse: function(specifier) {
+        var p = newParse(specifier += "", false);
+        p.toString = function() {
+          return specifier;
+        };
+        return p;
+      },
+      utcFormat: function(specifier) {
+        var f = newFormat(specifier += "", utcFormats);
+        f.toString = function() {
+          return specifier;
+        };
+        return f;
+      },
+      utcParse: function(specifier) {
+        var p = newParse(specifier += "", true);
+        p.toString = function() {
+          return specifier;
+        };
+        return p;
+      }
+    };
+  }
+  var pads = { "-": "", "_": " ", "0": "0" };
+  var numberRe = /^\s*\d+/;
+  var percentRe = /^%/;
+  var requoteRe = /[\\^$*+?|[\]().{}]/g;
+  function pad(value, fill, width) {
+    var sign = value < 0 ? "-" : "", string = (sign ? -value : value) + "", length = string.length;
+    return sign + (length < width ? new Array(width - length + 1).join(fill) + string : string);
+  }
+  function requote(s) {
+    return s.replace(requoteRe, "\\$&");
+  }
+  function formatRe(names) {
+    return new RegExp("^(?:" + names.map(requote).join("|") + ")", "i");
+  }
+  function formatLookup(names) {
+    return new Map(names.map((name, i) => [name.toLowerCase(), i]));
+  }
+  function parseWeekdayNumberSunday(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 1));
+    return n ? (d.w = +n[0], i + n[0].length) : -1;
+  }
+  function parseWeekdayNumberMonday(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 1));
+    return n ? (d.u = +n[0], i + n[0].length) : -1;
+  }
+  function parseWeekNumberSunday(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 2));
+    return n ? (d.U = +n[0], i + n[0].length) : -1;
+  }
+  function parseWeekNumberISO(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 2));
+    return n ? (d.V = +n[0], i + n[0].length) : -1;
+  }
+  function parseWeekNumberMonday(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 2));
+    return n ? (d.W = +n[0], i + n[0].length) : -1;
+  }
+  function parseFullYear(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 4));
+    return n ? (d.y = +n[0], i + n[0].length) : -1;
+  }
+  function parseYear(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 2));
+    return n ? (d.y = +n[0] + (+n[0] > 68 ? 1900 : 2e3), i + n[0].length) : -1;
+  }
+  function parseZone(d, string, i) {
+    var n = /^(Z)|([+-]\d\d)(?::?(\d\d))?/.exec(string.slice(i, i + 6));
+    return n ? (d.Z = n[1] ? 0 : -(n[2] + (n[3] || "00")), i + n[0].length) : -1;
+  }
+  function parseQuarter(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 1));
+    return n ? (d.q = n[0] * 3 - 3, i + n[0].length) : -1;
+  }
+  function parseMonthNumber(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 2));
+    return n ? (d.m = n[0] - 1, i + n[0].length) : -1;
+  }
+  function parseDayOfMonth(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 2));
+    return n ? (d.d = +n[0], i + n[0].length) : -1;
+  }
+  function parseDayOfYear(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 3));
+    return n ? (d.m = 0, d.d = +n[0], i + n[0].length) : -1;
+  }
+  function parseHour24(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 2));
+    return n ? (d.H = +n[0], i + n[0].length) : -1;
+  }
+  function parseMinutes(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 2));
+    return n ? (d.M = +n[0], i + n[0].length) : -1;
+  }
+  function parseSeconds(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 2));
+    return n ? (d.S = +n[0], i + n[0].length) : -1;
+  }
+  function parseMilliseconds(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 3));
+    return n ? (d.L = +n[0], i + n[0].length) : -1;
+  }
+  function parseMicroseconds(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 6));
+    return n ? (d.L = Math.floor(n[0] / 1e3), i + n[0].length) : -1;
+  }
+  function parseLiteralPercent(d, string, i) {
+    var n = percentRe.exec(string.slice(i, i + 1));
+    return n ? i + n[0].length : -1;
+  }
+  function parseUnixTimestamp(d, string, i) {
+    var n = numberRe.exec(string.slice(i));
+    return n ? (d.Q = +n[0], i + n[0].length) : -1;
+  }
+  function parseUnixTimestampSeconds(d, string, i) {
+    var n = numberRe.exec(string.slice(i));
+    return n ? (d.s = +n[0], i + n[0].length) : -1;
+  }
+  function formatDayOfMonth(d, p) {
+    return pad(d.getDate(), p, 2);
+  }
+  function formatHour24(d, p) {
+    return pad(d.getHours(), p, 2);
+  }
+  function formatHour12(d, p) {
+    return pad(d.getHours() % 12 || 12, p, 2);
+  }
+  function formatDayOfYear(d, p) {
+    return pad(1 + timeDay.count(timeYear(d), d), p, 3);
+  }
+  function formatMilliseconds(d, p) {
+    return pad(d.getMilliseconds(), p, 3);
+  }
+  function formatMicroseconds(d, p) {
+    return formatMilliseconds(d, p) + "000";
+  }
+  function formatMonthNumber(d, p) {
+    return pad(d.getMonth() + 1, p, 2);
+  }
+  function formatMinutes(d, p) {
+    return pad(d.getMinutes(), p, 2);
+  }
+  function formatSeconds(d, p) {
+    return pad(d.getSeconds(), p, 2);
+  }
+  function formatWeekdayNumberMonday(d) {
+    var day = d.getDay();
+    return day === 0 ? 7 : day;
+  }
+  function formatWeekNumberSunday(d, p) {
+    return pad(timeSunday.count(timeYear(d) - 1, d), p, 2);
+  }
+  function dISO(d) {
+    var day = d.getDay();
+    return day >= 4 || day === 0 ? timeThursday(d) : timeThursday.ceil(d);
+  }
+  function formatWeekNumberISO(d, p) {
+    d = dISO(d);
+    return pad(timeThursday.count(timeYear(d), d) + (timeYear(d).getDay() === 4), p, 2);
+  }
+  function formatWeekdayNumberSunday(d) {
+    return d.getDay();
+  }
+  function formatWeekNumberMonday(d, p) {
+    return pad(timeMonday.count(timeYear(d) - 1, d), p, 2);
+  }
+  function formatYear(d, p) {
+    return pad(d.getFullYear() % 100, p, 2);
+  }
+  function formatYearISO(d, p) {
+    d = dISO(d);
+    return pad(d.getFullYear() % 100, p, 2);
+  }
+  function formatFullYear(d, p) {
+    return pad(d.getFullYear() % 1e4, p, 4);
+  }
+  function formatFullYearISO(d, p) {
+    var day = d.getDay();
+    d = day >= 4 || day === 0 ? timeThursday(d) : timeThursday.ceil(d);
+    return pad(d.getFullYear() % 1e4, p, 4);
+  }
+  function formatZone(d) {
+    var z = d.getTimezoneOffset();
+    return (z > 0 ? "-" : (z *= -1, "+")) + pad(z / 60 | 0, "0", 2) + pad(z % 60, "0", 2);
+  }
+  function formatUTCDayOfMonth(d, p) {
+    return pad(d.getUTCDate(), p, 2);
+  }
+  function formatUTCHour24(d, p) {
+    return pad(d.getUTCHours(), p, 2);
+  }
+  function formatUTCHour12(d, p) {
+    return pad(d.getUTCHours() % 12 || 12, p, 2);
+  }
+  function formatUTCDayOfYear(d, p) {
+    return pad(1 + utcDay.count(utcYear(d), d), p, 3);
+  }
+  function formatUTCMilliseconds(d, p) {
+    return pad(d.getUTCMilliseconds(), p, 3);
+  }
+  function formatUTCMicroseconds(d, p) {
+    return formatUTCMilliseconds(d, p) + "000";
+  }
+  function formatUTCMonthNumber(d, p) {
+    return pad(d.getUTCMonth() + 1, p, 2);
+  }
+  function formatUTCMinutes(d, p) {
+    return pad(d.getUTCMinutes(), p, 2);
+  }
+  function formatUTCSeconds(d, p) {
+    return pad(d.getUTCSeconds(), p, 2);
+  }
+  function formatUTCWeekdayNumberMonday(d) {
+    var dow = d.getUTCDay();
+    return dow === 0 ? 7 : dow;
+  }
+  function formatUTCWeekNumberSunday(d, p) {
+    return pad(utcSunday.count(utcYear(d) - 1, d), p, 2);
+  }
+  function UTCdISO(d) {
+    var day = d.getUTCDay();
+    return day >= 4 || day === 0 ? utcThursday(d) : utcThursday.ceil(d);
+  }
+  function formatUTCWeekNumberISO(d, p) {
+    d = UTCdISO(d);
+    return pad(utcThursday.count(utcYear(d), d) + (utcYear(d).getUTCDay() === 4), p, 2);
+  }
+  function formatUTCWeekdayNumberSunday(d) {
+    return d.getUTCDay();
+  }
+  function formatUTCWeekNumberMonday(d, p) {
+    return pad(utcMonday.count(utcYear(d) - 1, d), p, 2);
+  }
+  function formatUTCYear(d, p) {
+    return pad(d.getUTCFullYear() % 100, p, 2);
+  }
+  function formatUTCYearISO(d, p) {
+    d = UTCdISO(d);
+    return pad(d.getUTCFullYear() % 100, p, 2);
+  }
+  function formatUTCFullYear(d, p) {
+    return pad(d.getUTCFullYear() % 1e4, p, 4);
+  }
+  function formatUTCFullYearISO(d, p) {
+    var day = d.getUTCDay();
+    d = day >= 4 || day === 0 ? utcThursday(d) : utcThursday.ceil(d);
+    return pad(d.getUTCFullYear() % 1e4, p, 4);
+  }
+  function formatUTCZone() {
+    return "+0000";
+  }
+  function formatLiteralPercent() {
+    return "%";
+  }
+  function formatUnixTimestamp(d) {
+    return +d;
+  }
+  function formatUnixTimestampSeconds(d) {
+    return Math.floor(+d / 1e3);
+  }
+
+  // node_modules/d3-time-format/src/defaultLocale.js
+  var locale2;
+  var timeFormat;
+  var timeParse;
+  var utcFormat;
+  var utcParse;
+  defaultLocale2({
+    dateTime: "%x, %X",
+    date: "%-m/%-d/%Y",
+    time: "%-I:%M:%S %p",
+    periods: ["AM", "PM"],
+    days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    shortDays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    shortMonths: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  });
+  function defaultLocale2(definition) {
+    locale2 = formatLocale(definition);
+    timeFormat = locale2.format;
+    timeParse = locale2.parse;
+    utcFormat = locale2.utcFormat;
+    utcParse = locale2.utcParse;
+    return locale2;
+  }
+
+  // node_modules/d3-scale/src/time.js
+  function date(t) {
+    return new Date(t);
+  }
+  function number4(t) {
+    return t instanceof Date ? +t : +/* @__PURE__ */ new Date(+t);
+  }
+  function calendar(ticks2, tickInterval, year, month, week, day, hour, minute, second2, format2) {
+    var scale = continuous(), invert = scale.invert, domain = scale.domain;
+    var formatMillisecond = format2(".%L"), formatSecond = format2(":%S"), formatMinute = format2("%I:%M"), formatHour = format2("%I %p"), formatDay = format2("%a %d"), formatWeek = format2("%b %d"), formatMonth = format2("%B"), formatYear2 = format2("%Y");
+    function tickFormat2(date2) {
+      return (second2(date2) < date2 ? formatMillisecond : minute(date2) < date2 ? formatSecond : hour(date2) < date2 ? formatMinute : day(date2) < date2 ? formatHour : month(date2) < date2 ? week(date2) < date2 ? formatDay : formatWeek : year(date2) < date2 ? formatMonth : formatYear2)(date2);
+    }
+    scale.invert = function(y2) {
+      return new Date(invert(y2));
+    };
+    scale.domain = function(_) {
+      return arguments.length ? domain(Array.from(_, number4)) : domain().map(date);
+    };
+    scale.ticks = function(interval2) {
+      var d = domain();
+      return ticks2(d[0], d[d.length - 1], interval2 == null ? 10 : interval2);
+    };
+    scale.tickFormat = function(count, specifier) {
+      return specifier == null ? tickFormat2 : format2(specifier);
+    };
+    scale.nice = function(interval2) {
+      var d = domain();
+      if (!interval2 || typeof interval2.range !== "function")
+        interval2 = tickInterval(d[0], d[d.length - 1], interval2 == null ? 10 : interval2);
+      return interval2 ? domain(nice(d, interval2)) : scale;
+    };
+    scale.copy = function() {
+      return copy(scale, calendar(ticks2, tickInterval, year, month, week, day, hour, minute, second2, format2));
+    };
+    return scale;
+  }
+
+  // node_modules/d3-scale/src/utcTime.js
+  function utcTime() {
+    return initRange.apply(calendar(utcTicks, utcTickInterval, utcYear, utcMonth, utcSunday, utcDay, utcHour, utcMinute, second, utcFormat).domain([Date.UTC(2e3, 0, 1), Date.UTC(2e3, 0, 2)]), arguments);
+  }
+
+  // node_modules/d3-shape/src/constant.js
+  function constant_default4(x2) {
+    return function constant() {
+      return x2;
+    };
+  }
+
+  // node_modules/d3-shape/src/path.js
+  function withPath(shape) {
+    let digits = 3;
+    shape.digits = function(_) {
+      if (!arguments.length)
+        return digits;
+      if (_ == null) {
+        digits = null;
+      } else {
+        const d = Math.floor(_);
+        if (!(d >= 0))
+          throw new RangeError(`invalid digits: ${_}`);
+        digits = d;
+      }
+      return shape;
+    };
+    return () => new Path(digits);
+  }
+
+  // node_modules/d3-shape/src/array.js
+  var slice = Array.prototype.slice;
+  function array_default(x2) {
+    return typeof x2 === "object" && "length" in x2 ? x2 : Array.from(x2);
+  }
+
+  // node_modules/d3-shape/src/curve/linear.js
+  function Linear(context5) {
+    this._context = context5;
+  }
+  Linear.prototype = {
+    areaStart: function() {
+      this._line = 0;
+    },
+    areaEnd: function() {
+      this._line = NaN;
+    },
+    lineStart: function() {
+      this._point = 0;
+    },
+    lineEnd: function() {
+      if (this._line || this._line !== 0 && this._point === 1)
+        this._context.closePath();
+      this._line = 1 - this._line;
+    },
+    point: function(x2, y2) {
+      x2 = +x2, y2 = +y2;
+      switch (this._point) {
+        case 0:
+          this._point = 1;
+          this._line ? this._context.lineTo(x2, y2) : this._context.moveTo(x2, y2);
+          break;
+        case 1:
+          this._point = 2;
+        default:
+          this._context.lineTo(x2, y2);
+          break;
+      }
+    }
+  };
+  function linear_default(context5) {
+    return new Linear(context5);
+  }
+
+  // node_modules/d3-shape/src/point.js
+  function x(p) {
+    return p[0];
+  }
+  function y(p) {
+    return p[1];
+  }
+
+  // node_modules/d3-shape/src/line.js
+  function line_default(x2, y2) {
+    var defined = constant_default4(true), context5 = null, curve = linear_default, output = null, path2 = withPath(line);
+    x2 = typeof x2 === "function" ? x2 : x2 === void 0 ? x : constant_default4(x2);
+    y2 = typeof y2 === "function" ? y2 : y2 === void 0 ? y : constant_default4(y2);
+    function line(data) {
+      var i, n = (data = array_default(data)).length, d, defined0 = false, buffer;
+      if (context5 == null)
+        output = curve(buffer = path2());
+      for (i = 0; i <= n; ++i) {
+        if (!(i < n && defined(d = data[i], i, data)) === defined0) {
+          if (defined0 = !defined0)
+            output.lineStart();
+          else
+            output.lineEnd();
+        }
+        if (defined0)
+          output.point(+x2(d, i, data), +y2(d, i, data));
+      }
+      if (buffer)
+        return output = null, buffer + "" || null;
+    }
+    line.x = function(_) {
+      return arguments.length ? (x2 = typeof _ === "function" ? _ : constant_default4(+_), line) : x2;
+    };
+    line.y = function(_) {
+      return arguments.length ? (y2 = typeof _ === "function" ? _ : constant_default4(+_), line) : y2;
+    };
+    line.defined = function(_) {
+      return arguments.length ? (defined = typeof _ === "function" ? _ : constant_default4(!!_), line) : defined;
+    };
+    line.curve = function(_) {
+      return arguments.length ? (curve = _, context5 != null && (output = curve(context5)), line) : curve;
+    };
+    line.context = function(_) {
+      return arguments.length ? (_ == null ? context5 = output = null : output = curve(context5 = _), line) : context5;
+    };
+    return line;
+  }
+
+  // node_modules/d3-zoom/src/transform.js
+  function Transform(k, x2, y2) {
+    this.k = k;
+    this.x = x2;
+    this.y = y2;
+  }
+  Transform.prototype = {
+    constructor: Transform,
+    scale: function(k) {
+      return k === 1 ? this : new Transform(this.k * k, this.x, this.y);
+    },
+    translate: function(x2, y2) {
+      return x2 === 0 & y2 === 0 ? this : new Transform(this.k, this.x + this.k * x2, this.y + this.k * y2);
+    },
+    apply: function(point) {
+      return [point[0] * this.k + this.x, point[1] * this.k + this.y];
+    },
+    applyX: function(x2) {
+      return x2 * this.k + this.x;
+    },
+    applyY: function(y2) {
+      return y2 * this.k + this.y;
+    },
+    invert: function(location) {
+      return [(location[0] - this.x) / this.k, (location[1] - this.y) / this.k];
+    },
+    invertX: function(x2) {
+      return (x2 - this.x) / this.k;
+    },
+    invertY: function(y2) {
+      return (y2 - this.y) / this.k;
+    },
+    rescaleX: function(x2) {
+      return x2.copy().domain(x2.range().map(this.invertX, this).map(x2.invert, x2));
+    },
+    rescaleY: function(y2) {
+      return y2.copy().domain(y2.range().map(this.invertY, this).map(y2.invert, y2));
+    },
+    toString: function() {
+      return "translate(" + this.x + "," + this.y + ") scale(" + this.k + ")";
+    }
+  };
+  var identity3 = new Transform(1, 0, 0);
+  transform.prototype = Transform.prototype;
+  function transform(node) {
+    while (!node.__zoom)
+      if (!(node = node.parentNode))
+        return identity3;
+    return node.__zoom;
+  }
+
+  // client/components/Stat/StockChart.jsx
+  var import_react58 = __toESM(require_react(), 1);
+  var import_prop_types8 = __toESM(require_prop_types(), 1);
+  function StockChart({
+    stockName,
+    data = [],
+    width = 928,
+    height = 500,
+    marginTop = 20,
+    marginRight = 30,
+    marginBottom = 30,
+    marginLeft = 40
+  }) {
+    const [stockDetails, setStockDetails] = (0, import_react58.useState)([]);
+    (0, import_react58.useEffect)(() => {
+      function getStock() {
+        return __async(this, null, function* () {
+          const stockData = yield retrieveStockDetails(stockName, 1);
+          setStockDetails(stockData);
+        });
+      }
+      getStock();
+      console.log(stockDetails);
+      console.log(typeof stockDetails);
+    }, []);
+    for (let i = 0; i < stockDetails.length; i++) {
+      const stock = { date: Date.parse(stockDetails[i][0]), close: stockDetails[i][5] };
+      data.push(stock);
+    }
+    console.log("data: ");
+    console.log(data);
+    console.log(typeof data);
+    console.log("stockDetails: ");
+    console.log(stockDetails);
+    const gx = (0, import_react58.useRef)();
+    const gy = (0, import_react58.useRef)();
+    const x2 = utcTime(extent(data, (d) => d.date), [marginLeft, width - marginRight]);
+    const y2 = linear2([0, max(data, (d) => d.close)], [height - marginBottom, marginTop]);
+    const line = line_default().x((d) => x2(d.date)).y((d) => y2(d.close));
+    (0, import_react58.useEffect)(() => void select_default2(gx.current).call(axisBottom(x2)), [gx, x2]);
+    (0, import_react58.useEffect)(() => void select_default2(gy.current).call(axisLeft(y2)), [gy, y2]);
+    return /* @__PURE__ */ import_react58.default.createElement("svg", { width, height }, /* @__PURE__ */ import_react58.default.createElement("g", { ref: gx, transform: `translate(0,${height - marginBottom})` }), /* @__PURE__ */ import_react58.default.createElement("g", { ref: gy, transform: `translate(${marginLeft},0)` }), /* @__PURE__ */ import_react58.default.createElement("path", { fill: "none", stroke: "steelBlue", strokeWidth: "1.5", d: line(data) }), /* @__PURE__ */ import_react58.default.createElement("g", { fill: "white", stroke: "currentColor", strokeWidth: "1.5" }, data.map((d, i) => /* @__PURE__ */ import_react58.default.createElement("circle", { key: i, cx: x2(i), cy: y2(d), r: "2.5" }))));
+  }
+  StockChart.propTypes = {
+    stockName: import_prop_types8.default.string,
+    data: import_prop_types8.default.array,
+    width: import_prop_types8.default.number,
+    height: import_prop_types8.default.number,
+    marginTop: import_prop_types8.default.number,
+    marginRight: import_prop_types8.default.number,
+    marginBottom: import_prop_types8.default.number,
+    marginLeft: import_prop_types8.default.number
+  };
+  StockChart.defaultProps = {
+    stockName: "",
+    data: [],
+    width: 928,
+    height: 500,
+    marginTop: 20,
+    marginRight: 30,
+    marginBottom: 30,
+    marginLeft: 40
+  };
+
+  // client/components/Stat/StatsPage.jsx
   function StatsPage() {
-    return /* @__PURE__ */ import_react57.default.createElement("div", null, /* @__PURE__ */ import_react57.default.createElement("div", null, /* @__PURE__ */ import_react57.default.createElement("h1", null, "Stats Page")), /* @__PURE__ */ import_react57.default.createElement("div", null, /* @__PURE__ */ import_react57.default.createElement("p", null, "This is where Stats stuff will go")));
+    return /* @__PURE__ */ import_react59.default.createElement("div", null, /* @__PURE__ */ import_react59.default.createElement("div", null, /* @__PURE__ */ import_react59.default.createElement("h1", null, "Stats Page")), /* @__PURE__ */ import_react59.default.createElement("div", null, /* @__PURE__ */ import_react59.default.createElement("p", null, "this is a circle"), /* @__PURE__ */ import_react59.default.createElement(StockChart, { stockName: "AAPL" })));
   }
   var StatsPage_default = StatsPage;
 
   // client/components/SearchPage/MySearchBar.jsx
-  var import_react58 = __toESM(require_react(), 1);
+  var import_react60 = __toESM(require_react(), 1);
   var MySearchBar = () => {
-    const [searchInput, setSearchInput] = import_react58.default.useState("");
-    const [searchResult, setSearchResult] = import_react58.default.useState([""]);
-    const searchForm = (0, import_react58.useRef)();
-    (0, import_react58.useEffect)(() => {
+    const [searchInput, setSearchInput] = import_react60.default.useState("");
+    const [searchResult, setSearchResult] = import_react60.default.useState([""]);
+    const searchForm = (0, import_react60.useRef)();
+    (0, import_react60.useEffect)(() => {
       document.body.addEventListener("keydown", onKeyDown);
       return () => {
         document.body.removeEventListener("keydown", onKeyDown);
@@ -36227,10 +40810,10 @@
         }
       });
     }
-    (0, import_react58.useEffect)(() => {
+    (0, import_react60.useEffect)(() => {
       searchForm.current.focus();
     }, []);
-    const start = 0;
+    const start2 = 0;
     const end = 10;
     const handleChange = (e) => __async(void 0, null, function* () {
       e.preventDefault();
@@ -36245,7 +40828,7 @@
           console.log("searchInput is empty");
           setSearchResult([""]);
         } else {
-          const searchResult2 = yield searchStockAPI({ searchInput: searchInput2, start, end });
+          const searchResult2 = yield searchStockAPI({ searchInput: searchInput2, start: start2, end });
           if (searchResult2) {
             setSearchResult(searchResult2);
           } else {
@@ -36254,7 +40837,7 @@
         }
       });
     }
-    return /* @__PURE__ */ import_react58.default.createElement(import_react58.default.Fragment, null, /* @__PURE__ */ import_react58.default.createElement(Card_default, { className: "mx-5" }, /* @__PURE__ */ import_react58.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react58.default.createElement(Card_default.Header, null, "Stock Search"), /* @__PURE__ */ import_react58.default.createElement(Card_default.Text, null, "Search for a stock by symbol or name"), /* @__PURE__ */ import_react58.default.createElement("div", { className: "input-group " }, /* @__PURE__ */ import_react58.default.createElement(
+    return /* @__PURE__ */ import_react60.default.createElement(import_react60.default.Fragment, null, /* @__PURE__ */ import_react60.default.createElement(Card_default, { className: "mx-5" }, /* @__PURE__ */ import_react60.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react60.default.createElement(Card_default.Header, null, "Stock Search"), /* @__PURE__ */ import_react60.default.createElement(Card_default.Text, null, "Search for a stock by symbol or name"), /* @__PURE__ */ import_react60.default.createElement("div", { className: "input-group " }, /* @__PURE__ */ import_react60.default.createElement(
       "input",
       {
         id: "searchForm",
@@ -36265,7 +40848,7 @@
         onChange: handleChange,
         ref: searchForm
       }
-    ), /* @__PURE__ */ import_react58.default.createElement(
+    ), /* @__PURE__ */ import_react60.default.createElement(
       Button_default2,
       {
         variant: "outline-success",
@@ -36273,11 +40856,11 @@
         onClick: handleSearch
       },
       "Search"
-    )))), /* @__PURE__ */ import_react58.default.createElement(Card_default, { className: "mx-5" }, /* @__PURE__ */ import_react58.default.createElement(Card_default.Header, null, "Search Results"), /* @__PURE__ */ import_react58.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react58.default.createElement(Table_default, { className: "table" }, /* @__PURE__ */ import_react58.default.createElement("thead", null, /* @__PURE__ */ import_react58.default.createElement("tr", null, /* @__PURE__ */ import_react58.default.createElement("th", null, "Symbol"), /* @__PURE__ */ import_react58.default.createElement("th", null, "Name"), /* @__PURE__ */ import_react58.default.createElement("th", null, "Quote Type"), /* @__PURE__ */ import_react58.default.createElement("th", null, "Industry"), /* @__PURE__ */ import_react58.default.createElement("th", null, "Score"))), /* @__PURE__ */ import_react58.default.createElement("tbody", null, searchResult.map((stock) => /* @__PURE__ */ import_react58.default.createElement("tr", { key: stock.symbol }, /* @__PURE__ */ import_react58.default.createElement("td", null, stock.symbol), /* @__PURE__ */ import_react58.default.createElement("td", null, stock.name), /* @__PURE__ */ import_react58.default.createElement("td", null, stock.quoteType), /* @__PURE__ */ import_react58.default.createElement("td", null, stock.industry), /* @__PURE__ */ import_react58.default.createElement("td", null, stock.score))))))));
+    )))), /* @__PURE__ */ import_react60.default.createElement(Card_default, { className: "mx-5" }, /* @__PURE__ */ import_react60.default.createElement(Card_default.Header, null, "Search Results"), /* @__PURE__ */ import_react60.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react60.default.createElement(Table_default, { className: "table" }, /* @__PURE__ */ import_react60.default.createElement("thead", null, /* @__PURE__ */ import_react60.default.createElement("tr", null, /* @__PURE__ */ import_react60.default.createElement("th", null, "Symbol"), /* @__PURE__ */ import_react60.default.createElement("th", null, "Name"), /* @__PURE__ */ import_react60.default.createElement("th", null, "Quote Type"), /* @__PURE__ */ import_react60.default.createElement("th", null, "Industry"), /* @__PURE__ */ import_react60.default.createElement("th", null, "Score"))), /* @__PURE__ */ import_react60.default.createElement("tbody", null, searchResult.map((stock) => /* @__PURE__ */ import_react60.default.createElement("tr", { key: stock.symbol }, /* @__PURE__ */ import_react60.default.createElement("td", null, stock.symbol), /* @__PURE__ */ import_react60.default.createElement("td", null, stock.name), /* @__PURE__ */ import_react60.default.createElement("td", null, stock.quoteType), /* @__PURE__ */ import_react60.default.createElement("td", null, stock.industry), /* @__PURE__ */ import_react60.default.createElement("td", null, stock.score))))))));
   };
 
   // client/components/Login_Signup/LoginRegisterForm.jsx
-  var import_react59 = __toESM(require_react(), 1);
+  var import_react61 = __toESM(require_react(), 1);
 
   // client/components/Login_Signup/dataHelper.js
   function signUp(userInfo) {
@@ -36307,15 +40890,15 @@
   }
 
   // client/components/Login_Signup/LoginRegisterForm.jsx
-  var import_prop_types8 = __toESM(require_prop_types(), 1);
+  var import_prop_types9 = __toESM(require_prop_types(), 1);
   var import_react_router_dom2 = __toESM(require_main2(), 1);
   function LoginCard(props) {
     const navigate = (0, import_react_router_dom2.useNavigate)();
     const { onLogIn } = props;
-    const [name, setName] = (0, import_react59.useState)("");
-    const [pass, setPass] = (0, import_react59.useState)("");
-    const [success, setSuccess] = (0, import_react59.useState)(false);
-    const [show, setShow] = (0, import_react59.useState)(false);
+    const [name, setName] = (0, import_react61.useState)("");
+    const [pass, setPass] = (0, import_react61.useState)("");
+    const [success, setSuccess] = (0, import_react61.useState)(false);
+    const [show, setShow] = (0, import_react61.useState)(false);
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
     const onSuccessMessage = "Logged in successfully";
@@ -36338,24 +40921,24 @@
         console.log(error);
       }
     });
-    return /* @__PURE__ */ import_react59.default.createElement("div", null, /* @__PURE__ */ import_react59.default.createElement(Alert_default, { show, variant: success ? "success" : "danger", onClose: handleClose, dismissible: true }, /* @__PURE__ */ import_react59.default.createElement(Alert_default.Heading, null, "Login"), /* @__PURE__ */ import_react59.default.createElement("p", null, success ? onSuccessMessage : onFailMessage)), /* @__PURE__ */ import_react59.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react59.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react59.default.createElement("form", { method: "post", onSubmit: handleSubmit }, /* @__PURE__ */ import_react59.default.createElement("label", null, "Please enter your information to log in."), /* @__PURE__ */ import_react59.default.createElement("label", null, "Username: ", /* @__PURE__ */ import_react59.default.createElement(
+    return /* @__PURE__ */ import_react61.default.createElement("div", null, /* @__PURE__ */ import_react61.default.createElement(Alert_default, { show, variant: success ? "success" : "danger", onClose: handleClose, dismissible: true }, /* @__PURE__ */ import_react61.default.createElement(Alert_default.Heading, null, "Login"), /* @__PURE__ */ import_react61.default.createElement("p", null, success ? onSuccessMessage : onFailMessage)), /* @__PURE__ */ import_react61.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react61.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react61.default.createElement("form", { method: "post", onSubmit: handleSubmit }, /* @__PURE__ */ import_react61.default.createElement("label", null, "Please enter your information to log in."), /* @__PURE__ */ import_react61.default.createElement("label", null, "Username: ", /* @__PURE__ */ import_react61.default.createElement(
       "input",
       {
         name: "username",
         value: name,
         onChange: (e) => setName(e.target.value)
       }
-    )), /* @__PURE__ */ import_react59.default.createElement("label", null, "Password: ", /* @__PURE__ */ import_react59.default.createElement(
+    )), /* @__PURE__ */ import_react61.default.createElement("label", null, "Password: ", /* @__PURE__ */ import_react61.default.createElement(
       "input",
       {
         name: "password",
         value: pass,
         onChange: (e) => setPass(e.target.value)
       }
-    )), /* @__PURE__ */ import_react59.default.createElement("label", null, /* @__PURE__ */ import_react59.default.createElement(Button_default2, { type: "submit", className: "mt-3 center" }, "Log In"))), /* @__PURE__ */ import_react59.default.createElement("div", { className: "mt-3" }, /* @__PURE__ */ import_react59.default.createElement(import_react_router_dom2.Link, { to: "/signup", className: ".p-3" }, "Don't have an account? Sign Up!"), /* @__PURE__ */ import_react59.default.createElement("br", null), /* @__PURE__ */ import_react59.default.createElement(import_react_router_dom2.Link, { to: "/forgotPassword" }, "Forgot Password?")))));
+    )), /* @__PURE__ */ import_react61.default.createElement("label", null, /* @__PURE__ */ import_react61.default.createElement(Button_default2, { type: "submit", className: "mt-3 center" }, "Log In"))), /* @__PURE__ */ import_react61.default.createElement("div", { className: "mt-3" }, /* @__PURE__ */ import_react61.default.createElement(import_react_router_dom2.Link, { to: "/signup", className: ".p-3" }, "Don't have an account? Sign Up!"), /* @__PURE__ */ import_react61.default.createElement("br", null), /* @__PURE__ */ import_react61.default.createElement(import_react_router_dom2.Link, { to: "/forgotPassword" }, "Forgot Password?")))));
   }
   LoginCard.propTypes = {
-    onLogIn: import_prop_types8.default.func
+    onLogIn: import_prop_types9.default.func
   };
   var LoginRegisterForm_default = LoginCard;
   function wait(ms) {
@@ -36363,17 +40946,17 @@
   }
 
   // client/components/Login_Signup/SignUpRegisterForm.jsx
-  var import_react60 = __toESM(require_react(), 1);
-  var import_prop_types9 = __toESM(require_prop_types(), 1);
+  var import_react62 = __toESM(require_react(), 1);
+  var import_prop_types10 = __toESM(require_prop_types(), 1);
   var import_react_router_dom3 = __toESM(require_main2(), 1);
   function SignUpCard(props) {
     const { onSignUp } = props;
-    const [newUsername, setNewUsername] = import_react60.default.useState("");
-    const [newPassword, setNewPassword] = import_react60.default.useState("");
-    const [newFirstName, setNewFirstName] = import_react60.default.useState("");
-    const [newLastName, setNewLastName] = import_react60.default.useState("");
-    const [newGmail, setNewGmail] = import_react60.default.useState("");
-    const [confirmPass, setConfirmPass] = import_react60.default.useState("");
+    const [newUsername, setNewUsername] = import_react62.default.useState("");
+    const [newPassword, setNewPassword] = import_react62.default.useState("");
+    const [newFirstName, setNewFirstName] = import_react62.default.useState("");
+    const [newLastName, setNewLastName] = import_react62.default.useState("");
+    const [newGmail, setNewGmail] = import_react62.default.useState("");
+    const [confirmPass, setConfirmPass] = import_react62.default.useState("");
     function handleSubmit(e) {
       return __async(this, null, function* () {
         e.preventDefault();
@@ -36394,79 +40977,79 @@
         }
       });
     }
-    return /* @__PURE__ */ import_react60.default.createElement("div", null, /* @__PURE__ */ import_react60.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react60.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react60.default.createElement("form", { method: "post", onSubmit: handleSubmit }, /* @__PURE__ */ import_react60.default.createElement("label", null, "Please enter your information to create a new account."), /* @__PURE__ */ import_react60.default.createElement("label", null, "First Name: ", /* @__PURE__ */ import_react60.default.createElement(
+    return /* @__PURE__ */ import_react62.default.createElement("div", null, /* @__PURE__ */ import_react62.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react62.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react62.default.createElement("form", { method: "post", onSubmit: handleSubmit }, /* @__PURE__ */ import_react62.default.createElement("label", null, "Please enter your information to create a new account."), /* @__PURE__ */ import_react62.default.createElement("label", null, "First Name: ", /* @__PURE__ */ import_react62.default.createElement(
       "input",
       {
         name: "firstName",
         value: newFirstName,
         onChange: (e) => setNewFirstName(e.target.value)
       }
-    )), /* @__PURE__ */ import_react60.default.createElement("label", null, "Last Name: ", /* @__PURE__ */ import_react60.default.createElement(
+    )), /* @__PURE__ */ import_react62.default.createElement("label", null, "Last Name: ", /* @__PURE__ */ import_react62.default.createElement(
       "input",
       {
         name: "lastName",
         value: newLastName,
         onChange: (e) => setNewLastName(e.target.value)
       }
-    )), /* @__PURE__ */ import_react60.default.createElement("label", null, "Gmail: ", /* @__PURE__ */ import_react60.default.createElement("br", null), /* @__PURE__ */ import_react60.default.createElement(
+    )), /* @__PURE__ */ import_react62.default.createElement("label", null, "Gmail: ", /* @__PURE__ */ import_react62.default.createElement("br", null), /* @__PURE__ */ import_react62.default.createElement(
       "input",
       {
         name: "gmail",
         value: newGmail,
         onChange: (e) => setNewGmail(e.target.value)
       }
-    )), /* @__PURE__ */ import_react60.default.createElement("label", null, "Username: ", /* @__PURE__ */ import_react60.default.createElement(
+    )), /* @__PURE__ */ import_react62.default.createElement("label", null, "Username: ", /* @__PURE__ */ import_react62.default.createElement(
       "input",
       {
         name: "username",
         value: newUsername,
         onChange: (e) => setNewUsername(e.target.value)
       }
-    )), /* @__PURE__ */ import_react60.default.createElement("label", null, "Password: ", /* @__PURE__ */ import_react60.default.createElement(
+    )), /* @__PURE__ */ import_react62.default.createElement("label", null, "Password: ", /* @__PURE__ */ import_react62.default.createElement(
       "input",
       {
         name: "password",
         value: newPassword,
         onChange: (e) => setNewPassword(e.target.value)
       }
-    )), /* @__PURE__ */ import_react60.default.createElement("label", null, "Confirm Password: ", /* @__PURE__ */ import_react60.default.createElement(
+    )), /* @__PURE__ */ import_react62.default.createElement("label", null, "Confirm Password: ", /* @__PURE__ */ import_react62.default.createElement(
       "input",
       {
         name: "confirm_password",
         value: confirmPass,
         onChange: (e) => setConfirmPass(e.target.value)
       }
-    )), /* @__PURE__ */ import_react60.default.createElement("label", null, /* @__PURE__ */ import_react60.default.createElement(Button_default2, { type: "submit", className: "mt-3" }, "Sign Up"))), /* @__PURE__ */ import_react60.default.createElement("div", { className: "mt-3" }, /* @__PURE__ */ import_react60.default.createElement(import_react_router_dom3.Link, { to: "/login", className: ".p-3" }, "Already have an account? Login!")))));
+    )), /* @__PURE__ */ import_react62.default.createElement("label", null, /* @__PURE__ */ import_react62.default.createElement(Button_default2, { type: "submit", className: "mt-3" }, "Sign Up"))), /* @__PURE__ */ import_react62.default.createElement("div", { className: "mt-3" }, /* @__PURE__ */ import_react62.default.createElement(import_react_router_dom3.Link, { to: "/login", className: ".p-3" }, "Already have an account? Login!")))));
   }
   SignUpCard.propTypes = {
-    onSignUp: import_prop_types9.default.func
+    onSignUp: import_prop_types10.default.func
   };
   var SignUpRegisterForm_default = SignUpCard;
 
   // client/components/Tut/TutorialPage.jsx
-  var import_react61 = __toESM(require_react(), 1);
+  var import_react63 = __toESM(require_react(), 1);
   function tPage() {
-    return /* @__PURE__ */ import_react61.default.createElement(import_react61.default.Fragment, null, /* @__PURE__ */ import_react61.default.createElement("div", null, /* @__PURE__ */ import_react61.default.createElement(Container_default, null, /* @__PURE__ */ import_react61.default.createElement(Row_default, null, /* @__PURE__ */ import_react61.default.createElement(Col_default, null, /* @__PURE__ */ import_react61.default.createElement(Accordion_default, { defaultActiveKey: "0" }, /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Item, { eventKey: "0" }, /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Header, null, /* @__PURE__ */ import_react61.default.createElement(BsQuestionCircle, null)), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Body, null, "This is a tutorial that briefly explains elememts and pages on this website.")), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Item, { eventKey: "1" }, /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Header, null, "Home"), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Body, null, "This is the landing page for all visitors.")), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Item, { eventKey: "2" }, /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Header, null, "Stats"), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Body, null, "This page has a more indepth overview of the stocks that are being evaluated on the website")), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Item, { eventKey: "3" }, /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Header, null, "Monkey Technology"), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Body, null, "This page describes the algorithm that we used to take the position of the monkeys and translate it into stock descisions.")), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Item, { eventKey: "4" }, /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Header, null, "Log In"), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Body, null, "This is where you log in to your account")), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Item, { eventKey: "6" }, /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Header, null, "Sign In"), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Body, null, "This is where you can create an account that allows you to track specific stocks and add them to your portfolio")), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Item, { eventKey: "7" }, /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Header, null, "Settings"), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Body, null, "This is where you can change different visual elements of the website. In order for the changes to stay between sessions, you must create an account or log in to an already existing account.")), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Item, { eventKey: "8" }, /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Header, null, /* @__PURE__ */ import_react61.default.createElement(BsBrightnessHigh, null)), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Body, null, "This Dark mode button toggles the entire website into a color scheme that is easier on the eye when studying the screen in a darkend environment."))))))));
+    return /* @__PURE__ */ import_react63.default.createElement(import_react63.default.Fragment, null, /* @__PURE__ */ import_react63.default.createElement("div", null, /* @__PURE__ */ import_react63.default.createElement(Container_default, null, /* @__PURE__ */ import_react63.default.createElement(Row_default, null, /* @__PURE__ */ import_react63.default.createElement(Col_default, null, /* @__PURE__ */ import_react63.default.createElement(Accordion_default, { defaultActiveKey: "0" }, /* @__PURE__ */ import_react63.default.createElement(Accordion_default.Item, { eventKey: "0" }, /* @__PURE__ */ import_react63.default.createElement(Accordion_default.Header, null, /* @__PURE__ */ import_react63.default.createElement(BsQuestionCircle, null)), /* @__PURE__ */ import_react63.default.createElement(Accordion_default.Body, null, "This is a tutorial that briefly explains elememts and pages on this website.")), /* @__PURE__ */ import_react63.default.createElement(Accordion_default.Item, { eventKey: "1" }, /* @__PURE__ */ import_react63.default.createElement(Accordion_default.Header, null, "Home"), /* @__PURE__ */ import_react63.default.createElement(Accordion_default.Body, null, "This is the landing page for all visitors.")), /* @__PURE__ */ import_react63.default.createElement(Accordion_default.Item, { eventKey: "2" }, /* @__PURE__ */ import_react63.default.createElement(Accordion_default.Header, null, "Stats"), /* @__PURE__ */ import_react63.default.createElement(Accordion_default.Body, null, "This page has a more indepth overview of the stocks that are being evaluated on the website")), /* @__PURE__ */ import_react63.default.createElement(Accordion_default.Item, { eventKey: "3" }, /* @__PURE__ */ import_react63.default.createElement(Accordion_default.Header, null, "Monkey Technology"), /* @__PURE__ */ import_react63.default.createElement(Accordion_default.Body, null, "This page describes the algorithm that we used to take the position of the monkeys and translate it into stock descisions.")), /* @__PURE__ */ import_react63.default.createElement(Accordion_default.Item, { eventKey: "4" }, /* @__PURE__ */ import_react63.default.createElement(Accordion_default.Header, null, "Log In"), /* @__PURE__ */ import_react63.default.createElement(Accordion_default.Body, null, "This is where you log in to your account")), /* @__PURE__ */ import_react63.default.createElement(Accordion_default.Item, { eventKey: "6" }, /* @__PURE__ */ import_react63.default.createElement(Accordion_default.Header, null, "Sign In"), /* @__PURE__ */ import_react63.default.createElement(Accordion_default.Body, null, "This is where you can create an account that allows you to track specific stocks and add them to your portfolio")), /* @__PURE__ */ import_react63.default.createElement(Accordion_default.Item, { eventKey: "7" }, /* @__PURE__ */ import_react63.default.createElement(Accordion_default.Header, null, "Settings"), /* @__PURE__ */ import_react63.default.createElement(Accordion_default.Body, null, "This is where you can change different visual elements of the website. In order for the changes to stay between sessions, you must create an account or log in to an already existing account.")), /* @__PURE__ */ import_react63.default.createElement(Accordion_default.Item, { eventKey: "8" }, /* @__PURE__ */ import_react63.default.createElement(Accordion_default.Header, null, /* @__PURE__ */ import_react63.default.createElement(BsBrightnessHigh, null)), /* @__PURE__ */ import_react63.default.createElement(Accordion_default.Body, null, "This Dark mode button toggles the entire website into a color scheme that is easier on the eye when studying the screen in a darkend environment."))))))));
   }
   var TutorialPage_default = tPage;
 
   // client/components/Error/Error.jsx
-  var import_react62 = __toESM(require_react(), 1);
+  var import_react64 = __toESM(require_react(), 1);
   function Error2() {
-    return /* @__PURE__ */ import_react62.default.createElement("div", null, /* @__PURE__ */ import_react62.default.createElement("h1", null, "Error"), /* @__PURE__ */ import_react62.default.createElement("p", null, "The URL you have entered does not link to a page."));
+    return /* @__PURE__ */ import_react64.default.createElement("div", null, /* @__PURE__ */ import_react64.default.createElement("h1", null, "Error"), /* @__PURE__ */ import_react64.default.createElement("p", null, "The URL you have entered does not link to a page."));
   }
 
   // client/components/ResetPassword/ResetPassword.jsx
-  var import_react63 = __toESM(require_react(), 1);
-  var import_prop_types10 = __toESM(require_prop_types(), 1);
+  var import_react65 = __toESM(require_react(), 1);
+  var import_prop_types11 = __toESM(require_prop_types(), 1);
   function ResetPassword(props) {
     const accessKey = props.accessKey;
-    const [username, setUsername] = (0, import_react63.useState)("");
-    const [password, setPassword] = (0, import_react63.useState)("");
-    const [confirmPassword, setConfirmPassword] = (0, import_react63.useState)("");
-    const [success, setSuccess] = (0, import_react63.useState)(false);
-    const [show, setShow] = (0, import_react63.useState)(false);
-    const [showNoMatch, setShowNoMatch] = (0, import_react63.useState)(false);
+    const [username, setUsername] = (0, import_react65.useState)("");
+    const [password, setPassword] = (0, import_react65.useState)("");
+    const [confirmPassword, setConfirmPassword] = (0, import_react65.useState)("");
+    const [success, setSuccess] = (0, import_react65.useState)(false);
+    const [show, setShow] = (0, import_react65.useState)(false);
+    const [showNoMatch, setShowNoMatch] = (0, import_react65.useState)(false);
     const handleShowNoMatch = () => setShowNoMatch(true);
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
@@ -36499,26 +41082,26 @@
         }
       }
     });
-    return /* @__PURE__ */ import_react63.default.createElement(import_react63.default.Fragment, null, /* @__PURE__ */ import_react63.default.createElement(Alert_default, { show: showNoMatch, variant: "danger", onClose: handleClose, dismissible: true }, /* @__PURE__ */ import_react63.default.createElement("p", null, "Passwords do not match!")), /* @__PURE__ */ import_react63.default.createElement(Alert_default, { show, variant: success ? "success" : "danger", onClose: handleClose, dismissible: true }, /* @__PURE__ */ import_react63.default.createElement(Alert_default.Heading, null, "Reset Password"), /* @__PURE__ */ import_react63.default.createElement("p", null, success ? onSuccessMessage : onFailMessage)), /* @__PURE__ */ import_react63.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react63.default.createElement(Card_default.Header, { className: "fw-bold" }, "Reset Password"), /* @__PURE__ */ import_react63.default.createElement(CardBody_default, null, /* @__PURE__ */ import_react63.default.createElement("form", { onSubmit: handleSubmit }, /* @__PURE__ */ import_react63.default.createElement("div", null, "accessKey: ", accessKey), /* @__PURE__ */ import_react63.default.createElement("label", { className: "m-3" }, "Username:", /* @__PURE__ */ import_react63.default.createElement("input", { type: "text", value: username, onChange: handleUsernameChange })), /* @__PURE__ */ import_react63.default.createElement("label", { className: "m-3" }, "New Password:", /* @__PURE__ */ import_react63.default.createElement("input", { type: "password", value: password, onChange: handlePasswordChange })), /* @__PURE__ */ import_react63.default.createElement("br", null), /* @__PURE__ */ import_react63.default.createElement("label", { className: "m-3" }, "Confirm New Password:", /* @__PURE__ */ import_react63.default.createElement("input", { type: "password", value: confirmPassword, onChange: handleConfirmPasswordChange })), /* @__PURE__ */ import_react63.default.createElement("br", null), /* @__PURE__ */ import_react63.default.createElement("button", { className: "m-3", type: "submit" }, "Reset Password")))));
+    return /* @__PURE__ */ import_react65.default.createElement(import_react65.default.Fragment, null, /* @__PURE__ */ import_react65.default.createElement(Alert_default, { show: showNoMatch, variant: "danger", onClose: handleClose, dismissible: true }, /* @__PURE__ */ import_react65.default.createElement("p", null, "Passwords do not match!")), /* @__PURE__ */ import_react65.default.createElement(Alert_default, { show, variant: success ? "success" : "danger", onClose: handleClose, dismissible: true }, /* @__PURE__ */ import_react65.default.createElement(Alert_default.Heading, null, "Reset Password"), /* @__PURE__ */ import_react65.default.createElement("p", null, success ? onSuccessMessage : onFailMessage)), /* @__PURE__ */ import_react65.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react65.default.createElement(Card_default.Header, { className: "fw-bold" }, "Reset Password"), /* @__PURE__ */ import_react65.default.createElement(CardBody_default, null, /* @__PURE__ */ import_react65.default.createElement("form", { onSubmit: handleSubmit }, /* @__PURE__ */ import_react65.default.createElement("div", null, "accessKey: ", accessKey), /* @__PURE__ */ import_react65.default.createElement("label", { className: "m-3" }, "Username:", /* @__PURE__ */ import_react65.default.createElement("input", { type: "text", value: username, onChange: handleUsernameChange })), /* @__PURE__ */ import_react65.default.createElement("label", { className: "m-3" }, "New Password:", /* @__PURE__ */ import_react65.default.createElement("input", { type: "password", value: password, onChange: handlePasswordChange })), /* @__PURE__ */ import_react65.default.createElement("br", null), /* @__PURE__ */ import_react65.default.createElement("label", { className: "m-3" }, "Confirm New Password:", /* @__PURE__ */ import_react65.default.createElement("input", { type: "password", value: confirmPassword, onChange: handleConfirmPasswordChange })), /* @__PURE__ */ import_react65.default.createElement("br", null), /* @__PURE__ */ import_react65.default.createElement("button", { className: "m-3", type: "submit" }, "Reset Password")))));
   }
   ResetPassword.propTypes = {
-    accessKey: import_prop_types10.default.string,
-    match: import_prop_types10.default.shape({
-      params: import_prop_types10.default.shape({
-        accessKey: import_prop_types10.default.string
+    accessKey: import_prop_types11.default.string,
+    match: import_prop_types11.default.shape({
+      params: import_prop_types11.default.shape({
+        accessKey: import_prop_types11.default.string
       })
     })
   };
   var ResetPassword_default = ResetPassword;
 
   // client/components/ForgotPassword/ForgotPassword.jsx
-  var import_react64 = __toESM(require_react(), 1);
+  var import_react66 = __toESM(require_react(), 1);
   var import_react_router_dom4 = __toESM(require_main2(), 1);
   function ForgotPassword() {
-    const [username, setUsername] = (0, import_react64.useState)("");
-    const [email, setEmail] = (0, import_react64.useState)("");
-    const [success, setSuccess] = (0, import_react64.useState)(false);
-    const [show, setShow] = (0, import_react64.useState)(false);
+    const [username, setUsername] = (0, import_react66.useState)("");
+    const [email, setEmail] = (0, import_react66.useState)("");
+    const [success, setSuccess] = (0, import_react66.useState)(false);
+    const [show, setShow] = (0, import_react66.useState)(false);
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
     const onSuccessMessage = "Email sent";
@@ -36539,19 +41122,19 @@
       }
       handleShow();
     });
-    return /* @__PURE__ */ import_react64.default.createElement(import_react64.default.Fragment, null, /* @__PURE__ */ import_react64.default.createElement(Alert_default, { show, variant: success ? "success" : "danger", onClose: handleClose, dismissible: true }, /* @__PURE__ */ import_react64.default.createElement(Alert_default.Heading, null, "Reset Password"), /* @__PURE__ */ import_react64.default.createElement("p", null, success ? onSuccessMessage : onFailMessage)), /* @__PURE__ */ import_react64.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react64.default.createElement(Card_default.Header, null, "Forgot Password"), /* @__PURE__ */ import_react64.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react64.default.createElement("form", { onSubmit: handleSubmit }, /* @__PURE__ */ import_react64.default.createElement("label", { className: "m-3" }, "Username:", /* @__PURE__ */ import_react64.default.createElement("input", { type: "text", value: username, onChange: handleUsernameChange })), /* @__PURE__ */ import_react64.default.createElement("label", { className: "m-3" }, "Email:", /* @__PURE__ */ import_react64.default.createElement("input", { type: "text", value: email, onChange: handleEmailChange })), /* @__PURE__ */ import_react64.default.createElement("br", null), /* @__PURE__ */ import_react64.default.createElement("div", { className: "row-5" }, /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom4.Link, { to: "/login" }, /* @__PURE__ */ import_react64.default.createElement(Button_default2, { variant: "secondary" }, "Back to Login")), /* @__PURE__ */ import_react64.default.createElement(Button_default2, { type: "submit" }, "Send Email"))))));
+    return /* @__PURE__ */ import_react66.default.createElement(import_react66.default.Fragment, null, /* @__PURE__ */ import_react66.default.createElement(Alert_default, { show, variant: success ? "success" : "danger", onClose: handleClose, dismissible: true }, /* @__PURE__ */ import_react66.default.createElement(Alert_default.Heading, null, "Reset Password"), /* @__PURE__ */ import_react66.default.createElement("p", null, success ? onSuccessMessage : onFailMessage)), /* @__PURE__ */ import_react66.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react66.default.createElement(Card_default.Header, null, "Forgot Password"), /* @__PURE__ */ import_react66.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react66.default.createElement("form", { onSubmit: handleSubmit }, /* @__PURE__ */ import_react66.default.createElement("label", { className: "m-3" }, "Username:", /* @__PURE__ */ import_react66.default.createElement("input", { type: "text", value: username, onChange: handleUsernameChange })), /* @__PURE__ */ import_react66.default.createElement("label", { className: "m-3" }, "Email:", /* @__PURE__ */ import_react66.default.createElement("input", { type: "text", value: email, onChange: handleEmailChange })), /* @__PURE__ */ import_react66.default.createElement("br", null), /* @__PURE__ */ import_react66.default.createElement("div", { className: "row-5" }, /* @__PURE__ */ import_react66.default.createElement(import_react_router_dom4.Link, { to: "/login" }, /* @__PURE__ */ import_react66.default.createElement(Button_default2, { variant: "secondary" }, "Back to Login")), /* @__PURE__ */ import_react66.default.createElement(Button_default2, { type: "submit" }, "Send Email"))))));
   }
 
   // client/components/App.jsx
   function App() {
     const location = (0, import_react_router_dom5.useLocation)();
     const { hash, pathname, search } = location;
-    const [darkMode, setDarkMode] = import_react65.default.useState(false);
+    const [darkMode, setDarkMode] = import_react67.default.useState(false);
     const handleDarkMode = () => {
       setDarkMode(!darkMode);
     };
-    const [username, setUsername] = import_react65.default.useState("");
-    const [logInStatus, setLogInStatus] = import_react65.default.useState(false);
+    const [username, setUsername] = import_react67.default.useState("");
+    const [logInStatus, setLogInStatus] = import_react67.default.useState(false);
     function onLogInChange(username2) {
       setUsername(username2);
       setLogInStatus(true);
@@ -36559,21 +41142,21 @@
     const theme = darkMode ? "dark" : "light";
     document.getElementById("html").setAttribute("data-bs-theme", darkMode ? "dark" : "light");
     const accessKey = search.substring(11, search.length);
-    return /* @__PURE__ */ import_react65.default.createElement(import_react65.default.Fragment, null, /* @__PURE__ */ import_react65.default.createElement("div", { "data-bs-theme": theme }, /* @__PURE__ */ import_react65.default.createElement(MyNavBar, { loggedIn: logInStatus, mode: theme, "data-bs-theme": theme, handleTheme: handleDarkMode, isDark: darkMode }), /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Routes, null, /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Route, { path: "/", exact: true, element: /* @__PURE__ */ import_react65.default.createElement(HomePage_default, { theme, name: username, status: logInStatus }) }), /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Route, { path: "/login", element: /* @__PURE__ */ import_react65.default.createElement(LoginRegisterForm_default, { onLogIn: onLogInChange }) }), /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Route, { path: "/about", Component: IntroPage_default }), /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Route, { path: "/signup", element: /* @__PURE__ */ import_react65.default.createElement(SignUpRegisterForm_default, { onSignUp: onLogInChange }) }), /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Route, { path: "/monkeyTech", Component: MonkeyTechPage_default }), /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Route, { path: "/setting", element: /* @__PURE__ */ import_react65.default.createElement(
+    return /* @__PURE__ */ import_react67.default.createElement(import_react67.default.Fragment, null, /* @__PURE__ */ import_react67.default.createElement("div", { "data-bs-theme": theme }, /* @__PURE__ */ import_react67.default.createElement(MyNavBar, { loggedIn: logInStatus, mode: theme, "data-bs-theme": theme, handleTheme: handleDarkMode, isDark: darkMode }), /* @__PURE__ */ import_react67.default.createElement(import_react_router_dom5.Routes, null, /* @__PURE__ */ import_react67.default.createElement(import_react_router_dom5.Route, { path: "/", exact: true, element: /* @__PURE__ */ import_react67.default.createElement(HomePage_default, { theme, name: username, status: logInStatus }) }), /* @__PURE__ */ import_react67.default.createElement(import_react_router_dom5.Route, { path: "/login", element: /* @__PURE__ */ import_react67.default.createElement(LoginRegisterForm_default, { onLogIn: onLogInChange }) }), /* @__PURE__ */ import_react67.default.createElement(import_react_router_dom5.Route, { path: "/about", Component: IntroPage_default }), /* @__PURE__ */ import_react67.default.createElement(import_react_router_dom5.Route, { path: "/signup", element: /* @__PURE__ */ import_react67.default.createElement(SignUpRegisterForm_default, { onSignUp: onLogInChange }) }), /* @__PURE__ */ import_react67.default.createElement(import_react_router_dom5.Route, { path: "/monkeyTech", Component: MonkeyTechPage_default }), /* @__PURE__ */ import_react67.default.createElement(import_react_router_dom5.Route, { path: "/setting", element: /* @__PURE__ */ import_react67.default.createElement(
       SettingsPage_default,
       {
         name: username,
         setLogIn: setLogInStatus,
         setName: setUsername
       }
-    ) }), /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Route, { path: "/stats", Component: StatsPage_default }), /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Route, { path: "/search", Component: MySearchBar }), /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Route, { path: "/TutorialPage", Component: TutorialPage_default }), /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Route, { path: "/resetPassword", element: /* @__PURE__ */ import_react65.default.createElement(ResetPassword_default, { accessKey, darkMode }) }), /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Route, { path: "/forgotPassword", element: /* @__PURE__ */ import_react65.default.createElement(ForgotPassword, { darkMode }) }), /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Route, { path: "*", Component: Error2 }))));
+    ) }), /* @__PURE__ */ import_react67.default.createElement(import_react_router_dom5.Route, { path: "/stats", Component: StatsPage_default }), /* @__PURE__ */ import_react67.default.createElement(import_react_router_dom5.Route, { path: "/search", Component: MySearchBar }), /* @__PURE__ */ import_react67.default.createElement(import_react_router_dom5.Route, { path: "/TutorialPage", Component: TutorialPage_default }), /* @__PURE__ */ import_react67.default.createElement(import_react_router_dom5.Route, { path: "/resetPassword", element: /* @__PURE__ */ import_react67.default.createElement(ResetPassword_default, { accessKey, darkMode }) }), /* @__PURE__ */ import_react67.default.createElement(import_react_router_dom5.Route, { path: "/forgotPassword", element: /* @__PURE__ */ import_react67.default.createElement(ForgotPassword, { darkMode }) }), /* @__PURE__ */ import_react67.default.createElement(import_react_router_dom5.Route, { path: "*", Component: Error2 }))));
   }
 
   // client/main.jsx
   var import_react_router_dom6 = __toESM(require_main2(), 1);
-  var root = (0, import_client.createRoot)(document.getElementById("root"));
-  root.render(
-    /* @__PURE__ */ import_react66.default.createElement(import_react_router_dom6.BrowserRouter, null, /* @__PURE__ */ import_react66.default.createElement(App, null))
+  var root2 = (0, import_client.createRoot)(document.getElementById("root"));
+  root2.render(
+    /* @__PURE__ */ import_react68.default.createElement(import_react_router_dom6.BrowserRouter, null, /* @__PURE__ */ import_react68.default.createElement(App, null))
     // <SignupPage/>
     // <LoginPage/>
     // <IntroPage/>
