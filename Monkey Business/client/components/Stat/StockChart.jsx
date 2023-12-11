@@ -1,23 +1,40 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import { retrieveStockDetails } from '../../mbdataHelper';
+
+//stockDetails = await retrieveStockDetails(stockName);
 
 export default function StockChart({
   stockName,
   data = [],
-  stockData = retrieveStockDetails(stockName), 
+  stockData,
   width = 928,
   height = 500,
   marginTop = 20,
   marginRight = 30,
   marginBottom = 30,
   marginLeft = 40
-
+  
+  
   }) {
+  
+  //stockData = await retrieveStockDetails(stockName);
+  useEffect(() => {
+      async function getStock(){
+        stockData = await retrieveStockDetails(stockName);
+        response = await response.json()
+      }
+      if(!response) getStock();
+  })//*/
+
+  
   for(let i = 0; i < stockData.length; i++){
     stock = {date: stockData[i][0], close: stockData[i][5]};
     data += stock;
   }
+  console.log(stockData);
+  const gx = useRef();
+  const gy = useRef();
   // Declare the x (horizontal position) scale.
   const x = d3.scaleUtc(d3.extent(data, d => d.date), [marginLeft, width - marginRight]);
 
@@ -29,6 +46,19 @@ export default function StockChart({
       .x(d => x(d.date))
       .y(d => y(d.close));
   
+  useEffect(() => void d3.select(gx.current).call(d3.axisBottom(x)), [gx, x]);
+  useEffect(() => void d3.select(gy.current).call(d3.axisLeft(y)), [gy, y]);
+  return (
+    <svg width={width} height={height}>
+      <g ref={gx} transform={`translate(0,${height - marginBottom})`} />
+      <g ref={gy} transform={`translate(${marginLeft},0)`} />
+      <path fill="none" stroke="steelBlue" strokeWidth="1.5" d={line(data)} />
+      <g fill="white" stroke="currentColor" strokeWidth="1.5">
+        {data.map((d, i) => (<circle key={i} cx={x(i)} cy={y(d)} r="2.5" />))}
+      </g>
+    </svg>
+  );//*/
+  /*
   // Create the SVG container.
   const svg = d3.create("svg")
       .attr("width", width)
@@ -63,5 +93,5 @@ export default function StockChart({
       .attr("stroke-width", 1.5)
       .attr("d", line(data));
   
-  //return svg.node();
+  return svg.node();//*/
 }
