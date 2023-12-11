@@ -1,7 +1,7 @@
 import random
 import sys
 
-quant = sys.argv[1]
+quant = int(sys.argv[1])
 
 def reccomendStocks(quant):
 
