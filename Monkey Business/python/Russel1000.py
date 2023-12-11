@@ -1,7 +1,7 @@
 import random
 import sys
 
-quant = int(sys.argv[1])
+# quant = int(sys.argv[1])
 
 def reccomendStocks(quant):
 
@@ -17,6 +17,7 @@ def reccomendStocks(quant):
     list10=["TXRH","TXT","TYL","U","UA","UAA","UAL","UBER","UDR","UGI","UHAL","UHA.B","UHS","UI","ULTA","UNH","UNM","UNP","UPS","URI","USB","USFD","UTHR","UWMC","V","VAC","VEEV","VFC","VICI","VIRT","VLO","VLTO","VMC","VMI","VNO","VNT","VOYA","VRSK","VRSN","VRT","VRTX","VSAT","VSCO","VST","VSTS","VTR","VTRS","VVV","VYX","VZ","W","WAB","WAL","WAT","WBA","WBD","WBS","WCC","WDAY","WDC","WEC","WELL","WEN","WEX","WFC","WH","WHR","WING","WLK","WM","WMB","WMS","WMT","WOLF","WOOF","WPC","WRB","WRK","WSC","WSM","WSO","WST","WTFC","WTM","WTRG","WTW","WU","WWD","WY","WYNN","X","XEL","XOM","XP","XPO","XRAY","XYL","YETI","YUM","Z"]
 
     russel+=list2+list3+list4+list5+list6+list7+list8+list9+list10
+    
     # print(russel)
 
     output=[]
@@ -26,11 +27,11 @@ def reccomendStocks(quant):
         quant=0
     i=0
     while(len(output)<quant):
-        temp=random.randint(1,999)
+        temp=random.randint(1,993)
         if (russel[temp] not in output):
             output.append(russel[temp])
             # i+=1
     return output
 
-print(reccomendStocks(quant))
+print(reccomendStocks(30))
 
