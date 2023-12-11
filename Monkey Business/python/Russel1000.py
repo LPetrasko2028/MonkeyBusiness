@@ -1,11 +1,7 @@
 import random
 import sys
 
-<<<<<<< Updated upstream
-# quant = int(sys.argv[1])
-=======
 quant = int(sys.argv[1])
->>>>>>> Stashed changes
 
 def reccomendStocks(quant):
 
@@ -18,7 +14,7 @@ def reccomendStocks(quant):
     list7=["MRVI","MRVL","MS","MSA","MSCI","MSFT","MSGS","MSI","MSM","MTB","MTCH","MTD","MTG","MTN","MTZ","MU","MUSA","NATL","NBIX","NCLH","NCNO","NDAQ","NDSN","NEE","NEM","NET","NEU","NFE","NFG","NFLX","NI","NKE","NLOP","NLY","NNN","NOC","NOV","NOW","NRG","NSA","NSC","NTAP","NTNX","NTRA","NTRS","NU","NUE","NVCR","NVDA","NVR","NVST","NVT","NWL","NWS","NWSA","NXST","O","OC","ODFL","OGE","OGN","OHI","OKE","OKTA","OLED","OLLI","OLN","OLPX","OMC","OMF","ON","ORCL","ORI","ORLY","OSK","OTIS","OVV","OWL","OXY","OZK","PAG","PANW","PARA","PARAA","PATH","PAYC","PAYX","PB","PCAR","PCG","PCOR","PCTY","PEAK","PEG","PEGA","PEN","PENN","PEP"]
     list8=["PFE","PFG","PFGC","PG","PGR","PH","PHIN","PHM","PII","PINC","PINS","PK","PKG","PLD","PLNT","PLTK","PLTR","PLUG","PM","PNC","PNFP","PNR","PNW","PODD","POOL","POST","PPC","PPG","PPL","PRGO","PRI","PRU","PSA","PSTG","PSX","PTC","PTON","PVH","PWR","PXD","PYCR","PYPL","QCOM","QDEL","QGEN","QRVO","QS","R","RARE","RBA","RBC","RBLX","RCL","RCM","REG","REGN","REXR","REYN","RF","RGA","RGEN","RGLD","RH","RHI","RITM","RIVN","RJF","RKT","RL","RLI","RMD","RNG","RNR","ROIV","ROK","ROKU","ROL","ROP","ROST","RPM","RPRX","RRC","RRX","RS","RSG","RTX","RUN","RVTY","RYAN","RYN","S","SAIA","SAIC","SAM","SBAC","SBUX","SCCO","SCHW","SCI","SEB"]
     list9=["SEE","SEIC","SF","SGEN","SHC","SHW","SIRI","SITE","SJM","SKX","SLB","SLGN","SLM","SMAR","SMG","SNA","SNDR","SNOW","SNPS","SNV","SNX","SO","SOFI","SON","SPB","SPG","SPGI","SPLK","SPOT","SPR","SQ","SRC","SRCL","SRE","SRPT","SSNC","SSRM","ST","STAG","STE","STLD","STT","STWD","STZ","SUI","SWAV","SWK","SWKS","SWN","SYF","SYK","SYY","T","TAP","TDC","TDG","TDOC","TDY","TEAM","TECH","TER","TFC","TFSL","TFX","TGT","THC","THG","THO","TJX","TKO","TKR","TMO","TMUS","TNDM","TNL","TOL","TOST","TPG","TPL","TPR","TPX","TREX","TRGP","TRIP","TRMB","TROW","TRU","TRV","TSCO","TSLA","TSN","TT","TTC","TTD","TTEK","TTWO","TW","TWLO","TXG","TXN"]
-    list10=["TXRH","TXT","TYL","U","UA","UAA","UAL","UBER","UDR","UGI","UHAL","UHA.B","UHS","UI","ULTA","UNH","UNM","UNP","UPS","URI","USB","USFD","UTHR","UWMC","V","VAC","VEEV","VFC","VICI","VIRT","VLO","VLTO","VMC","VMI","VNO","VNT","VOYA","VRSK","VRSN","VRT","VRTX","VSAT","VSCO","VST","VSTS","VTR","VTRS","VVV","VYX","VZ","W","WAB","WAL","WAT","WBA","WBD","WBS","WCC","WDAY","WDC","WEC","WELL","WEN","WEX","WFC","WH","WHR","WING","WLK","WM","WMB","WMS","WMT","WOLF","WOOF","WPC","WRB","WRK","WSC","WSM","WSO","WST","WTFC","WTM","WTRG","WTW","WU","WWD","WY","WYNN","X","XEL","XOM","XP","XPO","XRAY","XYL","YETI","YUM","Z"]
+    list10=["TXRH","TXT","TYL","U","UA","UAA","UAL","UBER","UDR","UGI","UHAL","UHA.B","UHS","UI","ULTA","UNH","UNM","UNP","UPS","URI","USB","USFD","UTHR","UWMC","V","VAC","VEEV","VFC","VICI","VIRT","VLO","VLTO","VMC","VMI","VNO","VNT","VOYA","VRSK","VRSN","VRT","VRTX","VSAT","VSCO","VST","VSTS","VTR","VTRS","VVV","VYX","VZ","W","WAB","WAL","WAT","WBA","WBD","WBS","WCC","WDAY","WDC","WEC","WELL","WEN","WEX","WFC","WH","WHR","WING","WLK","WM","WMB","WMS","WMT","WOLF","WOOF","WPC","WRB","WRK","WSC","WSM","WSO","WST","WTFC","WTM","WTRG","WTW","WU","WWD","WY","WYNN","X","XEL","XOM","XP","XPO","XRAY","XYL","YETI","YUM","Z","ZBH","ZBRA","ZG","ZI","ZION","ZM","ZS","ZTS"]
 
     russel+=list2+list3+list4+list5+list6+list7+list8+list9+list10
     
@@ -29,17 +25,12 @@ def reccomendStocks(quant):
         quant=100
     if (quant<=0):
         quant=0
-    i=0
+    # i=0
     while(len(output)<quant):
-<<<<<<< Updated upstream
-        temp=random.randint(1,993)
-=======
-        temp=random.randint(1,990)
->>>>>>> Stashed changes
+        temp=random.randint(1,999)
         if (russel[temp] not in output):
             output.append(russel[temp])
             # i+=1
     return output
 
-print(reccomendStocks(30))
-
+print(reccomendStocks(quant))
