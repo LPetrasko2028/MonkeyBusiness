@@ -1,6 +1,8 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { searchStockAPI } from '../../mbdataHelper.js'
-import { Card, Button, Table } from 'react-bootstrap'
+import { Card, Button, Table, Modal} from 'react-bootstrap'
+import { postBuySellStock } from '../../mbdataHelper.js'
+
 export const MySearchBar = () => {
   const [searchInput, setSearchInput] = React.useState('')
   const [searchResult, setSearchResult] = React.useState([''])
@@ -31,6 +33,35 @@ export const MySearchBar = () => {
     console.log('e.target.value: ', e.target.value)
     setSearchInput(e.target.value)
   }
+
+//this is to add the button to add and sell stocks
+
+const [showModal, setShowModal] = useState(false);
+const [inputValue, setInputValue] = useState('');
+const [storedValue, setStoredValue] = useState(0);
+
+const handleCloseModal = () => {
+    setShowModal(false);
+};
+
+const handleOpenModal = () => {
+    setShowModal(true);
+};
+
+const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+};
+
+const handleEnter = () => {
+    const intValue = parseInt(inputValue);
+    if (!isNaN(intValue)) {
+        setStoredValue(intValue);
+    }
+    setInputValue('');
+    setShowModal(false);
+};
+  //end of button code
+
   async function handleSearch () {
     const searchInput = searchForm.current.value
     if (searchInput === '') {
@@ -94,6 +125,45 @@ export const MySearchBar = () => {
                   <td>{stock.quoteType}</td>
                   <td>{stock.industry}</td>
                   <td>{stock.score}</td>
+                  <td>
+
+                    {stock.symbol ? <Button onClick={handleOpenModal}variant="primary">Buy Stock</Button> : null}
+                    <Modal show={showModal} onHide={handleCloseModal}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Modal Title</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <input type="number" value={inputValue} onChange={handleInputChange} />
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleCloseModal}>
+                                Close
+                            </Button>
+                            <Button variant="primary" onClick={handleEnter}>
+                                Enter
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+
+                    {stock.symbol ? <Button onClick={handleOpenModal} variant="danger">Sell Stock</Button> : null}
+                    <Modal show={showModal} onHide={handleCloseModal}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Modal Title</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <input type="number" value={inputValue} onChange={handleInputChange} />
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleCloseModal}>
+                                Close
+                            </Button>
+                            <Button variant="primary" onClick={handleEnter}>
+                                Enter
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+
+                  </td>
                 </tr>
               ))}
             </tbody>

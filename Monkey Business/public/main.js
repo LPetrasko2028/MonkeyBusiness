@@ -1133,7 +1133,7 @@
             }
             return dispatcher.useContext(Context2);
           }
-          function useState17(initialState) {
+          function useState18(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1935,7 +1935,7 @@
           exports.useMemo = useMemo11;
           exports.useReducer = useReducer2;
           exports.useRef = useRef14;
-          exports.useState = useState17;
+          exports.useState = useState18;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition2;
           exports.version = ReactVersion;
@@ -36238,6 +36238,26 @@
       console.log("e.target.value: ", e.target.value);
       setSearchInput(e.target.value);
     });
+    const [showModal, setShowModal] = (0, import_react58.useState)(false);
+    const [inputValue, setInputValue] = (0, import_react58.useState)("");
+    const [storedValue, setStoredValue] = (0, import_react58.useState)(0);
+    const handleCloseModal = () => {
+      setShowModal(false);
+    };
+    const handleOpenModal = () => {
+      setShowModal(true);
+    };
+    const handleInputChange = (e) => {
+      setInputValue(e.target.value);
+    };
+    const handleEnter = () => {
+      const intValue = parseInt(inputValue);
+      if (!isNaN(intValue)) {
+        setStoredValue(intValue);
+      }
+      setInputValue("");
+      setShowModal(false);
+    };
     function handleSearch() {
       return __async(this, null, function* () {
         const searchInput2 = searchForm.current.value;
@@ -36273,7 +36293,7 @@
         onClick: handleSearch
       },
       "Search"
-    )))), /* @__PURE__ */ import_react58.default.createElement(Card_default, { className: "mx-5" }, /* @__PURE__ */ import_react58.default.createElement(Card_default.Header, null, "Search Results"), /* @__PURE__ */ import_react58.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react58.default.createElement(Table_default, { className: "table" }, /* @__PURE__ */ import_react58.default.createElement("thead", null, /* @__PURE__ */ import_react58.default.createElement("tr", null, /* @__PURE__ */ import_react58.default.createElement("th", null, "Symbol"), /* @__PURE__ */ import_react58.default.createElement("th", null, "Name"), /* @__PURE__ */ import_react58.default.createElement("th", null, "Quote Type"), /* @__PURE__ */ import_react58.default.createElement("th", null, "Industry"), /* @__PURE__ */ import_react58.default.createElement("th", null, "Score"))), /* @__PURE__ */ import_react58.default.createElement("tbody", null, searchResult.map((stock) => /* @__PURE__ */ import_react58.default.createElement("tr", { key: stock.symbol }, /* @__PURE__ */ import_react58.default.createElement("td", null, stock.symbol), /* @__PURE__ */ import_react58.default.createElement("td", null, stock.name), /* @__PURE__ */ import_react58.default.createElement("td", null, stock.quoteType), /* @__PURE__ */ import_react58.default.createElement("td", null, stock.industry), /* @__PURE__ */ import_react58.default.createElement("td", null, stock.score))))))));
+    )))), /* @__PURE__ */ import_react58.default.createElement(Card_default, { className: "mx-5" }, /* @__PURE__ */ import_react58.default.createElement(Card_default.Header, null, "Search Results"), /* @__PURE__ */ import_react58.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react58.default.createElement(Table_default, { className: "table" }, /* @__PURE__ */ import_react58.default.createElement("thead", null, /* @__PURE__ */ import_react58.default.createElement("tr", null, /* @__PURE__ */ import_react58.default.createElement("th", null, "Symbol"), /* @__PURE__ */ import_react58.default.createElement("th", null, "Name"), /* @__PURE__ */ import_react58.default.createElement("th", null, "Quote Type"), /* @__PURE__ */ import_react58.default.createElement("th", null, "Industry"), /* @__PURE__ */ import_react58.default.createElement("th", null, "Score"))), /* @__PURE__ */ import_react58.default.createElement("tbody", null, searchResult.map((stock) => /* @__PURE__ */ import_react58.default.createElement("tr", { key: stock.symbol }, /* @__PURE__ */ import_react58.default.createElement("td", null, stock.symbol), /* @__PURE__ */ import_react58.default.createElement("td", null, stock.name), /* @__PURE__ */ import_react58.default.createElement("td", null, stock.quoteType), /* @__PURE__ */ import_react58.default.createElement("td", null, stock.industry), /* @__PURE__ */ import_react58.default.createElement("td", null, stock.score), /* @__PURE__ */ import_react58.default.createElement("td", null, stock.symbol ? /* @__PURE__ */ import_react58.default.createElement(Button_default2, { onClick: handleOpenModal, variant: "primary" }, "Buy Stock") : null, /* @__PURE__ */ import_react58.default.createElement(Modal_default2, { show: showModal, onHide: handleCloseModal }, /* @__PURE__ */ import_react58.default.createElement(Modal_default2.Header, { closeButton: true }, /* @__PURE__ */ import_react58.default.createElement(Modal_default2.Title, null, "Modal Title")), /* @__PURE__ */ import_react58.default.createElement(Modal_default2.Body, null, /* @__PURE__ */ import_react58.default.createElement("input", { type: "number", value: inputValue, onChange: handleInputChange })), /* @__PURE__ */ import_react58.default.createElement(Modal_default2.Footer, null, /* @__PURE__ */ import_react58.default.createElement(Button_default2, { variant: "secondary", onClick: handleCloseModal }, "Close"), /* @__PURE__ */ import_react58.default.createElement(Button_default2, { variant: "primary", onClick: handleEnter }, "Enter"))), stock.symbol ? /* @__PURE__ */ import_react58.default.createElement(Button_default2, { onClick: handleOpenModal, variant: "danger" }, "Sell Stock") : null, /* @__PURE__ */ import_react58.default.createElement(Modal_default2, { show: showModal, onHide: handleCloseModal }, /* @__PURE__ */ import_react58.default.createElement(Modal_default2.Header, { closeButton: true }, /* @__PURE__ */ import_react58.default.createElement(Modal_default2.Title, null, "Modal Title")), /* @__PURE__ */ import_react58.default.createElement(Modal_default2.Body, null, /* @__PURE__ */ import_react58.default.createElement("input", { type: "number", value: inputValue, onChange: handleInputChange })), /* @__PURE__ */ import_react58.default.createElement(Modal_default2.Footer, null, /* @__PURE__ */ import_react58.default.createElement(Button_default2, { variant: "secondary", onClick: handleCloseModal }, "Close"), /* @__PURE__ */ import_react58.default.createElement(Button_default2, { variant: "primary", onClick: handleEnter }, "Enter")))))))))));
   };
 
   // client/components/Login_Signup/LoginRegisterForm.jsx
