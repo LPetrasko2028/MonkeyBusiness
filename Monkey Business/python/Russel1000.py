@@ -1,7 +1,11 @@
 import random
 import sys
 
+<<<<<<< Updated upstream
 # quant = int(sys.argv[1])
+=======
+quant = int(sys.argv[1])
+>>>>>>> Stashed changes
 
 def reccomendStocks(quant):
 
@@ -27,7 +31,11 @@ def reccomendStocks(quant):
         quant=0
     i=0
     while(len(output)<quant):
+<<<<<<< Updated upstream
         temp=random.randint(1,993)
+=======
+        temp=random.randint(1,990)
+>>>>>>> Stashed changes
         if (russel[temp] not in output):
             output.append(russel[temp])
             # i+=1

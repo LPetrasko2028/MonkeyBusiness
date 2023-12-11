@@ -18,7 +18,7 @@ dataRouter.get('/stocks/:search', searchForStock) // anyone can access * with re
 dataRouter.get('/stocks', getInvestorStocks) // corresponding user can get their stocks
 dataRouter.get('/stockDetails', getStockInfo)
 
-dataRouter.get('/generalstocks', getGeneralStocks)
+dataRouter.get('/generalStocks', getGeneralStocks)
 
 dataRouter.post('/stockChange', updateStockCount)
 
