@@ -24,7 +24,7 @@ async function addToQueue (req, res) {
   queue.add(() => updateStockCount(req, res))
 }
 
-dataRouter.post('/stockChange', addToQueue) // updateStockCount
+dataRouter.post('/stockChange', isAuthenticated, updateStockCount) // updateStockCount  isAuthenticated, validator.validate({ body: stockSchema }), // change back to add to queue
 dataRouter.post('/userMarketData', getUserMarketData)
 
 // ------------------------------------ Auth Routes ------------------------------------

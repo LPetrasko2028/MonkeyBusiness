@@ -3,7 +3,7 @@ import json
 import urllib
 import sys  # added after
 
-names = ["AMZN", "AAPL", "AMZN.NE"]
+names = ["AMZN", "AAPL", "AMZN.NE", "A"]
 #when given  the stock name, returns:
 #stock name, current price, the high for the day, the volume, and the percent change for the day
 def getStockInfo(names):
@@ -47,4 +47,4 @@ def stockSearchList(query, startRange, endRange):
           output.append(data[i]['symbol'])
     return output
 
-print(stockSearchList(query, startRange, endRange)) # added after
+#print(stockSearchList(query, startRange, endRange)) # added after

@@ -1,5 +1,5 @@
 import queryMongoDatabase from '../data/mongoController.js'
-import { getStockShort, getStockDetails, searchStockAPI, GetCompareData } from './callPythonScripts.js'
+import { getStockShort, getStockDetails, searchStockAPI, GetCompareData, getStockPrice } from './callPythonScripts.js'
 
 export async function getStockInfo (req, res) {
   const stockName = req.query.stockName
@@ -9,7 +9,7 @@ export async function getStockInfo (req, res) {
   }
   console.log(typeof req.query.timeFrame)
   const timeFrameMonths = (parseInt(req.query.timeFrame) < 1) ? 1 : parseInt(req.query.timeFrame)
-console.log(timeFrameMonths)
+  console.log(timeFrameMonths)
   try {
     let stockData = await getStockDetails(stockName, timeFrameMonths)
     console.log(stockData)
@@ -149,19 +149,28 @@ export async function getInvestorStocks (req, res) {
 }
 
 export async function updateStockCount (req, res) {
-  const username = req.body.username
+  const username = req.session.username
   const stockName = req.body.stockName
-  const stockPrice = req.body.stockPrice
+  let stockPrice = req.body.stockPrice
   const changeAmount = req.body.changeAmount
   const changeType = req.body.changeType
-
+  console.log('Username:', username)
+  console.log('Stock Name:', stockName, typeof stockName)
+  console.log('Stock Price:', stockPrice)
+  console.log('Change Amount:', changeAmount)
+  console.log('Change Type:', changeType)
+  if (stockPrice === 'unknown') {
+    const stockPriceData = await getStockPrice(stockName)
+    stockPrice = stockPriceData
+  }
+  console.log(username, stockName, stockPrice, changeAmount, changeType)
   queryMongoDatabase(async db => {
     // check if investor collection exists
     const data = await db.collection('Investor').findOne({ username })
     if (data < 1) {
       res.status(404).json({ error: true, message: 'No Investor Found' })
     } else {
-      if (changeType === 'sell') {
+      if (changeType === 'Sell') {
         // handle the sale of stocks
         let foundStock = null
         let count = 0
@@ -214,7 +223,7 @@ export async function updateStockCount (req, res) {
             }
           }
         }
-      } else if (changeType === 'buy') {
+      } else if (changeType === 'Buy') {
       // handle the purchase of stocks
         if (changeAmount * stockPrice > data.balance) {
           // error if user doesn't have enough funds to buy stock
@@ -264,26 +273,25 @@ export async function updateStockCount (req, res) {
 
 export async function getUserMarketData (req, res) {
   const username = req.body.username
-  let stockArr = []
-  //query database to get the user's stock pool
-  queryMongoDatabase( async db=> {
+  const stockArr = []
+  // query database to get the user's stock pool
+  queryMongoDatabase(async db => {
     const data = await db.collection('Investor').findOne({ username })
     const numDocs = await db.collection('Investor').countDocuments({ username })
-    if(numDocs === null) {
-      res.status(404).json({error: true, message: 'Investor Account Not Found'})
+    if (numDocs === null) {
+      res.status(404).json({ error: true, message: 'Investor Account Not Found' })
     }
-    for(const stock of data.stocks) {
+    for (const stock of data.stocks) {
       stockArr.push(stock[0])
     }
 
-    //call python script to grab stock data from stockArr names
+    // call python script to grab stock data from stockArr names
     try {
-      //console.log(stockArr)
+      // console.log(stockArr)
       const compareData = await GetCompareData(stockArr)
       res.send(compareData)
     } catch (err) {
       console.log(err)
     }
-
   }, 'MonkeyBusinessWebApp')
 }

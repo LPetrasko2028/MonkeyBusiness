@@ -1,8 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { searchStockAPI } from '../../mbdataHelper.js'
-import { Card, Button, Table, Modal} from 'react-bootstrap'
-import { postBuySellStock } from '../../mbdataHelper.js'
-
+import { searchStockAPI, postBuySellStock } from '../../mbdataHelper.js'
+import { Card, Button, Table, Modal } from 'react-bootstrap'
+import CustomModal from './Modal.jsx'
 export const MySearchBar = () => {
   const [searchInput, setSearchInput] = React.useState('')
   const [searchResult, setSearchResult] = React.useState([''])
@@ -34,33 +33,42 @@ export const MySearchBar = () => {
     setSearchInput(e.target.value)
   }
 
-//this is to add the button to add and sell stocks
+  // this is to add the button to add and sell stocks
 
-const [showModal, setShowModal] = useState(false);
-const [inputValue, setInputValue] = useState('');
-const [storedValue, setStoredValue] = useState(0);
+  const [showModal, setShowModal] = useState(false)
+  const [inputValue, setInputValue] = useState('')
+  const [storedValue, setStoredValue] = useState(0)
+  const [stockSymbol, setStockSymbol] = useState('')
 
-const handleCloseModal = () => {
-    setShowModal(false);
-};
+  const handleCloseModal = () => {
+    setShowModal(false)
+  }
 
-const handleOpenModal = () => {
-    setShowModal(true);
-};
+  const handleOpenModal = (e) => {
+    const stockSymbol = e.target.id
+    setStockSymbol(stockSymbol)
+    setShowModal(true)
+  }
 
-const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-};
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value)
+  }
 
-const handleEnter = () => {
-    const intValue = parseInt(inputValue);
+  async function handleEnter (stockSymbol, type) {
+    const intValue = parseInt(inputValue)
     if (!isNaN(intValue)) {
-        setStoredValue(intValue);
+      setStoredValue(intValue)
+      const submitSuccess = await postBuySellStock(stockSymbol, 'unknown', type, intValue)
+      if (submitSuccess) {
+        console.log('submitSuccess: ', submitSuccess)
+      } else {
+        console.log('submitSuccess: ', submitSuccess)
+      }
     }
-    setInputValue('');
-    setShowModal(false);
-};
-  //end of button code
+    // setInputValue('')
+    setShowModal(false)
+  }
+  // end of button code
 
   async function handleSearch () {
     const searchInput = searchForm.current.value
@@ -130,7 +138,7 @@ const handleEnter = () => {
                     {stock.symbol ? <Button onClick={handleOpenModal}variant="primary">Buy Stock</Button> : null}
                     <Modal show={showModal} onHide={handleCloseModal}>
                         <Modal.Header closeButton>
-                            <Modal.Title>Modal Title</Modal.Title>
+                            <Modal.Title>{stock.symbol}</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <input type="number" value={inputValue} onChange={handleInputChange} />
@@ -139,29 +147,14 @@ const handleEnter = () => {
                             <Button variant="secondary" onClick={handleCloseModal}>
                                 Close
                             </Button>
-                            <Button variant="primary" onClick={handleEnter}>
+                            <Button variant="primary" id={stock.symbol} value='Buy' onClick={(e) => handleEnter(e.currentTarget.getAttribute('id'), e.currentTarget.value)}>
                                 Enter
                             </Button>
                         </Modal.Footer>
                     </Modal>
 
-                    {stock.symbol ? <Button onClick={handleOpenModal} variant="danger">Sell Stock</Button> : null}
-                    <Modal show={showModal} onHide={handleCloseModal}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Modal Title</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <input type="number" value={inputValue} onChange={handleInputChange} />
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={handleCloseModal}>
-                                Close
-                            </Button>
-                            <Button variant="primary" onClick={handleEnter}>
-                                Enter
-                            </Button>
-                        </Modal.Footer>
-                    </Modal>
+                    {stock.symbol ? <Button onClick={handleOpenModal} id={stock.symbol} variant="danger">Sell Stock</Button> : null}
+                    <CustomModal stockName={stockSymbol} type={'Sell'} showModal={showModal} setShowModal={handleCloseModal} />
 
                   </td>
                 </tr>
@@ -171,5 +164,5 @@ const handleEnter = () => {
         </Card.Body>
       </Card>
     </React.Fragment>
-  );
+  )
 }
