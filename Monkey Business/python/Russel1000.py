@@ -20,13 +20,15 @@ def reccomendStocks(quant):
     russel1000+=list2+list3+list4+list5+list6+list7+list8+list9+list10
 
     
-    russel100=["AAPL","MSFT","GOOG","GOOGL","AMZN","NVDA","TSLA","META","BRK.B","V","JPM","UNH","XOM","LLY","WMT","JNJ","MA","AVGO","PG","HD","ORCL","CVX","MRK","KO","PEP","COST","ABBV","COST","ABBV","ABDE","BAC","CRM","MCD","CSCO","PFE","TMO","ACN","NFLX","ABT","LIN","AMD","DHR","CMCSA","MKE","TMUS","DIS","WFC","TXN","UPS","PM","NEE","MS","RTX","QCOM","COP","SPGI","HON","INTU","LOW","INTC","VZ","BA","BMY","CAT","AXP","UNP","IBM","GE","DE","LMT","MDT","AMGN","SBUX","ISRG","AMAT","NOW","PLD","SYK","T","GS","BLK","SCHW","BKNG","ADI","ELV","MDLZ","TJX","GILD","ADP","MMC","CVS","AMT","C","ARTX","UBER","LRCX","SLB","CI","MO","HCA","ETN","PYPL"]
+    russel100=["AAPL","MSFT","GOOG","GOOGL","AMZN","NVDA","TSLA","META","V","JPM","UNH","XOM","LLY","WMT","JNJ","AVGO","PG","HD","ORCL","CVX","MRK","KO","PEP","COST","ABBV","COST","ABBV","ABDE","BAC","CRM","MCD","CSCO","PFE","TMO","ACN","NFLX","ABT","LIN","AMD","DHR","CMCSA","MKE","TMUS","DIS","WFC","TXN","UPS","PM","NEE","MS","RTX","QCOM","COP","SPGI","HON","INTU","LOW","INTC","VZ","BA","BMY","CAT","AXP","UNP","IBM","GE","DE","LMT","MDT","AMGN","SBUX","ISRG","AMAT","NOW","PLD","SYK","T","GS","BLK","SCHW","BKNG","ADI","ELV","MDLZ","TJX","GILD","ADP","MMC","CVS","AMT","UBER","LRCX","SLB","CI","MO","HCA","ETN","PYPL"]
     # print(russel)
 
     
     input=russel100 #change THIS variable to switch to the 1000 mode
     output=[]
     if (isinstance(quant, int)):
+        if (quant>=len(input)):
+            quant=len(input)-1
         if (quant>=100):
             quant=100
         if (quant<=0):
