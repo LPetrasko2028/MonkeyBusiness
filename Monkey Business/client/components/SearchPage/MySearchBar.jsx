@@ -39,6 +39,7 @@ export const MySearchBar = () => {
   const [inputValue, setInputValue] = useState('')
   const [storedValue, setStoredValue] = useState(0)
   const [stockSymbol, setStockSymbol] = useState('')
+  const [type, setType] = useState('')
 
   const handleCloseModal = () => {
     setShowModal(false)
@@ -46,7 +47,9 @@ export const MySearchBar = () => {
 
   const handleOpenModal = (e) => {
     const stockSymbol = e.target.id
+    const type = e.target.value
     setStockSymbol(stockSymbol)
+    setType(type)
     setShowModal(true)
   }
 
@@ -135,7 +138,7 @@ export const MySearchBar = () => {
                   <td>{stock.score}</td>
                   <td>
 
-                    {stock.symbol ? <Button onClick={handleOpenModal}variant="primary">Buy Stock</Button> : null}
+                    {/* {stock.symbol ? <Button onClick={handleOpenModal}variant="primary">Buy Stock</Button> : null}
                     <Modal show={showModal} onHide={handleCloseModal}>
                         <Modal.Header closeButton>
                             <Modal.Title>{stock.symbol}</Modal.Title>
@@ -151,10 +154,13 @@ export const MySearchBar = () => {
                                 Enter
                             </Button>
                         </Modal.Footer>
-                    </Modal>
+                    </Modal> */}
 
-                    {stock.symbol ? <Button onClick={handleOpenModal} id={stock.symbol} variant="danger">Sell Stock</Button> : null}
-                    <CustomModal stockName={stockSymbol} type={'Sell'} showModal={showModal} setShowModal={handleCloseModal} />
+                    {stock.symbol ? <Button onClick={handleOpenModal} id={stock.symbol} value='Buy' variant="primary">Buy Stock</Button> : null}
+                    <CustomModal stockName={stockSymbol} type={type} showModal={showModal} setShowModal={handleCloseModal} />
+
+                    {stock.symbol ? <Button onClick={handleOpenModal} id={stock.symbol} value='Sell' variant="danger">Sell Stock</Button> : null}
+                    <CustomModal stockName={stockSymbol} type={type} showModal={showModal} setShowModal={handleCloseModal} />
 
                   </td>
                 </tr>

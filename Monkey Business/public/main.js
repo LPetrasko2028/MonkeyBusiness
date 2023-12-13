@@ -36236,6 +36236,7 @@
   var import_prop_types8 = __toESM(require_prop_types(), 1);
   var CustomModal = ({ stockName, type, showModal, setShowModal }) => {
     const [inputValue, setInputValue] = (0, import_react58.useState)("");
+    console.log("type: ", type);
     const handleInputChange = (e) => {
       setInputValue(e.target.value);
     };
@@ -36326,23 +36327,26 @@
     const [inputValue, setInputValue] = (0, import_react59.useState)("");
     const [storedValue, setStoredValue] = (0, import_react59.useState)(0);
     const [stockSymbol, setStockSymbol] = (0, import_react59.useState)("");
+    const [type, setType] = (0, import_react59.useState)("");
     const handleCloseModal = () => {
       setShowModal(false);
     };
     const handleOpenModal = (e) => {
       const stockSymbol2 = e.target.id;
+      const type2 = e.target.value;
       setStockSymbol(stockSymbol2);
+      setType(type2);
       setShowModal(true);
     };
     const handleInputChange = (e) => {
       setInputValue(e.target.value);
     };
-    function handleEnter(stockSymbol2, type) {
+    function handleEnter(stockSymbol2, type2) {
       return __async(this, null, function* () {
         const intValue = parseInt(inputValue);
         if (!isNaN(intValue)) {
           setStoredValue(intValue);
-          const submitSuccess = yield postBuySellStock(stockSymbol2, "unknown", type, intValue);
+          const submitSuccess = yield postBuySellStock(stockSymbol2, "unknown", type2, intValue);
           if (submitSuccess) {
             console.log("submitSuccess: ", submitSuccess);
           } else {
@@ -36387,7 +36391,7 @@
         onClick: handleSearch
       },
       "Search"
-    )))), /* @__PURE__ */ import_react59.default.createElement(Card_default, { className: "mx-5" }, /* @__PURE__ */ import_react59.default.createElement(Card_default.Header, null, "Search Results"), /* @__PURE__ */ import_react59.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react59.default.createElement(Table_default, { className: "table" }, /* @__PURE__ */ import_react59.default.createElement("thead", null, /* @__PURE__ */ import_react59.default.createElement("tr", null, /* @__PURE__ */ import_react59.default.createElement("th", null, "Symbol"), /* @__PURE__ */ import_react59.default.createElement("th", null, "Name"), /* @__PURE__ */ import_react59.default.createElement("th", null, "Quote Type"), /* @__PURE__ */ import_react59.default.createElement("th", null, "Industry"), /* @__PURE__ */ import_react59.default.createElement("th", null, "Score"))), /* @__PURE__ */ import_react59.default.createElement("tbody", null, searchResult.map((stock) => /* @__PURE__ */ import_react59.default.createElement("tr", { key: stock.symbol }, /* @__PURE__ */ import_react59.default.createElement("td", null, stock.symbol), /* @__PURE__ */ import_react59.default.createElement("td", null, stock.name), /* @__PURE__ */ import_react59.default.createElement("td", null, stock.quoteType), /* @__PURE__ */ import_react59.default.createElement("td", null, stock.industry), /* @__PURE__ */ import_react59.default.createElement("td", null, stock.score), /* @__PURE__ */ import_react59.default.createElement("td", null, stock.symbol ? /* @__PURE__ */ import_react59.default.createElement(Button_default2, { onClick: handleOpenModal, variant: "primary" }, "Buy Stock") : null, /* @__PURE__ */ import_react59.default.createElement(Modal_default2, { show: showModal, onHide: handleCloseModal }, /* @__PURE__ */ import_react59.default.createElement(Modal_default2.Header, { closeButton: true }, /* @__PURE__ */ import_react59.default.createElement(Modal_default2.Title, null, stock.symbol)), /* @__PURE__ */ import_react59.default.createElement(Modal_default2.Body, null, /* @__PURE__ */ import_react59.default.createElement("input", { type: "number", value: inputValue, onChange: handleInputChange })), /* @__PURE__ */ import_react59.default.createElement(Modal_default2.Footer, null, /* @__PURE__ */ import_react59.default.createElement(Button_default2, { variant: "secondary", onClick: handleCloseModal }, "Close"), /* @__PURE__ */ import_react59.default.createElement(Button_default2, { variant: "primary", id: stock.symbol, value: "Buy", onClick: (e) => handleEnter(e.currentTarget.getAttribute("id"), e.currentTarget.value) }, "Enter"))), stock.symbol ? /* @__PURE__ */ import_react59.default.createElement(Button_default2, { onClick: handleOpenModal, id: stock.symbol, variant: "danger" }, "Sell Stock") : null, /* @__PURE__ */ import_react59.default.createElement(Modal_default3, { stockName: stockSymbol, type: "Sell", showModal, setShowModal: handleCloseModal })))))))));
+    )))), /* @__PURE__ */ import_react59.default.createElement(Card_default, { className: "mx-5" }, /* @__PURE__ */ import_react59.default.createElement(Card_default.Header, null, "Search Results"), /* @__PURE__ */ import_react59.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react59.default.createElement(Table_default, { className: "table" }, /* @__PURE__ */ import_react59.default.createElement("thead", null, /* @__PURE__ */ import_react59.default.createElement("tr", null, /* @__PURE__ */ import_react59.default.createElement("th", null, "Symbol"), /* @__PURE__ */ import_react59.default.createElement("th", null, "Name"), /* @__PURE__ */ import_react59.default.createElement("th", null, "Quote Type"), /* @__PURE__ */ import_react59.default.createElement("th", null, "Industry"), /* @__PURE__ */ import_react59.default.createElement("th", null, "Score"))), /* @__PURE__ */ import_react59.default.createElement("tbody", null, searchResult.map((stock) => /* @__PURE__ */ import_react59.default.createElement("tr", { key: stock.symbol }, /* @__PURE__ */ import_react59.default.createElement("td", null, stock.symbol), /* @__PURE__ */ import_react59.default.createElement("td", null, stock.name), /* @__PURE__ */ import_react59.default.createElement("td", null, stock.quoteType), /* @__PURE__ */ import_react59.default.createElement("td", null, stock.industry), /* @__PURE__ */ import_react59.default.createElement("td", null, stock.score), /* @__PURE__ */ import_react59.default.createElement("td", null, stock.symbol ? /* @__PURE__ */ import_react59.default.createElement(Button_default2, { onClick: handleOpenModal, id: stock.symbol, value: "Buy", variant: "primary" }, "Buy Stock") : null, /* @__PURE__ */ import_react59.default.createElement(Modal_default3, { stockName: stockSymbol, type, showModal, setShowModal: handleCloseModal }), stock.symbol ? /* @__PURE__ */ import_react59.default.createElement(Button_default2, { onClick: handleOpenModal, id: stock.symbol, value: "Sell", variant: "danger" }, "Sell Stock") : null, /* @__PURE__ */ import_react59.default.createElement(Modal_default3, { stockName: stockSymbol, type, showModal, setShowModal: handleCloseModal })))))))));
   };
 
   // client/components/Login_Signup/LoginRegisterForm.jsx

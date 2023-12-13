@@ -5,7 +5,7 @@ import { postBuySellStock } from '../../mbdataHelper.js'
 
 export const CustomModal = ({ stockName, type, showModal, setShowModal }) => {
   const [inputValue, setInputValue] = useState('')
-
+console.log('type: ', type)
   const handleInputChange = (e) => {
     setInputValue(e.target.value)
   }
