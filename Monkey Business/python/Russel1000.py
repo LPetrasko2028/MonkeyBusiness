@@ -1,8 +1,9 @@
 import random
 import sys
 
-# quant = int(sys.argv[1])
-quant=100
+quant = int(sys.argv[1])
+
+
 def reccomendStocks(quant):
 
     russel1000=["A","AA","AAL","AAP","AAPL","ABBV","ABNB","ABT","ACGL","ACHC","ACI","ACM","ACN","ADBE","ADC","ADI","ADM","ADP","ADSK","ADT","AEE","AEP","AES","AFG","AFL","AFRM","AGCO","AGL","AGNC","AGO","AGR","AIG","AIRC","AIZ","AJG","AKAM","AL","ALB","ALGM","ALGN","ALK","ALL","ALLE","ALNY","ALSN","AM","AMAT","AMBP","AMC","AMCR","AMD","AME","AMED","AMG","AMGN","AMH","AMP","AMT","AMZN","AN","ANET","ANSS","AON","AOS","APA","APD","APH","APLS","APO","APP","APTV","AR","ARE","ARES","ARMK","ARW","ASH","ATO","ATR","AVB","AVGO","AVT","AVTR","AVY","AWI","AWK","AXON","AXP","AXS","AXTA","AYI","AYX","AZEK","AZO","AZPN","AZTA","BA","BAC","BAH"]
@@ -25,9 +26,12 @@ def reccomendStocks(quant):
     
     input=russel100 #change THIS variable to switch to the 1000 mode
     output=[]
-    if (quant>=100):
-        quant=100
-    if (quant<=0):
+    if (isinstance(quant, int)):
+        if (quant>=100):
+            quant=100
+        if (quant<=0):
+            quant=0
+    else:
         quant=0
     # i=0
     while(len(output)<quant):
