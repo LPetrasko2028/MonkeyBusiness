@@ -4,6 +4,7 @@ import sys
 quant = int(sys.argv[1])
 
 
+#quant=100
 def reccomendStocks(quant):
 
     russel1000=["A","AA","AAL","AAP","AAPL","ABBV","ABNB","ABT","ACGL","ACHC","ACI","ACM","ACN","ADBE","ADC","ADI","ADM","ADP","ADSK","ADT","AEE","AEP","AES","AFG","AFL","AFRM","AGCO","AGL","AGNC","AGO","AGR","AIG","AIRC","AIZ","AJG","AKAM","AL","ALB","ALGM","ALGN","ALK","ALL","ALLE","ALNY","ALSN","AM","AMAT","AMBP","AMC","AMCR","AMD","AME","AMED","AMG","AMGN","AMH","AMP","AMT","AMZN","AN","ANET","ANSS","AON","AOS","APA","APD","APH","APLS","APO","APP","APTV","AR","ARE","ARES","ARMK","ARW","ASH","ATO","ATR","AVB","AVGO","AVT","AVTR","AVY","AWI","AWK","AXON","AXP","AXS","AXTA","AYI","AYX","AZEK","AZO","AZPN","AZTA","BA","BAC","BAH"]
@@ -19,12 +20,12 @@ def reccomendStocks(quant):
 
     russel1000+=list2+list3+list4+list5+list6+list7+list8+list9+list10
 
-    
+
     russel100=["AAPL","MSFT","GOOG","GOOGL","AMZN","NVDA","TSLA","META","V","JPM","UNH","XOM","LLY","WMT","JNJ","AVGO","PG","HD","ORCL","CVX","MRK","KO","PEP","COST","ABBV","COST","ABBV","ABDE","BAC","CRM","MCD","CSCO","PFE","TMO","ACN","NFLX","ABT","LIN","AMD","DHR","CMCSA","MKE","TMUS","DIS","WFC","TXN","UPS","PM","NEE","MS","RTX","QCOM","COP","SPGI","HON","INTU","LOW","INTC","VZ","BA","BMY","CAT","AXP","UNP","IBM","GE","DE","LMT","MDT","AMGN","SBUX","ISRG","AMAT","NOW","PLD","SYK","T","GS","BLK","SCHW","BKNG","ADI","ELV","MDLZ","TJX","GILD","ADP","MMC","CVS","AMT","UBER","LRCX","SLB","CI","MO","HCA","ETN","PYPL"]
     # print(russel)
 
-    
-    input=russel100 #change THIS variable to switch to the 1000 mode
+
+    input=russel1000 #change THIS variable to switch to the 1000 mode
     output=[]
     if (isinstance(quant, int)):
         if (quant>=len(input)):

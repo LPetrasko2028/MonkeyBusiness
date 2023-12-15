@@ -75,8 +75,10 @@ function parseStockDataArray (stockData) {
   // parse stock data
   // return parsed data
 
+  console.log('Stock Data: ', stockData)
   const regex = /(?<=\[)(.*?)(?=\])/g
   const matches = String(stockData.match(regex))
+  console.log('matches: ', matches)
   const data = matches.substring(1, matches.length - 1)
   const parsedData = data.split(',\'')
   const parsedDataArray = parsedData.map((stock) => {
@@ -226,27 +228,26 @@ export async function updateStockCount (req, res) {
 
 export async function getUserMarketData (req, res) {
   const username = req.body.username
-  let stockArr = []
-  //query database to get the user's stock pool
-  queryMongoDatabase( async db=> {
+  const stockArr = []
+  // query database to get the user's stock pool
+  queryMongoDatabase(async db => {
     const data = await db.collection('Investor').findOne({ username })
     const numDocs = await db.collection('Investor').countDocuments({ username })
-    if(numDocs === null) {
-      res.status(404).json({error: true, message: 'Investor Account Not Found'})
+    if (numDocs === null) {
+      res.status(404).json({ error: true, message: 'Investor Account Not Found' })
     }
-    for(const stock of data.stocks) {
+    for (const stock of data.stocks) {
       stockArr.push(stock[0])
     }
 
-    //call python script to grab stock data from stockArr names
+    // call python script to grab stock data from stockArr names
     try {
-      //console.log(stockArr)
+      // console.log(stockArr)
       const compareData = await GetCompareData(stockArr)
       res.send(compareData)
     } catch (err) {
       console.log(err)
     }
-
   }, 'MonkeyBusinessWebApp')
 }
 
@@ -258,9 +259,15 @@ export async function getGeneralStocks (req, res) {
   try {
     const stockData = await russel1000API(stockQuant)
     const parsedData = parseStockData(stockData)
-
     console.log(parsedData)
-    res.json(parsedData)
+    const stocks = await getStockShort(parsedData)
+    if (stocks === undefined) {
+      res.status(404).json({ error: true, message: 'No Stock Name Provided' })
+    } else {
+      res.json(parseStockDataArray(stocks))
+    }
+
+    console.log(parseStockDataArray(stocks))
   } catch (err) {
     console.log(err)
   }

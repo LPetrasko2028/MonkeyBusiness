@@ -20,5 +20,5 @@ def getStockInfo(names):
         stockArray.append(output)  # added after
     return stockArray
 
-print(getStockInfo(names))  # added after
-#print(getStockInfo(names)) # added after
+#print(names)  # added after
+print(getStockInfo(names)) # added after
