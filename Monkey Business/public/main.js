@@ -35874,21 +35874,6 @@
       }
     });
   }
-  function retrieveStockDetails(stockName, timeFrame) {
-    return __async(this, null, function* () {
-      try {
-        const response = yield fetch("http://localhost:3000/api/stockDetails?" + new URLSearchParams({ stockName, timeFrame }));
-        if (response.status >= 400) {
-          throw new Error(`Request failed with response code ${response.status}`);
-        }
-        return yield response.json();
-      } catch (err) {
-        console.error("Failed to retrieve stock details");
-        console.error(err);
-        return null;
-      }
-    });
-  }
   function login(username, password) {
     return __async(this, null, function* () {
       try {
@@ -35988,11 +35973,6 @@
         renderUserInvestments();
       } else {
         const renderTestStockDetails = () => __async(this, null, function* () {
-          const fetchTestStockDetails = yield retrieveStockDetails("AAPL", testTimeFrame);
-          setTestStockDetails(fetchTestStockDetails);
-          fetchTestStockDetails.forEach((date) => {
-            console.log(date);
-          });
         });
         renderTestStockDetails();
         console.log(testStockDetails);

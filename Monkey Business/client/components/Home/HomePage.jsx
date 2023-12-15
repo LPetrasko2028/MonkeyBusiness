@@ -22,11 +22,11 @@ function Home (props) {
       renderUserInvestments()
     } else {
       const renderTestStockDetails = async () => {
-        const fetchTestStockDetails = await retrieveStockDetails('AAPL', testTimeFrame)
-        setTestStockDetails(fetchTestStockDetails)
-        fetchTestStockDetails.forEach((date) => {
-          console.log(date)
-        })
+        //const fetchTestStockDetails = await retrieveStockDetails('AAPL', testTimeFrame)
+        //setTestStockDetails(fetchTestStockDetails)
+        //fetchTestStockDetails.forEach((date) => {
+          //console.log(date)
+        //})
       }
       renderTestStockDetails()
       console.log(testStockDetails)
