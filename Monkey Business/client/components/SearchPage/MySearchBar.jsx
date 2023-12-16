@@ -155,7 +155,7 @@ export const MySearchBar = () => {
                             </Button>
                         </Modal.Footer>
                     </Modal> */}
-
+                    
                     {stock.symbol ? <Button onClick={handleOpenModal} id={stock.symbol} value='Buy' variant="primary">Buy Stock</Button> : null}
                     <CustomModal stockName={stockSymbol} type={type} showModal={showModal} setShowModal={handleCloseModal} />
 

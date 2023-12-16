@@ -33,6 +33,7 @@ console.log('type: ', type)
           <Modal.Title>{stockName}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <div>Number of Stocks</div>
           <input
             type="number"
             value={inputValue}
