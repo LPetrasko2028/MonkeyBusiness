@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Row, Col, Card, Table, Alert, Button } from 'react-bootstrap'
 import { getMonkeyInvestments } from '../../mbdataHelper'
+import PropTypes from 'prop-types'
 import './testStyle.css'
 
-function MonkeyTech () {
+function MonkeyTech (props) {
+  const isUserLoggedIn = props.status
+  const [loggedInMessage, setLoggedInMessage] = useState('Please log in to view Monkey Investments')
   const [tableData, setTableData] = useState([])
   const [show, setShow] = useState(false)
   const [success, setSuccess] = useState(false)
@@ -15,19 +18,24 @@ function MonkeyTech () {
   const onFailMessage = 'Failed to retrieve monkey investments'
 
   useEffect(() => {
-    const renderMonkeyInvestments = async () => {
-      const fetchMonkeyInvestments = await getMonkeyInvestments()
-      if (fetchMonkeyInvestments) {
-        setSuccess(true)
-        setTableData(fetchMonkeyInvestments)
-      } else {
-        setSuccess(false)
-      }
-      handleShow()
+    if (!isUserLoggedIn) {
+      console.log('User not logged in')
+    } else {
+      setLoggedInMessage('Monkey Investments')
+      const renderMonkeyInvestments = async () => {
+        const fetchMonkeyInvestments = await getMonkeyInvestments()
+        if (fetchMonkeyInvestments) {
+          setSuccess(true)
+          setTableData(fetchMonkeyInvestments)
+        } else {
+          setSuccess(false)
+        }
+        handleShow()
 
-      console.log(fetchMonkeyInvestments)
+        console.log(fetchMonkeyInvestments)
+      }
+      renderMonkeyInvestments()
     }
-    renderMonkeyInvestments()
   }, [])
 
   const handleDelete = (name) => {
@@ -47,26 +55,19 @@ function MonkeyTech () {
   return (
     <React.Fragment>
       <Alert show={show} variant={success ? 'success' : 'danger'} onClose={handleClose} dismissible>
-        <Alert.Heading>Retrieving Monkey Stock Details</Alert.Heading>
-        <p>
-          {success ? onSuccessMessage : onFailMessage}
-        </p>
+        <Alert.Heading>{success ? onSuccessMessage : onFailMessage}</Alert.Heading>
       </Alert>
 
+      <h1>{loggedInMessage}</h1>
       {tableData.map((currentValue) => (
         <Card key={currentValue.name} className="mx-3">
           <Card.Body>
             <Card.Title>
               <Row>
-                <Col>{currentValue.name}</Col>
+                <Col><h4>{currentValue.name}</h4></Col>
 
                 <Col>Monkey Investment Cash Available: {currentValue.cash}</Col>
               </Row>
-              <div>
-                <Button variant="link" onClick={handleEditStockPool}>
-                  {editStockPool ? 'Save' : 'Edit'} Stock Pool
-                </Button>
-              </div>
             </Card.Title>
             <Table striped bordered hover>
               <tbody>
@@ -108,7 +109,10 @@ function MonkeyTech () {
                   </td>
                 </tr>
                 <tr>
-                  <td>Stock Pool</td>
+                  <td>Stock Pool
+                    <Button className='mx-3' onClick={handleEditStockPool}>
+                  {editStockPool ? 'Save' : 'Edit'} Stock Pool
+                </Button></td>
                   <td>
                     {!editStockPool
                       ? (
@@ -149,6 +153,12 @@ function MonkeyTech () {
       ))}
     </React.Fragment>
   )
+}
+MonkeyTech.propTypes = {
+  status: PropTypes.bool
+}
+MonkeyTech.defaultProps = {
+  status: false
 }
 
 export default MonkeyTech

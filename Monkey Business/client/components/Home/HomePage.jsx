@@ -3,13 +3,12 @@ import PropTypes from 'prop-types'
 import StockTable from '../StockTable/StockTable.jsx'
 import { retrieveInvestorStocks, retrieveStockDetails } from '../../mbdataHelper.js'
 import { Card, Row } from 'react-bootstrap'
+import IntroPage from '../Intro/IntroPage.jsx'
 function Home (props) {
   const { name } = props
   const [userInvestments, setUserInvestments] = useState([])
   const [userInvestmentPage, setUserInvestmentPage] = useState(0)
   const [userInvestmentPageSize, setUserInvestmentPageSize] = useState(10)
-  const [testStockDetails, setTestStockDetails] = useState([])
-  const [testTimeFrame, setTestTimeFrame] = useState(1)
   useEffect(() => {
     if (name !== '') {
       const renderUserInvestments = async () => {
@@ -21,15 +20,6 @@ function Home (props) {
       }
       renderUserInvestments()
     } else {
-      const renderTestStockDetails = async () => {
-        //const fetchTestStockDetails = await retrieveStockDetails('AAPL', testTimeFrame)
-        //setTestStockDetails(fetchTestStockDetails)
-        //fetchTestStockDetails.forEach((date) => {
-          //console.log(date)
-        //})
-      }
-      renderTestStockDetails()
-      console.log(testStockDetails)
       console.log('User is not logged in')
     }
   }, [name])
@@ -47,7 +37,7 @@ function Home (props) {
         <h2> Welcome To Our Monkey Business Web App!</h2>
         <h4>Please Login To See All of Our App's Features </h4>
 
-          <StockTable />
+          <IntroPage />
       </React.Fragment>
     )
   }

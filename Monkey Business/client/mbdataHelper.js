@@ -127,6 +127,20 @@ export async function signUp (username, password, passwordConfirm, email) {
   }
 }
 
+export async function logout () {
+  try {
+    const response = await fetch('http://localhost:3000/api/logout')
+    if (response.status >= 400) {
+      throw new Error(`Request failed with response code ${response.status}`)
+    }
+    return true
+  } catch (err) {
+    console.error('Failed to logout')
+    console.error(err)
+    return false
+  }
+}
+
 export async function deleteAccount (username) { // Input of password instead ---TO DO---
   try {
     const response = await fetch(`http://localhost:3000/api/account/${username}`, {

@@ -48,8 +48,8 @@ export const MySearchBar = () => {
   return (
     <React.Fragment>
       <Card className="mx-5">
+      <Card.Header>Stock Search</Card.Header>
         <Card.Body>
-          <Card.Header>Stock Search</Card.Header>
           <Card.Text>
             Search for a stock by symbol or name
           </Card.Text>

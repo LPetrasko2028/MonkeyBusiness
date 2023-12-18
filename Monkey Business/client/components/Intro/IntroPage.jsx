@@ -2,9 +2,7 @@ import React from 'react'
 function IntroPage () {
   return (
     <React.Fragment>
-      <h1> Placeholder </h1>
-      <h2> Devs </h2>
-      <div> info about us</div>
+      <h4> Welcome to Monkey Business! </h4>
     </React.Fragment>
   )
 }

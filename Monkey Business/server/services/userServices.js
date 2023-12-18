@@ -54,22 +54,18 @@ export async function signup (req, res) { // working without authentication ----
     } else { res.status(404).json({ error: true, message: 'Failed to insert investor info!' }) }
   }, 'MonkeyBusinessWebApp')
 }
-
-export async function logout (next, req, res) { // maybe POST to introduce authentication ------------------TO DO --------------------
-  // if authenticated, logout, else redirect to login page
-  req.session.user = null
-  req.session.save(function (err) {
-    if (err) return next(err)
-    req.session.regenerate(function (err) {
-      if (err) next(err)
-      res.redirect('/')
-    }
-    )
-  })
-  req.session.destroy(function (err) {
-    if (err) return next(err)
-    res.redirect('/')
-  })
+export async function logout (req, res) {
+  if (req.session) {
+    req.session.destroy((err) => {
+      if (err) {
+        res.status(500).json({ error: true, message: 'Failed to logout' })
+      } else {
+        res.sendStatus(401)
+      }
+    })
+  } else {
+    res.end()
+  }
 }
 
 export async function updatePreferences (req, res) {
