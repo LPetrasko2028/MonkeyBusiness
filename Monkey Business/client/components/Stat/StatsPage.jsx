@@ -12,8 +12,8 @@ function StatsPage() {
       <div>
         <p>this is a circle</p>
         
-        <StockChart stockName={"AAPL"}></StockChart>
-
+        <StockChart stockName={"AAPL"} months={4}></StockChart>
+        
          
         
       </div>
