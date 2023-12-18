@@ -1,5 +1,5 @@
 import queryMongoDatabase from '../data/mongoController.js'
-import { getStockShort, getStockDetails, searchStockAPI, GetCompareData } from './callPythonScripts.js'
+import { getStockShort, getStockDetails, searchStockAPI, GetCompareData, russel1000API } from './callPythonScripts.js'
 
 export async function getStockInfo (req, res) {
   const stockName = req.query.stockName
@@ -97,6 +97,20 @@ function parseStockDataArray (stockData) {
     return (stockObj)
   })
   return (parsedDataArray)
+}
+
+function parseStockNameArray (stockData) {
+  console.log("StockData: " + stockData)
+  const regex = /(?<=\[)(.*?)(?=\])/g
+  const matches = String(stockData.match(regex))
+  console.log("Matches: " + matches)
+  const data = matches.substring(1, matches.length - 1)
+  console.log("Data: " + data)
+  const parsedData = data.split(", '")
+  console.log("ParsedData: " + parsedData)
+  const stockNames = parsedData.map((stock) => stock.replace(/'/g, ''))
+  console.log("StockNames: " + stockNames)
+  return stockNames
 }
 
 export async function getInvestorStocks (req, res) {
@@ -250,4 +264,27 @@ export async function getUserMarketData (req, res) {
       console.log(err)
     }
   }, 'MonkeyBusinessWebApp')
+}
+
+export async function getGeneralStocks (req, res) {
+  if (req.query.stockQuant === 'undefined' || req.query.stockQuant === undefined) {
+    res.status(404).json({ error: true, message: 'No Stock Name Provided' })
+    return
+  }
+  const stockQuant = parseInt(req.query.stockQuant)
+  try {
+    const stockData = await russel1000API(stockQuant)
+    const parsedData = parseStockNameArray(stockData)
+    console.log('ParsedData: ' + parsedData)
+    const stocks = await getStockShort(parsedData)
+    if (stocks === undefined) {
+      res.status(404).json({ error: true, message: 'No Stock Name Provided' })
+    } else {
+      res.json(parseStockDataArray(stocks))
+    }
+
+    console.log(parseStockDataArray(stocks))
+  } catch (err) {
+    console.log(err)
+  }
 }
