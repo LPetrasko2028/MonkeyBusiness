@@ -1,26 +1,59 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
+import { Modal } from 'react-bootstrap'
 import { signUp } from './dataHelper.js'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-// dummy theme stuff
-
+import { Icon } from 'react-icons-kit';
+import { eyeOff } from 'react-icons-kit/feather/eyeOff';
+import { eye } from 'react-icons-kit/feather/eye'
 
 function SignUpCard (props) {
   const { onSignUp } = props
   const [newUsername, setNewUsername] = React.useState('')
   const [newPassword, setNewPassword] = React.useState('')
-  const [newFirstName, setNewFirstName] = React.useState('')
-  const [newLastName, setNewLastName] = React.useState('')
   const [newGmail, setNewGmail] = React.useState('')
   const [confirmPass, setConfirmPass] = React.useState('')
-
+  const [type, setType] = React.useState('password')
+  const [icon, setIcon] = React.useState(eye)
+  const [show, setShow] = React.useState(false)
+  const [content, setContent] = React.useState('')
+  const onShortPass = 'Password must be at least 10 letters long!'
+  const onLongPass = 'Password must be at most 20 letters long'
+  function handlePasswordChange (e) {
+    e.preventDefault()
+    setNewPassword(e.target.value)
+    const length = e.target.value.length
+    if (length < 10) {
+      setContent(onShortPass)
+    } else if (length > 20) {
+      setContent(onLongPass)
+    } else {
+      setContent('')
+    }
+  }
+  function handleClose () {
+    setShow(false)
+  }
+  function handleToggle (e) {
+    e.preventDefault()
+    if (type === 'password') {
+      setType('text')
+      setIcon(eyeOff)
+    } else {
+      setType('password')
+      setIcon(eye)
+    }
+  }
   async function handleSubmit (e) {
     e.preventDefault()
+    if (newPassword.length <= 10) {
+      //
+    } else if (newPassword.length >= 20) {
+      //
+    }
     if (
-      newFirstName !== '' &&
-      newLastName !== '' &&
       newGmail.endsWith('@gmail.com') &&
       newUsername !== '' &&
       newPassword !== '' &&
@@ -38,7 +71,7 @@ function SignUpCard (props) {
         onSignUp(newUsername)
       }
     } else {
-      console.log('Missing information')
+      setShow(true)
     }
   }
   return (
@@ -48,22 +81,6 @@ function SignUpCard (props) {
       <form method = "post" onSubmit={handleSubmit}>
         <label>
           {'Please enter your information to create a new account.'}
-        </label>
-        <label>
-        {'First Name: '}
-        <input
-          name="firstName"
-          value={newFirstName}
-          onChange={e => setNewFirstName(e.target.value)}
-        />
-        </label>
-        <label>
-        {'Last Name: '}
-        <input
-          name="lastName"
-          value={newLastName}
-          onChange={e => setNewLastName(e.target.value)}
-        />
         </label>
         <label>
         {'Gmail: '}
@@ -85,19 +102,29 @@ function SignUpCard (props) {
         <label>
         {'Password: '}
         <input
+          type = {type}
           name="password"
           value={newPassword}
-          onChange={e => setNewPassword(e.target.value)}
+          onChange={e => handlePasswordChange(e)}
         />
+        <span className="flex justify-around items-center" onClick={handleToggle}>
+          <Icon class="absolute mr-10" icon={icon} size={25}/>
+        </span>
         </label>
         <label>
         {'Confirm Password: '}
         <input
+          type = {type}
           name="confirm_password"
           value={confirmPass}
           onChange={e => setConfirmPass(e.target.value)}
         />
+        <span className="flex justify-around items-center" onClick={handleToggle}>
+          <Icon class="absolute mr-10" icon={icon} size={25}/>
+        </span>
         </label>
+        <br/>
+        <p style={{ color: 'red' }}> { content } </p>
         <label>
           <Button type = 'submit' className = 'mt-3' >Sign Up</Button>
         </label>
@@ -107,6 +134,17 @@ function SignUpCard (props) {
         </div>
       </Card.Body>
     </Card>
+    <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Missing information!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          If you are seeing this window,
+          then the form you filled in does not contains enough
+          information to create a new account.
+          Please close and try again.
+        </Modal.Body>
+      </Modal>
     </div>
   )
 }
