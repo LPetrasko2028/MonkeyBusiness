@@ -1,10 +1,12 @@
 import React from 'react'
 import * as data from './dataHelper.js'
-import { Row } from 'react-bootstrap'
+import { Row, Button, Modal } from 'react-bootstrap'
+import StockDetails from './StockDetails.jsx'
 export const MySearchBar = () => {
   const [searchInput, setSearchInput] = React.useState('')
-  const [stock, setStock] = React.useState([])
+  const [stock, setStock] = React.useState([''])
   const [searchResult, setSearchResult] = React.useState([''])
+  const [show, setShow] = React.useState(false)
   React.useEffect(() => {
     const fetchData = async () => {
       const stockData = await data.retrieveStocks()
@@ -12,51 +14,61 @@ export const MySearchBar = () => {
     }
     fetchData()
   }, [])
+  async function handleSubmit (e) {
+    e.preventDefault()
+    if (await data.retrieveStocks(searchInput)) {
+      const result = await data.retrieveStocks(searchInput)
+      setStock(result)
+      console.log(result)
+    } else {
+      setShow(true)
+    }
+  }
+  function handleClose () {
+    setShow(false)
+  }
   const handleChange = (e) => {
     e.preventDefault()
-    const newStocksName = []
     setSearchInput(e.target.value)
-    if (e.target.value.length > 0) {
-      const regex = new RegExp(e.target.value, 'gmi')
-      stock.map((stockData) => {
-        if (String(stockData.name).match(regex) != null) {
-          newStocksName.push(stockData.name)
-        }
-        console.log('Stock' + newStocksName)
-        return ([])
-      })
-    } else {
-      stock.map((stockData) => {
-        newStocksName.push(stockData.name)
-        return ([])
-      })
-    }
-    setSearchResult(newStocksName)
   }
-  console.log('Result' + searchResult)
   let k = 0
-  const stocks = searchResult.map(
-    (thisStock) => {
-      k++
-      console.log(thisStock)
-      return (
-      <Row className = 'px-3 py-3 pt-1 pb-2' key = {k}> {thisStock} </Row>
-      )
-    }
-  )
+  let stocks = ['']
+  if (stock !== null) {
+    stocks = stock.map(
+      (thisStock) => {
+        k++
+        return (
+      <Row key = {k} className = 'px-3 py-3 pt-1 pb-2'>
+        <StockDetails stockName={thisStock}/>
+      </Row>
+        )
+      }
+    )
+  }
   return (
     <React.Fragment>
-        <Row className = 'px-3 py-3 pt-1 pb-2 bg-dark'>
+        <Row className = 'px-3 py-3 pt-1 pb-2'>
+          <form method = "get" onSubmit={handleSubmit}>
             <input
               id = 'searchForm'
               type='text'
               placeholder='Search'
-              className='pl-1'
+              className='px-3 py-3 pt-1 pb-2 w-75'
               value = {searchInput}
               onChange={ handleChange }
             />
+            <Button type = 'submit' > Search </Button>
+            </form>
         </Row>
         {stocks}
+        <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          No stock found!
+        </Modal.Header>
+        <Modal.Body>
+          Please check your input and make sure you have the right name to search for.
+        </Modal.Body>
+      </Modal>
       </React.Fragment>
   )
 }
