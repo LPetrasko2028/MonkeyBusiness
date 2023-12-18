@@ -34,45 +34,38 @@ export async function signup (req, res) { // working without authentication ----
   const passwordConfirm = req.body.passwordConfirm
   const email = req.body.email
 
-  // let errors = []
-  // if (!username || !password || !passwordConfirm || !email) { // file for validation errors ------------------TO DO --------------------
-  //   errors.push({ message: 'Please enter all fields' })
-  // }
   queryMongoDatabase(async db => {
     const signupSuccess = await db.collection('Users').findOne({ username })
 
-    if ((signupSuccess) !== null) { res.status(404).json({ error: true, message: 'Username Already Exists.' }) } else {
-      if (password !== passwordConfirm) { res.status(404).json({ error: true, message: 'Passwords do not match.' }) } else if (validateEmail(email) === false) { res.status(404).json({ error: true, message: 'Invalid Email.' }) }
-
-      // Encrypt Password before database insertion ------------------TO DO --------------------
-      const passwordHash = await hashPassword(password)
-      const adminID = null
-      const preferencesID = new ObjectId('651dec44f8c800a5da81622b')
-      // initialize new_investor
-      const investorID = await db.collection('Investor').insertOne({ username, stocks: [], monkey: [] })
-      if (investorID.insertedCount !== null) {
-        const insertDoc = await db.collection('Users').insertOne({ username, password: passwordHash, email, preferencesID, adminID })
-        if (insertDoc.insertedCount !== null) { res.json({ error: false, message: `User: ${username} Signed Up Successfully` }) } else { res.status(404).json({ error: true, message: 'Failed to insert user info!' }) }
-      } else { res.status(404).json({ error: true, message: 'Failed to insert investor info!' }) }
+    if ((signupSuccess) !== null) { // Return error if username already exists
+      res.status(404).json({ error: true, message: 'Username Already Exists.' })
+      return
     }
+    if (password !== passwordConfirm) { res.status(404).json({ error: true, message: 'Passwords do not match.' }); return } // Return error if passwords do not match
+    else if (validateEmail(email) === false) { res.status(404).json({ error: true, message: 'Invalid Email.' }); return } // Return error if email is invalid
+    const passwordHash = await hashPassword(password)
+    const adminID = null
+    const preferencesID = new ObjectId('651dec44f8c800a5da81622b')
+    // initialize new_investor
+    const investorID = await db.collection('Investor').insertOne({ username, stocks: [], amount: 10000, history: [] })
+    if (investorID.insertedCount !== null) {
+      const insertDoc = await db.collection('Users').insertOne({ username, password: passwordHash, email, preferencesID, adminID })
+      if (insertDoc.insertedCount !== null) { res.json({ error: false, message: `User: ${username} Signed Up Successfully` }) } else { res.status(404).json({ error: true, message: 'Failed to insert user info!' }) }
+    } else { res.status(404).json({ error: true, message: 'Failed to insert investor info!' }) }
   }, 'MonkeyBusinessWebApp')
 }
-
-export async function logout (next, req, res) { // maybe POST to introduce authentication ------------------TO DO --------------------
-  // if authenticated, logout, else redirect to login page
-  req.session.user = null
-  req.session.save(function (err) {
-    if (err) return next(err)
-    req.session.regenerate(function (err) {
-      if (err) next(err)
-      res.redirect('/')
-    }
-    )
-  })
-  req.session.destroy(function (err) {
-    if (err) return next(err)
-    res.redirect('/')
-  })
+export async function logout (req, res) {
+  if (req.session) {
+    req.session.destroy((err) => {
+      if (err) {
+        res.status(500).json({ error: true, message: 'Failed to logout' })
+      } else {
+        res.sendStatus(401)
+      }
+    })
+  } else {
+    res.end()
+  }
 }
 
 export async function updatePreferences (req, res) {
@@ -139,18 +132,17 @@ export async function deleteUser (req, res) {
   }, 'MonkeyBusinessWebApp')
 }
 
-export async function getAccountDetails(req, res) {
+export async function getAccountDetails (req, res) {
   const username = req.body.username // eventually change to session
 
   queryMongoDatabase(async db => {
     const findAccount = await db.collection('Users').find({ username })
     const numDocs = await db.collection('Users').countDocuments({ username })
 
-    if(numDocs === 0) { //check if no user / duplicate users
-      res.status(404).json({ error: true, message: 'User not found'})
+    if (numDocs === 0) { // check if no user / duplicate users
+      res.status(404).json({ error: true, message: 'User not found' })
     } else if (numDocs > 1) {
       res.status(500).json({ error: true, message: 'Multiple users with same username' })
-
     } else {
       for await (const doc of findAccount) {
         res.json(doc)
@@ -159,29 +151,28 @@ export async function getAccountDetails(req, res) {
   }, 'MonkeyBusinessWebApp')
 }
 
-export async function getPreferences(req, res) {
+export async function getPreferences (req, res) {
   const username = req.body.username // eventually change to session
 
   queryMongoDatabase(async db => {
     const findUsername = await db.collection('Users').findOne({ username })
     const numDocs = await db.collection('Users').countDocuments({ username })
 
-    if(numDocs === 0) { //check if no user / duplicate users
-      res.status(404).json({ error: true, message: 'User not found'})
+    if (numDocs === 0) { // check if no user / duplicate users
+      res.status(404).json({ error: true, message: 'User not found' })
     } else if (numDocs > 1) {
       res.status(500).json({ error: true, message: 'Multiple users with same username' })
-
     } else {
-      const prefId = findUsername['preferencesID'] // either use this or findUsername[4]
+      const prefId = findUsername.preferencesID // either use this or findUsername[4]
       const findPreferences = await db.collection('Preferences').find({ _id: prefId })
       const numDocs2 = await db.collection('Preferences').countDocuments({ _id: prefId })
-      if(numDocs2 === 0) {
+      if (numDocs2 === 0) {
         res.status(404).json('Preference set not found')
       } else {
         for await (const doc of findPreferences) {
           res.json(doc)
         }
-        //res.json({ error: false, message: 'Preference set found' })
+        // res.json({ error: false, message: 'Preference set found' })
       }
     }
   }, 'MonkeyBusinessWebApp')

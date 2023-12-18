@@ -28,43 +28,74 @@ export default function App () {
     setUsername(username)
     setLogInStatus(true)
   }
+
   const theme = (darkMode ? 'dark' : 'light')
   document.getElementById('html').setAttribute('data-bs-theme', darkMode ? 'dark' : 'light')
   //-------------------------------------------------------------
   const accessKey = search.substring(11, search.length)
   return (
     <React.Fragment>
-
       <div data-bs-theme={theme}>
-        <MyNavBar loggedIn = {logInStatus} mode = {theme} data-bs-theme = {theme} handleTheme = {handleDarkMode} isDark = {darkMode} />
+        <MyNavBar
+          loggedIn={logInStatus}
+          mode={theme}
+          data-bs-theme={theme}
+          handleTheme={handleDarkMode}
+          isDark={darkMode}
+          setLogInStatus={setLogInStatus}
+        />
+        <div className="container-fluid" style={{ marginTop: '1rem' }} />
+        <div className="mx-5">
         <Routes>
+          <Route
+            path="/"
+            exact
+            element={
+              <Home theme={theme} name={username} status={logInStatus} />
+            }
+          />
+          <Route
+            path="/login"
+            element={<LoginCard onLogIn={onLogInChange} />}
+          />
+          <Route path="/about" Component={IntroPage} />
+          <Route
+            path="/signup"
+            element={<SignUpCard onSignUp={onLogInChange} />}
+          />
+          <Route
+            path="/monkeyTech"
+            element={<MonkeTech status={logInStatus} />}
+          />
+          <Route
+            path="/setting"
+            element={
+              <SettingsPage
+                name={username}
+                setLogIn={setLogInStatus}
+                setName={setUsername}
+              ></SettingsPage>
+            }
+          />
+          <Route path="/stats" Component={StatsPage} />
+          <Route path="/search" Component={MySearchBar} />
+          <Route path="/TutorialPage" Component={tPage} />
+          <Route
+            path="/resetPassword"
+            element={
+              <ResetPassword accessKey={accessKey} darkMode={darkMode} />
+            }
+          ></Route>
 
-            <Route path="/" exact element= {<Home theme={theme} name = {username} status = {logInStatus}/>}/>
-            <Route path="/login" element = { <LoginCard onLogIn={onLogInChange}/> } />
-            <Route path="/about" Component={IntroPage } />
-            <Route path = "/signup" element = { <SignUpCard onSignUp = {onLogInChange}/>}/>
-            <Route path = "/monkeyTech" Component = {MonkeTech}/>
-            <Route path = "/setting" element = {
-            <SettingsPage
-              name = { username }
-              setLogIn = {setLogInStatus}
-              setName = {setUsername}
-            >
-            </SettingsPage>
-            }/>
-            <Route path = "/stats" Component = {StatsPage}/>
-            <Route path = "/search" Component = {MySearchBar}/>
-            <Route path="/TutorialPage" Component={tPage}/>
-            <Route path="/resetPassword" element={<ResetPassword accessKey={accessKey} darkMode={darkMode} />}>
-            </Route>
+          <Route
+            path="/forgotPassword"
+            element={<ForgotPassword darkMode={darkMode} />}
+          />
 
-            <Route path="/forgotPassword" element={<ForgotPassword darkMode={darkMode} />}/>
-
-            <Route path = "*" Component = {Error}/>
-
+          <Route path="*" Component={Error} />
         </Routes>
+        </div>
       </div>
-
     </React.Fragment>
   )
 }

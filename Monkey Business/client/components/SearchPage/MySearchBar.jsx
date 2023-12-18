@@ -1,74 +1,105 @@
-import React from 'react'
-import * as data from './dataHelper.js'
-import { Row, Button, Modal } from 'react-bootstrap'
-import StockDetails from './StockDetails.jsx'
+import React, { useRef, useEffect } from 'react'
+import { searchStockAPI } from '../../mbdataHelper.js'
+import { Card, Button, Table } from 'react-bootstrap'
 export const MySearchBar = () => {
   const [searchInput, setSearchInput] = React.useState('')
-  const [stock, setStock] = React.useState([''])
   const [searchResult, setSearchResult] = React.useState([''])
-  const [show, setShow] = React.useState(false)
-  React.useEffect(() => {
-    const fetchData = async () => {
-      const stockData = await data.retrieveStocks()
-      setStock(stockData)
+  const searchForm = useRef()
+
+  useEffect(() => {
+    document.body.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.body.removeEventListener('keydown', onKeyDown)
     }
-    fetchData()
   }, [])
-  async function handleSubmit (e) {
-    e.preventDefault()
-    if (await data.retrieveStocks(searchInput)) {
-      const result = await data.retrieveStocks(searchInput)
-      setStock(result)
-      console.log(result)
-    } else {
-      setShow(true)
+
+  async function onKeyDown (event) {
+    const submit = event.key === 'Enter'
+    if (submit) {
+      await handleSearch()
     }
   }
-  function handleClose () {
-    setShow(false)
-  }
-  const handleChange = (e) => {
+  useEffect(() => {
+    searchForm.current.focus()
+  }, [])
+  const start = 0
+  const end = 10
+
+  const handleChange = async (e) => {
     e.preventDefault()
+    console.log('searchInput: ', searchInput)
+    console.log('e.target.value: ', e.target.value)
     setSearchInput(e.target.value)
   }
-  let k = 0
-  let stocks = ['']
-  if (stock !== null) {
-    stocks = stock.map(
-      (thisStock) => {
-        k++
-        return (
-      <Row key = {k} className = 'px-3 py-3 pt-1 pb-2'>
-        <StockDetails stockName={thisStock}/>
-      </Row>
-        )
+  async function handleSearch () {
+    const searchInput = searchForm.current.value
+    if (searchInput === '') {
+      console.log('searchInput is empty')
+      setSearchResult([''])
+    } else {
+      const searchResult = await searchStockAPI({ searchInput, start, end })
+      if (searchResult) {
+        setSearchResult(searchResult)
+      } else {
+        setSearchResult([''])
       }
-    )
+    }
   }
   return (
     <React.Fragment>
-        <Row className = 'px-3 py-3 pt-1 pb-2'>
-          <form method = "get" onSubmit={handleSubmit}>
-            <input
-              id = 'searchForm'
-              type='text'
-              placeholder='Search'
-              className='px-3 py-3 pt-1 pb-2 w-75'
-              value = {searchInput}
-              onChange={ handleChange }
-            />
-            <Button type = 'submit' > Search </Button>
-            </form>
-        </Row>
-        {stocks}
-        <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          No stock found!
-        </Modal.Header>
-        <Modal.Body>
-          Please check your input and make sure you have the right name to search for.
-        </Modal.Body>
-      </Modal>
-      </React.Fragment>
-  )
+      <Card className="mx-5">
+      <Card.Header>Stock Search</Card.Header>
+        <Card.Body>
+          <Card.Text>
+            Search for a stock by symbol or name
+          </Card.Text>
+          <div className='input-group '>
+          <input
+            id="searchForm"
+            type="text"
+            placeholder="Search"
+            className="fill"
+            value={searchInput}
+            onChange={handleChange}
+            ref={searchForm}
+          />
+          <Button
+            variant="outline-success"
+            className="ml-2"
+            onClick={handleSearch}
+          >
+            Search
+          </Button>
+          </div>
+        </Card.Body>
+      </Card>
+      <Card className="mx-5">
+        <Card.Header>Search Results</Card.Header>
+        <Card.Body>
+          <Table className="table">
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Quote Type</th>
+                <th>Industry</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              {searchResult.map((stock) => (
+                <tr key={stock.symbol}>
+                  <td>{stock.symbol}</td>
+                  <td>{stock.name}</td>
+                  <td>{stock.quoteType}</td>
+                  <td>{stock.industry}</td>
+                  <td>{stock.score}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Card.Body>
+      </Card>
+    </React.Fragment>
+  );
 }

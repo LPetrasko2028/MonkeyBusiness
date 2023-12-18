@@ -1133,7 +1133,7 @@
             }
             return dispatcher.useContext(Context2);
           }
-          function useState15(initialState) {
+          function useState17(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1141,11 +1141,11 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useReducer(reducer, initialArg, init);
           }
-          function useRef13(initialValue) {
+          function useRef14(initialValue) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect16(create, deps) {
+          function useEffect19(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -1157,7 +1157,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useLayoutEffect(create, deps);
           }
-          function useCallback11(callback, deps) {
+          function useCallback12(callback, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useCallback(callback, deps);
           }
@@ -1923,19 +1923,19 @@
           exports.memo = memo;
           exports.startTransition = startTransition;
           exports.unstable_act = act;
-          exports.useCallback = useCallback11;
+          exports.useCallback = useCallback12;
           exports.useContext = useContext14;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect16;
+          exports.useEffect = useEffect19;
           exports.useId = useId;
           exports.useImperativeHandle = useImperativeHandle2;
           exports.useInsertionEffect = useInsertionEffect;
           exports.useLayoutEffect = useLayoutEffect2;
           exports.useMemo = useMemo11;
           exports.useReducer = useReducer2;
-          exports.useRef = useRef13;
-          exports.useState = useState15;
+          exports.useRef = useRef14;
+          exports.useState = useState17;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition2;
           exports.version = ReactVersion;
@@ -2431,9 +2431,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React86 = require_react();
+          var React87 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React86.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React87.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -4038,7 +4038,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React86.Children.forEach(props.children, function(child) {
+                  React87.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -12485,7 +12485,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React86.Component().refs;
+          var emptyRefsObject = new React87.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -26938,7 +26938,7 @@
     "node_modules/react-router-dom/node_modules/react-router/dist/umd/react-router.development.js"(exports, module) {
       (function(global2, factory) {
         typeof exports === "object" && typeof module !== "undefined" ? factory(exports, require_react(), require_router_cjs()) : typeof define === "function" && define.amd ? define(["exports", "react", "@remix-run/router"], factory) : (global2 = typeof globalThis !== "undefined" ? globalThis : global2 || self, factory(global2.ReactRouter = {}, global2.React, global2.RemixRouter));
-      })(exports, function(exports2, React86, router) {
+      })(exports, function(exports2, React87, router) {
         "use strict";
         function _interopNamespace(e) {
           if (e && e.__esModule)
@@ -26960,7 +26960,7 @@
           n["default"] = e;
           return Object.freeze(n);
         }
-        var React__namespace = /* @__PURE__ */ _interopNamespace(React86);
+        var React__namespace = /* @__PURE__ */ _interopNamespace(React87);
         function _extends2() {
           _extends2 = Object.assign ? Object.assign.bind() : function(target) {
             for (var i = 1; i < arguments.length; i++) {
@@ -28080,7 +28080,7 @@
     "node_modules/react-router-dom/dist/umd/react-router-dom.development.js"(exports, module) {
       (function(global2, factory) {
         typeof exports === "object" && typeof module !== "undefined" ? factory(exports, require_react(), require_main(), require_router_cjs()) : typeof define === "function" && define.amd ? define(["exports", "react", "react-router", "@remix-run/router"], factory) : (global2 = typeof globalThis !== "undefined" ? globalThis : global2 || self, factory(global2.ReactRouterDOM = {}, global2.React, global2.ReactRouter, global2.RemixRouter));
-      })(exports, function(exports2, React86, reactRouter, router) {
+      })(exports, function(exports2, React87, reactRouter, router) {
         "use strict";
         function _interopNamespace(e) {
           if (e && e.__esModule)
@@ -28102,7 +28102,7 @@
           n["default"] = e;
           return Object.freeze(n);
         }
-        var React__namespace = /* @__PURE__ */ _interopNamespace(React86);
+        var React__namespace = /* @__PURE__ */ _interopNamespace(React87);
         function _extends2() {
           _extends2 = Object.assign ? Object.assign.bind() : function(target) {
             for (var i = 1; i < arguments.length; i++) {
@@ -29398,7 +29398,7 @@
       if (true) {
         (function() {
           "use strict";
-          var React86 = require_react();
+          var React87 = require_react();
           var REACT_ELEMENT_TYPE = Symbol.for("react.element");
           var REACT_PORTAL_TYPE = Symbol.for("react.portal");
           var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
@@ -29424,7 +29424,7 @@
             }
             return null;
           }
-          var ReactSharedInternals = React86.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React87.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function error(format) {
             {
               {
@@ -31297,11 +31297,11 @@
   });
 
   // client/main.jsx
-  var import_react65 = __toESM(require_react(), 1);
+  var import_react66 = __toESM(require_react(), 1);
   var import_client = __toESM(require_client(), 1);
 
   // client/components/App.jsx
-  var import_react64 = __toESM(require_react(), 1);
+  var import_react65 = __toESM(require_react(), 1);
   var import_react_router_dom5 = __toESM(require_main2(), 1);
 
   // client/components/Navigation/MyNavBar.jsx
@@ -35782,30 +35782,119 @@
   };
 
   // client/components/Home/HomePage.jsx
+  var import_react53 = __toESM(require_react(), 1);
+  var import_prop_types6 = __toESM(require_prop_types(), 1);
+
+  // client/components/StockTable/StockTable.jsx
   var import_react52 = __toESM(require_react(), 1);
   var import_prop_types5 = __toESM(require_prop_types(), 1);
-  function Home(props) {
-    const { name } = props;
-    let content;
-    if (name !== "") {
-      content = /* @__PURE__ */ import_react52.default.createElement("div", null, " Welcome ", name, " ");
-    } else {
-      content = /* @__PURE__ */ import_react52.default.createElement("div", null, " Home page placeholder");
-    }
-    return /* @__PURE__ */ import_react52.default.createElement(import_react52.default.Fragment, null, content);
+  function StockTable({ stocks, page, pageSize }) {
+    console.log("stocks: ", stocks);
+    return /* @__PURE__ */ import_react52.default.createElement(Card_default, { className: "px-2 mx-5" }, /* @__PURE__ */ import_react52.default.createElement(Table_default, { className: "table" }, /* @__PURE__ */ import_react52.default.createElement("thead", null, /* @__PURE__ */ import_react52.default.createElement("tr", null, /* @__PURE__ */ import_react52.default.createElement("th", null, "Name"), /* @__PURE__ */ import_react52.default.createElement("th", null, "Price"), /* @__PURE__ */ import_react52.default.createElement("th", null, "Volume"), /* @__PURE__ */ import_react52.default.createElement("th", null, "Change"), /* @__PURE__ */ import_react52.default.createElement("th", null, "Market Cap"))), /* @__PURE__ */ import_react52.default.createElement("tbody", null, stocks.map((stock) => /* @__PURE__ */ import_react52.default.createElement("tr", { key: stock.name ? stock.name : "" }, /* @__PURE__ */ import_react52.default.createElement("td", null, stock.name ? stock.name : ""), /* @__PURE__ */ import_react52.default.createElement("td", null, stock.price ? stock.price : ""), /* @__PURE__ */ import_react52.default.createElement("td", null, stock.volume ? stock.volume : ""), /* @__PURE__ */ import_react52.default.createElement("td", null, stock.change ? stock.change : ""), /* @__PURE__ */ import_react52.default.createElement("td", null, stock.marketCap ? stock.marketCap : ""))))), /* @__PURE__ */ import_react52.default.createElement(Card_default.Footer, null, /* @__PURE__ */ import_react52.default.createElement("div", { style: { display: "flex", justifyContent: "space-between" } }, /* @__PURE__ */ import_react52.default.createElement("div", null, /* @__PURE__ */ import_react52.default.createElement(
+      "button",
+      {
+        type: "button",
+        className: page > 1 ? "btn btn-primary" : "btn btn-primary disabled",
+        onClick: () => {
+          console.log("Previous");
+        }
+      },
+      "Previous Page"
+    )), /* @__PURE__ */ import_react52.default.createElement("div", null, /* @__PURE__ */ import_react52.default.createElement("span", null, "Page ", page + 1, " of ", Math.ceil(stocks.length / pageSize), " (Stocks: ", page * pageSize, " - ", (page + 1) * pageSize < stocks.length ? (page + 1) * pageSize : stocks.length, " of ", stocks.length, ")")), /* @__PURE__ */ import_react52.default.createElement("div", null, /* @__PURE__ */ import_react52.default.createElement(
+      "button",
+      {
+        type: "button",
+        className: page > 1 ? "btn btn-primary" : "btn btn-primary disabled",
+        onClick: () => {
+          console.log("Next");
+        }
+      },
+      "Next Page"
+    )))));
   }
-  Home.propTypes = {
-    name: import_prop_types5.default.string
+  StockTable.propTypes = {
+    stocks: import_prop_types5.default.arrayOf(
+      import_prop_types5.default.shape({
+        name: import_prop_types5.default.string.isRequired,
+        price: import_prop_types5.default.number.isRequired,
+        volume: import_prop_types5.default.number.isRequired,
+        change: import_prop_types5.default.number.isRequired,
+        marketCap: import_prop_types5.default.number.isRequired
+      })
+    ).isRequired,
+    page: import_prop_types5.default.number,
+    pageSize: import_prop_types5.default.number
   };
-  Home.defaultProps = {
-    name: ""
+  StockTable.defaultProps = {
+    stocks: [{
+      name: "",
+      price: 0,
+      volume: 0,
+      change: 0,
+      marketCap: 0
+    }],
+    page: 0,
+    pageSize: 10
   };
-  var HomePage_default = Home;
-
-  // client/components/MonkeyTech/MonkeyTechPage.jsx
-  var import_react53 = __toESM(require_react(), 1);
 
   // client/mbdataHelper.js
+  function searchStockAPI(stockName, start, end) {
+    return __async(this, null, function* () {
+      try {
+        const response = yield fetch("http://localhost:3000/api/search", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ stockName, start, end })
+        });
+        if (response.status >= 400) {
+          throw new Error(`Request failed with response code ${response.status}`);
+        }
+        return yield response.json();
+      } catch (err) {
+        console.error("Failed to retrieve stock details");
+        console.error(err);
+        return null;
+      }
+    });
+  }
+  function retrieveInvestorStocks(start, end) {
+    return __async(this, null, function* () {
+      try {
+        const response = yield fetch("http://localhost:3000/api/stocks?" + new URLSearchParams({ start, end }));
+        if (response.status >= 400) {
+          throw new Error(`Request failed with response code ${response.status}`);
+        }
+        return yield response.json();
+      } catch (err) {
+        console.error("Failed to retrieve array of stocks");
+        console.error(err);
+        return [];
+      }
+    });
+  }
+  function login(username, password) {
+    return __async(this, null, function* () {
+      try {
+        const response = yield fetch("http://localhost:3000/api/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ username, password })
+        });
+        if (response.status >= 400) {
+          throw new Error(`Request failed with response code ${response.status}`);
+        }
+        return true;
+      } catch (err) {
+        console.error("Failed to login");
+        console.error(err);
+        return false;
+      }
+    });
+  }
   function resetPassword(accessKey, username, password, confirmPassword) {
     return __async(this, null, function* () {
       try {
@@ -35855,7 +35944,7 @@
         if (response.status >= 400) {
           throw new Error(`Request failed with response code ${response.status}`);
         }
-        return response;
+        return yield response.json();
       } catch (err) {
         console.error("Failed to retrieve monkey investments");
         console.error(err);
@@ -35864,41 +35953,106 @@
     });
   }
 
+  // client/components/Home/HomePage.jsx
+  function Home(props) {
+    const { name } = props;
+    const [userInvestments, setUserInvestments] = (0, import_react53.useState)([]);
+    const [userInvestmentPage, setUserInvestmentPage] = (0, import_react53.useState)(0);
+    const [userInvestmentPageSize, setUserInvestmentPageSize] = (0, import_react53.useState)(10);
+    const [testStockDetails, setTestStockDetails] = (0, import_react53.useState)([]);
+    const [testTimeFrame, setTestTimeFrame] = (0, import_react53.useState)(1);
+    (0, import_react53.useEffect)(() => {
+      if (name !== "") {
+        const renderUserInvestments = () => __async(this, null, function* () {
+          const fetchUserInvestments = yield retrieveInvestorStocks(userInvestmentPage * userInvestmentPageSize, (userInvestmentPage + 1) * userInvestmentPageSize);
+          setUserInvestments(fetchUserInvestments);
+          fetchUserInvestments.forEach((stock) => {
+            console.log(stock);
+          });
+        });
+        renderUserInvestments();
+      } else {
+        const renderTestStockDetails = () => __async(this, null, function* () {
+        });
+        renderTestStockDetails();
+        console.log(testStockDetails);
+        console.log("User is not logged in");
+      }
+    }, [name]);
+    let content;
+    if (name !== "") {
+      content = /* @__PURE__ */ import_react53.default.createElement(import_react53.default.Fragment, null, /* @__PURE__ */ import_react53.default.createElement("div", { className: "px-4 mx-4 ", style: { display: "flex", justifyContent: "space-between" } }, /* @__PURE__ */ import_react53.default.createElement("h2", { id: "name" }, " Welcome ", name, " "), " ", /* @__PURE__ */ import_react53.default.createElement("h2", { id: "amount" }, " Account Value: 40000 ")), /* @__PURE__ */ import_react53.default.createElement(StockTable, { stocks: userInvestments, page: userInvestmentPage, pageSize: userInvestmentPageSize }));
+    } else {
+      content = /* @__PURE__ */ import_react53.default.createElement(import_react53.default.Fragment, null, /* @__PURE__ */ import_react53.default.createElement("h2", null, " Welcome To Our Monkey Business Web App!"), /* @__PURE__ */ import_react53.default.createElement("h4", null, "Please Login To See All of Our App's Features "), /* @__PURE__ */ import_react53.default.createElement(StockTable, null));
+    }
+    return /* @__PURE__ */ import_react53.default.createElement(import_react53.default.Fragment, null, content);
+  }
+  Home.propTypes = {
+    name: import_prop_types6.default.string
+  };
+  Home.defaultProps = {
+    name: ""
+  };
+  var HomePage_default = Home;
+
   // client/components/MonkeyTech/MonkeyTechPage.jsx
-  function MonkeTech() {
-    const [tableData, setTableData] = (0, import_react53.useState)([]);
-    const [show, setShow] = (0, import_react53.useState)(false);
-    const [success, setSuccess] = (0, import_react53.useState)(false);
+  var import_react54 = __toESM(require_react(), 1);
+  function MonkeyTech() {
+    const [tableData, setTableData] = (0, import_react54.useState)([]);
+    const [show, setShow] = (0, import_react54.useState)(false);
+    const [success, setSuccess] = (0, import_react54.useState)(false);
+    const [editStockPool, setEditStockPool] = (0, import_react54.useState)(false);
+    const [stockPool, setStockPool] = (0, import_react54.useState)([]);
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
     const onSuccessMessage = "Monkey Investments retrieved";
     const onFailMessage = "Failed to retrieve monkey investments";
-    (0, import_react53.useEffect)(() => {
-      const renderMonkeyInvestments = (e) => __async(this, null, function* () {
+    (0, import_react54.useEffect)(() => {
+      const renderMonkeyInvestments = () => __async(this, null, function* () {
         const fetchMonkeyInvestments = yield getMonkeyInvestments();
         if (fetchMonkeyInvestments) {
           setSuccess(true);
+          setTableData(fetchMonkeyInvestments);
         } else {
           setSuccess(false);
         }
         handleShow();
-        setTableData(fetchMonkeyInvestments);
+        console.log(fetchMonkeyInvestments);
       });
       renderMonkeyInvestments();
     }, []);
-    return /* @__PURE__ */ import_react53.default.createElement(import_react53.default.Fragment, null, /* @__PURE__ */ import_react53.default.createElement(Alert_default, { show, variant: success ? "success" : "danger", onClose: handleClose, dismissible: true }, /* @__PURE__ */ import_react53.default.createElement(Alert_default.Heading, null, "Retrieving Monkey Stock Details"), /* @__PURE__ */ import_react53.default.createElement("p", null, success ? onSuccessMessage : onFailMessage)), /* @__PURE__ */ import_react53.default.createElement(Table_default, { striped: true, border: true, hover: true, id: "monkeyTable" }, /* @__PURE__ */ import_react53.default.createElement("thead", null, /* @__PURE__ */ import_react53.default.createElement("tr", null, /* @__PURE__ */ import_react53.default.createElement("th", { scope: "col" }, "Stock Name"), /* @__PURE__ */ import_react53.default.createElement("th", { scope: "col" }, "Stocks"), /* @__PURE__ */ import_react53.default.createElement("th", { scope: "col" }, "History"), /* @__PURE__ */ import_react53.default.createElement("th", { scope: "col" }, "Stock Pool"), /* @__PURE__ */ import_react53.default.createElement("th", { scope: "col" }, "Amount"))), /* @__PURE__ */ import_react53.default.createElement("tbody", null)), /* @__PURE__ */ import_react53.default.createElement("div", null, tableData));
+    const handleDelete = (name) => {
+      const updatedTableData = tableData.filter((item) => item.name !== name);
+      setTableData(updatedTableData);
+    };
+    const handleEditStockPool = () => {
+      setEditStockPool(!editStockPool);
+    };
+    const handleRemoveFromStockPool = (name) => {
+      console.log("Remove from stock pool");
+      const updatedStockPool = stockPool.filter((item) => item.name !== name);
+      setStockPool(updatedStockPool);
+    };
+    return /* @__PURE__ */ import_react54.default.createElement(import_react54.default.Fragment, null, /* @__PURE__ */ import_react54.default.createElement(Alert_default, { show, variant: success ? "success" : "danger", onClose: handleClose, dismissible: true }, /* @__PURE__ */ import_react54.default.createElement(Alert_default.Heading, null, "Retrieving Monkey Stock Details"), /* @__PURE__ */ import_react54.default.createElement("p", null, success ? onSuccessMessage : onFailMessage)), tableData.map((currentValue) => /* @__PURE__ */ import_react54.default.createElement(Card_default, { key: currentValue.name, className: "mx-3" }, /* @__PURE__ */ import_react54.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react54.default.createElement(Card_default.Title, null, /* @__PURE__ */ import_react54.default.createElement(Row_default, null, /* @__PURE__ */ import_react54.default.createElement(Col_default, null, currentValue.name), /* @__PURE__ */ import_react54.default.createElement(Col_default, null, "Monkey Investment Cash Available: ", currentValue.cash)), /* @__PURE__ */ import_react54.default.createElement("div", null, /* @__PURE__ */ import_react54.default.createElement(Button_default2, { variant: "link", onClick: handleEditStockPool }, editStockPool ? "Save" : "Edit", " Stock Pool"))), /* @__PURE__ */ import_react54.default.createElement(Table_default, { striped: true, bordered: true, hover: true }, /* @__PURE__ */ import_react54.default.createElement("tbody", null, /* @__PURE__ */ import_react54.default.createElement("tr", null, /* @__PURE__ */ import_react54.default.createElement("td", null, "Stocks"), /* @__PURE__ */ import_react54.default.createElement("td", null, /* @__PURE__ */ import_react54.default.createElement(Container_default, { fluid: true }, /* @__PURE__ */ import_react54.default.createElement(Row_default, null, currentValue.stocks.map((stock) => /* @__PURE__ */ import_react54.default.createElement(Col_default, { key: stock.stockName }, /* @__PURE__ */ import_react54.default.createElement(Card_default, { key: stock.stockName }, /* @__PURE__ */ import_react54.default.createElement(Card_default.Body, null, stock.stockName + ", " + stock.amount)))))))), /* @__PURE__ */ import_react54.default.createElement("tr", null, /* @__PURE__ */ import_react54.default.createElement("td", null, "History"), /* @__PURE__ */ import_react54.default.createElement("td", null, /* @__PURE__ */ import_react54.default.createElement(Container_default, { fluid: true }, /* @__PURE__ */ import_react54.default.createElement(Row_default, null, currentValue.history.map((history) => /* @__PURE__ */ import_react54.default.createElement(Col_default, { key: history.name }, /* @__PURE__ */ import_react54.default.createElement(
+      Card_default,
+      {
+        key: history.name,
+        className: history.type === "buy" ? "buy-class" : "sell-class"
+      },
+      /* @__PURE__ */ import_react54.default.createElement(Card_default.Body, null, history.name + ", " + history.date + ", " + history.type + ", " + history.amount)
+    ))))))), /* @__PURE__ */ import_react54.default.createElement("tr", null, /* @__PURE__ */ import_react54.default.createElement("td", null, "Stock Pool"), /* @__PURE__ */ import_react54.default.createElement("td", null, !editStockPool ? /* @__PURE__ */ import_react54.default.createElement(Container_default, { fluid: true }, /* @__PURE__ */ import_react54.default.createElement(Row_default, null, currentValue.stockPool.map((stockName) => /* @__PURE__ */ import_react54.default.createElement(Col_default, { key: stockName }, /* @__PURE__ */ import_react54.default.createElement(Card_default, { key: stockName }, /* @__PURE__ */ import_react54.default.createElement(Card_default.Body, null, stockName)))))) : /* @__PURE__ */ import_react54.default.createElement(Container_default, { fluid: true }, /* @__PURE__ */ import_react54.default.createElement(Row_default, null, currentValue.stockPool.map((stockName) => /* @__PURE__ */ import_react54.default.createElement(Col_default, { key: stockName }, /* @__PURE__ */ import_react54.default.createElement(Card_default, { key: stockName }, /* @__PURE__ */ import_react54.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react54.default.createElement(Button_default2, { className: "mx-2", onClick: () => handleRemoveFromStockPool(stockName) }, "X"), stockName)))))))))), /* @__PURE__ */ import_react54.default.createElement(Button_default2, { variant: "danger", onClick: () => handleDelete(currentValue.name) }, "Delete")))));
   }
-  var MonkeyTechPage_default = MonkeTech;
+  var MonkeyTechPage_default = MonkeyTech;
 
   // client/components/Intro/IntroPage.jsx
-  var import_react54 = __toESM(require_react(), 1);
+  var import_react55 = __toESM(require_react(), 1);
   function IntroPage() {
-    return /* @__PURE__ */ import_react54.default.createElement(import_react54.default.Fragment, null, /* @__PURE__ */ import_react54.default.createElement("h1", null, " Placeholder "), /* @__PURE__ */ import_react54.default.createElement("h2", null, " Devs "), /* @__PURE__ */ import_react54.default.createElement("div", null, " info about us"));
+    return /* @__PURE__ */ import_react55.default.createElement(import_react55.default.Fragment, null, /* @__PURE__ */ import_react55.default.createElement("h1", null, " Placeholder "), /* @__PURE__ */ import_react55.default.createElement("h2", null, " Devs "), /* @__PURE__ */ import_react55.default.createElement("div", null, " info about us"));
   }
   var IntroPage_default = IntroPage;
 
   // client/components/Setting/SettingsPage.jsx
-  var import_react55 = __toESM(require_react(), 1);
+  var import_react56 = __toESM(require_react(), 1);
 
   // client/components/Setting/dataHelper.js
   function updatePref(Prefs) {
@@ -35943,7 +36097,7 @@
   }
 
   // client/components/Setting/SettingsPage.jsx
-  var import_prop_types6 = __toESM(require_prop_types(), 1);
+  var import_prop_types7 = __toESM(require_prop_types(), 1);
   var import_react_router_dom = __toESM(require_main2(), 1);
   var myTheme = "light";
   var buttonTheme = "outline-dark";
@@ -35959,10 +36113,10 @@
   function SettingsPage(props) {
     const navigate = (0, import_react_router_dom.useNavigate)();
     const { name, setLogIn, setName } = props;
-    const [change, setChange] = import_react55.default.useState(false);
-    const [fontSize, setFontSize] = import_react55.default.useState(12);
-    const [graphColor, setGraphColor] = import_react55.default.useState("Default");
-    const [show, setShow] = import_react55.default.useState(false);
+    const [change, setChange] = import_react56.default.useState(false);
+    const [fontSize, setFontSize] = import_react56.default.useState(12);
+    const [graphColor, setGraphColor] = import_react56.default.useState("Default");
+    const [show, setShow] = import_react56.default.useState(false);
     function handleClose(e) {
       setShow(false);
     }
@@ -36015,129 +36169,97 @@
     }
     let content;
     if (change) {
-      content = /* @__PURE__ */ import_react55.default.createElement(Button_default2, { type: "submit", onClick: handleSubmit }, " Apply");
+      content = /* @__PURE__ */ import_react56.default.createElement(Button_default2, { type: "submit", onClick: handleSubmit }, " Apply");
     }
-    return /* @__PURE__ */ import_react55.default.createElement("div", { className: "px-3", "data-bs-theme": myTheme }, /* @__PURE__ */ import_react55.default.createElement("div", null, /* @__PURE__ */ import_react55.default.createElement("h1", null, "Settings Page"), /* @__PURE__ */ import_react55.default.createElement("h2", null, "This is where the settings will be")), /* @__PURE__ */ import_react55.default.createElement(Row_default, null, /* @__PURE__ */ import_react55.default.createElement("div", null, /* @__PURE__ */ import_react55.default.createElement("p", null, "Theme mode:", /* @__PURE__ */ import_react55.default.createElement("label", null, /* @__PURE__ */ import_react55.default.createElement("input", { type: "radio", name: "settingsRadio", value: "option1" }), "Light Mode"), /* @__PURE__ */ import_react55.default.createElement("label", null, /* @__PURE__ */ import_react55.default.createElement("input", { type: "radio", name: "settingsRadio", value: "option2" }), "Dark Mode")))), /* @__PURE__ */ import_react55.default.createElement(Row_default, null, /* @__PURE__ */ import_react55.default.createElement("label", null, /* @__PURE__ */ import_react55.default.createElement("div", null, "Font size: "), /* @__PURE__ */ import_react55.default.createElement("input", { type: "number", name: "fontSize", value: fontSize, onChange: handleChangeFontSize }))), /* @__PURE__ */ import_react55.default.createElement(Row_default, null, /* @__PURE__ */ import_react55.default.createElement("label", null, /* @__PURE__ */ import_react55.default.createElement("div", null, "Graph Colors: "))), /* @__PURE__ */ import_react55.default.createElement(Row_default, null, /* @__PURE__ */ import_react55.default.createElement("label", null, "Default", /* @__PURE__ */ import_react55.default.createElement("input", { type: "radio", name: "graphColor", value: "Default", checked: true, onChange: handleChangeGraphColor }))), /* @__PURE__ */ import_react55.default.createElement(Row_default, null, /* @__PURE__ */ import_react55.default.createElement("label", null, "Simply Black", /* @__PURE__ */ import_react55.default.createElement("input", { type: "radio", name: "graphColor", value: "Simply Black", onChange: handleChangeGraphColor }))), /* @__PURE__ */ import_react55.default.createElement(Row_default, null, /* @__PURE__ */ import_react55.default.createElement("label", null, "Hot & Cold", /* @__PURE__ */ import_react55.default.createElement("input", { type: "radio", name: "graphColor", value: "Hot & Cold", onChange: handleChangeGraphColor }))), /* @__PURE__ */ import_react55.default.createElement(Row_default, null, /* @__PURE__ */ import_react55.default.createElement("label", null, "Spring", /* @__PURE__ */ import_react55.default.createElement("input", { type: "radio", name: "graphColor", value: "Spring", onChange: handleChangeGraphColor }))), /* @__PURE__ */ import_react55.default.createElement(Row_default, null, /* @__PURE__ */ import_react55.default.createElement(Button_default2, { type: "submit", className: "mt-3", variant: buttonTheme, onClick: handleDelete }, " Delete Account")), /* @__PURE__ */ import_react55.default.createElement(Modal_default2, { show, onHide: handleClose }, /* @__PURE__ */ import_react55.default.createElement(Modal_default2.Header, { closeButton: true }, /* @__PURE__ */ import_react55.default.createElement(Modal_default2.Title, null, "Confirm Delete")), /* @__PURE__ */ import_react55.default.createElement(Modal_default2.Body, null, "All of your account data will be gone reduced to atoms"), /* @__PURE__ */ import_react55.default.createElement(Modal_default2.Footer, null, /* @__PURE__ */ import_react55.default.createElement(Button_default2, { variant: "secondary", onClick: handleClose }, "Cancel"), /* @__PURE__ */ import_react55.default.createElement(Button_default2, { variant: buttonTheme, onClick: confirmDelete }, "Delete"))), /* @__PURE__ */ import_react55.default.createElement(Row_default, null, content));
+    return /* @__PURE__ */ import_react56.default.createElement("div", { className: "px-3", "data-bs-theme": myTheme }, /* @__PURE__ */ import_react56.default.createElement("div", null, /* @__PURE__ */ import_react56.default.createElement("h1", null, "Settings Page"), /* @__PURE__ */ import_react56.default.createElement("h2", null, "This is where the settings will be")), /* @__PURE__ */ import_react56.default.createElement(Row_default, null, /* @__PURE__ */ import_react56.default.createElement("div", null, /* @__PURE__ */ import_react56.default.createElement("p", null, "Theme mode:", /* @__PURE__ */ import_react56.default.createElement("label", null, /* @__PURE__ */ import_react56.default.createElement("input", { type: "radio", name: "settingsRadio", value: "option1" }), "Light Mode"), /* @__PURE__ */ import_react56.default.createElement("label", null, /* @__PURE__ */ import_react56.default.createElement("input", { type: "radio", name: "settingsRadio", value: "option2" }), "Dark Mode")))), /* @__PURE__ */ import_react56.default.createElement(Row_default, null, /* @__PURE__ */ import_react56.default.createElement("label", null, /* @__PURE__ */ import_react56.default.createElement("div", null, "Font size: "), /* @__PURE__ */ import_react56.default.createElement("input", { type: "number", name: "fontSize", value: fontSize, onChange: handleChangeFontSize }))), /* @__PURE__ */ import_react56.default.createElement(Row_default, null, /* @__PURE__ */ import_react56.default.createElement("label", null, /* @__PURE__ */ import_react56.default.createElement("div", null, "Graph Colors: "))), /* @__PURE__ */ import_react56.default.createElement(Row_default, null, /* @__PURE__ */ import_react56.default.createElement("label", null, "Default", /* @__PURE__ */ import_react56.default.createElement("input", { type: "radio", name: "graphColor", value: "Default", checked: true, onChange: handleChangeGraphColor }))), /* @__PURE__ */ import_react56.default.createElement(Row_default, null, /* @__PURE__ */ import_react56.default.createElement("label", null, "Simply Black", /* @__PURE__ */ import_react56.default.createElement("input", { type: "radio", name: "graphColor", value: "Simply Black", onChange: handleChangeGraphColor }))), /* @__PURE__ */ import_react56.default.createElement(Row_default, null, /* @__PURE__ */ import_react56.default.createElement("label", null, "Hot & Cold", /* @__PURE__ */ import_react56.default.createElement("input", { type: "radio", name: "graphColor", value: "Hot & Cold", onChange: handleChangeGraphColor }))), /* @__PURE__ */ import_react56.default.createElement(Row_default, null, /* @__PURE__ */ import_react56.default.createElement("label", null, "Spring", /* @__PURE__ */ import_react56.default.createElement("input", { type: "radio", name: "graphColor", value: "Spring", onChange: handleChangeGraphColor }))), /* @__PURE__ */ import_react56.default.createElement(Row_default, null, /* @__PURE__ */ import_react56.default.createElement(Button_default2, { type: "submit", className: "mt-3", variant: buttonTheme, onClick: handleDelete }, " Delete Account")), /* @__PURE__ */ import_react56.default.createElement(Modal_default2, { show, onHide: handleClose }, /* @__PURE__ */ import_react56.default.createElement(Modal_default2.Header, { closeButton: true }, /* @__PURE__ */ import_react56.default.createElement(Modal_default2.Title, null, "Confirm Delete")), /* @__PURE__ */ import_react56.default.createElement(Modal_default2.Body, null, "All of your account data will be gone reduced to atoms"), /* @__PURE__ */ import_react56.default.createElement(Modal_default2.Footer, null, /* @__PURE__ */ import_react56.default.createElement(Button_default2, { variant: "secondary", onClick: handleClose }, "Cancel"), /* @__PURE__ */ import_react56.default.createElement(Button_default2, { variant: buttonTheme, onClick: confirmDelete }, "Delete"))), /* @__PURE__ */ import_react56.default.createElement(Row_default, null, content));
   }
   SettingsPage.propTypes = {
-    name: import_prop_types6.default.string.isRequired,
-    setLogIn: import_prop_types6.default.func,
-    setName: import_prop_types6.default.func.isRequired
+    name: import_prop_types7.default.string.isRequired,
+    setLogIn: import_prop_types7.default.func,
+    setName: import_prop_types7.default.func.isRequired
   };
   var SettingsPage_default = SettingsPage;
 
   // client/components/Stat/StatsPage.jsx
-  var import_react56 = __toESM(require_react(), 1);
+  var import_react57 = __toESM(require_react(), 1);
   function StatsPage() {
-    return /* @__PURE__ */ import_react56.default.createElement("div", null, /* @__PURE__ */ import_react56.default.createElement("div", null, /* @__PURE__ */ import_react56.default.createElement("h1", null, "Stats Page")), /* @__PURE__ */ import_react56.default.createElement("div", null, /* @__PURE__ */ import_react56.default.createElement("p", null, "This is where Stats stuff will go")));
+    return /* @__PURE__ */ import_react57.default.createElement("div", null, /* @__PURE__ */ import_react57.default.createElement("div", null, /* @__PURE__ */ import_react57.default.createElement("h1", null, "Stats Page")), /* @__PURE__ */ import_react57.default.createElement("div", null, /* @__PURE__ */ import_react57.default.createElement("p", null, "This is where Stats stuff will go")));
   }
   var StatsPage_default = StatsPage;
 
   // client/components/SearchPage/MySearchBar.jsx
-  var import_react57 = __toESM(require_react(), 1);
-
-  // client/components/SearchPage/dataHelper.js
-  function retrieveStocks() {
-    return __async(this, null, function* () {
-      try {
-        const response = yield fetch("http://localhost:3000/api/stocksTemp");
-        if (response.status >= 400) {
-          throw new Error(`Request failed with response code ${response.status}`);
-        }
-        return yield response.json();
-      } catch (err) {
-        console.error("Failed to retrieve array of stocks");
-        console.error(err);
-        return [];
-      }
-    });
-  }
-
-  // client/components/SearchPage/MySearchBar.jsx
+  var import_react58 = __toESM(require_react(), 1);
   var MySearchBar = () => {
-    const [searchInput, setSearchInput] = import_react57.default.useState("");
-    const [stock, setStock] = import_react57.default.useState([]);
-    const [searchResult, setSearchResult] = import_react57.default.useState([""]);
-    import_react57.default.useEffect(() => {
-      const fetchData = () => __async(void 0, null, function* () {
-        const stockData = yield retrieveStocks();
-        setStock(stockData);
-      });
-      fetchData();
+    const [searchInput, setSearchInput] = import_react58.default.useState("");
+    const [searchResult, setSearchResult] = import_react58.default.useState([""]);
+    const searchForm = (0, import_react58.useRef)();
+    (0, import_react58.useEffect)(() => {
+      document.body.addEventListener("keydown", onKeyDown);
+      return () => {
+        document.body.removeEventListener("keydown", onKeyDown);
+      };
     }, []);
-    const handleChange = (e) => {
+    function onKeyDown(event) {
+      return __async(this, null, function* () {
+        const submit = event.key === "Enter";
+        if (submit) {
+          yield handleSearch();
+        }
+      });
+    }
+    (0, import_react58.useEffect)(() => {
+      searchForm.current.focus();
+    }, []);
+    const start = 0;
+    const end = 10;
+    const handleChange = (e) => __async(void 0, null, function* () {
       e.preventDefault();
-      const newStocksName = [];
+      console.log("searchInput: ", searchInput);
+      console.log("e.target.value: ", e.target.value);
       setSearchInput(e.target.value);
-      if (e.target.value.length > 0) {
-        const regex = new RegExp(e.target.value, "gmi");
-        stock.map((stockData) => {
-          if (String(stockData.name).match(regex) != null) {
-            newStocksName.push(stockData.name);
+    });
+    function handleSearch() {
+      return __async(this, null, function* () {
+        const searchInput2 = searchForm.current.value;
+        if (searchInput2 === "") {
+          console.log("searchInput is empty");
+          setSearchResult([""]);
+        } else {
+          const searchResult2 = yield searchStockAPI({ searchInput: searchInput2, start, end });
+          if (searchResult2) {
+            setSearchResult(searchResult2);
+          } else {
+            setSearchResult([""]);
           }
-          console.log("Stock" + newStocksName);
-          return [];
-        });
-      } else {
-        stock.map((stockData) => {
-          newStocksName.push(stockData.name);
-          return [];
-        });
-      }
-      setSearchResult(newStocksName);
-    };
-    console.log("Result" + searchResult);
-    let k = 0;
-    const stocks = searchResult.map(
-      (thisStock) => {
-        k++;
-        console.log(thisStock);
-        return /* @__PURE__ */ import_react57.default.createElement(Row_default, { className: "px-3 py-3 pt-1 pb-2", key: k }, " ", thisStock, " ");
-      }
-    );
-    return /* @__PURE__ */ import_react57.default.createElement(import_react57.default.Fragment, null, /* @__PURE__ */ import_react57.default.createElement(Row_default, { className: "px-3 py-3 pt-1 pb-2 bg-dark" }, /* @__PURE__ */ import_react57.default.createElement(
+        }
+      });
+    }
+    return /* @__PURE__ */ import_react58.default.createElement(import_react58.default.Fragment, null, /* @__PURE__ */ import_react58.default.createElement(Card_default, { className: "mx-5" }, /* @__PURE__ */ import_react58.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react58.default.createElement(Card_default.Header, null, "Stock Search"), /* @__PURE__ */ import_react58.default.createElement(Card_default.Text, null, "Search for a stock by symbol or name"), /* @__PURE__ */ import_react58.default.createElement("div", { className: "input-group " }, /* @__PURE__ */ import_react58.default.createElement(
       "input",
       {
         id: "searchForm",
         type: "text",
         placeholder: "Search",
-        className: "pl-1",
+        className: "fill",
         value: searchInput,
-        onChange: handleChange
+        onChange: handleChange,
+        ref: searchForm
       }
-    )), stocks);
+    ), /* @__PURE__ */ import_react58.default.createElement(
+      Button_default2,
+      {
+        variant: "outline-success",
+        className: "ml-2",
+        onClick: handleSearch
+      },
+      "Search"
+    )))), /* @__PURE__ */ import_react58.default.createElement(Card_default, { className: "mx-5" }, /* @__PURE__ */ import_react58.default.createElement(Card_default.Header, null, "Search Results"), /* @__PURE__ */ import_react58.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react58.default.createElement(Table_default, { className: "table" }, /* @__PURE__ */ import_react58.default.createElement("thead", null, /* @__PURE__ */ import_react58.default.createElement("tr", null, /* @__PURE__ */ import_react58.default.createElement("th", null, "Symbol"), /* @__PURE__ */ import_react58.default.createElement("th", null, "Name"), /* @__PURE__ */ import_react58.default.createElement("th", null, "Quote Type"), /* @__PURE__ */ import_react58.default.createElement("th", null, "Industry"), /* @__PURE__ */ import_react58.default.createElement("th", null, "Score"))), /* @__PURE__ */ import_react58.default.createElement("tbody", null, searchResult.map((stock) => /* @__PURE__ */ import_react58.default.createElement("tr", { key: stock.symbol }, /* @__PURE__ */ import_react58.default.createElement("td", null, stock.symbol), /* @__PURE__ */ import_react58.default.createElement("td", null, stock.name), /* @__PURE__ */ import_react58.default.createElement("td", null, stock.quoteType), /* @__PURE__ */ import_react58.default.createElement("td", null, stock.industry), /* @__PURE__ */ import_react58.default.createElement("td", null, stock.score))))))));
   };
 
   // client/components/Login_Signup/LoginRegisterForm.jsx
-  var import_react58 = __toESM(require_react(), 1);
+  var import_react59 = __toESM(require_react(), 1);
 
   // client/components/Login_Signup/dataHelper.js
-  function logIn(userInfo) {
-    return __async(this, null, function* () {
-      try {
-        const response = yield fetch("http://localhost:3000/api/login", {
-          method: "POST",
-          // or 'PUT'
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(userInfo)
-        });
-        console.log(JSON.stringify(userInfo));
-        if (response.status >= 400) {
-          throw new Error(`Request failed with response code ${response.status}`);
-        } else {
-          window.alert("Log In successfully");
-          return true;
-        }
-      } catch (err) {
-        window.alert("Failed to log in");
-        console.error("Failed to log in");
-        console.error(err);
-        return false;
-      }
-    });
-  }
   function signUp(userInfo) {
     return __async(this, null, function* () {
       try {
@@ -36165,59 +36287,73 @@
   }
 
   // client/components/Login_Signup/LoginRegisterForm.jsx
-  var import_prop_types7 = __toESM(require_prop_types(), 1);
+  var import_prop_types8 = __toESM(require_prop_types(), 1);
   var import_react_router_dom2 = __toESM(require_main2(), 1);
   function LoginCard(props) {
     const navigate = (0, import_react_router_dom2.useNavigate)();
     const { onLogIn } = props;
-    const [name, setName] = import_react58.default.useState("");
-    const [pass, setPass] = import_react58.default.useState("");
-    function handleSubmit(e) {
-      return __async(this, null, function* () {
-        e.preventDefault();
-        const user = {
-          username: name,
-          password: pass
-        };
-        if (yield logIn(user)) {
+    const [name, setName] = (0, import_react59.useState)("");
+    const [pass, setPass] = (0, import_react59.useState)("");
+    const [success, setSuccess] = (0, import_react59.useState)(false);
+    const [show, setShow] = (0, import_react59.useState)(false);
+    const handleShow = () => setShow(true);
+    const handleClose = () => setShow(false);
+    const onSuccessMessage = "Logged in successfully";
+    const onFailMessage = "Failed to log in";
+    const handleSubmit = (e) => __async(this, null, function* () {
+      e.preventDefault();
+      try {
+        const attemptLogin = yield login(name, pass);
+        if (attemptLogin) {
+          setSuccess(true);
           onLogIn(name);
+          handleShow();
+          yield wait(1e3);
           navigate("/");
+        } else {
+          setSuccess(false);
         }
-      });
-    }
-    return /* @__PURE__ */ import_react58.default.createElement("div", null, /* @__PURE__ */ import_react58.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react58.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react58.default.createElement("form", { method: "post", onSubmit: handleSubmit }, /* @__PURE__ */ import_react58.default.createElement("label", null, "Please enter your information to log in."), /* @__PURE__ */ import_react58.default.createElement("label", null, "Username: ", /* @__PURE__ */ import_react58.default.createElement(
+        handleShow();
+      } catch (error) {
+        console.log(error);
+      }
+    });
+    return /* @__PURE__ */ import_react59.default.createElement("div", null, /* @__PURE__ */ import_react59.default.createElement(Alert_default, { show, variant: success ? "success" : "danger", onClose: handleClose, dismissible: true }, /* @__PURE__ */ import_react59.default.createElement(Alert_default.Heading, null, "Login"), /* @__PURE__ */ import_react59.default.createElement("p", null, success ? onSuccessMessage : onFailMessage)), /* @__PURE__ */ import_react59.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react59.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react59.default.createElement("form", { method: "post", onSubmit: handleSubmit }, /* @__PURE__ */ import_react59.default.createElement("label", null, "Please enter your information to log in."), /* @__PURE__ */ import_react59.default.createElement("label", null, "Username: ", /* @__PURE__ */ import_react59.default.createElement(
       "input",
       {
         name: "username",
         value: name,
         onChange: (e) => setName(e.target.value)
       }
-    )), /* @__PURE__ */ import_react58.default.createElement("label", null, "Password: ", /* @__PURE__ */ import_react58.default.createElement(
+    )), /* @__PURE__ */ import_react59.default.createElement("label", null, "Password: ", /* @__PURE__ */ import_react59.default.createElement(
       "input",
       {
         name: "password",
         value: pass,
         onChange: (e) => setPass(e.target.value)
       }
-    )), /* @__PURE__ */ import_react58.default.createElement("label", null, /* @__PURE__ */ import_react58.default.createElement(Button_default2, { type: "submit", className: "mt-3 center" }, "Log In"))), /* @__PURE__ */ import_react58.default.createElement("div", { className: "mt-3" }, /* @__PURE__ */ import_react58.default.createElement(import_react_router_dom2.Link, { to: "/signup", className: ".p-3" }, "Don't have an account? Sign Up!"), /* @__PURE__ */ import_react58.default.createElement("br", null), /* @__PURE__ */ import_react58.default.createElement(import_react_router_dom2.Link, { to: "/forgotPassword" }, "Forgot Password?")))));
+    )), /* @__PURE__ */ import_react59.default.createElement("label", null, /* @__PURE__ */ import_react59.default.createElement(Button_default2, { type: "submit", className: "mt-3 center" }, "Log In"))), /* @__PURE__ */ import_react59.default.createElement("div", { className: "mt-3" }, /* @__PURE__ */ import_react59.default.createElement(import_react_router_dom2.Link, { to: "/signup", className: ".p-3" }, "Don't have an account? Sign Up!"), /* @__PURE__ */ import_react59.default.createElement("br", null), /* @__PURE__ */ import_react59.default.createElement(import_react_router_dom2.Link, { to: "/forgotPassword" }, "Forgot Password?")))));
   }
   LoginCard.propTypes = {
-    onLogIn: import_prop_types7.default.func
+    onLogIn: import_prop_types8.default.func
   };
   var LoginRegisterForm_default = LoginCard;
+  function wait(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
 
   // client/components/Login_Signup/SignUpRegisterForm.jsx
-  var import_react59 = __toESM(require_react(), 1);
-  var import_prop_types8 = __toESM(require_prop_types(), 1);
+  var import_react60 = __toESM(require_react(), 1);
+  var import_prop_types9 = __toESM(require_prop_types(), 1);
   var import_react_router_dom3 = __toESM(require_main2(), 1);
   function SignUpCard(props) {
     const { onSignUp } = props;
-    const [newUsername, setNewUsername] = import_react59.default.useState("");
-    const [newPassword, setNewPassword] = import_react59.default.useState("");
-    const [newFirstName, setNewFirstName] = import_react59.default.useState("");
-    const [newLastName, setNewLastName] = import_react59.default.useState("");
-    const [newGmail, setNewGmail] = import_react59.default.useState("");
-    const [confirmPass, setConfirmPass] = import_react59.default.useState("");
+    const [newUsername, setNewUsername] = import_react60.default.useState("");
+    const [newPassword, setNewPassword] = import_react60.default.useState("");
+    const [newFirstName, setNewFirstName] = import_react60.default.useState("");
+    const [newLastName, setNewLastName] = import_react60.default.useState("");
+    const [newGmail, setNewGmail] = import_react60.default.useState("");
+    const [confirmPass, setConfirmPass] = import_react60.default.useState("");
     function handleSubmit(e) {
       return __async(this, null, function* () {
         e.preventDefault();
@@ -36238,79 +36374,79 @@
         }
       });
     }
-    return /* @__PURE__ */ import_react59.default.createElement("div", null, /* @__PURE__ */ import_react59.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react59.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react59.default.createElement("form", { method: "post", onSubmit: handleSubmit }, /* @__PURE__ */ import_react59.default.createElement("label", null, "Please enter your information to create a new account."), /* @__PURE__ */ import_react59.default.createElement("label", null, "First Name: ", /* @__PURE__ */ import_react59.default.createElement(
+    return /* @__PURE__ */ import_react60.default.createElement("div", null, /* @__PURE__ */ import_react60.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react60.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react60.default.createElement("form", { method: "post", onSubmit: handleSubmit }, /* @__PURE__ */ import_react60.default.createElement("label", null, "Please enter your information to create a new account."), /* @__PURE__ */ import_react60.default.createElement("label", null, "First Name: ", /* @__PURE__ */ import_react60.default.createElement(
       "input",
       {
         name: "firstName",
         value: newFirstName,
         onChange: (e) => setNewFirstName(e.target.value)
       }
-    )), /* @__PURE__ */ import_react59.default.createElement("label", null, "Last Name: ", /* @__PURE__ */ import_react59.default.createElement(
+    )), /* @__PURE__ */ import_react60.default.createElement("label", null, "Last Name: ", /* @__PURE__ */ import_react60.default.createElement(
       "input",
       {
         name: "lastName",
         value: newLastName,
         onChange: (e) => setNewLastName(e.target.value)
       }
-    )), /* @__PURE__ */ import_react59.default.createElement("label", null, "Gmail: ", /* @__PURE__ */ import_react59.default.createElement("br", null), /* @__PURE__ */ import_react59.default.createElement(
+    )), /* @__PURE__ */ import_react60.default.createElement("label", null, "Gmail: ", /* @__PURE__ */ import_react60.default.createElement("br", null), /* @__PURE__ */ import_react60.default.createElement(
       "input",
       {
         name: "gmail",
         value: newGmail,
         onChange: (e) => setNewGmail(e.target.value)
       }
-    )), /* @__PURE__ */ import_react59.default.createElement("label", null, "Username: ", /* @__PURE__ */ import_react59.default.createElement(
+    )), /* @__PURE__ */ import_react60.default.createElement("label", null, "Username: ", /* @__PURE__ */ import_react60.default.createElement(
       "input",
       {
         name: "username",
         value: newUsername,
         onChange: (e) => setNewUsername(e.target.value)
       }
-    )), /* @__PURE__ */ import_react59.default.createElement("label", null, "Password: ", /* @__PURE__ */ import_react59.default.createElement(
+    )), /* @__PURE__ */ import_react60.default.createElement("label", null, "Password: ", /* @__PURE__ */ import_react60.default.createElement(
       "input",
       {
         name: "password",
         value: newPassword,
         onChange: (e) => setNewPassword(e.target.value)
       }
-    )), /* @__PURE__ */ import_react59.default.createElement("label", null, "Confirm Password: ", /* @__PURE__ */ import_react59.default.createElement(
+    )), /* @__PURE__ */ import_react60.default.createElement("label", null, "Confirm Password: ", /* @__PURE__ */ import_react60.default.createElement(
       "input",
       {
         name: "confirm_password",
         value: confirmPass,
         onChange: (e) => setConfirmPass(e.target.value)
       }
-    )), /* @__PURE__ */ import_react59.default.createElement("label", null, /* @__PURE__ */ import_react59.default.createElement(Button_default2, { type: "submit", className: "mt-3" }, "Sign Up"))), /* @__PURE__ */ import_react59.default.createElement("div", { className: "mt-3" }, /* @__PURE__ */ import_react59.default.createElement(import_react_router_dom3.Link, { to: "/login", className: ".p-3" }, "Already have an account? Login!")))));
+    )), /* @__PURE__ */ import_react60.default.createElement("label", null, /* @__PURE__ */ import_react60.default.createElement(Button_default2, { type: "submit", className: "mt-3" }, "Sign Up"))), /* @__PURE__ */ import_react60.default.createElement("div", { className: "mt-3" }, /* @__PURE__ */ import_react60.default.createElement(import_react_router_dom3.Link, { to: "/login", className: ".p-3" }, "Already have an account? Login!")))));
   }
   SignUpCard.propTypes = {
-    onSignUp: import_prop_types8.default.func
+    onSignUp: import_prop_types9.default.func
   };
   var SignUpRegisterForm_default = SignUpCard;
 
   // client/components/Tut/TutorialPage.jsx
-  var import_react60 = __toESM(require_react(), 1);
+  var import_react61 = __toESM(require_react(), 1);
   function tPage() {
-    return /* @__PURE__ */ import_react60.default.createElement(import_react60.default.Fragment, null, /* @__PURE__ */ import_react60.default.createElement("div", null, /* @__PURE__ */ import_react60.default.createElement(Container_default, null, /* @__PURE__ */ import_react60.default.createElement(Row_default, null, /* @__PURE__ */ import_react60.default.createElement(Col_default, null, /* @__PURE__ */ import_react60.default.createElement(Accordion_default, { defaultActiveKey: "0" }, /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Item, { eventKey: "0" }, /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Header, null, /* @__PURE__ */ import_react60.default.createElement(BsQuestionCircle, null)), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Body, null, "This is a tutorial that briefly explains elememts and pages on this website.")), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Item, { eventKey: "1" }, /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Header, null, "Home"), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Body, null, "This is the landing page for all visitors.")), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Item, { eventKey: "2" }, /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Header, null, "Stats"), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Body, null, "This page has a more indepth overview of the stocks that are being evaluated on the website")), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Item, { eventKey: "3" }, /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Header, null, "Monkey Technology"), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Body, null, "This page describes the algorithm that we used to take the position of the monkeys and translate it into stock descisions.")), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Item, { eventKey: "4" }, /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Header, null, "Log In"), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Body, null, "This is where you log in to your account")), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Item, { eventKey: "6" }, /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Header, null, "Sign In"), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Body, null, "This is where you can create an account that allows you to track specific stocks and add them to your portfolio")), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Item, { eventKey: "7" }, /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Header, null, "Settings"), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Body, null, "This is where you can change different visual elements of the website. In order for the changes to stay between sessions, you must create an account or log in to an already existing account.")), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Item, { eventKey: "8" }, /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Header, null, /* @__PURE__ */ import_react60.default.createElement(BsBrightnessHigh, null)), /* @__PURE__ */ import_react60.default.createElement(Accordion_default.Body, null, "This Dark mode button toggles the entire website into a color scheme that is easier on the eye when studying the screen in a darkend environment."))))))));
+    return /* @__PURE__ */ import_react61.default.createElement(import_react61.default.Fragment, null, /* @__PURE__ */ import_react61.default.createElement("div", null, /* @__PURE__ */ import_react61.default.createElement(Container_default, null, /* @__PURE__ */ import_react61.default.createElement(Row_default, null, /* @__PURE__ */ import_react61.default.createElement(Col_default, null, /* @__PURE__ */ import_react61.default.createElement(Accordion_default, { defaultActiveKey: "0" }, /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Item, { eventKey: "0" }, /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Header, null, /* @__PURE__ */ import_react61.default.createElement(BsQuestionCircle, null)), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Body, null, "This is a tutorial that briefly explains elememts and pages on this website.")), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Item, { eventKey: "1" }, /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Header, null, "Home"), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Body, null, "This is the landing page for all visitors.")), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Item, { eventKey: "2" }, /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Header, null, "Stats"), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Body, null, "This page has a more indepth overview of the stocks that are being evaluated on the website")), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Item, { eventKey: "3" }, /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Header, null, "Monkey Technology"), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Body, null, "This page describes the algorithm that we used to take the position of the monkeys and translate it into stock descisions.")), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Item, { eventKey: "4" }, /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Header, null, "Log In"), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Body, null, "This is where you log in to your account")), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Item, { eventKey: "6" }, /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Header, null, "Sign In"), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Body, null, "This is where you can create an account that allows you to track specific stocks and add them to your portfolio")), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Item, { eventKey: "7" }, /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Header, null, "Settings"), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Body, null, "This is where you can change different visual elements of the website. In order for the changes to stay between sessions, you must create an account or log in to an already existing account.")), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Item, { eventKey: "8" }, /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Header, null, /* @__PURE__ */ import_react61.default.createElement(BsBrightnessHigh, null)), /* @__PURE__ */ import_react61.default.createElement(Accordion_default.Body, null, "This Dark mode button toggles the entire website into a color scheme that is easier on the eye when studying the screen in a darkend environment."))))))));
   }
   var TutorialPage_default = tPage;
 
   // client/components/Error/Error.jsx
-  var import_react61 = __toESM(require_react(), 1);
+  var import_react62 = __toESM(require_react(), 1);
   function Error2() {
-    return /* @__PURE__ */ import_react61.default.createElement("div", null, /* @__PURE__ */ import_react61.default.createElement("h1", null, "Error"), /* @__PURE__ */ import_react61.default.createElement("p", null, "The URL you have entered does not link to a page."));
+    return /* @__PURE__ */ import_react62.default.createElement("div", null, /* @__PURE__ */ import_react62.default.createElement("h1", null, "Error"), /* @__PURE__ */ import_react62.default.createElement("p", null, "The URL you have entered does not link to a page."));
   }
 
   // client/components/ResetPassword/ResetPassword.jsx
-  var import_react62 = __toESM(require_react(), 1);
-  var import_prop_types9 = __toESM(require_prop_types(), 1);
+  var import_react63 = __toESM(require_react(), 1);
+  var import_prop_types10 = __toESM(require_prop_types(), 1);
   function ResetPassword(props) {
     const accessKey = props.accessKey;
-    const [username, setUsername] = (0, import_react62.useState)("");
-    const [password, setPassword] = (0, import_react62.useState)("");
-    const [confirmPassword, setConfirmPassword] = (0, import_react62.useState)("");
-    const [success, setSuccess] = (0, import_react62.useState)(false);
-    const [show, setShow] = (0, import_react62.useState)(false);
-    const [showNoMatch, setShowNoMatch] = (0, import_react62.useState)(false);
+    const [username, setUsername] = (0, import_react63.useState)("");
+    const [password, setPassword] = (0, import_react63.useState)("");
+    const [confirmPassword, setConfirmPassword] = (0, import_react63.useState)("");
+    const [success, setSuccess] = (0, import_react63.useState)(false);
+    const [show, setShow] = (0, import_react63.useState)(false);
+    const [showNoMatch, setShowNoMatch] = (0, import_react63.useState)(false);
     const handleShowNoMatch = () => setShowNoMatch(true);
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
@@ -36343,26 +36479,26 @@
         }
       }
     });
-    return /* @__PURE__ */ import_react62.default.createElement(import_react62.default.Fragment, null, /* @__PURE__ */ import_react62.default.createElement(Alert_default, { show: showNoMatch, variant: "danger", onClose: handleClose, dismissible: true }, /* @__PURE__ */ import_react62.default.createElement("p", null, "Passwords do not match!")), /* @__PURE__ */ import_react62.default.createElement(Alert_default, { show, variant: success ? "success" : "danger", onClose: handleClose, dismissible: true }, /* @__PURE__ */ import_react62.default.createElement(Alert_default.Heading, null, "Reset Password"), /* @__PURE__ */ import_react62.default.createElement("p", null, success ? onSuccessMessage : onFailMessage)), /* @__PURE__ */ import_react62.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react62.default.createElement(Card_default.Header, { className: "fw-bold" }, "Reset Password"), /* @__PURE__ */ import_react62.default.createElement(CardBody_default, null, /* @__PURE__ */ import_react62.default.createElement("form", { onSubmit: handleSubmit }, /* @__PURE__ */ import_react62.default.createElement("div", null, "accessKey: ", accessKey), /* @__PURE__ */ import_react62.default.createElement("label", { className: "m-3" }, "Username:", /* @__PURE__ */ import_react62.default.createElement("input", { type: "text", value: username, onChange: handleUsernameChange })), /* @__PURE__ */ import_react62.default.createElement("label", { className: "m-3" }, "New Password:", /* @__PURE__ */ import_react62.default.createElement("input", { type: "password", value: password, onChange: handlePasswordChange })), /* @__PURE__ */ import_react62.default.createElement("br", null), /* @__PURE__ */ import_react62.default.createElement("label", { className: "m-3" }, "Confirm New Password:", /* @__PURE__ */ import_react62.default.createElement("input", { type: "password", value: confirmPassword, onChange: handleConfirmPasswordChange })), /* @__PURE__ */ import_react62.default.createElement("br", null), /* @__PURE__ */ import_react62.default.createElement("button", { className: "m-3", type: "submit" }, "Reset Password")))));
+    return /* @__PURE__ */ import_react63.default.createElement(import_react63.default.Fragment, null, /* @__PURE__ */ import_react63.default.createElement(Alert_default, { show: showNoMatch, variant: "danger", onClose: handleClose, dismissible: true }, /* @__PURE__ */ import_react63.default.createElement("p", null, "Passwords do not match!")), /* @__PURE__ */ import_react63.default.createElement(Alert_default, { show, variant: success ? "success" : "danger", onClose: handleClose, dismissible: true }, /* @__PURE__ */ import_react63.default.createElement(Alert_default.Heading, null, "Reset Password"), /* @__PURE__ */ import_react63.default.createElement("p", null, success ? onSuccessMessage : onFailMessage)), /* @__PURE__ */ import_react63.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react63.default.createElement(Card_default.Header, { className: "fw-bold" }, "Reset Password"), /* @__PURE__ */ import_react63.default.createElement(CardBody_default, null, /* @__PURE__ */ import_react63.default.createElement("form", { onSubmit: handleSubmit }, /* @__PURE__ */ import_react63.default.createElement("div", null, "accessKey: ", accessKey), /* @__PURE__ */ import_react63.default.createElement("label", { className: "m-3" }, "Username:", /* @__PURE__ */ import_react63.default.createElement("input", { type: "text", value: username, onChange: handleUsernameChange })), /* @__PURE__ */ import_react63.default.createElement("label", { className: "m-3" }, "New Password:", /* @__PURE__ */ import_react63.default.createElement("input", { type: "password", value: password, onChange: handlePasswordChange })), /* @__PURE__ */ import_react63.default.createElement("br", null), /* @__PURE__ */ import_react63.default.createElement("label", { className: "m-3" }, "Confirm New Password:", /* @__PURE__ */ import_react63.default.createElement("input", { type: "password", value: confirmPassword, onChange: handleConfirmPasswordChange })), /* @__PURE__ */ import_react63.default.createElement("br", null), /* @__PURE__ */ import_react63.default.createElement("button", { className: "m-3", type: "submit" }, "Reset Password")))));
   }
   ResetPassword.propTypes = {
-    accessKey: import_prop_types9.default.string,
-    match: import_prop_types9.default.shape({
-      params: import_prop_types9.default.shape({
-        accessKey: import_prop_types9.default.string
+    accessKey: import_prop_types10.default.string,
+    match: import_prop_types10.default.shape({
+      params: import_prop_types10.default.shape({
+        accessKey: import_prop_types10.default.string
       })
     })
   };
   var ResetPassword_default = ResetPassword;
 
   // client/components/ForgotPassword/ForgotPassword.jsx
-  var import_react63 = __toESM(require_react(), 1);
+  var import_react64 = __toESM(require_react(), 1);
   var import_react_router_dom4 = __toESM(require_main2(), 1);
   function ForgotPassword() {
-    const [username, setUsername] = (0, import_react63.useState)("");
-    const [email, setEmail] = (0, import_react63.useState)("");
-    const [success, setSuccess] = (0, import_react63.useState)(false);
-    const [show, setShow] = (0, import_react63.useState)(false);
+    const [username, setUsername] = (0, import_react64.useState)("");
+    const [email, setEmail] = (0, import_react64.useState)("");
+    const [success, setSuccess] = (0, import_react64.useState)(false);
+    const [show, setShow] = (0, import_react64.useState)(false);
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
     const onSuccessMessage = "Email sent";
@@ -36383,42 +36519,41 @@
       }
       handleShow();
     });
-    return /* @__PURE__ */ import_react63.default.createElement(import_react63.default.Fragment, null, /* @__PURE__ */ import_react63.default.createElement(Alert_default, { show, variant: success ? "success" : "danger", onClose: handleClose, dismissible: true }, /* @__PURE__ */ import_react63.default.createElement(Alert_default.Heading, null, "Reset Password"), /* @__PURE__ */ import_react63.default.createElement("p", null, success ? onSuccessMessage : onFailMessage)), /* @__PURE__ */ import_react63.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react63.default.createElement(Card_default.Header, null, "Forgot Password"), /* @__PURE__ */ import_react63.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react63.default.createElement("form", { onSubmit: handleSubmit }, /* @__PURE__ */ import_react63.default.createElement("label", { className: "m-3" }, "Username:", /* @__PURE__ */ import_react63.default.createElement("input", { type: "text", value: username, onChange: handleUsernameChange })), /* @__PURE__ */ import_react63.default.createElement("label", { className: "m-3" }, "Email:", /* @__PURE__ */ import_react63.default.createElement("input", { type: "text", value: email, onChange: handleEmailChange })), /* @__PURE__ */ import_react63.default.createElement("br", null), /* @__PURE__ */ import_react63.default.createElement("div", { className: "row-5" }, /* @__PURE__ */ import_react63.default.createElement(import_react_router_dom4.Link, { to: "/login" }, /* @__PURE__ */ import_react63.default.createElement(Button_default2, { variant: "secondary" }, "Back to Login")), /* @__PURE__ */ import_react63.default.createElement(Button_default2, { type: "submit" }, "Send Email"))))));
+    return /* @__PURE__ */ import_react64.default.createElement(import_react64.default.Fragment, null, /* @__PURE__ */ import_react64.default.createElement(Alert_default, { show, variant: success ? "success" : "danger", onClose: handleClose, dismissible: true }, /* @__PURE__ */ import_react64.default.createElement(Alert_default.Heading, null, "Reset Password"), /* @__PURE__ */ import_react64.default.createElement("p", null, success ? onSuccessMessage : onFailMessage)), /* @__PURE__ */ import_react64.default.createElement(Card_default, { style: { width: "18rem" }, className: "mx-auto mt-5" }, /* @__PURE__ */ import_react64.default.createElement(Card_default.Header, null, "Forgot Password"), /* @__PURE__ */ import_react64.default.createElement(Card_default.Body, null, /* @__PURE__ */ import_react64.default.createElement("form", { onSubmit: handleSubmit }, /* @__PURE__ */ import_react64.default.createElement("label", { className: "m-3" }, "Username:", /* @__PURE__ */ import_react64.default.createElement("input", { type: "text", value: username, onChange: handleUsernameChange })), /* @__PURE__ */ import_react64.default.createElement("label", { className: "m-3" }, "Email:", /* @__PURE__ */ import_react64.default.createElement("input", { type: "text", value: email, onChange: handleEmailChange })), /* @__PURE__ */ import_react64.default.createElement("br", null), /* @__PURE__ */ import_react64.default.createElement("div", { className: "row-5" }, /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom4.Link, { to: "/login" }, /* @__PURE__ */ import_react64.default.createElement(Button_default2, { variant: "secondary" }, "Back to Login")), /* @__PURE__ */ import_react64.default.createElement(Button_default2, { type: "submit" }, "Send Email"))))));
   }
 
   // client/components/App.jsx
   function App() {
     const location = (0, import_react_router_dom5.useLocation)();
     const { hash, pathname, search } = location;
-    const [darkMode, setDarkMode] = import_react64.default.useState(false);
+    const [darkMode, setDarkMode] = import_react65.default.useState(false);
     const handleDarkMode = () => {
       setDarkMode(!darkMode);
     };
-    const [username, setUsername] = import_react64.default.useState("");
-    const [logInStatus, setLogInStatus] = import_react64.default.useState(false);
+    const [username, setUsername] = import_react65.default.useState("");
+    const [logInStatus, setLogInStatus] = import_react65.default.useState(false);
     function onLogInChange(username2) {
       setUsername(username2);
       setLogInStatus(true);
     }
     const theme = darkMode ? "dark" : "light";
     document.getElementById("html").setAttribute("data-bs-theme", darkMode ? "dark" : "light");
-    console.log(darkMode);
     const accessKey = search.substring(11, search.length);
-    return /* @__PURE__ */ import_react64.default.createElement(import_react64.default.Fragment, null, /* @__PURE__ */ import_react64.default.createElement("div", { "data-bs-theme": theme }, /* @__PURE__ */ import_react64.default.createElement(MyNavBar, { loggedIn: logInStatus, mode: theme, "data-bs-theme": theme, handleTheme: handleDarkMode, isDark: darkMode }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Routes, null, /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/", exact: true, element: /* @__PURE__ */ import_react64.default.createElement(HomePage_default, { theme, name: username, status: logInStatus }) }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/login", element: /* @__PURE__ */ import_react64.default.createElement(LoginRegisterForm_default, { onLogIn: onLogInChange }) }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/about", Component: IntroPage_default }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/signup", element: /* @__PURE__ */ import_react64.default.createElement(SignUpRegisterForm_default, { onSignUp: onLogInChange }) }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/monkeyTech", Component: MonkeyTechPage_default }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/setting", element: /* @__PURE__ */ import_react64.default.createElement(
+    return /* @__PURE__ */ import_react65.default.createElement(import_react65.default.Fragment, null, /* @__PURE__ */ import_react65.default.createElement("div", { "data-bs-theme": theme }, /* @__PURE__ */ import_react65.default.createElement(MyNavBar, { loggedIn: logInStatus, mode: theme, "data-bs-theme": theme, handleTheme: handleDarkMode, isDark: darkMode }), /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Routes, null, /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Route, { path: "/", exact: true, element: /* @__PURE__ */ import_react65.default.createElement(HomePage_default, { theme, name: username, status: logInStatus }) }), /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Route, { path: "/login", element: /* @__PURE__ */ import_react65.default.createElement(LoginRegisterForm_default, { onLogIn: onLogInChange }) }), /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Route, { path: "/about", Component: IntroPage_default }), /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Route, { path: "/signup", element: /* @__PURE__ */ import_react65.default.createElement(SignUpRegisterForm_default, { onSignUp: onLogInChange }) }), /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Route, { path: "/monkeyTech", Component: MonkeyTechPage_default }), /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Route, { path: "/setting", element: /* @__PURE__ */ import_react65.default.createElement(
       SettingsPage_default,
       {
         name: username,
         setLogIn: setLogInStatus,
         setName: setUsername
       }
-    ) }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/stats", Component: StatsPage_default }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/search", Component: MySearchBar }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/TutorialPage", Component: TutorialPage_default }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/resetPassword", element: /* @__PURE__ */ import_react64.default.createElement(ResetPassword_default, { accessKey, darkMode }) }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "/forgotPassword", element: /* @__PURE__ */ import_react64.default.createElement(ForgotPassword, { darkMode }) }), /* @__PURE__ */ import_react64.default.createElement(import_react_router_dom5.Route, { path: "*", Component: Error2 }))));
+    ) }), /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Route, { path: "/stats", Component: StatsPage_default }), /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Route, { path: "/search", Component: MySearchBar }), /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Route, { path: "/TutorialPage", Component: TutorialPage_default }), /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Route, { path: "/resetPassword", element: /* @__PURE__ */ import_react65.default.createElement(ResetPassword_default, { accessKey, darkMode }) }), /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Route, { path: "/forgotPassword", element: /* @__PURE__ */ import_react65.default.createElement(ForgotPassword, { darkMode }) }), /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom5.Route, { path: "*", Component: Error2 }))));
   }
 
   // client/main.jsx
   var import_react_router_dom6 = __toESM(require_main2(), 1);
   var root = (0, import_client.createRoot)(document.getElementById("root"));
   root.render(
-    /* @__PURE__ */ import_react65.default.createElement(import_react_router_dom6.BrowserRouter, null, /* @__PURE__ */ import_react65.default.createElement(App, null))
+    /* @__PURE__ */ import_react66.default.createElement(import_react_router_dom6.BrowserRouter, null, /* @__PURE__ */ import_react66.default.createElement(App, null))
     // <SignupPage/>
     // <LoginPage/>
     // <IntroPage/>

@@ -22,6 +22,16 @@ def getStockInfo(names):
         stockArray.append(output)  # added after
     return stockArray
 if(type(names) is list):
+  try:
     print(getStockInfo(names))
-#print(getStockInfo(names))  # added after
-#print(getStockInfo(names)) # added after
+  except NameError:
+    print('name error' + NameError)
+  except ValueError:
+    print('value error' + ValueError)
+  except TypeError:
+    print('type error' + TypeError)
+  except AttributeError:
+    print('attribute error' + AttributeError)
+  except:
+    print(f"error")
+

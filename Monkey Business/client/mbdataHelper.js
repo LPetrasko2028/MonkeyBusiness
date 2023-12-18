@@ -1,7 +1,11 @@
-export async function searchStockAPI (stockName, stockPageObj) { // Search for stock by name
+export async function searchStockAPI (stockName, start, end) { // Search for stock by name
   try {
-    const response = await fetch(`http://localhost:3000/api/stocks/${stockName}`, {
-      body: JSON.stringify(stockPageObj)
+    const response = await fetch('http://localhost:3000/api/search', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ stockName, start, end })
     })
     if (response.status >= 400) {
       throw new Error(`Request failed with response code ${response.status}`)
@@ -20,9 +24,9 @@ Example of stockPageObj to display the first 5 stocks (page 1):
   "end": 5
 }
 */
-export async function retrieveInvestorStocks () { // Failed Authentication should result in a redirect to a landing page or login page
+export async function retrieveInvestorStocks (start, end) { // Failed Authentication should result in a redirect to a landing page or login page
   try {
-    const response = await fetch('http://localhost:3000/api/stocks')
+    const response = await fetch('http://localhost:3000/api/stocks?' + new URLSearchParams({ start, end }))
     if (response.status >= 400) {
       throw new Error(`Request failed with response code ${response.status}`)
     }
@@ -34,9 +38,9 @@ export async function retrieveInvestorStocks () { // Failed Authentication shoul
   }
 }
 
-export async function retrieveStockDetails (stockSymbol) { // Examples of stockSymbol: 'GME', 'AMC', 'TSLA', 'AAPL', 'GOOG', 'MSFT', 'AMZN'
+export async function retrieveStockDetails (stockName, timeFrame) { // Examples of stockSymbol: 'GME', 'AMC', 'TSLA', 'AAPL', 'GOOG', 'MSFT', 'AMZN'
   try {
-    const response = await fetch(`http://localhost:3000/api/stockDetails/${stockSymbol}`)
+    const response = await fetch('http://localhost:3000/api/stockDetails?' + new URLSearchParams({ stockName, timeFrame }))
     if (response.status >= 400) {
       throw new Error(`Request failed with response code ${response.status}`)
     }
@@ -118,6 +122,20 @@ export async function signUp (username, password, passwordConfirm, email) {
     return true
   } catch (err) {
     console.error('Failed to sign up')
+    console.error(err)
+    return false
+  }
+}
+
+export async function logout () {
+  try {
+    const response = await fetch('http://localhost:3000/api/logout')
+    if (response.status >= 400) {
+      throw new Error(`Request failed with response code ${response.status}`)
+    }
+    return true
+  } catch (err) {
+    console.error('Failed to logout')
     console.error(err)
     return false
   }
@@ -232,7 +250,7 @@ export async function getMonkeyInvestments () {
     if (response.status >= 400) {
       throw new Error(`Request failed with response code ${response.status}`)
     }
-    return response //await response.json()
+    return await response.json()
   } catch (err) {
     console.error('Failed to retrieve monkey investments')
     console.error(err)
