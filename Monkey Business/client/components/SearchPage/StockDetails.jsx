@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Modal, Card } from 'react-bootstrap'
+import { Modal, Button } from 'react-bootstrap'
 import { retrieveStockDetail } from './dataHelper'
 export default function StockDetails (props) {
-  const { stockName } = props
+  const { stock } = props
   const [show, setShow] = React.useState(false)
   const [open, setOpen] = React.useState('')
   const [low, setLow] = React.useState('')
@@ -15,7 +15,7 @@ export default function StockDetails (props) {
     setShow(false)
   }
   async function handleClick () {
-    const detail = await retrieveStockDetail(stockName)
+    const detail = await retrieveStockDetail(stock.symbol)
     const stockDetail = detail[detail.length - 1]
     setOpen(stockDetail[2])
     setLow(stockDetail[3])
@@ -27,10 +27,15 @@ export default function StockDetails (props) {
   }
   return (
     <React.Fragment>
-      <Card onClick={handleClick}> { stockName } </Card>
+      <td>{stock.symbol}</td>
+          <td>{stock.name}</td>
+          <td>{stock.quoteType}</td>
+          <td>{stock.industry}</td>
+          <td>{stock.score}</td>
+          <Button onClick={handleClick}> Get Details </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Stock: { stockName } </Modal.Title>
+          <Modal.Title>Stock: { stock.symbol } </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           Date: {date} <br/>
@@ -45,5 +50,5 @@ export default function StockDetails (props) {
   )
 }
 StockDetails.propTypes = {
-  stockName: PropTypes.string.isRequired
+  stock: PropTypes.object.isRequired
 }

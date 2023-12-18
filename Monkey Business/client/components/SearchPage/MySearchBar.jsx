@@ -1,11 +1,12 @@
 import React, { useRef, useEffect } from 'react'
 import { searchStockAPI } from '../../mbdataHelper.js'
 import { Card, Button, Table } from 'react-bootstrap'
+import StockDetails from './StockDetails.jsx'
 export const MySearchBar = () => {
   const [searchInput, setSearchInput] = React.useState('')
   const [searchResult, setSearchResult] = React.useState([''])
   const searchForm = useRef()
-
+  let content
   useEffect(() => {
     document.body.addEventListener('keydown', onKeyDown)
     return () => {
@@ -31,6 +32,16 @@ export const MySearchBar = () => {
     console.log('e.target.value: ', e.target.value)
     setSearchInput(e.target.value)
   }
+  function handleClick (stockName) {
+    if (stockName !== null) {
+      content = (
+        <StockDetails stockName = {stockName} />
+      )
+    } else {
+      content = (<div></div>)
+    }
+    console.log(stockName)
+  }
   async function handleSearch () {
     const searchInput = searchForm.current.value
     if (searchInput === '') {
@@ -44,6 +55,18 @@ export const MySearchBar = () => {
         setSearchResult([''])
       }
     }
+  }
+  let stocks = ['']
+  if (searchResult !== null) {
+    stocks = searchResult.map(
+      (stock) => {
+        return (
+          <tr key={stock.symbol} >
+          <StockDetails stock = {stock}/>
+        </tr>
+        )
+      }
+    )
   }
   return (
     <React.Fragment>
@@ -87,19 +110,12 @@ export const MySearchBar = () => {
               </tr>
             </thead>
             <tbody>
-              {searchResult.map((stock) => (
-                <tr key={stock.symbol}>
-                  <td>{stock.symbol}</td>
-                  <td>{stock.name}</td>
-                  <td>{stock.quoteType}</td>
-                  <td>{stock.industry}</td>
-                  <td>{stock.score}</td>
-                </tr>
-              ))}
+              { stocks }
             </tbody>
           </Table>
+          {content}
         </Card.Body>
       </Card>
     </React.Fragment>
-  );
+  )
 }
