@@ -11350,6 +11350,32 @@ fieldset:disabled .btn {
     display: none !important;
   }
 }
+
+/* client/components/Intro/IntroPage.css */
+.introHeader {
+  text-align: center;
+  padding-top: 40px;
+  padding-bottom: 10px;
+}
+.introTable {
+  padding: 20px;
+}
+td {
+  padding: 15px;
+}
+.introParagraph {
+  text-align: center;
+  word-wrap: break-word;
+  width: 75%;
+  padding-left: 25%;
+}
+img {
+  height: 400px;
+  width: auto;
+}
+.imgLink {
+  text-align: center;
+}
 /*! Bundled license information:
 
 bootstrap/dist/css/bootstrap.min.css:

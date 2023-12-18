@@ -75,20 +75,19 @@ function SettingsPage (props) {
   return (
     <div className='px-3' data-bs-theme={myTheme} >
       <div>
-        <h1>Settings Page</h1>
-        <h2>This is where the settings will be</h2>
+        <h1>Settings</h1>
       </div>
       <Row>
       <div>
         <p>
-          Theme mode:
+        <text style={{marginRight: 5}}>Theme mode:</text>
           <label>
             <input type='radio' name='settingsRadio' value='option1'/>
-            Light Mode
+            <text style={{marginLeft: 5, marginRight: 5}}>Light Mode</text>
           </label>
           <label>
             <input type='radio' name='settingsRadio' value='option2'/>
-            Dark Mode
+            <text style={{marginLeft: 5}}>Dark Mode</text>
           </label>
           </p>
           </div>
@@ -107,25 +106,25 @@ function SettingsPage (props) {
         </Row>
         <Row>
           <label>
-          Default
+          <text style={{marginRight: 5}}> Default</text>
           <input type = 'radio' name = 'graphColor' value = 'Default' checked onChange={handleChangeGraphColor}/>
           </label>
         </Row>
         <Row>
           <label>
-          Simply Black
+          <text style={{marginRight: 5}}>Simply Black</text>
           <input type = 'radio' name = 'graphColor' value = 'Simply Black' onChange={handleChangeGraphColor} />
           </label>
         </Row>
         <Row>
           <label>
-          Hot & Cold
+          <text style={{marginRight: 5}}>Hot & Cold</text>
           <input type = 'radio' name = 'graphColor' value = 'Hot & Cold' onChange={handleChangeGraphColor} />
           </label>
         </Row>
         <Row>
           <label>
-          Spring
+          <text style={{marginRight: 5}}>Spring</text>
           <input type = 'radio' name = 'graphColor' value = 'Spring' onChange={handleChangeGraphColor}/>
           </label>
         </Row>
