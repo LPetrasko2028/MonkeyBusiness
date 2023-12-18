@@ -91,7 +91,7 @@ Example of stockObj:
 
 export async function getGenStocks (stockQuant) {
   try {
-    const response = await fetch('http://localhost:3000/api/genStocks?' + new URLSearchParams({ stockQuant }))
+    const response = await fetch('http://localhost:3000/api/generalStocks?' + new URLSearchParams({ stockQuant }))
     if (response.status >= 400) {
       throw new Error(`Request failed with response code ${response.status}`)
     }

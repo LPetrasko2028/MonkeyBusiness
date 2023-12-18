@@ -22,7 +22,7 @@ export default function StockTable ({ stocks, page, pageSize }) {
               <td>{stock.name ? stock.name : ""}</td>
               <td>{stock.price ? stock.price : ""}</td>
               <td>{stock.volume ? stock.volume : ""}</td>
-              <td>{stock.change ? stock.change : ""}</td>
+              <td>{stock.change}</td>
               <td>{stock.marketCap ? stock.marketCap : ""}</td>
             </tr>
           ))}
