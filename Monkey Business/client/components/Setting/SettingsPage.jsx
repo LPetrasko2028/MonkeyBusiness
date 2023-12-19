@@ -75,7 +75,8 @@ function SettingsPage (props) {
   return (
     <div className='px-3' data-bs-theme={myTheme} >
       <div>
-        <h1>Settings</h1>
+        <h1>Settings Page</h1>
+        <h2>This is where the settings will be</h2>
       </div>
       <Row>
       <div>
