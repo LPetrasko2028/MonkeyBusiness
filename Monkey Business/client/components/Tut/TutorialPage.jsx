@@ -14,7 +14,7 @@ function tPage () {
         <Accordion.Item eventKey='0'>
           <Accordion.Header><BsQuestionCircle/></Accordion.Header>
           <Accordion.Body>
-            This is a tutorial that briefly explains elememts and pages on this website.
+            This is a tutorial that briefly explains elements and pages on this website.
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey='1'>
