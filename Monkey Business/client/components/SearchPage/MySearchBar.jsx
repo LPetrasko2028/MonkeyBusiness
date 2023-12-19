@@ -1,13 +1,14 @@
-import React, { useRef, useEffect } from 'react'
-import { searchStockAPI } from '../../mbdataHelper.js'
-import { Card, Button, Table } from 'react-bootstrap'
+import React from 'react'
+import { searchStockAPI, postBuySellStock } from '../../mbdataHelper.js'
+import { Card, Button, Table, Modal } from 'react-bootstrap'
 import StockDetails from './StockDetails.jsx'
+import CustomModal from './Modal.jsx'
 export const MySearchBar = () => {
   const [searchInput, setSearchInput] = React.useState('')
   const [searchResult, setSearchResult] = React.useState([''])
-  const searchForm = useRef()
+  const searchForm = React.useRef()
   let content
-  useEffect(() => {
+  React.useEffect(() => {
     document.body.addEventListener('keydown', onKeyDown)
     return () => {
       document.body.removeEventListener('keydown', onKeyDown)
@@ -20,7 +21,7 @@ export const MySearchBar = () => {
       await handleSearch()
     }
   }
-  useEffect(() => {
+  React.useEffect(() => {
     searchForm.current.focus()
   }, [])
   const start = 0
@@ -56,6 +57,8 @@ export const MySearchBar = () => {
       }
     }
   }
+
+  // end of button code
   let stocks = ['']
   if (searchResult !== null) {
     stocks = searchResult.map(

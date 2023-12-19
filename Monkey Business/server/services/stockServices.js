@@ -1,5 +1,5 @@
 import queryMongoDatabase from '../data/mongoController.js'
-import { getStockShort, getStockDetails, searchStockAPI, GetCompareData, russel1000API } from './callPythonScripts.js'
+import { getStockShort, getStockDetails, searchStockAPI, GetCompareData, russel1000API, getStockPrice } from './callPythonScripts.js'
 
 export async function getStockInfo (req, res) {
   const stockName = req.query.stockName
@@ -12,10 +12,7 @@ export async function getStockInfo (req, res) {
   console.log(timeFrameMonths)
   try {
     let stockData = await getStockDetails(stockName, timeFrameMonths)
-    console.log(stockData)
     stockData = stockData.split('\n')
-    stockData.pop()
-    stockData.pop()
     stockData.pop()
     stockData.shift()
     stockData.shift()
@@ -25,6 +22,7 @@ export async function getStockInfo (req, res) {
       date.pop()
       stockArray.push(date)
     }
+    console.log(stockArray)
     res.send((stockArray))
   } catch (err) {
     console.log(err)
@@ -148,9 +146,13 @@ export async function getInvestorStocks (req, res) {
 export async function updateStockCount (req, res) {
   const username = req.session.username
   const stockName = req.body.stockName
-  const stockPrice = req.body.stockPrice
+  let stockPrice = req.body.stockPrice
   const changeAmount = req.body.changeAmount
   const changeType = req.body.changeType
+  if (stockPrice === 'unknown') {
+    const stockPriceData = await getStockPrice(stockName)
+    stockPrice = stockPriceData
+  }
 
   queryMongoDatabase(async db => {
     // check if investor collection exists
@@ -159,7 +161,7 @@ export async function updateStockCount (req, res) {
       res.status(404).json({ error: true, message: 'No Investor Found' })
       return
     }
-    if (changeType === 'sell') { // handle the sale of stocks
+    if (changeType === 'Sell') { // handle the sale of stocks
       let foundStock = null
       let count = 0
       for (const stock of data.stocks) {
@@ -201,7 +203,7 @@ export async function updateStockCount (req, res) {
       if (histUpdate.modifiedCount === null) { // error if history could not be updated
         console.log('History Could Not Be Updated')
       }
-    } else if (changeType === 'buy') { // handle the purchase of stocks
+    } else if (changeType === 'Buy') { // handle the purchase of stocks
       if (changeAmount * stockPrice > data.balance) { // error if user doesn't have enough funds to buy stock
         res.status(404).json({ error: true, message: 'Not Enough Money To Buy' })
         return
