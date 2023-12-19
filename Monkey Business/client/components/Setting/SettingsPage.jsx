@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 
 function SettingsPage (props) {
   const navigate = useNavigate()
-  const { name, setLogIn, setName, setStyle, setFont, setButtonTheme, buttonTheme } = props
+  const { name, setLogIn, setName, setStyle, setFont, setButtonTheme, buttonTheme, setButtonTheme2 } = props
   const [change, setChange] = React.useState(false)
   const [fontSize, setFontSize] = React.useState(12)
   const [graphColor, setGraphColor] = React.useState('Default')
@@ -38,15 +38,19 @@ function SettingsPage (props) {
         if (graphColor === 'Simply Black') {
           setStyle('#d3d3d3')
           setButtonTheme('btn-outline-secondary')
+          setButtonTheme2('btn-outline-danger')
         } else if (graphColor === 'Hot & Cold') {
           setStyle('#5f9ea0')
+          setButtonTheme2('btn-outline-danger')
           setButtonTheme('btn-outline-primary')
         } else if (graphColor === 'Spring') {
           setStyle('#ffb6c1')
           setButtonTheme('btn-outline-danger')
+          setButtonTheme2('btn-outline-success')
         } else {
           setStyle('#f0ffff')
           setButtonTheme('btn-outline-success')
+          setButtonTheme2('btn-outline-warning')
         }
       } else {
         console.log('did not update')
@@ -146,6 +150,7 @@ SettingsPage.propTypes = {
   setStyle: PropTypes.func,
   setFont: PropTypes.func,
   setButtonTheme: PropTypes.func,
-  buttonTheme: PropTypes.string
+  buttonTheme: PropTypes.string,
+  setButtonTheme2: PropTypes.func
 }
 export default SettingsPage

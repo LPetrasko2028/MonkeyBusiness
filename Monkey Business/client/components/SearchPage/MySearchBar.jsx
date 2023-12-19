@@ -4,7 +4,7 @@ import { Card, Button, Table } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import StockDetails from './StockDetails.jsx'
 export default function MySearchBar (props) {
-  const { buttonTheme } = props
+  const { buttonTheme, buttonTheme2 } = props
   const [searchInput, setSearchInput] = React.useState('')
   const [searchResult, setSearchResult] = React.useState([''])
   const searchForm = useRef()
@@ -55,7 +55,7 @@ export default function MySearchBar (props) {
       (stock) => {
         return (
           <tr key={stock.symbol} >
-          <StockDetails stock = {stock} buttonTheme={buttonTheme}/>
+          <StockDetails stock = {stock} buttonTheme={buttonTheme} buttonTheme2={buttonTheme2}/>
         </tr>
         )
       }
@@ -114,5 +114,6 @@ export default function MySearchBar (props) {
   )
 }
 MySearchBar.propTypes = {
-  buttonTheme: PropTypes.string
+  buttonTheme: PropTypes.string,
+  buttonTheme2: PropTypes.string
 }

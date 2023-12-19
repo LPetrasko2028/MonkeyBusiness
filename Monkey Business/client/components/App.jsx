@@ -1,6 +1,6 @@
-//If there are more pages added after this, then if you can add these two as props for styling, that'd be great:
-//style: for changing background color: style={{ backgroundColor: style }}
-//buttonTheme: for changing button theme: <Button variant: 'outline' className = {buttonTheme} ...
+// If there are more pages added after this, then if you can add these two as props for styling, that'd be great:
+// style: for changing background color: style={{ backgroundColor: style }}
+// buttonTheme: for changing button theme: <Button variant: 'outline' className = {buttonTheme} ...
 
 import React from 'react'
 import { Route, Routes, Switch, BrowserRouter as Router, useLocation } from 'react-router-dom'
@@ -26,6 +26,7 @@ export default function App () {
   const [style, setStyle] = React.useState('#f0f8ff')
   const [font, setFont] = React.useState('12')
   const [buttonTheme, setButtonTheme] = React.useState('btn-outline-success')
+  const [buttonTheme2, setButtonTheme2] = React.useState('btn-outline-warning')
   const handleDarkMode = () => {
     setDarkMode(!darkMode)
   }
@@ -86,11 +87,12 @@ export default function App () {
                 setStyle={setStyle}
                 setButtonTheme = {setButtonTheme}
                 buttonTheme={buttonTheme}
+                setButtonTheme2 = {setButtonTheme2}
               ></SettingsPage>
             }
           />
           <Route path="/stats" Component={StatsPage} />
-          <Route path="/search" element={<MySearchBar buttonTheme={buttonTheme}></MySearchBar>} />
+          <Route path="/search" element={<MySearchBar buttonTheme={buttonTheme} buttonTheme2={buttonTheme2}></MySearchBar>} />
           <Route path="/TutorialPage" Component={tPage} />
           <Route
             path="/resetPassword"
