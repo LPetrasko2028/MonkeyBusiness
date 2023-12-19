@@ -5,9 +5,9 @@ export async function runMonkeyAlgorithm (coordSpace) {
 
   if (coordSpace === undefined) {
     return () => { throw new Error('No coordSpace provided') }
-  } else {
-    console.log('coordSpace: ', coordSpace)
   }
+  console.log('coordSpace: ', coordSpace)
+
   queryMongoDatabase(async db => {
     const data = await db.collection('Monkey').find({})
     if ((await db.collection('Monkey').countDocuments()) < 1) {
@@ -25,6 +25,10 @@ export async function runMonkeyAlgorithm (coordSpace) {
         const username = x.username
         const history = x.history // Save this for later if possible
 
+
+        for (let i = 0; i < stockPool.length; i++) { // if x is odd buy, if x is even sell. if y is odd little, if y is even a lot
+          console.log('stock operation')
+        }
 
         const newStocks = stocks
         const newMonkey = {
