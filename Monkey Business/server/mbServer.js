@@ -80,6 +80,5 @@ app.listen(PORT, () => {
 })
 
 var rule = new schedule.RecurrenceRule()
-rule.minute = [0, 15, 30, 45]
-schedule.scheduleJob(rule, () => {getMonkeyPosition("https://www.youtube.com/watch?v=jaPx8uOE5_0", 1)})
-// getMonkeyPosition("https://www.youtube.com/watch?v=EBer-aLmzM8", 1) // "https://www.youtube.com/watch?v=jaPx8uOE5_0"
+rule.hour = [0]
+schedule.scheduleJob(rule, () => {getMonkeyPosition("https://www.youtube.com/watch?v=jaPx8uOE5_0", 2)})
