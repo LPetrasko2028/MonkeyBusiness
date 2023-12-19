@@ -1,3 +1,7 @@
+//If there are more pages added after this, then if you can add these two as props for styling, that'd be great:
+//style: for changing background color: style={{ backgroundColor: style }}
+//buttonTheme: for changing button theme: <Button variant: 'outline' className = {buttonTheme} ...
+
 import React from 'react'
 import { Route, Routes, Switch, BrowserRouter as Router, useLocation } from 'react-router-dom'
 import MyNavBar from './Navigation/MyNavBar.jsx'
