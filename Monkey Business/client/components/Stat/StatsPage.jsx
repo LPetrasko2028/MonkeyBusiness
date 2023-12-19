@@ -1,5 +1,4 @@
-import React from 'react';
-import LinePlot from './LinePlot.jsx';
+import React, {useState} from 'react';
 import StockChart from './StockChart.jsx';
 
 function StatsPage() {
@@ -10,9 +9,14 @@ function StatsPage() {
       </div>
 
       <div>
-        <p>this is a circle</p>
-        
+        <form>
+        <label>Enter a Stock:  
+          <input type="text" name="stockField" value={"AAPL"} readOnly></input>
+        </label>
+        <button type="submit">Submit</button>
+        </form>
         <StockChart stockName={"AAPL"} months={4}></StockChart>
+        
         
          
         

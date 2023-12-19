@@ -3,8 +3,11 @@ import * as d3 from 'd3'
 import { retrieveStockDetails } from '../../mbdataHelper'
 import PropTypes from 'prop-types'
 
-// stockDetails = await retrieveStockDetails(stockName);
-
+/*
+This page uses a lot of modules from d3. It's based on the public template provided by d3 for displaying stock information: https://observablehq.com/@d3/line-chart/2?intent=fork
+D3 is a sadistic module and noone can seem to agree on 1 way to implement things. If you're trying to expand this graph, be prepared to dig through countless articles and tips that 
+give you contradicting advice! -DF
+*/
 export default function StockChart ({
   stockName,
   months,
@@ -18,30 +21,20 @@ export default function StockChart ({
 
 }) {
   const [stockDetails, setStockDetails] = useState([])
-  //const [data, setData] = useState([])
-
   useEffect(() => {
     async function getStock () {
       const stockData = await retrieveStockDetails(stockName, months)
       setStockDetails(stockData)
     }
     if(stockDetails.length == 0) getStock()
-    //console.log(stockDetails)
-    //console.log(typeof stockDetails)
-  }, [])//* /
-  //dataArray = []
+    
+  }, [stockName])
+  data=[]
   for (let i = 0; i < stockDetails.length; i++) {
     const stock = { date: Date.parse(stockDetails[i][0]), close: stockDetails[i][5] }
     data.push(stock)
   }
-  //setData(dataArray)
-  console.log('data: ')
-  console.log(data)
-  console.log(typeof data)
-  console.log('stockDetails: ')
-  console.log(stockDetails)//*/
-  //const gx = useRef()
-  //const gy = useRef()
+  
   // Declare the x (horizontal position) scale.
   const x = d3.scaleUtc(d3.extent(data, d => d.date), [marginLeft, width - marginRight])
 
@@ -55,19 +48,6 @@ export default function StockChart ({
   const line = d3.line()
     .x(d => x(d.date))
     .y(d => y(d.close))
-
-  //useEffect(() => void d3.select(gx.current).call(d3.axisBottom(x)), [gx, x])
-  //useEffect(() => void d3.select(gy.current).call(d3.axisLeft(y)), [gy, y])
-  /*return (
-    <svg width={width} height={height} viewport={[0, 0, width, height]}>
-      <g ref={gx} transform={`translate(0,${height - marginBottom})`} />
-      <g ref={gy} transform={`translate(${marginLeft},0)`} />
-      <path fill="none" stroke="steelBlue" strokeWidth="1.5" d={line(data)} />
-      <g fill="white" stroke="currentColor" strokeWidth="1.5">
-        {data.map((d, i) => (<circle key={i} cx={x(i)} cy={y(d)} r="2.5" />))}
-      </g>
-    </svg>
-  )//*/
   
   const ref = useRef()
   // Create the SVG container.
@@ -77,6 +57,8 @@ export default function StockChart ({
       .attr("height", height)
       .attr("viewBox", [0, 0, width, height])
       .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
+  
+  d3.selectAll("g > *").remove() //THIS LINE DOES NOT PLAY NICE. It will mess up other graphs on the same page as it. You've been warned.
 
   // Add the x-axis.
   svg.append("g")
@@ -98,19 +80,25 @@ export default function StockChart ({
           .attr("text-anchor", "start")
           .text("↑ Daily close ($)"));
 
-  // Append a path for the line.
-  svg.append("path")
-      .attr("fill", "none")
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", 1.5)
-      .attr("d", line(data));
-  //},[])
+  const path = svg.selectAll('path').data(data)
+  path.attr('d', line(data))
+      .style('stroke-width', 1.5)
+      .style('stroke', 'steelblue')
+      .attr("fill", "none");
+  path.enter().append('svg:path').attr('d', line(data))
+      .style('stroke-width', 1.5)
+      .style('stroke', 'steelblue')
+      .attr("fill", "none");
+  path.exit().remove()
+  
+  
+  
   return(
     <svg
     viewBox="0 0 100 50"  
     ref={ref}
     />
-  )// */
+  )
 }
 StockChart.propTypes = {
   stockName: PropTypes.string,
