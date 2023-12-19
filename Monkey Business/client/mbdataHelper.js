@@ -54,14 +54,14 @@ export async function retrieveStockDetails (stockName, timeFrame) { // Examples 
   }
 }
 
-export async function postBuySellStock (stockObj) { // add stock to profile
+export async function postBuySellStock (stockName, stockPrice, changeType, changeAmount) { // add stock to profile
   try {
     const response = await fetch('http://localhost:3000/api/stockChange', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(stockObj)
+      body: JSON.stringify({ stockName, stockPrice, changeType, changeAmount })
     })
     if (response.status >= 400) {
       throw new Error(`Request failed with response code ${response.status}`)
