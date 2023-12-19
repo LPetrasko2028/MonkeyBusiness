@@ -1,11 +1,14 @@
 import React, { useRef, useEffect } from 'react'
 import { searchStockAPI } from '../../mbdataHelper.js'
 import { Card, Button, Table } from 'react-bootstrap'
-export const MySearchBar = () => {
+import PropTypes from 'prop-types'
+import StockDetails from './StockDetails.jsx'
+export default function MySearchBar (props) {
+  const { buttonTheme, buttonTheme2 } = props
   const [searchInput, setSearchInput] = React.useState('')
   const [searchResult, setSearchResult] = React.useState([''])
   const searchForm = useRef()
-
+  let content
   useEffect(() => {
     document.body.addEventListener('keydown', onKeyDown)
     return () => {
@@ -31,6 +34,7 @@ export const MySearchBar = () => {
     console.log('e.target.value: ', e.target.value)
     setSearchInput(e.target.value)
   }
+
   async function handleSearch () {
     const searchInput = searchForm.current.value
     if (searchInput === '') {
@@ -45,11 +49,23 @@ export const MySearchBar = () => {
       }
     }
   }
+  let stocks = ['']
+  if (searchResult !== null) {
+    stocks = searchResult.map(
+      (stock) => {
+        return (
+          <tr key={stock.symbol} >
+          <StockDetails stock = {stock} buttonTheme={buttonTheme} buttonTheme2={buttonTheme2}/>
+        </tr>
+        )
+      }
+    )
+  }
   return (
     <React.Fragment>
       <Card className="mx-5">
+      <Card.Header>Stock Search</Card.Header>
         <Card.Body>
-          <Card.Header>Stock Search</Card.Header>
           <Card.Text>
             Search for a stock by symbol or name
           </Card.Text>
@@ -64,8 +80,9 @@ export const MySearchBar = () => {
             ref={searchForm}
           />
           <Button
-            variant="outline-success"
-            className="ml-2"
+            type = 'button'
+            variant='outline'
+            className= {buttonTheme + ' ml-2'}
             onClick={handleSearch}
           >
             Search
@@ -87,19 +104,16 @@ export const MySearchBar = () => {
               </tr>
             </thead>
             <tbody>
-              {searchResult.map((stock) => (
-                <tr key={stock.symbol}>
-                  <td>{stock.symbol}</td>
-                  <td>{stock.name}</td>
-                  <td>{stock.quoteType}</td>
-                  <td>{stock.industry}</td>
-                  <td>{stock.score}</td>
-                </tr>
-              ))}
+              { stocks }
             </tbody>
           </Table>
+          {content}
         </Card.Body>
       </Card>
     </React.Fragment>
-  );
+  )
+}
+MySearchBar.propTypes = {
+  buttonTheme: PropTypes.string,
+  buttonTheme2: PropTypes.string
 }

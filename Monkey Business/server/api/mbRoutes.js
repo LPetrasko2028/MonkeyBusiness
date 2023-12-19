@@ -3,7 +3,7 @@ import PQueue from 'p-queue'
 import { validationErrorMiddleware, validator, loginSchema, signupSchema, stockSchema, monkeySchema } from './../middleware/validation.js'
 
 import { updateMonkey, getMonkeyInvestments, getMonkeyHistory } from './../services/monkeyServices.js'
-import { getInvestorStocks, searchForStock, updateStockCount, getStockInfo, getUserMarketData } from './../services/stockServices.js'
+import { getInvestorStocks, searchForStock, updateStockCount, getStockInfo, getUserMarketData, getGeneralStocks } from './../services/stockServices.js'
 import { login, signup, logout, updatePreferences, getPreferences, deleteUser, getAccountDetails } from './../services/userServices.js'
 
 import { isAuthenticated } from '../middleware/authentication.js'
@@ -20,11 +20,14 @@ dataRouter.use(validationErrorMiddleware)
 dataRouter.post('/search', searchForStock) // anyone can access * with restrictions to prevent abuse
 dataRouter.get('/stocks', isAuthenticated, getInvestorStocks) // corresponding user can get their stocks
 dataRouter.get('/stockDetails', getStockInfo)
+
+dataRouter.get('/generalStocks', getGeneralStocks)
+
 async function addToQueue (req, res) {
   queue.add(() => updateStockCount(req, res))
 }
 
-dataRouter.post('/stockChange', addToQueue) // updateStockCount
+dataRouter.post('/stockChange', isAuthenticated, addToQueue) // updateStockCount
 dataRouter.post('/userMarketData', getUserMarketData)
 
 // ------------------------------------ Auth Routes ------------------------------------

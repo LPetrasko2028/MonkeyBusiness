@@ -1,5 +1,5 @@
 import queryMongoDatabase from '../data/mongoController.js'
-import { getStockShort, getStockDetails, searchStockAPI, GetCompareData } from './callPythonScripts.js'
+import { getStockShort, getStockDetails, searchStockAPI, GetCompareData, russel1000API, getStockPrice } from './callPythonScripts.js'
 
 export async function getStockInfo (req, res) {
   const stockName = req.query.stockName
@@ -9,13 +9,10 @@ export async function getStockInfo (req, res) {
   }
   console.log(typeof req.query.timeFrame)
   const timeFrameMonths = (parseInt(req.query.timeFrame) < 1) ? 1 : parseInt(req.query.timeFrame)
-console.log(timeFrameMonths)
+  console.log(timeFrameMonths)
   try {
     let stockData = await getStockDetails(stockName, timeFrameMonths)
-    console.log(stockData)
     stockData = stockData.split('\n')
-    stockData.pop()
-    stockData.pop()
     stockData.pop()
     stockData.shift()
     stockData.shift()
@@ -25,6 +22,7 @@ console.log(timeFrameMonths)
       date.pop()
       stockArray.push(date)
     }
+    console.log(stockArray)
     res.send((stockArray))
   } catch (err) {
     console.log(err)
@@ -33,8 +31,6 @@ console.log(timeFrameMonths)
 
 export async function searchForStock (req, res) {
   const searchQuery = req.body.stockName.searchInput
-  console.log(searchQuery)
-  console.log(typeof searchQuery)
   if (searchQuery === undefined) {
     res.status(404).json({ error: true, message: 'No Search Query Provided' })
   }
@@ -48,21 +44,6 @@ export async function searchForStock (req, res) {
     console.log(err)
   }
 }
-
-// async function getInvestorStockNames (username) {
-//   queryMongoDatabase(async db => {
-//     const data = await db.collection('Investor').findOne({ username })
-//     if ((data) < 1) {
-//       return ('Failed to find investor')
-//     }
-//     const stockNames = []
-//     for (const stock of data.stocks) {
-//       stockNames.push(stock[0])
-//     }
-//     const userStockData = await getStockShort(stockNames)
-//     return (userStockData)
-//   }, 'MonkeyBusinessWebApp')
-// }
 
 function parseSearchData (searchData) {
   // parse stock data
@@ -116,6 +97,20 @@ function parseStockDataArray (stockData) {
   return (parsedDataArray)
 }
 
+function parseStockNameArray (stockData) {
+  console.log("StockData: " + stockData)
+  const regex = /(?<=\[)(.*?)(?=\])/g
+  const matches = String(stockData.match(regex))
+  console.log("Matches: " + matches)
+  const data = matches.substring(1, matches.length - 1)
+  console.log("Data: " + data)
+  const parsedData = data.split(", '")
+  console.log("ParsedData: " + parsedData)
+  const stockNames = parsedData.map((stock) => stock.replace(/'/g, ''))
+  console.log("StockNames: " + stockNames)
+  return stockNames
+}
+
 export async function getInvestorStocks (req, res) {
   // console.log('Session: ' + req.session)
   // console.log('Request body: ' + req.body)
@@ -123,8 +118,8 @@ export async function getInvestorStocks (req, res) {
   // console.log('Request params: ' + req.params.start)
   // console.log('Request params: ' + req.params.end)
   const username = req.session.username
-  let start = 0
-  let end = 5
+  let start = (req.query.start) ? parseInt(req.query.start) : 0
+  let end = (req.query.end) ? parseInt(req.query.end) : 5
   queryMongoDatabase(async db => {
     const data = await db.collection('Investor').findOne({ username })
     if ((data) < 1) {
@@ -149,114 +144,100 @@ export async function getInvestorStocks (req, res) {
 }
 
 export async function updateStockCount (req, res) {
-  const username = req.body.username
+  const username = req.session.username
   const stockName = req.body.stockName
-  const stockPrice = req.body.stockPrice
+  let stockPrice = req.body.stockPrice
   const changeAmount = req.body.changeAmount
   const changeType = req.body.changeType
+  if (stockPrice === 'unknown') {
+    const stockPriceData = await getStockPrice(stockName)
+    stockPrice = stockPriceData
+  }
 
   queryMongoDatabase(async db => {
     // check if investor collection exists
     const data = await db.collection('Investor').findOne({ username })
     if (data < 1) {
       res.status(404).json({ error: true, message: 'No Investor Found' })
-    } else {
-      if (changeType === 'sell') {
-        // handle the sale of stocks
-        let foundStock = null
-        let count = 0
-        for (const stock of data.stocks) {
-          if (stock[0] === stockName) {
-            foundStock = stock
-            break
-          }
-          count++
+      return
+    }
+    if (changeType === 'Sell') { // handle the sale of stocks
+      let foundStock = null
+      let count = 0
+      for (const stock of data.stocks) {
+        if (stock.stockName === stockName) {
+          foundStock = stock
+          break
         }
-        if (foundStock === null) {
-          res.status(404).json({ error: true, message: 'Stock Not Found' })
-        } else {
-          if (changeAmount > foundStock[1]) {
-            // error if selling more stocks than owned
-            res.status(404).json({ error: true, message: 'Not Enough Stocks To Sell' })
-          } else if (changeAmount === foundStock[1]) {
-            // remove stock if selling same amount of stocks owned
-            const nameDelete = await db.collection('Investor').updateOne(
-              { username },
-              { $pull: { stocks: foundStock }, $set: { balance: data.balance + (changeAmount * stockPrice) } }
-            )
-            if (nameDelete.modifiedCount === null) {
-              res.status(404).json({ error: true, message: 'Stock Could Not Be Removed' })
-            } else {
-              const newHistoryArray = [changeType, stockName, changeAmount]
-              const histUpdate = db.collection('Investor').updateOne(
-                { username },
-                { $push: { stockHistory: newHistoryArray } }
-              )
-              if (histUpdate.modifiedCount === null) {
-                res.status(404).json({ error: true, message: 'History Could Not Be Updated' })
-              }
-              res.json({ error: false, message: 'Stock Successfully Removed' })
-            }
-          } else {
-            // update amout of stocks in db otherwise
-            const stockChange = await db.collection('Investor').updateOne(
-              { username },
-              { $set: { [`stocks.${count}`]: [stockName, (foundStock[1] - changeAmount)], balance: data.balance + (changeAmount * stockPrice) } })
-            if (stockChange.modifiedCount === null) {
-              res.status(404).json({ error: true, message: 'Stock Could Not Be Updated' })
-            } else {
-              const newHistoryArray = [changeType, stockName, changeAmount]
-              const histUpdate = db.collection('Investor').updateOne({ username }, { $push: { stockHistory: newHistoryArray } })
-              if (histUpdate.modifiedCount === null) {
-                res.status(404).json({ error: true, message: 'History Could Not Be Updated' })
-              }
-              res.json({ error: false, message: 'Stock Successfully Updated' })
-            }
-          }
+        count++
+      }
+      if (foundStock === null) { // error if stock not found
+        res.status(404).json({ error: true, message: 'Stock Not Found' })
+        return
+      }
+      if (changeAmount > foundStock.amount) { // error if selling more stocks than owned
+        res.status(404).json({ error: true, message: 'Not Enough Stocks To Sell' })
+      } else if (changeAmount === foundStock.amount) { // remove stock if selling same amount of stocks owned
+        const nameDelete = await db.collection('Investor').updateOne(
+          { username },
+          { $pull: { stocks: foundStock }, $set: { balance: data.balance + (changeAmount * stockPrice) } }
+        )
+        if (nameDelete.modifiedCount === null) { // error if stock could not be removed
+          res.status(404).json({ error: true, message: 'Stock Could Not Be Removed' })
+          return
         }
-      } else if (changeType === 'buy') {
-      // handle the purchase of stocks
-        if (changeAmount * stockPrice > data.balance) {
-          // error if user doesn't have enough funds to buy stock
-          res.status(404).json({ error: true, message: 'Not Enough Money To Buy' })
-        } else {
-          let foundStock = null
-          let count = 0
-          for (const stock of data.stocks) {
-            if (stock[0] === stockName) {
-              foundStock = stock
-              break
-            }
-            count++
-          }
-          if (foundStock === null) {
-            // push to stocks array if purchasing new stock
-            const stockInsert = await db.collection('Investor').updateOne({ username }, { $push: { stocks: [stockName, changeAmount] }, $set: { balance: (data.balance - (changeAmount * stockPrice)) } })
-            if (stockInsert.modifiedCount === null) {
-              res.status(404).json({ error: true, message: 'Stock Could Not Be Added' })
-            } else {
-              const newHistoryArray = [changeType, stockName, changeAmount]
-              const histUpdate = db.collection('Investor').updateOne({ username }, { $push: { stockHistory: newHistoryArray } })
-              if (histUpdate.modifiedCount === null) {
-                res.status(404).json({ error: true, message: 'History Could Not Be Updated' })
-              }
-              res.json({ error: false, message: 'Stock Successfully Added' })
-            }
-          } else {
-            // update stock amount otherwise
-            const stockChange = await db.collection('Investor').updateOne({ username }, { $set: { [`stocks.${count}`]: [stockName, (foundStock[1] + changeAmount)], balance: (data.balance - (changeAmount * stockPrice)) } })
-            if (stockChange.modifiedCount === null) {
-              res.status(404).json({ error: true, message: 'Stock Could Not Be Updated' })
-            } else {
-              const newHistoryArray = [changeType, stockName, changeAmount]
-              const histUpdate = db.collection('Investor').updateOne({ username }, { $push: { stockHistory: newHistoryArray } })
-              if (histUpdate.modifiedCount === null) {
-                res.status(404).json({ error: true, message: 'History Could Not Be Updated' })
-              }
-              res.json({ error: false, message: 'Stock Successfully Updated' })
-            }
-          }
+        res.json({ error: false, message: 'Stock Successfully Removed' })
+      } else if (changeAmount < foundStock.amount) { // update amount of stocks in db otherwise
+        const stockChange = await db.collection('Investor').updateOne(
+          { username },
+          { $set: { [`stocks.${count}`]: { stockName, amount: (foundStock.amount - changeAmount) }, balance: data.balance + (changeAmount * stockPrice) } })
+        if (stockChange.modifiedCount === null) { // error if stock could not be updated
+          res.status(404).json({ error: true, message: 'Stock Could Not Be Updated' })
+          return
         }
+        res.json({ error: false, message: 'Stock Successfully Updated' })
+      }
+      const date = new Date()
+      const newHistoryObject = { changeType, stockName, changeAmount, date }
+      const histUpdate = db.collection('Investor').updateOne({ username }, { $push: { stockHistory: newHistoryObject } })
+      if (histUpdate.modifiedCount === null) { // error if history could not be updated
+        console.log('History Could Not Be Updated')
+      }
+    } else if (changeType === 'Buy') { // handle the purchase of stocks
+      if (changeAmount * stockPrice > data.balance) { // error if user doesn't have enough funds to buy stock
+        res.status(404).json({ error: true, message: 'Not Enough Money To Buy' })
+        return
+      }
+      let foundStock = null
+      let count = 0
+      for (const stock of data.stocks) {
+        if (stock.stockName === stockName) {
+          foundStock = stock
+          break
+        }
+        count++
+      }
+      if (foundStock === null) { // push to stocks array if purchasing new stock
+        const stockInsert = await db.collection('Investor').updateOne({ username }, { $push: { stocks: { stockName, amount: changeAmount } }, $set: { balance: (data.balance - (changeAmount * stockPrice)) } })
+        if (stockInsert.modifiedCount === null) { // error if stock could not be added
+          res.status(404).json({ error: true, message: 'Stock Could Not Be Added' })
+          return
+        }
+        res.json({ error: false, message: 'Stock Successfully Added' })
+      } else { // update stock amount otherwise
+        const newStockObj = { stockName, amount: (foundStock.amount + changeAmount) }
+        const stockChange = await db.collection('Investor').updateOne({ username }, { $set: { [`stocks.${count}`]: newStockObj, balance: (data.balance - (changeAmount * stockPrice)) } })
+        if (stockChange.modifiedCount === null) { // error if stock could not be updated
+          res.status(404).json({ error: true, message: 'Stock Could Not Be Updated' })
+          return
+        }
+        res.json({ error: false, message: 'Stock Successfully Updated' })
+      }
+      const date = new Date()
+      const newHistoryObject = { changeType, stockName, changeAmount, date }
+      const histUpdate = db.collection('Investor').updateOne({ username }, { $push: { stockHistory: newHistoryObject } })
+      if (histUpdate.modifiedCount === null) { // error if history could not be updated
+        console.log('History Could Not Be Updated')
       }
     }
   }, 'MonkeyBusinessWebApp')
@@ -264,26 +245,49 @@ export async function updateStockCount (req, res) {
 
 export async function getUserMarketData (req, res) {
   const username = req.body.username
-  let stockArr = []
-  //query database to get the user's stock pool
-  queryMongoDatabase( async db=> {
+  const stockArr = []
+  // query database to get the user's stock pool
+  queryMongoDatabase(async db => {
     const data = await db.collection('Investor').findOne({ username })
     const numDocs = await db.collection('Investor').countDocuments({ username })
-    if(numDocs === null) {
-      res.status(404).json({error: true, message: 'Investor Account Not Found'})
+    if (numDocs === null) {
+      res.status(404).json({ error: true, message: 'Investor Account Not Found' })
     }
-    for(const stock of data.stocks) {
+    for (const stock of data.stocks) {
       stockArr.push(stock[0])
     }
 
-    //call python script to grab stock data from stockArr names
+    // call python script to grab stock data from stockArr names
     try {
-      //console.log(stockArr)
+      // console.log(stockArr)
       const compareData = await GetCompareData(stockArr)
       res.send(compareData)
     } catch (err) {
       console.log(err)
     }
-
   }, 'MonkeyBusinessWebApp')
+}
+
+export async function getGeneralStocks (req, res) {
+  if (req.query.stockQuant === 'undefined' || req.query.stockQuant === undefined) {
+    res.status(404).json({ error: true, message: 'No Stock Name Provided' })
+    console.log('No Stock Quant Provided')
+    return
+  }
+  const stockQuant = parseInt(req.query.stockQuant)
+  try {
+    const stockData = await russel1000API(stockQuant)
+    const parsedData = parseStockNameArray(stockData)
+    console.log('ParsedData: ' + parsedData)
+    const stocks = await getStockShort(parsedData)
+    if (stocks === undefined) {
+      res.status(404).json({ error: true, message: 'No Stock Name Provided' })
+    } else {
+      res.json(parseStockDataArray(stocks))
+    }
+
+    console.log(parseStockDataArray(stocks))
+  } catch (err) {
+    console.log(err)
+  }
 }

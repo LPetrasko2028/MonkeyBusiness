@@ -1,3 +1,5 @@
+// ----------------- Stock Requests -----------------
+
 export async function searchStockAPI (stockName, start, end) { // Search for stock by name
   try {
     const response = await fetch('http://localhost:3000/api/search', {
@@ -52,14 +54,14 @@ export async function retrieveStockDetails (stockName, timeFrame) { // Examples 
   }
 }
 
-export async function postBuySellStock (stockObj) { // add stock to profile
+export async function postBuySellStock (stockName, stockPrice, changeType, changeAmount) { // add stock to profile
   try {
     const response = await fetch('http://localhost:3000/api/stockChange', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(stockObj)
+      body: JSON.stringify({ stockName, stockPrice, changeType, changeAmount })
     })
     if (response.status >= 400) {
       throw new Error(`Request failed with response code ${response.status}`)
@@ -86,6 +88,23 @@ Example of stockObj:
   "changeType": "sell"
 }
 */
+
+export async function getGenStocks (stockQuant) {
+  try {
+    const response = await fetch('http://localhost:3000/api/generalStocks?' + new URLSearchParams({ stockQuant }))
+    if (response.status >= 400) {
+      throw new Error(`Request failed with response code ${response.status}`)
+    }
+    return await response.json()
+  } catch (err) {
+    console.error('Failed to retrieve general stocks')
+    console.error(err)
+    console.log(err)
+    return []
+  }
+}
+
+// ----------------- User Requests -----------------
 
 export async function login (username, password) {
   try {
@@ -122,6 +141,20 @@ export async function signUp (username, password, passwordConfirm, email) {
     return true
   } catch (err) {
     console.error('Failed to sign up')
+    console.error(err)
+    return false
+  }
+}
+
+export async function logout () {
+  try {
+    const response = await fetch('http://localhost:3000/api/logout')
+    if (response.status >= 400) {
+      throw new Error(`Request failed with response code ${response.status}`)
+    }
+    return true
+  } catch (err) {
+    console.error('Failed to logout')
     console.error(err)
     return false
   }
@@ -229,6 +262,8 @@ export async function getUser () {
     return null
   }
 }
+
+// ----------------- Monkey Requests -----------------
 
 export async function getMonkeyInvestments () {
   try {

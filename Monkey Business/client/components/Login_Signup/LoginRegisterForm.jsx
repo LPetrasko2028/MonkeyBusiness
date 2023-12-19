@@ -5,10 +5,13 @@ import { logIn } from './dataHelper'
 import PropTypes from 'prop-types'
 import { useNavigate, Link } from 'react-router-dom'
 import { login } from '../../mbdataHelper'
+import { Icon } from 'react-icons-kit'
+import { eyeOff } from 'react-icons-kit/feather/eyeOff'
+import { eye } from 'react-icons-kit/feather/eye'
 
 function LoginCard (props) {
   const navigate = useNavigate()
-  const { onLogIn } = props
+  const { onLogIn, mode } = props
   const [name, setName] = useState('')
   const [pass, setPass] = useState('')
   const [success, setSuccess] = useState(false)
@@ -17,7 +20,18 @@ function LoginCard (props) {
   const handleClose = () => setShow(false)
   const onSuccessMessage = 'Logged in successfully'
   const onFailMessage = 'Failed to log in'
-
+  const [type, setType] = React.useState('password')
+  const [icon, setIcon] = React.useState(eye)
+  function handleToggle (e) {
+    e.preventDefault()
+    if (type === 'password') {
+      setType('text')
+      setIcon(eyeOff)
+    } else {
+      setType('password')
+      setIcon(eye)
+    }
+  }
   const handleSubmit = async e => {
     e.preventDefault()
     try {
@@ -62,18 +76,22 @@ function LoginCard (props) {
         <label>
         {'Password: '}
         <input
+          type = {type}
           name="password"
           value={pass}
           onChange={e => setPass(e.target.value)}
         />
+        <span className="flex justify-around items-center" onClick={handleToggle}>
+          <Icon class="absolute mr-10" icon={icon} size={25}/>
+        </span>
         </label>
         <label>
-          <Button type = 'submit' className = 'mt-3 center' >Log In</Button>
+          <Button variant='outline' type = 'submit' className = {mode + ' mt-3 center'} >Log In</Button>
         </label>
         </form>
         <div className = 'mt-3'>
 
-        <Link to = '/signup' className='.p-3'>Don't have an account? Sign Up!</Link>
+        <Link to = '/signup' className='.p-3'>Don`t have an account? Sign Up!</Link>
         <br />
         <Link to = '/forgotPassword'>Forgot Password?</Link>
         </div>
@@ -83,7 +101,8 @@ function LoginCard (props) {
   )
 }
 LoginCard.propTypes = {
-  onLogIn: PropTypes.func
+  onLogIn: PropTypes.func,
+  mode: PropTypes.string
 }
 export default LoginCard
 

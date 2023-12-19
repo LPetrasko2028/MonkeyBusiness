@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Table, Card } from 'react-bootstrap'
+import { Table, Card, Button } from 'react-bootstrap'
 
-export default function StockTable ({ stocks, page, pageSize }) {
+export default function StockTable ({ stocks, page, pageSize, buttonTheme }) {
   console.log('stocks: ', stocks)
   return (
     <Card className="px-2 mx-5">
@@ -18,28 +18,29 @@ export default function StockTable ({ stocks, page, pageSize }) {
         </thead>
         <tbody>
           {stocks.map((stock) => (
-            <tr key={stock.name ? stock.name : ""}>
-              <td>{stock.name ? stock.name : ""}</td>
-              <td>{stock.price ? stock.price : ""}</td>
-              <td>{stock.volume ? stock.volume : ""}</td>
-              <td>{stock.change ? stock.change : ""}</td>
-              <td>{stock.marketCap ? stock.marketCap : ""}</td>
+            <tr key={stock.name ? stock.name : ''}>
+              <td>{stock.name ? stock.name : ''}</td>
+              <td>{stock.price ? stock.price : ''}</td>
+              <td>{stock.volume ? stock.volume : ''}</td>
+              <td>{stock.change ? stock.change : ''}</td>
+              <td>{stock.marketCap ? stock.marketCap : ''}</td>
             </tr>
           ))}
         </tbody>
       </Table>
       <Card.Footer>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <div>
-            <button
+            <Button
               type="button"
-              className={(page > 1) ? "btn btn-primary" : "btn btn-primary disabled"}
+              variant='outline'
+              className={(page > 1) ? buttonTheme : buttonTheme + ' disabled'}
               onClick={() => {
-                console.log("Previous");
+                console.log('Previous')
               }}
             >
               Previous Page
-            </button>
+            </Button>
           </div>
           <div>
             <span>
@@ -47,20 +48,21 @@ export default function StockTable ({ stocks, page, pageSize }) {
             </span>
           </div>
           <div>
-            <button
+            <Button
               type="button"
-              className= {(page > 1) ? "btn btn-primary" : "btn btn-primary disabled"}
+              variant='outline'
+              className= {(page > 1) ? buttonTheme : buttonTheme + ' disabled'}
               onClick={() => {
-                console.log("Next");
+                console.log('Next')
               }}
             >
               Next Page
-            </button>
+            </Button>
           </div>
         </div>
       </Card.Footer>
     </Card>
-  );
+  )
 }
 StockTable.propTypes = {
   stocks: PropTypes.arrayOf(
@@ -73,7 +75,8 @@ StockTable.propTypes = {
     })
   ).isRequired,
   page: PropTypes.number,
-  pageSize: PropTypes.number
+  pageSize: PropTypes.number,
+  buttonTheme: PropTypes.string
 }
 StockTable.defaultProps = {
   stocks: [{
