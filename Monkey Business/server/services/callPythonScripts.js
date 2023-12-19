@@ -1,5 +1,5 @@
 import cp from 'child_process'
-
+import { runMonkeyAlgorithm } from './monkeyServices.js'
 //function getMonkeyPosition
 //Runs the python script to record a live stream for (segments * 5) seconds
 //Then runs the movement detection algorithm on the video.t
@@ -23,7 +23,7 @@ export async function getMonkeyPosition (url, segments) {
     var index = 0;
     while ((j = result.indexOf(char, i)) !== -1) {
       var space = result.indexOf(' ', i);
-      const coord = {x: result.substring(i, space), y: result.substring(space, j)};
+      const coord = { x: result.substring(i, space), y: result.substring(space, j-1) };
       coordSpace[index] = coord;
       index = index+1;
       i = j + 1;
@@ -36,6 +36,7 @@ export async function getMonkeyPosition (url, segments) {
     for (let i = 0; i < coordSpace.length; i++) {
       console.log(`x: ${coordSpace[i].x}, y: ${coordSpace[i].y}`);
     }
+    runMonkeyAlgorithm(coordSpace)
   })
 }
 
