@@ -60,7 +60,7 @@ export default function MyNavBar (props) {
     )
   }
   return (
-    <Navbar style={{ backgroundColor: theme }} variant={mode} className='px-5'>
+    <Navbar style={{ backgroundColor: (isDark) ? '#000000' : '#f0f8ff' }} variant={mode} className='px-5'>
       <Navbar.Brand>Monkey Business</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
