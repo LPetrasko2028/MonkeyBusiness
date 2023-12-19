@@ -4,13 +4,14 @@ import Card from 'react-bootstrap/Card'
 import { Modal } from 'react-bootstrap'
 import { signUp } from './dataHelper.js'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Icon } from 'react-icons-kit';
 import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 import { eye } from 'react-icons-kit/feather/eye'
 
 function SignUpCard (props) {
-  const { onSignUp } = props
+  const navigate = useNavigate()
+  const { onSignUp, buttonTheme } = props
   const [newUsername, setNewUsername] = React.useState('')
   const [newPassword, setNewPassword] = React.useState('')
   const [newGmail, setNewGmail] = React.useState('')
@@ -69,6 +70,8 @@ function SignUpCard (props) {
       if (await signUp(newUser)) {
         console.log('Sign Up Successfully')
         onSignUp(newUsername)
+        await wait(1000)
+        navigate('/')
       }
     } else {
       setShow(true)
@@ -126,7 +129,7 @@ function SignUpCard (props) {
         <br/>
         <p style={{ color: 'red' }}> { content } </p>
         <label>
-          <Button type = 'submit' className = 'mt-3' >Sign Up</Button>
+          <Button type = 'submit' className = {buttonTheme + ' mt-3'} variant='outline' >Sign Up</Button>
         </label>
       </form>
         <div className = 'mt-3'>
@@ -149,6 +152,10 @@ function SignUpCard (props) {
   )
 }
 SignUpCard.propTypes = {
-  onSignUp: PropTypes.func
+  onSignUp: PropTypes.func,
+  buttonTheme: PropTypes.string
 }
 export default SignUpCard
+export function wait (ms) {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}

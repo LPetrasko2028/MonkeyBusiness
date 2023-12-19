@@ -6,7 +6,7 @@ import MonkeTech from './MonkeyTech/MonkeyTechPage.jsx'
 import IntroPage from './Intro/IntroPage.jsx'
 import SettingsPage from './Setting/SettingsPage.jsx'
 import StatsPage from './Stat/StatsPage.jsx'
-import { MySearchBar } from './SearchPage/MySearchBar.jsx'
+import MySearchBar from './SearchPage/MySearchBar.jsx'
 import LoginCard from './Login_Signup/LoginRegisterForm.jsx'
 import SignUpCard from './Login_Signup/SignUpRegisterForm.jsx'
 import tPage from './Tut/TutorialPage.jsx'
@@ -19,6 +19,9 @@ export default function App () {
   const location = useLocation()
   const { hash, pathname, search } = location
   const [darkMode, setDarkMode] = React.useState(false)
+  const [style, setStyle] = React.useState('#f0f8ff')
+  const [font, setFont] = React.useState('12')
+  const [buttonTheme, setButtonTheme] = React.useState('btn-outline-success')
   const handleDarkMode = () => {
     setDarkMode(!darkMode)
   }
@@ -39,6 +42,7 @@ export default function App () {
         <MyNavBar
           loggedIn={logInStatus}
           mode={theme}
+          theme={style}
           data-bs-theme={theme}
           handleTheme={handleDarkMode}
           isDark={darkMode}
@@ -51,17 +55,17 @@ export default function App () {
             path="/"
             exact
             element={
-              <Home theme={theme} name={username} status={logInStatus} />
+              <Home theme={theme} name={username} status={logInStatus} buttonTheme={buttonTheme} />
             }
           />
           <Route
             path="/login"
-            element={<LoginCard onLogIn={onLogInChange} />}
+            element={<LoginCard onLogIn={onLogInChange} mode={buttonTheme} />}
           />
           <Route path="/about" Component={IntroPage} />
           <Route
             path="/signup"
-            element={<SignUpCard onSignUp={onLogInChange} />}
+            element={<SignUpCard onSignUp={onLogInChange} buttonTheme={buttonTheme} />}
           />
           <Route
             path="/monkeyTech"
@@ -74,11 +78,15 @@ export default function App () {
                 name={username}
                 setLogIn={setLogInStatus}
                 setName={setUsername}
+                setFont={setFont}
+                setStyle={setStyle}
+                setButtonTheme = {setButtonTheme}
+                buttonTheme={buttonTheme}
               ></SettingsPage>
             }
           />
           <Route path="/stats" Component={StatsPage} />
-          <Route path="/search" Component={MySearchBar} />
+          <Route path="/search" element={<MySearchBar buttonTheme={buttonTheme}></MySearchBar>} />
           <Route path="/TutorialPage" Component={tPage} />
           <Route
             path="/resetPassword"

@@ -2,12 +2,12 @@ import React from 'react'
 import { Navbar, Nav, Dropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import PropTypes from 'prop-types'
-import { BsBrightnessHigh, BsMoonStars, BsPersonFill, BsBrightnessHighFill, BsQuestionCircle } from 'react-icons/bs'
+import { BsBrightnessHigh, BsMoonStars, BsPersonFill, BsBrightnessHighFill, BsBrightnessAltHighFill } from 'react-icons/bs'
 import { logout } from '../../mbdataHelper'
 import { redirect } from 'react-router-dom'
 
 export default function MyNavBar (props) {
-  const { loggedIn, handleTheme, mode, isDark, setLogInStatus } = props
+  const { loggedIn, handleTheme, mode, isDark, setLogInStatus, theme } = props
   const [check, setCheck] = React.useState(true)
   const handleClick = () => {
     handleTheme(!isDark)
@@ -60,7 +60,7 @@ export default function MyNavBar (props) {
     )
   }
   return (
-    <Navbar bg={mode} variant={mode} className='px-5'>
+    <Navbar style={{ backgroundColor: theme }} variant={mode} className='px-5'>
       <Navbar.Brand>Monkey Business</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
@@ -80,9 +80,6 @@ export default function MyNavBar (props) {
           <LinkContainer to="/about">
             <Nav.Link> About Us </Nav.Link>
           </LinkContainer>
-          <LinkContainer to="/TutorialPage">
-            <Nav.Link><BsQuestionCircle/></Nav.Link>
-          </LinkContainer>
           {navContent2}
           <Nav.Link>
             <div onClick={handleClick}>
@@ -99,6 +96,7 @@ MyNavBar.propTypes = {
   loggedIn: PropTypes.bool,
   handleTheme: PropTypes.func,
   mode: PropTypes.string,
+  theme: PropTypes.string,
   isDark: PropTypes.bool.isRequired,
   setLogInStatus: PropTypes.func.isRequired
 }
