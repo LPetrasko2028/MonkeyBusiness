@@ -177,3 +177,31 @@ export function russel1000API (quant) {
     })
   })
 }
+
+export function getStockPrice (stockName) {
+  return new Promise((resolve, reject) => {
+    const ls = cp.spawn('python', ['./python/getStockPrice.py', stockName])
+    let stdoutData = ''
+    let stderrData = ''
+
+    ls.stdout.on('data', (data) => {
+      stdoutData += data
+    })
+
+    ls.stderr.on('data', (data) => {
+      stderrData += data
+    })
+
+    ls.on('error', (err) => {
+      reject(err)
+    })
+
+    ls.on('close', (code) => {
+      if (code !== 0) {
+        reject(new Error(`child process exited with code ${code}: ${stderrData}`))
+      } else {
+        resolve(stdoutData)
+      }
+    })
+  })
+}
