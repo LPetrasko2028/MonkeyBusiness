@@ -1,8 +1,7 @@
 import queryMongoDatabase from '../data/mongoController.js'
-import { getStockShort } from './callPythonScripts.js'
+import { getStockPrice, getStockShort } from './callPythonScripts.js'
 
 export async function runMonkeyAlgorithm (coordSpace) {
-
   if (coordSpace === undefined) {
     return () => { throw new Error('No coordSpace provided') }
   }
@@ -17,7 +16,7 @@ export async function runMonkeyAlgorithm (coordSpace) {
       for await (const doc of data) {
         monkeyInvestmentArray.push(doc)
       }
-      monkeyInvestmentArray.forEach(x => {
+      for (const x of monkeyInvestmentArray) {
         const stockPool = x.stockPool
         const stocks = x.stocks
         const cash = x.cash
@@ -25,28 +24,76 @@ export async function runMonkeyAlgorithm (coordSpace) {
         const username = x.username
         const history = x.history // Save this for later if possible
 
-
+        let stockPriceSum = 0
+        const stockPriceArray = []
+        for (let i = 0; i < stockPool.length; i++) {
+          const stockPrice = await getStockPrice(stockPool[i])
+          stockPriceSum += stockPrice
+          stockPriceArray.push(stockPrice)
+        }
+        const stockPriceAverage = stockPriceSum / stockPool.length
+        const theoricalStockLimit = cash / stockPriceAverage
+        const averageStockAmount = parseInt(theoricalStockLimit / stockPool.length)
+        console.log(stocks)
         for (let i = 0; i < stockPool.length; i++) { // if x is odd buy, if x is even sell. if y is odd little, if y is even a lot
-          console.log('stock operation')
+          const stock = stocks.filter(x => x.stockName === stockPool[i])
+          console.log(stock[0])
+          console.log(stocks.indexOf(stock[0]))
+          if (coordSpace[i%coordSpace.length].x % 2 === 0) {
+            // sell
+            if (coordSpace[i%coordSpace.length].y % 2 === 0) {
+              // a lot
+              sellStock(stock, averageStockAmount, stockPriceArray[i], x._id, stocks.indexOf(stock[0]))
+            } else {
+              // a little
+              sellStock(stock, averageStockAmount, stockPriceArray[i], x._id, stocks.indexOf(stock[0]))
+            }
+          } else {
+            // buy
+            if (coordSpace[i%coordSpace.length].y % 2 === 0) {
+              // a lot
+              buyStock(stock, averageStockAmount, stockPriceArray[i], x._id, stocks.indexOf(stock[0]))
+            } else {
+              // a little
+              buyStock(stock, averageStockAmount, stockPriceArray[i], x._id, stocks.indexOf(stock[0]))
+            }
+          }
         }
-
-        const newStocks = stocks
-        const newMonkey = {
-          username,
-          name,
-          stocks: newStocks,
-          history,
-          stockPool,
-          cash
-        }
-        const update = db.collection('Monkey').updateOne({ username, name }, { $set: newMonkey })
-        if (update.modifiedCount === null) {
-          return () => { throw new Error('Error updating data') }
-        }
-      })
+      }
     }
   }, 'MonkeyBusinessWebApp')
 }
+async function buyStock (stockToBeAdded, amount, price, monkeyInvestmentId, placeInStocksArray) {
+  queryMongoDatabase(async db => {
+    const monkeyInvestment = await db.collection('Monkey').findOne({ _id: monkeyInvestmentId }, { projection: { _id: 0, username: 0, name: 0, stockPool: 0, history: 0 } })
+    if (monkeyInvestment === null) {
+      return () => { throw new Error('Monkey Investment not found') }
+    }
+    if (price * amount > monkeyInvestment.cash) {
+      return () => { throw new Error('Not enough cash to buy stocks') }
+    }
+    const setStock = await db.collection('Monkey').updateOne({ _id: monkeyInvestmentId }, { $set: { [`stocks.${placeInStocksArray}`]: { stockName: stockToBeAdded.stockName, amount: (stockToBeAdded.amount + amount) }, cash: monkeyInvestment.cash - (price * amount) } })
+    if (setStock.modifiedCount === null) {
+      return () => { throw new Error('Error updating Stock') }
+    }
+  }, 'MonkeyBusinessWebApp')
+}
+async function sellStock (stockToBeRemoved, amount, price, monkeyInvestmentId, placeInStocksArray) {
+  queryMongoDatabase(async db => {
+    const monkeyInvestment = await db.collection('Monkey').findOne({ _id: monkeyInvestmentId }, { projection: { _id: 0, username: 0, name: 0, stockPool: 0, history: 0 } })
+    if (monkeyInvestment === null) {
+      return () => { throw new Error('Monkey Investment not found') }
+    }
+    if (stockToBeRemoved.amount < amount) {
+      return () => { throw new Error('Not enough stocks to sell') }
+    }
+    const setStock = await db.collection('Monkey').updateOne({ _id: monkeyInvestmentId }, { $set: { [`stocks.${placeInStocksArray}`]: { stockName: stockToBeRemoved.stockName, amount: (stockToBeRemoved.amount - amount) }, cash: monkeyInvestment.cash + (price * amount) } })
+    if (setStock.modifiedCount === null) {
+      return () => { throw new Error('Error updating Stock') }
+    }
+  }, 'MonkeyBusinessWebApp')
+}
+
 
 export async function getMonkeyInvestments (req, res) { // returns all monkey investments for a user. A User can have multiple monkey investments (each with a unique name) that can use different stock pools.
   const username = req.session.username
