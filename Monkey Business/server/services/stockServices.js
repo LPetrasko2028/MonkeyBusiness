@@ -271,6 +271,7 @@ export async function getUserMarketData (req, res) {
 export async function getGeneralStocks (req, res) {
   if (req.query.stockQuant === 'undefined' || req.query.stockQuant === undefined) {
     res.status(404).json({ error: true, message: 'No Stock Name Provided' })
+    console.log('No Stock Quant Provided')
     return
   }
   const stockQuant = parseInt(req.query.stockQuant)

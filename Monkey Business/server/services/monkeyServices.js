@@ -1,6 +1,53 @@
 import queryMongoDatabase from '../data/mongoController.js'
 import { getStockShort } from './callPythonScripts.js'
 
+export async function runMonkeyAlgorithm (coordSpace) {
+
+  if (coordSpace === undefined) {
+    return () => { throw new Error('No coordSpace provided') }
+  }
+  console.log('coordSpace: ', coordSpace)
+
+  queryMongoDatabase(async db => {
+    const data = await db.collection('Monkey').find({})
+    if ((await db.collection('Monkey').countDocuments()) < 1) {
+      return () => { throw new Error('No Monkey Investments Found') }
+    } else {
+      const monkeyInvestmentArray = []
+      for await (const doc of data) {
+        monkeyInvestmentArray.push(doc)
+      }
+      monkeyInvestmentArray.forEach(x => {
+        const stockPool = x.stockPool
+        const stocks = x.stocks
+        const cash = x.cash
+        const name = x.name
+        const username = x.username
+        const history = x.history // Save this for later if possible
+
+
+        for (let i = 0; i < stockPool.length; i++) { // if x is odd buy, if x is even sell. if y is odd little, if y is even a lot
+          console.log('stock operation')
+        }
+
+        const newStocks = stocks
+        const newMonkey = {
+          username,
+          name,
+          stocks: newStocks,
+          history,
+          stockPool,
+          cash
+        }
+        const update = db.collection('Monkey').updateOne({ username, name }, { $set: newMonkey })
+        if (update.modifiedCount === null) {
+          return () => { throw new Error('Error updating data') }
+        }
+      })
+    }
+  }, 'MonkeyBusinessWebApp')
+}
+
 export async function getMonkeyInvestments (req, res) { // returns all monkey investments for a user. A User can have multiple monkey investments (each with a unique name) that can use different stock pools.
   const username = req.session.username
   queryMongoDatabase(async db => {

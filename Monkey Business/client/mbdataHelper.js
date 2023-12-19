@@ -1,3 +1,5 @@
+// ----------------- Stock Requests -----------------
+
 export async function searchStockAPI (stockName, start, end) { // Search for stock by name
   try {
     const response = await fetch('http://localhost:3000/api/search', {
@@ -86,6 +88,23 @@ Example of stockObj:
   "changeType": "sell"
 }
 */
+
+export async function getGenStocks (stockQuant) {
+  try {
+    const response = await fetch('http://localhost:3000/api/generalStocks?' + new URLSearchParams({ stockQuant }))
+    if (response.status >= 400) {
+      throw new Error(`Request failed with response code ${response.status}`)
+    }
+    return await response.json()
+  } catch (err) {
+    console.error('Failed to retrieve general stocks')
+    console.error(err)
+    console.log(err)
+    return []
+  }
+}
+
+// ----------------- User Requests -----------------
 
 export async function login (username, password) {
   try {
@@ -243,6 +262,8 @@ export async function getUser () {
     return null
   }
 }
+
+// ----------------- Monkey Requests -----------------
 
 export async function getMonkeyInvestments () {
   try {

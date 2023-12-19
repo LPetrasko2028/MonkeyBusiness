@@ -1,14 +1,15 @@
-import React from 'react'
-import { searchStockAPI, postBuySellStock } from '../../mbdataHelper.js'
-import { Card, Button, Table, Modal } from 'react-bootstrap'
+import React, { useRef, useEffect } from 'react'
+import { searchStockAPI } from '../../mbdataHelper.js'
+import { Card, Button, Table } from 'react-bootstrap'
+import PropTypes from 'prop-types'
 import StockDetails from './StockDetails.jsx'
-import CustomModal from './Modal.jsx'
-export const MySearchBar = () => {
+export default function MySearchBar (props) {
+  const { buttonTheme, buttonTheme2 } = props
   const [searchInput, setSearchInput] = React.useState('')
   const [searchResult, setSearchResult] = React.useState([''])
-  const searchForm = React.useRef()
+  const searchForm = useRef()
   let content
-  React.useEffect(() => {
+  useEffect(() => {
     document.body.addEventListener('keydown', onKeyDown)
     return () => {
       document.body.removeEventListener('keydown', onKeyDown)
@@ -21,7 +22,7 @@ export const MySearchBar = () => {
       await handleSearch()
     }
   }
-  React.useEffect(() => {
+  useEffect(() => {
     searchForm.current.focus()
   }, [])
   const start = 0
@@ -33,16 +34,7 @@ export const MySearchBar = () => {
     console.log('e.target.value: ', e.target.value)
     setSearchInput(e.target.value)
   }
-  function handleClick (stockName) {
-    if (stockName !== null) {
-      content = (
-        <StockDetails stockName = {stockName} />
-      )
-    } else {
-      content = (<div></div>)
-    }
-    console.log(stockName)
-  }
+
   async function handleSearch () {
     const searchInput = searchForm.current.value
     if (searchInput === '') {
@@ -57,15 +49,13 @@ export const MySearchBar = () => {
       }
     }
   }
-
-  // end of button code
   let stocks = ['']
   if (searchResult !== null) {
     stocks = searchResult.map(
       (stock) => {
         return (
           <tr key={stock.symbol} >
-          <StockDetails stock = {stock}/>
+          <StockDetails stock = {stock} buttonTheme={buttonTheme} buttonTheme2={buttonTheme2}/>
         </tr>
         )
       }
@@ -90,8 +80,9 @@ export const MySearchBar = () => {
             ref={searchForm}
           />
           <Button
-            variant="outline-success"
-            className="ml-2"
+            type = 'button'
+            variant='outline'
+            className= {buttonTheme + ' ml-2'}
             onClick={handleSearch}
           >
             Search
@@ -121,4 +112,8 @@ export const MySearchBar = () => {
       </Card>
     </React.Fragment>
   )
+}
+MySearchBar.propTypes = {
+  buttonTheme: PropTypes.string,
+  buttonTheme2: PropTypes.string
 }

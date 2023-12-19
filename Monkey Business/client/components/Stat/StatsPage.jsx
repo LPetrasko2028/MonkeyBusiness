@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+import StockChart from './StockChart.jsx';
 
 function StatsPage() {
   return (
@@ -8,7 +9,17 @@ function StatsPage() {
       </div>
 
       <div>
-        <p>This is where Stats stuff will go</p>
+        <form>
+        <label>Enter a Stock:  
+          <input type="text" name="stockField" value={"AAPL"} readOnly></input>
+        </label>
+        <button type="submit">Submit</button>
+        </form>
+        <StockChart stockName={"AAPL"} months={4}></StockChart>
+        
+        
+         
+        
       </div>
     </div>
   )
