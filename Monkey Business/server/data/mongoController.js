@@ -3,7 +3,7 @@ import { MongoClient, ServerApiVersion, ObjectId } from 'mongodb'
 import Dotenv from 'dotenv'
 
 Dotenv.config()
-const DB_USER = process.env.DB_USER ?? 'unknown'
+const DB_USER = (process.env.DB_USER) ? process.env.DB_USER : 'unknown'
 const DB_PASS = process.env.DB_PASS ?? 'unknown'
 // const apiKey = 'b4j3Sx7dSOst3JMj4P5tddrvKgFbwunvsnsi039rxf3PllmCSwYA129X9GWO1lqt'
 export const url = `mongodb+srv://${DB_USER}:${DB_PASS}@monkeybusinesscluster.bkutl1e.mongodb.net/?retryWrites=true&w=majority`
