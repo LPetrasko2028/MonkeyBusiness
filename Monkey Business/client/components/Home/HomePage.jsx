@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import StockTable from '../StockTable/StockTable.jsx'
 import { retrieveInvestorStocks, getGenStocks } from '../../mbdataHelper.js'
 import { Card, Row } from 'react-bootstrap'
+import IntroPage from '../Intro/IntroPage.jsx'
 function Home (props) {
-  const { name } = props
+  const { name, buttonTheme } = props
   const [userInvestments, setUserInvestments] = useState([])
   const [userInvestmentPage, setUserInvestmentPage] = useState(0)
   const [userInvestmentPageSize, setUserInvestmentPageSize] = useState(10)
@@ -47,7 +48,7 @@ function Home (props) {
     content = (
       <React.Fragment>
         <div className='px-4 mx-4 ' style={{ display: 'flex', justifyContent: 'space-between' }}><h2 id='name'> Welcome {name} </h2> <h2 id='amount'> Account Value: 40000 </h2></div>
-        <StockTable stocks={userInvestments} page={userInvestmentPage} pageSize={userInvestmentPageSize} />
+        <StockTable stocks={userInvestments} page={userInvestmentPage} pageSize={userInvestmentPageSize} buttonTheme={buttonTheme} />
       </React.Fragment>
     )
   } else {
@@ -56,14 +57,15 @@ function Home (props) {
         <h2> Welcome To Our Monkey Business Web App!</h2>
         <h4>Please Login To See All of Our App&apos;s Features </h4>
 
-          <StockTable stocks={genStocks} page={genStocksPage} pageSize={genStocksPageSize} />
+          <StockTable stocks={genStocks} page={genStocksPage} pageSize={genStocksPageSize} buttonTheme={buttonTheme}/>
       </React.Fragment>
     )
   }
   return <React.Fragment>{content}</React.Fragment>
 }
 Home.propTypes = {
-  name: PropTypes.string
+  name: PropTypes.string,
+  buttonTheme: PropTypes.string
 }
 Home.defaultProps = {
   name: ''

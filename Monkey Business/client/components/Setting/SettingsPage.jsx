@@ -1,21 +1,12 @@
 import React from 'react'
-import { Row, Button, Modal } from 'react-bootstrap'
+import { Row, Button, Modal, Card } from 'react-bootstrap'
 import { updatePref, deleteAcc } from './dataHelper'
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
-let myTheme = 'light'
-let buttonTheme = 'outline-dark'
-const isMidnight = false
-if (isMidnight) { myTheme = 'dark' }
-if (myTheme === 'light') {
-  buttonTheme = 'outline-dark'
-} else {
-  buttonTheme = 'outline-light'
-}
 
 function SettingsPage (props) {
   const navigate = useNavigate()
-  const { name, setLogIn, setName } = props
+  const { name, setLogIn, setName, setStyle, setFont, setButtonTheme, buttonTheme, setButtonTheme2 } = props
   const [change, setChange] = React.useState(false)
   const [fontSize, setFontSize] = React.useState(12)
   const [graphColor, setGraphColor] = React.useState('Default')
@@ -38,12 +29,29 @@ function SettingsPage (props) {
     if (fontSize != null && graphColor != null) {
       const preference = {
         username: name,
-        colorScheme: 'DefaultLight',
-        graphColor,
+        colorScheme: graphColor,
+        graphColor: 'Default',
         fontSize
       }
       if (await updatePref(preference)) {
         console.log('update successfully')
+        if (graphColor === 'Simply Black') {
+          setStyle('#d3d3d3')
+          setButtonTheme('btn-outline-secondary')
+          setButtonTheme2('btn-outline-danger')
+        } else if (graphColor === 'Hot & Cold') {
+          setStyle('#5f9ea0')
+          setButtonTheme2('btn-outline-danger')
+          setButtonTheme('btn-outline-primary')
+        } else if (graphColor === 'Spring') {
+          setStyle('#ffb6c1')
+          setButtonTheme('btn-outline-danger')
+          setButtonTheme2('btn-outline-success')
+        } else {
+          setStyle('#f0ffff')
+          setButtonTheme('btn-outline-success')
+          setButtonTheme2('btn-outline-warning')
+        }
       } else {
         console.log('did not update')
       }
@@ -69,30 +77,11 @@ function SettingsPage (props) {
   let content
   if (change) {
     content = (
-      <Button type = 'submit' onClick={handleSubmit}> Apply</Button>
+      <Button variant='outline' className={buttonTheme} type = 'submit' onClick={handleSubmit}> Apply</Button>
     )
   }
   return (
-    <div className='px-3' data-bs-theme={myTheme} >
-      <div>
-        <h1>Settings Page</h1>
-        <h2>This is where the settings will be</h2>
-      </div>
-      <Row>
-      <div>
-        <p>
-          Theme mode:
-          <label>
-            <input type='radio' name='settingsRadio' value='option1'/>
-            Light Mode
-          </label>
-          <label>
-            <input type='radio' name='settingsRadio' value='option2'/>
-            Dark Mode
-          </label>
-          </p>
-          </div>
-        </Row>
+    <div className='px-3' data-bs-theme={buttonTheme} >
         <Row>
           <label>
             <div>Font size: </div>
@@ -102,35 +91,36 @@ function SettingsPage (props) {
         </Row>
         <Row>
           <label>
-            <div>Graph Colors: </div>
+            <div>Color Theme: </div>
           </label>
         </Row>
-        <Row>
+        <Card>
+        <Row className = 'p-3'>
           <label>
-          Default
-          <input type = 'radio' name = 'graphColor' value = 'Default' checked onChange={handleChangeGraphColor}/>
-          </label>
+          <input type = 'radio' name = 'graphColor' value = 'DefaultLight' onChange={handleChangeGraphColor}/>
+          Default Light</label>
         </Row>
-        <Row>
+        <Row className = 'p-3'>
           <label>
-          Simply Black
           <input type = 'radio' name = 'graphColor' value = 'Simply Black' onChange={handleChangeGraphColor} />
+          Simply Black
           </label>
         </Row>
-        <Row>
+        <Row className = 'p-3'>
           <label>
-          Hot & Cold
           <input type = 'radio' name = 'graphColor' value = 'Hot & Cold' onChange={handleChangeGraphColor} />
+          Hot & Cold
           </label>
         </Row>
-        <Row>
+        <Row className = 'p-3'>
           <label>
-          Spring
           <input type = 'radio' name = 'graphColor' value = 'Spring' onChange={handleChangeGraphColor}/>
+          Spring
           </label>
         </Row>
+        </Card>
         <Row>
-          <Button type = 'submit' className = 'mt-3' variant={buttonTheme} onClick={handleDelete}> Delete Account</Button>
+          <Button variant='outline' type = 'submit' className={buttonTheme + ' mt-3'} onClick={handleDelete}> Delete Account</Button>
         </Row>
         <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -138,10 +128,10 @@ function SettingsPage (props) {
         </Modal.Header>
         <Modal.Body>All of your account data will be gone reduced to atoms</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button className={buttonTheme} variant='outline' onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant={buttonTheme} onClick={confirmDelete}>
+          <Button className={buttonTheme} variant='outline' onClick={confirmDelete}>
             Delete
           </Button>
         </Modal.Footer>
@@ -156,6 +146,11 @@ function SettingsPage (props) {
 SettingsPage.propTypes = {
   name: PropTypes.string.isRequired,
   setLogIn: PropTypes.func,
-  setName: PropTypes.func.isRequired
+  setName: PropTypes.func.isRequired,
+  setStyle: PropTypes.func,
+  setFont: PropTypes.func,
+  setButtonTheme: PropTypes.func,
+  buttonTheme: PropTypes.string,
+  setButtonTheme2: PropTypes.func
 }
 export default SettingsPage

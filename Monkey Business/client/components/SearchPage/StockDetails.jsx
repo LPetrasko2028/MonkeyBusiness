@@ -4,8 +4,9 @@ import { Modal, Button } from 'react-bootstrap'
 import { retrieveStockDetail } from './dataHelper'
 import CustomModal from './Modal.jsx'
 import { postBuySellStock } from '../../mbdataHelper.js'
+
 export default function StockDetails (props) {
-  const { stock } = props
+  const { stock, buttonTheme, buttonTheme2 } = props
   const [show, setShow] = React.useState(false)
   const [open, setOpen] = React.useState('')
   const [low, setLow] = React.useState('')
@@ -55,7 +56,6 @@ export default function StockDetails (props) {
   }
   async function handleClick () {
     const detail = await retrieveStockDetail(stock.symbol)
-    console.log ('detail: ', detail)
     const stockDetail = detail[detail.length - 1]
     setOpen(stockDetail[2])
     setLow(stockDetail[3])
@@ -79,7 +79,8 @@ export default function StockDetails (props) {
             onClick={handleOpenModal}
             id={stock.symbol}
             value="Buy"
-            variant="primary"
+            variant="outline"
+            className={buttonTheme}
           >
             Buy Stock
           </Button>
@@ -98,7 +99,8 @@ export default function StockDetails (props) {
             onClick={handleOpenModal}
             id={stock.symbol}
             value="Sell"
-            variant="danger"
+            variant='outline'
+            className={buttonTheme2}
           >
             Sell Stock
           </Button>
@@ -111,23 +113,25 @@ export default function StockDetails (props) {
           setShowModal={handleCloseModal}
         />
       </td>
-      <Button onClick={handleClick}> Get Details </Button>
+          <Button type = 'button' variant='outline' className={buttonTheme} onClick={handleClick}> Get Details </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Stock: {stock.symbol} </Modal.Title>
+          <Modal.Title>Stock: { stock.symbol } </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Date: {date} <br />
-          Open: {'$' + open} <br />
-          Low: {'$' + low} <br />
-          High: {'$' + high} <br />
-          Close: {'$' + close} <br />
-          Volume: {vol} <br />
+          Date: {date} <br/>
+          Open: {'$' + open} <br/>
+          Low: {'$' + low} <br/>
+          High: {'$' + high} <br/>
+          Close: {'$' + close} <br/>
+          Volume: {vol} <br/>
         </Modal.Body>
       </Modal>
     </React.Fragment>
   )
 }
 StockDetails.propTypes = {
-  stock: PropTypes.object.isRequired
+  stock: PropTypes.object.isRequired,
+  buttonTheme: PropTypes.string,
+  buttonTheme2: PropTypes.string
 }
