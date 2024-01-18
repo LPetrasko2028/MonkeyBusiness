@@ -2,7 +2,6 @@ import queryMongoDatabase from '../data/mongoController.js'
 import { getStockShort } from './callPythonScripts.js'
 
 export async function runMonkeyAlgorithm (coordSpace) {
-
   if (coordSpace === undefined) {
     return () => { throw new Error('No coordSpace provided') }
   }
@@ -24,7 +23,6 @@ export async function runMonkeyAlgorithm (coordSpace) {
         const name = x.name
         const username = x.username
         const history = x.history // Save this for later if possible
-
 
         for (let i = 0; i < stockPool.length; i++) { // if x is odd buy, if x is even sell. if y is odd little, if y is even a lot
           console.log('stock operation')
